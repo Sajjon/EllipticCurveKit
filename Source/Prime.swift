@@ -171,7 +171,7 @@ public extension UInt {
 public extension UInt.Prime {
 
     /// primes less than 2048
-    public static let tinyPrimes:[UInt] = {
+    public static let tinyPrimes: [UInt] = {
         var ps:[UInt] = [2, 3]
         var n:UInt = 5
         while n < 2048 {
@@ -190,7 +190,7 @@ public extension UInt.Prime {
     /// on bases <= n-th prime does not reveal compositeness.
     ///
     /// [A014233]: https://oeis.org/A014233
-    public static let A014233:[UInt] = [
+    public static let A014233: [UInt] = [
         2047,                   // p0   = 2
         1373653,                // p1   = 3
         25326001,               // p2   = 5
@@ -291,7 +291,7 @@ public extension UInt.Prime {
     // cf.
     //   http://en.wikipedia.org/wiki/Shanks'_square_forms_factorization
     //   https://github.com/danaj/Math-Prime-Util/blob/master/factor.c
-    public static let squfofMultipliers:[UInt] = [
+    public static let squfofMultipliers: [UInt] = [
         1,      3,      5,      7,      11,
         3*5,    3*7,    3*11,   5*7,    5*11,
         7*11,   3*5*7,  3*5*11, 3*7*11, 5*7*11, 3*5*7*11

@@ -18,6 +18,7 @@
 		48F22CBF20C7D64B004A18CA /* KeyDataToHexStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CBE20C7D64B004A18CA /* KeyDataToHexStringTests.swift */; };
 		48F22CC120C7DF9B004A18CA /* KeyDataElementOrdering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CC020C7DF9B004A18CA /* KeyDataElementOrdering.swift */; };
 		48F22CC520C80853004A18CA /* Prime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CC420C80853004A18CA /* Prime.swift */; };
+		48F22CC720C8188F004A18CA /* UIntPrimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CC620C8188F004A18CA /* UIntPrimeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		48F22CBE20C7D64B004A18CA /* KeyDataToHexStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataToHexStringTests.swift; sourceTree = "<group>"; };
 		48F22CC020C7DF9B004A18CA /* KeyDataElementOrdering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataElementOrdering.swift; sourceTree = "<group>"; };
 		48F22CC420C80853004A18CA /* Prime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prime.swift; sourceTree = "<group>"; };
+		48F22CC620C8188F004A18CA /* UIntPrimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIntPrimeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				48F22CBE20C7D64B004A18CA /* KeyDataToHexStringTests.swift */,
 				48F22CC020C7DF9B004A18CA /* KeyDataElementOrdering.swift */,
 				48F22CBB20C7C840004A18CA /* StringUtilsTests.swift */,
+				48F22CC620C8188F004A18CA /* UIntPrimeTests.swift */,
 				48F22CB020C70DE5004A18CA /* Info.plist */,
 			);
 			path = Tests;
@@ -231,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F22CC120C7DF9B004A18CA /* KeyDataElementOrdering.swift in Sources */,
+				48F22CC720C8188F004A18CA /* UIntPrimeTests.swift in Sources */,
 				48F22CBF20C7D64B004A18CA /* KeyDataToHexStringTests.swift in Sources */,
 				48F22CBA20C7B906004A18CA /* KeyDataStringInitTests.swift in Sources */,
 				48F22CB120C70DE9004A18CA /* KeyDataComparissionTests.swift in Sources */,

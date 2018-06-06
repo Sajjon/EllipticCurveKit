@@ -17,6 +17,7 @@
 		48F22CBD20C7C844004A18CA /* StringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CBB20C7C840004A18CA /* StringUtilsTests.swift */; };
 		48F22CBF20C7D64B004A18CA /* KeyDataToHexStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CBE20C7D64B004A18CA /* KeyDataToHexStringTests.swift */; };
 		48F22CC120C7DF9B004A18CA /* KeyDataElementOrdering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CC020C7DF9B004A18CA /* KeyDataElementOrdering.swift */; };
+		48F22CC520C80853004A18CA /* Prime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CC420C80853004A18CA /* Prime.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		48F22CBB20C7C840004A18CA /* StringUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtilsTests.swift; sourceTree = "<group>"; };
 		48F22CBE20C7D64B004A18CA /* KeyDataToHexStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataToHexStringTests.swift; sourceTree = "<group>"; };
 		48F22CC020C7DF9B004A18CA /* KeyDataElementOrdering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataElementOrdering.swift; sourceTree = "<group>"; };
+		48F22CC420C80853004A18CA /* Prime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				48F22CB220C70E17004A18CA /* KeyData.swift */,
 				48F22CB620C72879004A18CA /* Array_Extension.swift */,
 				48F22CB420C70E44004A18CA /* String_Extension.swift */,
+				48F22CC420C80853004A18CA /* Prime.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F22CB520C70E44004A18CA /* String_Extension.swift in Sources */,
+				48F22CC520C80853004A18CA /* Prime.swift in Sources */,
 				48F22CB720C72879004A18CA /* Array_Extension.swift in Sources */,
 				48F22CB320C70E17004A18CA /* KeyData.swift in Sources */,
 			);

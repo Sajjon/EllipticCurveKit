@@ -14,27 +14,33 @@ public struct KeyData {
     // Least significant element at index 0
     public private(set) var elements: [Element]
 
-    public init(_ elements: [Element]) {
+    public init(leastSignigicantElementLeading elements: [Element]) {
         self.elements = elements
     }
 
     public enum Error: Int, Swift.Error {
-        case invalidString
+        case stringInvalidChars, stringLengthNotEven
     }
 }
 
 // MARK: - Convenience Init
 public extension KeyData {
+
+    public init(_ elements: [Element]) {
+        self.init(leastSignigicantElementLeading: elements.reversed())
+    }
+
     init(hexString: String) throws {
+        guard hexString.containsOnlyHexChars() else { throw Error.stringInvalidChars }
         let string = hexString.dropTwoLeadinHexCharsIfNeeded()
-        let arrayOfHex = string.splitIntoSubStringsOfLength(2) // 16^2 = 256 bits
+        let arrayOfHex = try string.splitIntoSubStringsOfLength(2) // 16^2 = 256 bits
         let array = arrayOfHex.compactMap { Element($0, radix: 16) }
-        guard arrayOfHex.count == array.count else { throw Error.invalidString }
+        guard arrayOfHex.count == array.count else { fatalError("Incorrect implementation, case should be handled above") }
         self.init(array)
     }
 }
 
-// MARK: -
+// MARK: - ExpressibleByArrayLiteral
 extension KeyData: ExpressibleByArrayLiteral {}
 public extension KeyData {
     public init(arrayLiteral elements: Element...) {
@@ -68,7 +74,8 @@ public extension KeyData {
 extension KeyData: CustomStringConvertible {}
 public extension KeyData {
     public var description: String {
-        return elements.map { "\($0)" }.joined(separator: ", ")
+        let csv = elements.map { "\($0)" }.joined(separator: ", ")
+        return "[\(csv)]"
     }
 }
 
@@ -114,15 +121,21 @@ public extension KeyData {
 
     var length: Int { return elements.count }
 
+    func asHexString(uppercased: Bool = true, separator: String = "") -> String {
+        let format = uppercased ? "%02X" : "%02x"
+        return elements.reversed().map { String(format: format, $0) }.joined(separator: separator)
+    }
+
     var arrayOfHexAsString: String {
-        return elements.map { String(format: "%02X", $0) }.joined(separator: ", ")
+        let csv = asHexString(separator: ", ")
+        return "[\(csv)]"
     }
 }
 
 // MARK: Private
 private extension KeyData {
-    mutating func prepend(_ element: Element) {
-        elements.insert(element, at: 0)
+    mutating func append(_ element: Element) {
+        elements.append(element)
     }
 
     private static func appendLeadingZerosUntilLengthOf(_ lhs: KeyData, equalsLengthOf rhs: KeyData) -> (lhs: KeyData, rhs: KeyData) {
@@ -130,9 +143,9 @@ private extension KeyData {
         var rhs = rhs
         while lhs.length != rhs.length {
             if lhs.length > rhs.length {
-                rhs.prepend(0)
+                rhs.append(0)
             } else {
-                lhs.prepend(0)
+                lhs.append(0)
             }
         }
         return (lhs: lhs, rhs: rhs)

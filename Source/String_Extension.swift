@@ -15,7 +15,8 @@ extension String {
         return String(dropFirst(2))
     }
 
-    func splitIntoSubStringsOfLength(_ length: Int) -> [String] {
+    func splitIntoSubStringsOfLength(_ length: Int) throws -> [String] {
+        guard count % length == 0 else { throw KeyData.Error.stringLengthNotEven }
         var startIndex = self.startIndex
         var results = [Substring]()
 
@@ -27,4 +28,18 @@ extension String {
 
         return results.map { String($0) }
     }
+
+    func containsOnlyHexChars() -> Bool {
+        let string = dropTwoLeadinHexCharsIfNeeded()
+        do {
+            let regex = try NSRegularExpression(pattern: "([a-f0-9A-F]){1}")
+            let numberOfMatches = regex.numberOfMatches(in: string, range: NSRange(location: 0, length: string.count))
+            let containsOnlyHex = numberOfMatches == string.count
+            print("numberOfMatches: `\(numberOfMatches)`, containsOnlyHex: `\(containsOnlyHex)`, ")
+            return containsOnlyHex
+        } catch {
+            fatalError("Incorrect implementation of regexp, error: `\(error)`, please fix this.")
+        }
+    }
+
 }

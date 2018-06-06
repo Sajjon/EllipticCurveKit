@@ -105,13 +105,23 @@ class KeyDataElementOrdering: KeyDataTests {
     func testOrderingShorthandInitializer() {
         let data = KeyData([2, 0, 4, 1])
         XCTAssertEqual(data.elements, [1, 4, 0, 2])
-        XCTAssertEqual(data, [1, 4, 0, 2])
+        assertCollectionsEqual(data, data.elements)
     }
 
     func testOrderingOfDataUsingCollectionConformance() {
         let data = KeyData(leastSignigicantElementLeading: [2, 0, 4, 1])
         XCTAssertEqual(data.elements, [2, 0, 4, 1])
-        XCTAssertEqual(data, [2, 0, 4, 1])
+        assertCollectionsEqual(data, data.elements)
     }
 
+}
+
+func assertCollectionsEqual<C1: Collection, C2: Collection, E: Equatable>(_ rhs: C1, _ lhs: C2) where C1.Element == C2.Element, C1.Element == E {
+    let c1 = AnyCollection<E>(rhs)
+    let c2 = AnyCollection<E>(lhs)
+    XCTAssertEqual(c1.count, c2.count, "Should have same element count")
+    for i in 0..<c1.count {
+        let index = AnyIndex(i)
+        XCTAssertEqual(c1[index], c2[index], "Elemennts should be same")
+    }
 }

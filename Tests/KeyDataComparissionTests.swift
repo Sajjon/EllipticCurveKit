@@ -10,23 +10,23 @@ import XCTest
 @testable import SwiftCrypto
 
 class KeyDataTests: XCTestCase {
-    func assertEqual(_ lhs: KeyData, _ rhs: KeyData, _ message: String = "") {
+    func assertEqual(_ lhs: KeyDataStruct, _ rhs: KeyDataStruct, _ message: String = "") {
         XCTAssertEqual(lhs, rhs, message)
     }
 
-    func assert(_ lhs: KeyData, greaterThan rhs: KeyData, _ message: String = "")  {
+    func assert(_ lhs: KeyDataStruct, greaterThan rhs: KeyDataStruct, _ message: String = "")  {
         XCTAssertGreaterThan(lhs, rhs, message)
     }
 
-    func assert(_ lhs: KeyData, lessThanOrEqual rhs: KeyData, _ message: String = "")  {
+    func assert(_ lhs: KeyDataStruct, lessThanOrEqual rhs: KeyDataStruct, _ message: String = "")  {
         XCTAssertLessThanOrEqual(lhs, rhs)
     }
 
-    func assert(_ lhs: KeyData, notGreaterThan rhs: KeyData, _ message: String = "")  {
+    func assert(_ lhs: KeyDataStruct, notGreaterThan rhs: KeyDataStruct, _ message: String = "")  {
         XCTAssertTrue(!(lhs > rhs))
     }
 
-    func assert(_ lhs: KeyData, lessThan rhs: KeyData, _ message: String = "") {
+    func assert(_ lhs: KeyDataStruct, lessThan rhs: KeyDataStruct, _ message: String = "") {
         XCTAssertLessThan(lhs, rhs, message)
     }
 }
@@ -34,25 +34,25 @@ class KeyDataTests: XCTestCase {
 class KeyDataComparissionTests: KeyDataTests {
 
     func testEqualEmpty() {
-       assertEqual([], [], "Empty KeyData should be equal")
+       assertEqual([], [], "Empty KeyDataStruct should be equal")
     }
 
     func testEqualSingleZero() {
-        assertEqual([0], [0], "Single zero KeyData should be equal")
+        assertEqual([0], [0], "Single zero KeyDataStruct should be equal")
     }
 
     func testEqualThreeZero() {
-        assertEqual([0, 0, 0], [0, 0, 0], "Three zeros KeyData should be equal")
+        assertEqual([0, 0, 0], [0, 0, 0], "Three zeros KeyDataStruct should be equal")
     }
 
     func testEqualZerosDifferentLength() {
-        let oneZero: KeyData = [0]
-        let threeZeros: KeyData = [0, 0, 0]
-        assertEqual(oneZero, threeZeros, "KeyData only containing zeros but different count should be equal")
-        assertEqual(oneZero, KeyData([0]), "KeyData should not change after comparisson")
-        XCTAssertEqual(oneZero.length, 1, "KeyData should not change after comparisson")
-        assertEqual(threeZeros, [0, 0, 0], "KeyData should not change after comparisson")
-        XCTAssertEqual(threeZeros.length, 3, "KeyData should not change after comparisson")
+        let oneZero: KeyDataStruct = [0]
+        let threeZeros: KeyDataStruct = [0, 0, 0]
+        assertEqual(oneZero, threeZeros, "KeyDataStruct only containing zeros but different count should be equal")
+        assertEqual(oneZero, KeyDataStruct([0]), "KeyDataStruct should not change after comparisson")
+        XCTAssertEqual(oneZero.length, 1, "KeyDataStruct should not change after comparisson")
+        assertEqual(threeZeros, [0, 0, 0], "KeyDataStruct should not change after comparisson")
+        XCTAssertEqual(threeZeros.length, 3, "KeyDataStruct should not change after comparisson")
     }
 
     func testNotGreaterThan() {
@@ -71,5 +71,11 @@ class KeyDataComparissionTests: KeyDataTests {
         assert([1], lessThan: [2])
         assert([9], lessThan: [1, 0])
         assert([1, 0, 1], lessThan: [1, 0, 2])
+    }
+
+    func testComparissonInt64MaxValues() {
+        let smaller: KeyDataStruct = [0, 18446744073709551615]
+        let bigger: KeyDataStruct = [1, 0]
+         assert(smaller, lessThan: bigger)
     }
 }

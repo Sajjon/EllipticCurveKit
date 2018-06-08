@@ -9,22 +9,22 @@
 import XCTest
 @testable import SwiftCrypto
 
-extension KeyData {
+extension KeyDataStruct {
     private init?(hexFailable hex: String) {
         do {
             try self.init(hexString: hex)
         } catch {
-            XCTFail("Failed to create KeyData with string: `\(hex)`, error: \(error)")
+            XCTFail("Failed to create KeyDataStruct with string: `\(hex)`, error: \(error)")
             return nil
         }
     }
 
     init(hex: String) {
-        if let data = KeyData(hexFailable: hex) {
+        if let data = KeyDataStruct(hexFailable: hex) {
             self = data
         } else {
-            XCTFail("Failed to create KeyData with string: `\(hex)`")
-            self = KeyData([])
+            XCTFail("Failed to create KeyDataStruct with string: `\(hex)`")
+            self = KeyDataStruct([])
         }
     }
 }
@@ -32,14 +32,14 @@ extension KeyData {
 class KeyDataStringInitTests: KeyDataTests {
 
     func testEmptyString() {
-        let empty = KeyData(hex: "")
-        XCTAssertEqual(empty.length, 0, "KeyData should be created, but with length 0")
+        let empty = KeyDataStruct(hex: "")
+        XCTAssertEqual(empty.length, 0, "KeyDataStruct should be created, but with length 0")
     }
 
     func testOddChars1() {
         do {
-            _ = try KeyData(hexString: "1")
-        } catch KeyData.Error.stringLengthNotEven {
+            _ = try KeyDataStruct(hexString: "1")
+        } catch KeyDataError.stringLengthNotEven {
             XCTAssertTrue(true, "Should have failed with this, since length was odd.")
         } catch {
             XCTFail("Should not have failed, got error: `\(error)`")
@@ -48,8 +48,8 @@ class KeyDataStringInitTests: KeyDataTests {
 
     func testOddCharsF() {
         do {
-            _ = try KeyData(hexString: "F")
-        } catch KeyData.Error.stringLengthNotEven {
+            _ = try KeyDataStruct(hexString: "F")
+        } catch KeyDataError.stringLengthNotEven {
             XCTAssertTrue(true, "Should have failed with this, since length was odd.")
         } catch {
             XCTFail("Should not have failed, got error: `\(error)`")
@@ -58,8 +58,8 @@ class KeyDataStringInitTests: KeyDataTests {
 
     func testOddChars100() {
         do {
-            _ = try KeyData(hexString: "100")
-        } catch KeyData.Error.stringLengthNotEven {
+            _ = try KeyDataStruct(hexString: "100")
+        } catch KeyDataError.stringLengthNotEven {
             XCTAssertTrue(true, "Should have failed with this, since length was odd.")
         } catch {
             XCTFail("Should not have failed, got error: `\(error)`")
@@ -67,68 +67,68 @@ class KeyDataStringInitTests: KeyDataTests {
     }
 
     func testChars01() {
-        let data = KeyData(hex: "01")
+        let data = KeyDataStruct(hex: "01")
         assertEqual(data, [1])
-        XCTAssertEqual(data.length, 1, "Two hex charss should result in a single UInt8")
+        XCTAssertEqual(data.length, 1, "Two hex charss should result in a single UInt64")
     }
 
     func testChars0x01() {
-        let data = KeyData(hex: "0x01")
+        let data = KeyDataStruct(hex: "0x01")
         assertEqual(data, [1])
-        XCTAssertEqual(data.length, 1, "Two hex charss should result in a single UInt8")
+        XCTAssertEqual(data.length, 1, "Two hex charss should result in a single UInt64")
     }
 
     func testChars0F() {
-        let data = KeyData(hex: "0F")
+        let data = KeyDataStruct(hex: "0F")
         assertEqual(data, [15])
-        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt8")
+        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt64")
     }
 
     func testChars10() {
-        let data = KeyData(hex: "10")
+        let data = KeyDataStruct(hex: "10")
         assertEqual(data, [16], "should be equal")
-        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt8")
+        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt64")
     }
 
     func testCharsFF() {
-        let data = KeyData(hex: "FF")
+        let data = KeyDataStruct(hex: "FF")
         assertEqual(data, [255], "should be equal")
-        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt8")
+        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt64")
     }
 
     func testChars0xFF() {
-        let data = KeyData(hex: "0xFF")
+        let data = KeyDataStruct(hex: "0xFF")
         assertEqual(data, [255], "should be equal")
-        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt8")
+        XCTAssertEqual(data.length, 1, "Two hex chars should result in a single UInt64")
     }
 
     func testChars0100() {
-        let data = KeyData(hex: "0100")
+        let data = KeyDataStruct(hex: "0100")
         assertEqual(data, [1, 0], "should be equal")
-        XCTAssertEqual(data.length, 2, "Four hex chars should result in a two UInt8")
+        XCTAssertEqual(data.length, 2, "Four hex chars should result in a two UInt64")
     }
 
     func testCharsFFAAFFEC() {
-        let data = KeyData(hex: "FFAAFFEC")
+        let data = KeyDataStruct(hex: "FFAAFFEC")
         assertEqual(data, [255, 170, 255, 236], "should be equal")
-        XCTAssertEqual(data.length, 4, "Eight hex chars should result in a four UInt8")
+        XCTAssertEqual(data.length, 4, "Eight hex chars should result in a four UInt64")
     }
 
     func testCharsFFAAFFECWithLeadingZeros() {
-        let data = KeyData(hex: "00000000FFAAFFEC")
+        let data = KeyDataStruct(hex: "00000000FFAAFFEC")
         assertEqual(data, [0, 0, 0, 0, 255, 170, 255, 236], "should be equal")
-        XCTAssertEqual(data.length, 8, "16 hex chars should result in a eight UInt8")
+        XCTAssertEqual(data.length, 8, "16 hex chars should result in a eight UInt64")
     }
 
     func testCharsffaaffec() {
-        let data = KeyData(hex: "ffaaffec")
+        let data = KeyDataStruct(hex: "ffaaffec")
         assertEqual(data, [255, 170, 255, 236], "should be equal")
-        XCTAssertEqual(data.length, 4, "Eight hex chars should result in a four UInt8")
+        XCTAssertEqual(data.length, 4, "Eight hex chars should result in a four UInt64")
     }
 
     func testCharsfFAafFec() {
-        let data = KeyData(hex: "fFAafFec")
+        let data = KeyDataStruct(hex: "fFAafFec")
         assertEqual(data, [255, 170, 255, 236], "should be equal")
-        XCTAssertEqual(data.length, 4, "Eight hex chars should result in a four UInt8")
+        XCTAssertEqual(data.length, 4, "Eight hex chars should result in a four UInt64")
     }
 }

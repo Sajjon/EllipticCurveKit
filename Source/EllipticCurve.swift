@@ -68,7 +68,7 @@ struct PointOnEllipticCurve {
 // `n`: The order of the curve generator point `G`. This is, in layman's terms, the number of different points on the curve which can be gained by multiplying a scalar with `G`. For most operations this value is not needed, but for digital signing using ECDSA the operations are congruent modulo `n`, not `p`.
 
 // `h`: The cofactor of the curve. It is the quotient of the number of curve-points, or #E(Fp), divided by n.
-func generatePrivateKeyJB() -> KeyData {
+func generatePrivateKeyJB() -> KeyDataStruct {
 
     // To get the private key, choose a random integer dA so that: 0 < dA < n
 

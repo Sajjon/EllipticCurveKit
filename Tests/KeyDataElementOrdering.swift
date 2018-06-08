@@ -13,13 +13,13 @@ import XCTest
 class KeyDataElementOrdering: KeyDataTests {
 
     func testInitWithArray_255_0_170() {
-        let data = KeyData([255, 0, 170])
+        let data = KeyDataStruct([255, 0, 170])
         XCTAssertEqual(data[0], 170, "last element in array should be placed at index zero")
         XCTAssertEqual(data[2], 255, "first element in array should be placed at index `count-1` (last)")
     }
 
     func testInitWithArray_0_0_2_0() {
-        let data = KeyData([0, 0, 2, 0])
+        let data = KeyDataStruct([0, 0, 2, 0])
         XCTAssertEqual(data[0], 0)
         XCTAssertEqual(data[1], 2)
         XCTAssertEqual(data[2], 0)
@@ -27,7 +27,7 @@ class KeyDataElementOrdering: KeyDataTests {
     }
 
     func testInitWithArray_0_3_0_0() {
-        let data = KeyData([0, 3, 0, 0])
+        let data = KeyDataStruct([0, 3, 0, 0])
         XCTAssertEqual(data[0], 0)
         XCTAssertEqual(data[1], 0)
         XCTAssertEqual(data[2], 3)
@@ -35,12 +35,12 @@ class KeyDataElementOrdering: KeyDataTests {
     }
 
     func testInitAndCompareWithArray_0_0_1_2_0() {
-        let data = KeyData([0, 0, 1, 2, 0])
+        let data = KeyDataStruct([0, 0, 1, 2, 0])
         XCTAssertEqual(data.elements, [0, 2, 1, 0, 0])
     }
 
     func test255FollowedBy31Zeros() {
-        var array = Array<UInt8>.init(repeating: 0, count: 32)
+        var array = Array<UInt64>.init(repeating: 0, count: 32)
         array[0] = 255
 
         XCTAssertEqual(array, [
@@ -50,7 +50,7 @@ class KeyDataElementOrdering: KeyDataTests {
             0, 0, 0, 0, 0, 0, 0, 0
         ])
 
-        let data = KeyData(array)
+        let data = KeyDataStruct(array)
 
         XCTAssertEqual(data.length, 32, "Should contain 32 elements")
         XCTAssertEqual(data.elements[0], 0, "Element at index 0 should contain least significant element")
@@ -65,7 +65,7 @@ class KeyDataElementOrdering: KeyDataTests {
     }
 
     func test255FollowedBy31ZerosExpressibleByArrayLiteral() {
-        let data: KeyData =  [
+        let data: KeyDataStruct =  [
             255, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
@@ -78,7 +78,7 @@ class KeyDataElementOrdering: KeyDataTests {
     }
 
     func test255FollowedBy30ZerosFollowedBy236ExpressibleByArrayLiteral() {
-        let data: KeyData =  [
+        let data: KeyDataStruct =  [
             255, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0,
@@ -91,25 +91,25 @@ class KeyDataElementOrdering: KeyDataTests {
     }
 
     func testEmptyInitializerReversesOrder() {
-        let array: [UInt8] = [1, 2, 3]
-        let data = KeyData(array)
-        let designated = KeyData(leastSignigicantElementLeading: array)
+        let array: [UInt64] = [1, 2, 3]
+        let data = KeyDataStruct(array)
+        let designated = KeyDataStruct(leastSignigicantElementLeading: array)
         XCTAssertEqual(designated.elements.reversed(), data.elements)
     }
 
     func testOrderingDesignatedInitializer() {
-        let data = KeyData(leastSignigicantElementLeading: [2, 0, 4, 1])
+        let data = KeyDataStruct(leastSignigicantElementLeading: [2, 0, 4, 1])
         XCTAssertEqual(data.elements, [2, 0, 4, 1])
     }
 
     func testOrderingShorthandInitializer() {
-        let data = KeyData([2, 0, 4, 1])
+        let data = KeyDataStruct([2, 0, 4, 1])
         XCTAssertEqual(data.elements, [1, 4, 0, 2])
         assertCollectionsEqual(data, data.elements)
     }
 
     func testOrderingOfDataUsingCollectionConformance() {
-        let data = KeyData(leastSignigicantElementLeading: [2, 0, 4, 1])
+        let data = KeyDataStruct(leastSignigicantElementLeading: [2, 0, 4, 1])
         XCTAssertEqual(data.elements, [2, 0, 4, 1])
         assertCollectionsEqual(data, data.elements)
     }

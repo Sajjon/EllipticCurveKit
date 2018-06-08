@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
+		4830CB1820CA76A3007E5364 /* KeyDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830CB1720CA76A3007E5364 /* KeyDataStruct.swift */; };
+		4830CB1A20CA77A1007E5364 /* KeyDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830CB1920CA77A1007E5364 /* KeyDataError.swift */; };
+		483CB99320CAC36500B5E73C /* ArrayUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB99220CAC36500B5E73C /* ArrayUtilTests.swift */; };
+		487DB19E20CAA1D500CD7B38 /* KeyDataToHexStringTrimmingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487DB19D20CAA1D500CD7B38 /* KeyDataToHexStringTrimmingTests.swift */; };
 		48F22C9720C70D88004A18CA /* SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */; };
 		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48F22CB120C70DE9004A18CA /* KeyDataComparissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CAF20C70DE5004A18CA /* KeyDataComparissionTests.swift */; };
@@ -36,6 +40,10 @@
 /* Begin PBXFileReference section */
 		1EC9D765543237D4FC0A37DA /* Pods-SwiftCryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.release.xcconfig"; sourceTree = "<group>"; };
 		30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.release.xcconfig"; sourceTree = "<group>"; };
+		4830CB1720CA76A3007E5364 /* KeyDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataStruct.swift; sourceTree = "<group>"; };
+		4830CB1920CA77A1007E5364 /* KeyDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataError.swift; sourceTree = "<group>"; };
+		483CB99220CAC36500B5E73C /* ArrayUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayUtilTests.swift; sourceTree = "<group>"; };
+		487DB19D20CAA1D500CD7B38 /* KeyDataToHexStringTrimmingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataToHexStringTrimmingTests.swift; sourceTree = "<group>"; };
 		48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22C9620C70D87004A18CA /* SwiftCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22CA820C70DC1004A18CA /* SwiftCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCrypto.h; sourceTree = "<group>"; };
@@ -124,6 +132,8 @@
 				48F22CA820C70DC1004A18CA /* SwiftCrypto.h */,
 				48F22CA920C70DC1004A18CA /* Info.plist */,
 				48F22CB220C70E17004A18CA /* KeyData.swift */,
+				4830CB1920CA77A1007E5364 /* KeyDataError.swift */,
+				4830CB1720CA76A3007E5364 /* KeyDataStruct.swift */,
 				48F22CB620C72879004A18CA /* Array_Extension.swift */,
 				48F22CB420C70E44004A18CA /* String_Extension.swift */,
 				48F22CC220C7FD9D004A18CA /* EllipticCurve.swift */,
@@ -137,8 +147,10 @@
 				48F22CAF20C70DE5004A18CA /* KeyDataComparissionTests.swift */,
 				48F22CB820C7B903004A18CA /* KeyDataStringInitTests.swift */,
 				48F22CBE20C7D64B004A18CA /* KeyDataToHexStringTests.swift */,
+				487DB19D20CAA1D500CD7B38 /* KeyDataToHexStringTrimmingTests.swift */,
 				48F22CC020C7DF9B004A18CA /* KeyDataElementOrdering.swift */,
 				48F22CBB20C7C840004A18CA /* StringUtilsTests.swift */,
+				483CB99220CAC36500B5E73C /* ArrayUtilTests.swift */,
 				48F22CC620C8188F004A18CA /* UIntPrimeTests.swift */,
 				48F22CB020C70DE5004A18CA /* Info.plist */,
 			);
@@ -319,6 +331,8 @@
 				48F22CB520C70E44004A18CA /* String_Extension.swift in Sources */,
 				48F22CC320C7FD9D004A18CA /* EllipticCurve.swift in Sources */,
 				48F22CB720C72879004A18CA /* Array_Extension.swift in Sources */,
+				4830CB1820CA76A3007E5364 /* KeyDataStruct.swift in Sources */,
+				4830CB1A20CA77A1007E5364 /* KeyDataError.swift in Sources */,
 				48F22CB320C70E17004A18CA /* KeyData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,11 +342,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F22CC120C7DF9B004A18CA /* KeyDataElementOrdering.swift in Sources */,
+				487DB19E20CAA1D500CD7B38 /* KeyDataToHexStringTrimmingTests.swift in Sources */,
 				48F22CC720C8188F004A18CA /* UIntPrimeTests.swift in Sources */,
 				48F22CBF20C7D64B004A18CA /* KeyDataToHexStringTests.swift in Sources */,
 				48F22CBA20C7B906004A18CA /* KeyDataStringInitTests.swift in Sources */,
 				48F22CB120C70DE9004A18CA /* KeyDataComparissionTests.swift in Sources */,
 				48F22CBD20C7C844004A18CA /* StringUtilsTests.swift in Sources */,
+				483CB99320CAC36500B5E73C /* ArrayUtilTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

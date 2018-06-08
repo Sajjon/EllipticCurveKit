@@ -12,49 +12,49 @@ import XCTest
 class StringUtilsTests: KeyDataTests {
     func testDroppingLeading0xFromEmptyString() {
         let string = ""
-        let dropped = string.dropTwoLeadinHexCharsIfNeeded()
+        let dropped = string.droppingTwoLeadinHexCharsIfNeeded()
         XCTAssertEqual(string, dropped, "String without leading should not change")
         XCTAssertEqual(string, "", "Dropping method should not be mutating")
     }
 
     func testDroppingLeading0xFromStringInWith0xInMiddle() {
         let string = "a0xa"
-        let dropped = string.dropTwoLeadinHexCharsIfNeeded()
+        let dropped = string.droppingTwoLeadinHexCharsIfNeeded()
         XCTAssertEqual(string, dropped, "String without leading should not change")
         XCTAssertEqual(string, "a0xa", "Dropping method should not be mutating")
     }
 
     func testDroppingLeading0xFromStringInWith0xInEnd() {
         let string = "a0a"
-        let dropped = string.dropTwoLeadinHexCharsIfNeeded()
+        let dropped = string.droppingTwoLeadinHexCharsIfNeeded()
         XCTAssertEqual(string, dropped, "String without leading should not change")
         XCTAssertEqual(string, "a0a", "Dropping method should not be mutating")
     }
 
     func testDroppingLeading0xFromStringOnlyContaining0x() {
         let string = "0x"
-        let dropped = string.dropTwoLeadinHexCharsIfNeeded()
+        let dropped = string.droppingTwoLeadinHexCharsIfNeeded()
         XCTAssertEqual(dropped, "", "String only containing 0x should be empty after drop")
         XCTAssertEqual(string, "0x", "Dropping method should not be mutating")
     }
 
     func testSplittingEmptyInto1() {
         let string = ""
-        let array = try! string.splitIntoSubStringsOfLength(1)
+        let array = try! string.splittingIntoSubStringsOfLength(1)
         XCTAssertEqual(string, "", "Splitting should not be mutating")
         XCTAssertEqual(array.count, 0, "Should be 0 elements in array")
     }
 
     func testSplittingEmptyIntoTwo() {
         let string = ""
-        let array = try! string.splitIntoSubStringsOfLength(2)
+        let array = try! string.splittingIntoSubStringsOfLength(2)
         XCTAssertEqual(string, "", "Splitting should not be mutating")
         XCTAssertEqual(array.count, 0, "Should be 0 elements in array")
     }
 
     func testSplittingMethodFourParts() {
         let string = "abcd"
-        let array = try! string.splitIntoSubStringsOfLength(1)
+        let array = try! string.splittingIntoSubStringsOfLength(1)
         XCTAssertEqual(string, "abcd", "Splitting should not be mutating")
         XCTAssertEqual(array.count, 4, "Should be 4 elements in array")
         XCTAssertEqual(array[0], "a", "first char should be `a`")
@@ -65,7 +65,7 @@ class StringUtilsTests: KeyDataTests {
 
     func testSplittingMethodTwoParts() {
         let string = "abcd"
-        let array = try! string.splitIntoSubStringsOfLength(2)
+        let array = try! string.splittingIntoSubStringsOfLength(2)
         XCTAssertEqual(string, "abcd", "Splitting should not be mutating")
         XCTAssertEqual(array.count, 2, "Should be 2 elements in array")
         XCTAssertEqual(array[0], "ab", "first char should be `ab`")
@@ -74,7 +74,7 @@ class StringUtilsTests: KeyDataTests {
 
     func testSplittingMethodSingPart() {
         let string = "abcd"
-        let array = try! string.splitIntoSubStringsOfLength(4)
+        let array = try! string.splittingIntoSubStringsOfLength(4)
         XCTAssertEqual(string, "abcd", "Splitting should not be mutating")
         XCTAssertEqual(array.count, 1, "Should be 1 elements in array")
         XCTAssertEqual(array[0], "abcd", "first char should be `abcd`")
@@ -82,8 +82,8 @@ class StringUtilsTests: KeyDataTests {
 
     func testSplittingMethodOddCharCountTwoParts() {
         do {
-            _ = try "abc".splitIntoSubStringsOfLength(2)
-        } catch KeyData.Error.stringLengthNotEven {
+            _ = try "abc".splittingIntoSubStringsOfLength(2)
+        } catch KeyDataError.stringLengthNotEven {
             XCTAssertTrue(true, "Should have failed with this, since length was odd.")
         } catch {
             XCTFail("Should not have failed, got error: `\(error)`")
@@ -128,5 +128,29 @@ class StringUtilsTests: KeyDataTests {
     func testSearchForHexStringRegexpOddLengthShouldBeOKLeading0x() {
         let hexString = "0x1a2"
         XCTAssertTrue(hexString.containsOnlyHexChars(), "`0x1a2` (odd length) has should pass")
+    }
+
+    func testDropLeadingZerosNotNeededUnchanged() {
+        func assertUnchanged(_ string: String, _ message: String? = nil) {
+            let message = message ?? "String `\(string)` should remain unchanged"
+            XCTAssertEqual(string, string.droppingLeadingZerosIfNeeded(), message)
+        }
+        assertUnchanged("")
+        assertUnchanged("1")
+        assertUnchanged("123456789")
+        assertUnchanged("abcdef")
+        assertUnchanged("123456789abcdef")
+        assertUnchanged("10", "Non leading zeros should not be removed")
+        assertUnchanged("a0a0", "Non leading zeros should not be removed")
+    }
+
+    func testVerifyThatSingleZeroStringDoesNotGetTrimmedToEmptyString() {
+        XCTAssertEqual("0", "0".droppingLeadingZerosIfNeeded(), "String `0` should not become empty string")
+    }
+
+    func testDropLeadingZerosNeededChanged() {
+        XCTAssertEqual("0", "000000".droppingLeadingZerosIfNeeded(), "Several zero string should result single `0`")
+        XCTAssertEqual("1", "01".droppingLeadingZerosIfNeeded(), "01 string should result in 1")
+        XCTAssertEqual("10", "010".droppingLeadingZerosIfNeeded(), "010 string should result in 10")
     }
 }

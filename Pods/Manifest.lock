@@ -4,7 +4,7 @@ PODS:
   - SipHash (1.2.1)
 
 DEPENDENCIES:
-  - BigInt (from `https://github.com/attaswift/BigInt.git`)
+  - BigInt (from `../BigInt_Sajjon_Fork`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -12,17 +12,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   BigInt:
-    :git: https://github.com/attaswift/BigInt.git
-
-CHECKOUT OPTIONS:
-  BigInt:
-    :commit: 415297d2fedce3ae994be2d8b95006c38372b420
-    :git: https://github.com/attaswift/BigInt.git
+    :path: "../BigInt_Sajjon_Fork"
 
 SPEC CHECKSUMS:
-  BigInt: e9c681a5e230e75d1e3243ae762305f208585135
+  BigInt: ccd78bad696ee15e2adb0c9545b73830549a733d
   SipHash: b26918dbe6925368d4322374371437c62c9038e2
 
-PODFILE CHECKSUM: 0120aa20e00e6c373578052a8f08c68b8efc60d1
+PODFILE CHECKSUM: 4b024944d31d58ef772473f1d5d0d96c83edf6ea
 
 COCOAPODS: 1.5.3

@@ -1,5 +1,5 @@
 //
-//  KeyDataError.swift
+//  KeyDataConvertibleError.swift
 //  SwiftCrypto
 //
 //  Created by Alexander Cyon on 2018-06-08.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-public enum KeyDataError: Int, Swift.Error {
-    case stringInvalidChars, stringLengthNotEven
+public enum KeyDataConvertibleError: Int, Swift.Error {
+    case stringInvalidChars, invalidLength, separatorMismatch
 }

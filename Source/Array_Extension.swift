@@ -8,28 +8,29 @@
 
 import Foundation
 
-extension Array where Element == Bool {
-    var and: Bool {
-        return !contains(false)
-    }
-}
-
 extension Array where Element: BinaryInteger {
 
-    func indexOfFirstNonZeroElement() -> Index? {
-        for (index, element) in self.enumerated() {
-            guard element > 0 else { continue }
-            return index
+    func droppingTrailingZeros() -> [Element] {
+        var elements = self
+        elements.dropTrailingZeros()
+        return elements
+    }
+
+    mutating func dropTrailingZeros() {
+        while last == 0 {
+            removeLast()
         }
-        return nil
     }
 
-    func droppingLeadingZerosIfNonAllZeroOrEmpty() -> [Element] {
-        guard let index = indexOfFirstNonZeroElement() else { return self }
-        return Array(self[index..<endIndex])
+    func droppingLeadingZeros() -> [Element] {
+        var elements = self
+        elements.dropLeadingZeros()
+        return elements
     }
 
-    mutating func dropLeadingZerosIfNonAllZeroOrEmpty() {
-        self = droppingLeadingZerosIfNonAllZeroOrEmpty()
+    mutating func dropLeadingZeros() {
+        while first == 0 {
+            removeFirst()
+        }
     }
 }

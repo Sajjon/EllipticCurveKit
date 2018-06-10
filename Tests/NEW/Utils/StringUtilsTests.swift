@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftCrypto
 
-class StringUtilsTests: KeyDataTests {
+class StringUtilsTests: XCTestCase {
     func testDroppingLeading0xFromEmptyString() {
         let string = ""
         let dropped = string.droppingTwoLeadinHexCharsIfNeeded()
@@ -63,6 +63,14 @@ class StringUtilsTests: KeyDataTests {
         XCTAssertEqual(array[3], "d", "fourth char should be `d`")
     }
 
+    func testFoobar() {
+        let bits64: Int = 64
+        let bitsHex: Int = 16
+        XCTAssertEqual(bits64/bitsHex, 4)
+        let array = try! "abcd".splittingIntoSubStringsOfLength(4)
+        XCTAssertEqual(array.count, 1)
+    }
+
     func testSplittingMethodTwoParts() {
         let string = "abcd"
         let array = try! string.splittingIntoSubStringsOfLength(2)
@@ -83,7 +91,7 @@ class StringUtilsTests: KeyDataTests {
     func testSplittingMethodOddCharCountTwoParts() {
         do {
             _ = try "abc".splittingIntoSubStringsOfLength(2)
-        } catch KeyDataError.stringLengthNotEven {
+        } catch KeyDataConvertibleError.invalidLength {
             XCTAssertTrue(true, "Should have failed with this, since length was odd.")
         } catch {
             XCTFail("Should not have failed, got error: `\(error)`")
@@ -131,9 +139,9 @@ class StringUtilsTests: KeyDataTests {
     }
 
     func testDropLeadingZerosNotNeededUnchanged() {
-        func assertUnchanged(_ string: String, _ message: String? = nil) {
+        func assertUnchanged(_ string: String, _ message: String? = nil, line: Int = #line) {
             let message = message ?? "String `\(string)` should remain unchanged"
-            XCTAssertEqual(string, string.droppingLeadingZerosIfNeeded(), message)
+            XCTAssertEqual(string, string.droppingLeadingZerosIfNeeded(), message + " line: \(line)")
         }
         assertUnchanged("")
         assertUnchanged("1")
@@ -152,5 +160,12 @@ class StringUtilsTests: KeyDataTests {
         XCTAssertEqual("0", "000000".droppingLeadingZerosIfNeeded(), "Several zero string should result single `0`")
         XCTAssertEqual("1", "01".droppingLeadingZerosIfNeeded(), "01 string should result in 1")
         XCTAssertEqual("10", "010".droppingLeadingZerosIfNeeded(), "010 string should result in 10")
+    }
+
+    func testContainsOnlyHexChars() {
+        XCTAssertTrue("q".containsOnlyHexChars(or: "q"))
+        XCTAssertTrue("0123456789abcdefQ".containsOnlyHexChars(or: "Q"))
+        XCTAssertTrue("QQQ".containsOnlyHexChars(or: "Q"))
+        XCTAssertFalse("0123456789abcdefQ".containsOnlyHexChars(or: "P"))
     }
 }

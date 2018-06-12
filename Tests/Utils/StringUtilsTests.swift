@@ -38,106 +38,6 @@ class StringUtilsTests: XCTestCase {
         XCTAssertEqual(string, "0x", "Dropping method should not be mutating")
     }
 
-//    func testSplittingEmptyInto1() {
-//        let string = ""
-//        let array = try! string.splittingIntoSubStringsOfLength(1)
-//        XCTAssertEqual(string, "", "Splitting should not be mutating")
-//        XCTAssertEqual(array.count, 0, "Should be 0 elements in array")
-//    }
-//
-//    func testSplittingEmptyIntoTwo() {
-//        let string = ""
-//        let array = try! string.splittingIntoSubStringsOfLength(2)
-//        XCTAssertEqual(string, "", "Splitting should not be mutating")
-//        XCTAssertEqual(array.count, 0, "Should be 0 elements in array")
-//    }
-//
-//    func testSplittingMethodFourParts() {
-//        let string = "abcd"
-//        let array = try! string.splittingIntoSubStringsOfLength(1)
-//        XCTAssertEqual(string, "abcd", "Splitting should not be mutating")
-//        XCTAssertEqual(array.count, 4, "Should be 4 elements in array")
-//        XCTAssertEqual(array[0], "a", "first char should be `a`")
-//        XCTAssertEqual(array[1], "b", "second char should be `b`")
-//        XCTAssertEqual(array[2], "c", "third char should be `c`")
-//        XCTAssertEqual(array[3], "d", "fourth char should be `d`")
-//    }
-//
-//    func testFoobar() {
-//        let bits64: Int = 64
-//        let bitsHex: Int = 16
-//        XCTAssertEqual(bits64/bitsHex, 4)
-//        let array = try! "abcd".splittingIntoSubStringsOfLength(4)
-//        XCTAssertEqual(array.count, 1)
-//    }
-//
-//    func testSplittingMethodTwoParts() {
-//        let string = "abcd"
-//        let array = try! string.splittingIntoSubStringsOfLength(2)
-//        XCTAssertEqual(string, "abcd", "Splitting should not be mutating")
-//        XCTAssertEqual(array.count, 2, "Should be 2 elements in array")
-//        XCTAssertEqual(array[0], "ab", "first char should be `ab`")
-//        XCTAssertEqual(array[1], "cd", "second char should be `cd`")
-//    }
-//
-//    func testSplittingMethodSingPart() {
-//        let string = "abcd"
-//        let array = try! string.splittingIntoSubStringsOfLength(4)
-//        XCTAssertEqual(string, "abcd", "Splitting should not be mutating")
-//        XCTAssertEqual(array.count, 1, "Should be 1 elements in array")
-//        XCTAssertEqual(array[0], "abcd", "first char should be `abcd`")
-//    }
-//
-//    func testSplittingMethodOddCharCountTwoParts() {
-//        do {
-//            _ = try "abc".splittingIntoSubStringsOfLength(2)
-//        } catch KeyDataConvertibleError.invalidLength {
-//            XCTAssertTrue(true, "Should have failed with this, since length was odd.")
-//        } catch {
-//            XCTFail("Should not have failed, got error: `\(error)`")
-//        }
-//    }
-
-//    func testSearchForHexStringRegexpEmpty() {
-//        XCTAssertTrue("".containsOnlyHexChars(), "Empty strings should pass as true")
-//    }
-//
-//    func testSearchForHexStringRegexpJustLeading0x() {
-//        XCTAssertTrue("0x".containsOnlyHexChars(), "`0x` should pass as true")
-//    }
-//
-//    func testSearchForHexStringRegexpAllDifferent() {
-//        let hexString = "0123456789abcdef"
-//        XCTAssertTrue(hexString.containsOnlyHexChars(), "Should be valid")
-//        XCTAssertEqual(hexString, "0123456789abcdef", "Calling contain method should not be mutating")
-//    }
-//
-//    func testSearchForHexStringRegexpAllDifferentLeading0x() {
-//        let hexString = "0x0123456789abcdef"
-//        XCTAssertTrue(hexString.containsOnlyHexChars(), "Should be valid")
-//        XCTAssertEqual(hexString, "0x0123456789abcdef", "Calling contain method should not be mutating")
-//    }
-//
-//    func testSearchForHexStringRegexpInvalidSymbols() {
-//        XCTAssertFalse("g".containsOnlyHexChars(), "`g` is not a valid string")
-//        XCTAssertFalse("0xg".containsOnlyHexChars(), "`0xg` is not a valid string")
-//        XCTAssertFalse("h".containsOnlyHexChars(), "`h` is not a valid string")
-//        XCTAssertFalse("012345j1".containsOnlyHexChars())
-//        XCTAssertFalse("032p5bai".containsOnlyHexChars())
-//        XCTAssertFalse("032nfds91".containsOnlyHexChars())
-//        XCTAssertFalse("0123456789abcdefg".containsOnlyHexChars(), "Containing `g` is invalid")
-//    }
-//
-//    func testSearchForHexStringRegexpOddLengthShouldBeOK() {
-//        let hexString = "1a2"
-//        XCTAssertTrue(hexString.containsOnlyHexChars(), "`1a2` (odd length) has should pass")
-//    }
-//
-//    func testSearchForHexStringRegexpOddLengthShouldBeOKLeading0x() {
-//        let hexString = "0x1a2"
-//        XCTAssertTrue(hexString.containsOnlyHexChars(), "`0x1a2` (odd length) has should pass")
-//    }
-
     func testDropLeadingZerosNotNeededUnchanged() {
         func assertUnchanged(_ string: String, _ message: String? = nil, line: Int = #line) {
             let message = message ?? "String `\(string)` should remain unchanged"
@@ -161,11 +61,4 @@ class StringUtilsTests: XCTestCase {
         XCTAssertEqual("1", "01".droppingLeadingZerosIfNeeded(), "01 string should result in 1")
         XCTAssertEqual("10", "010".droppingLeadingZerosIfNeeded(), "010 string should result in 10")
     }
-
-//    func testContainsOnlyHexChars() {
-//        XCTAssertTrue("q".containsOnlyHexChars(or: "q"))
-//        XCTAssertTrue("0123456789abcdefQ".containsOnlyHexChars(or: "Q"))
-//        XCTAssertTrue("QQQ".containsOnlyHexChars(or: "Q"))
-//        XCTAssertFalse("0123456789abcdefQ".containsOnlyHexChars(or: "P"))
-//    }
 }

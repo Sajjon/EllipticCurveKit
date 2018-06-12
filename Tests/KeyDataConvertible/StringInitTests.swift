@@ -9,25 +9,7 @@
 import XCTest
 @testable import SwiftCrypto
 
-extension KeyDataConvertible {
-
-    init(msbAtIndex0 string: String, radix: Int = 16) {
-        if let data = Self(msbZeroIndexed: string, radix: radix) {
-            self = data
-        } else {
-            XCTFail("Failed to create KeyData with string: `\(string)`")
-            self = Self(msbZeroIndexed: [])
-        }
-    }
-}
-
-class KeyDataConvertibleTests: XCTestCase {
-    func assertEqual(_ lhs: KeyData, _ rhs: KeyData, _ message: String = "", line: Int = #line) {
-        XCTAssertEqual(lhs, rhs, message + ", line: \(line)")
-    }
-}
-
-class StringInitTests: KeyDataConvertibleTests {
+class StringInitTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -135,5 +117,22 @@ class StringInitTests: KeyDataConvertibleTests {
         XCTAssertEqual(data.asHexString(), "10000000000000000")
         XCTAssertEqual(data.asDecimalString(), "18446744073709551616")
     }
+}
 
+extension KeyDataConvertible {
+
+    init(msbAtIndex0 string: String, radix: Int = 16) {
+        if let data = Self(msbZeroIndexed: string, radix: radix) {
+            self = data
+        } else {
+            XCTFail("Failed to create KeyData with string: `\(string)`")
+            self = Self(msbZeroIndexed: [])
+        }
+    }
+}
+
+extension XCTestCase {
+    func assertEqual(_ lhs: KeyData, _ rhs: KeyData, _ message: String = "", line: Int = #line) {
+        XCTAssertEqual(lhs, rhs, message + ", line: \(line)")
+    }
 }

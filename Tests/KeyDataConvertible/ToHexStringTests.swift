@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import SwiftCrypto
 
-class KeyDataConvertibleToHexStringTests: KeyDataConvertibleTests {
+class KeyDataConvertibleToHexStringTests: XCTestCase {
 
     func test_0_equals_empty() {
         let data = KeyData(lsbZeroIndexed: [0])

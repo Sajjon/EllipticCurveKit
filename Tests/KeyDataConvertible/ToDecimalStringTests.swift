@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 @testable import SwiftCrypto
 
-class ToDecimalStringTests: KeyDataConvertibleTests {
+class ToDecimalStringTests: XCTestCase {
 
     func testDescriptionRadix10() {
         let data: KeyData = [1, 0]

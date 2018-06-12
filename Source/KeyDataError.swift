@@ -8,6 +8,6 @@
 
 import Foundation
 
-public enum KeyDataConvertibleError: Int, Swift.Error {
-    case stringInvalidChars, invalidLength, separatorMismatch
-}
+//public enum KeyDataConvertibleError: Int, Swift.Error {
+//    case stringInvalidChars, invalidLength, separatorMismatch
+//}

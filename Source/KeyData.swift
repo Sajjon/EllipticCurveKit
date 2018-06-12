@@ -7,24 +7,19 @@
 //
 
 import Foundation
-
-public typealias KeyData = KeyDataStruct
-public struct KeyDataStruct: KeyDataConvertible {
-    public typealias Element = UInt8
-
-    // Least significant element at index 0
-    public private(set) var elements: [Element]
-
-    public init(lsbZeroIndexed: [Element]) {
-        self.elements = lsbZeroIndexed.droppingTrailingZeros()
-    }
-}
-
 import BigInt
-extension BigUInt: KeyDataConvertible {
-    public typealias Element = Word
-    public var elements: [Element] { return storage }
-    public init(lsbZeroIndexed elements: [Element]) {
-        self.init(words: elements)
+
+public typealias KeyData = BigUInt
+
+extension BigUInt: KeyDataConvertible {}
+public extension BigUInt {
+
+    init(lsbZeroIndexed words: [Word]) {
+        self.init(words: words)
+    }
+
+    init?(msbZeroIndexed string: String, radix: Int) {
+        let string = radix == 16 ? string.droppingTwoLeadinHexCharsIfNeeded() : string
+        self.init(string, radix: radix)
     }
 }

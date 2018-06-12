@@ -42,7 +42,7 @@ class ComparisonTests: XCTestCase {
 
     func test_IntMaxValue_less_than_0_1() {
         XCTAssertLessThan(
-            KeyData(lsbZeroIndexed: [KeyData.Element.max]),
+            KeyData(lsbZeroIndexed: [UInt.max]),
             KeyData(lsbZeroIndexed: [0, 1])
         )
     }

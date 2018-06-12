@@ -14,7 +14,7 @@ import BigInt
 class BigUIntInitializerTests: XCTestCase {
 
     func testDesignatedInitBehavesLikeProtocolDesignatedInit() {
-        var array: [BigUInt.Element] = []
+        var array: [BigUInt.Word] = []
 
         array = [0, 0, 1, 2, 0]
         XCTAssertEqual(BigUInt(words: array), BigUInt(lsbZeroIndexed: array), "Only trailing zeros should be removed")

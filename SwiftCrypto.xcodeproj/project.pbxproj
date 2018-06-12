@@ -10,21 +10,23 @@
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
 		4830CB1820CA76A3007E5364 /* KeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830CB1720CA76A3007E5364 /* KeyData.swift */; };
 		4830CB1A20CA77A1007E5364 /* KeyDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830CB1920CA77A1007E5364 /* KeyDataError.swift */; };
-		483CB99320CAC36500B5E73C /* ArrayUtilDropLeadingZerosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB99220CAC36500B5E73C /* ArrayUtilDropLeadingZerosTests.swift */; };
-		483CB9BA20CD1D4C00B5E73C /* OrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9B920CD1D4C00B5E73C /* OrderingTests.swift */; };
-		483CB9BF20CD2F1D00B5E73C /* ArrayUtilDropTrailingZerosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9BE20CD2F1D00B5E73C /* ArrayUtilDropTrailingZerosTests.swift */; };
-		483CB9C220CD3D4E00B5E73C /* BigUIntInitializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9C120CD3D4E00B5E73C /* BigUIntInitializerTests.swift */; };
-		483CB9C420CD3ED200B5E73C /* ComparisonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9C320CD3ED200B5E73C /* ComparisonTests.swift */; };
-		483CB9C520CD41E500B5E73C /* StringInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CB820C7B903004A18CA /* StringInitTests.swift */; };
-		483CB9C820CD453400B5E73C /* ToHexStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483CB9C720CD453400B5E73C /* ToHexStringTests.swift */; };
+		4861AA5520D03EB100871618 /* StringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5220D03EB100871618 /* StringUtilsTests.swift */; };
+		4861AA5620D03EB100871618 /* ArrayUtilDropTrailingZerosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5320D03EB100871618 /* ArrayUtilDropTrailingZerosTests.swift */; };
+		4861AA5720D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5420D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift */; };
+		4861AA5B20D03EF400871618 /* PrimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5920D03EEE00871618 /* PrimeTests.swift */; };
+		4861AA5C20D03F0A00871618 /* BigUIntInitializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5A20D03EEE00871618 /* BigUIntInitializerTests.swift */; };
+		4861AA6520D03F8A00871618 /* StringInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA6120D03F6800871618 /* StringInitTests.swift */; };
+		4861AA6620D0428B00871618 /* ToHexStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA6320D03F6800871618 /* ToHexStringTests.swift */; };
+		4861AA6720D044D400871618 /* ComparisonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA6220D03F6800871618 /* ComparisonTests.swift */; };
+		4861AA6820D044ED00871618 /* OrderingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA6020D03F6800871618 /* OrderingTests.swift */; };
+		4861AA6920D0459E00871618 /* ToDecimalStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5F20D03F6800871618 /* ToDecimalStringTests.swift */; };
+		4861AA6A20D045BF00871618 /* DataToStringBackToDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5E20D03F6800871618 /* DataToStringBackToDataTests.swift */; };
 		48F22C9720C70D88004A18CA /* SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */; };
 		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48F22CB320C70E17004A18CA /* KeyDataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CB220C70E17004A18CA /* KeyDataConvertible.swift */; };
 		48F22CB520C70E44004A18CA /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CB420C70E44004A18CA /* String_Extension.swift */; };
 		48F22CB720C72879004A18CA /* Array_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CB620C72879004A18CA /* Array_Extension.swift */; };
-		48F22CBD20C7C844004A18CA /* StringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CBB20C7C840004A18CA /* StringUtilsTests.swift */; };
 		48F22CC320C7FD9D004A18CA /* EllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CC220C7FD9D004A18CA /* EllipticCurve.swift */; };
-		48F22CC720C8188F004A18CA /* PrimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CC620C8188F004A18CA /* PrimeTests.swift */; };
 		8823FC9573D8C1AF8B8D30CD /* Pods_SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665161916806AD945170E11A /* Pods_SwiftCrypto.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,12 +45,17 @@
 		30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.release.xcconfig"; sourceTree = "<group>"; };
 		4830CB1720CA76A3007E5364 /* KeyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyData.swift; sourceTree = "<group>"; };
 		4830CB1920CA77A1007E5364 /* KeyDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataError.swift; sourceTree = "<group>"; };
-		483CB99220CAC36500B5E73C /* ArrayUtilDropLeadingZerosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayUtilDropLeadingZerosTests.swift; sourceTree = "<group>"; };
-		483CB9B920CD1D4C00B5E73C /* OrderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingTests.swift; sourceTree = "<group>"; };
-		483CB9BE20CD2F1D00B5E73C /* ArrayUtilDropTrailingZerosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayUtilDropTrailingZerosTests.swift; sourceTree = "<group>"; };
-		483CB9C120CD3D4E00B5E73C /* BigUIntInitializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigUIntInitializerTests.swift; sourceTree = "<group>"; };
-		483CB9C320CD3ED200B5E73C /* ComparisonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTests.swift; sourceTree = "<group>"; };
-		483CB9C720CD453400B5E73C /* ToHexStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToHexStringTests.swift; sourceTree = "<group>"; };
+		4861AA5220D03EB100871618 /* StringUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtilsTests.swift; sourceTree = "<group>"; };
+		4861AA5320D03EB100871618 /* ArrayUtilDropTrailingZerosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtilDropTrailingZerosTests.swift; sourceTree = "<group>"; };
+		4861AA5420D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtilDropLeadingZerosTests.swift; sourceTree = "<group>"; };
+		4861AA5920D03EEE00871618 /* PrimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeTests.swift; sourceTree = "<group>"; };
+		4861AA5A20D03EEE00871618 /* BigUIntInitializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigUIntInitializerTests.swift; sourceTree = "<group>"; };
+		4861AA5E20D03F6800871618 /* DataToStringBackToDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataToStringBackToDataTests.swift; sourceTree = "<group>"; };
+		4861AA5F20D03F6800871618 /* ToDecimalStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDecimalStringTests.swift; sourceTree = "<group>"; };
+		4861AA6020D03F6800871618 /* OrderingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingTests.swift; sourceTree = "<group>"; };
+		4861AA6120D03F6800871618 /* StringInitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInitTests.swift; sourceTree = "<group>"; };
+		4861AA6220D03F6800871618 /* ComparisonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonTests.swift; sourceTree = "<group>"; };
+		4861AA6320D03F6800871618 /* ToHexStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToHexStringTests.swift; sourceTree = "<group>"; };
 		48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22C9620C70D87004A18CA /* SwiftCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22CA820C70DC1004A18CA /* SwiftCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCrypto.h; sourceTree = "<group>"; };
@@ -57,10 +64,7 @@
 		48F22CB220C70E17004A18CA /* KeyDataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDataConvertible.swift; sourceTree = "<group>"; };
 		48F22CB420C70E44004A18CA /* String_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_Extension.swift; sourceTree = "<group>"; };
 		48F22CB620C72879004A18CA /* Array_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_Extension.swift; sourceTree = "<group>"; };
-		48F22CB820C7B903004A18CA /* StringInitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInitTests.swift; sourceTree = "<group>"; };
-		48F22CBB20C7C840004A18CA /* StringUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtilsTests.swift; sourceTree = "<group>"; };
 		48F22CC220C7FD9D004A18CA /* EllipticCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurve.swift; sourceTree = "<group>"; };
-		48F22CC620C8188F004A18CA /* PrimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeTests.swift; sourceTree = "<group>"; };
 		665161916806AD945170E11A /* Pods_SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2A764FF59FB28920DD81F9 /* Pods-SwiftCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCryptoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,44 +112,36 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		483CB9B120CBF2C100B5E73C /* Utils */ = {
+		4861AA5120D03EB100871618 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				48F22CBB20C7C840004A18CA /* StringUtilsTests.swift */,
-				483CB9BE20CD2F1D00B5E73C /* ArrayUtilDropTrailingZerosTests.swift */,
-				483CB99220CAC36500B5E73C /* ArrayUtilDropLeadingZerosTests.swift */,
+				4861AA5220D03EB100871618 /* StringUtilsTests.swift */,
+				4861AA5320D03EB100871618 /* ArrayUtilDropTrailingZerosTests.swift */,
+				4861AA5420D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		483CB9B720CD1D0400B5E73C /* NEW */ = {
+		4861AA5820D03EEE00871618 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				483CB9C020CD3D2D00B5E73C /* ThirdParty */,
-				483CB9BB20CD225900B5E73C /* KeyDataConvertible */,
-				483CB9B120CBF2C100B5E73C /* Utils */,
-			);
-			path = NEW;
-			sourceTree = "<group>";
-		};
-		483CB9BB20CD225900B5E73C /* KeyDataConvertible */ = {
-			isa = PBXGroup;
-			children = (
-				483CB9B920CD1D4C00B5E73C /* OrderingTests.swift */,
-				48F22CB820C7B903004A18CA /* StringInitTests.swift */,
-				483CB9C720CD453400B5E73C /* ToHexStringTests.swift */,
-				483CB9C320CD3ED200B5E73C /* ComparisonTests.swift */,
-			);
-			path = KeyDataConvertible;
-			sourceTree = "<group>";
-		};
-		483CB9C020CD3D2D00B5E73C /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				483CB9C120CD3D4E00B5E73C /* BigUIntInitializerTests.swift */,
-				48F22CC620C8188F004A18CA /* PrimeTests.swift */,
+				4861AA5920D03EEE00871618 /* PrimeTests.swift */,
+				4861AA5A20D03EEE00871618 /* BigUIntInitializerTests.swift */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		4861AA5D20D03F6800871618 /* KeyDataConvertible */ = {
+			isa = PBXGroup;
+			children = (
+				4861AA5E20D03F6800871618 /* DataToStringBackToDataTests.swift */,
+				4861AA5F20D03F6800871618 /* ToDecimalStringTests.swift */,
+				4861AA6020D03F6800871618 /* OrderingTests.swift */,
+				4861AA6120D03F6800871618 /* StringInitTests.swift */,
+				4861AA6220D03F6800871618 /* ComparisonTests.swift */,
+				4861AA6320D03F6800871618 /* ToHexStringTests.swift */,
+			);
+			path = KeyDataConvertible;
 			sourceTree = "<group>";
 		};
 		48F22C8320C70D87004A18CA = {
@@ -186,7 +182,9 @@
 		48F22CAE20C70DE5004A18CA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				483CB9B720CD1D0400B5E73C /* NEW */,
+				4861AA5D20D03F6800871618 /* KeyDataConvertible */,
+				4861AA5820D03EEE00871618 /* ThirdParty */,
+				4861AA5120D03EB100871618 /* Utils */,
 				48F22CB020C70DE5004A18CA /* Info.plist */,
 			);
 			path = Tests;
@@ -376,15 +374,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483CB9C520CD41E500B5E73C /* StringInitTests.swift in Sources */,
-				483CB9BF20CD2F1D00B5E73C /* ArrayUtilDropTrailingZerosTests.swift in Sources */,
-				48F22CC720C8188F004A18CA /* PrimeTests.swift in Sources */,
-				483CB9C420CD3ED200B5E73C /* ComparisonTests.swift in Sources */,
-				48F22CBD20C7C844004A18CA /* StringUtilsTests.swift in Sources */,
-				483CB9C220CD3D4E00B5E73C /* BigUIntInitializerTests.swift in Sources */,
-				483CB9C820CD453400B5E73C /* ToHexStringTests.swift in Sources */,
-				483CB9BA20CD1D4C00B5E73C /* OrderingTests.swift in Sources */,
-				483CB99320CAC36500B5E73C /* ArrayUtilDropLeadingZerosTests.swift in Sources */,
+				4861AA6520D03F8A00871618 /* StringInitTests.swift in Sources */,
+				4861AA5620D03EB100871618 /* ArrayUtilDropTrailingZerosTests.swift in Sources */,
+				4861AA5520D03EB100871618 /* StringUtilsTests.swift in Sources */,
+				4861AA6A20D045BF00871618 /* DataToStringBackToDataTests.swift in Sources */,
+				4861AA5C20D03F0A00871618 /* BigUIntInitializerTests.swift in Sources */,
+				4861AA5720D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift in Sources */,
+				4861AA6920D0459E00871618 /* ToDecimalStringTests.swift in Sources */,
+				4861AA6620D0428B00871618 /* ToHexStringTests.swift in Sources */,
+				4861AA6720D044D400871618 /* ComparisonTests.swift in Sources */,
+				4861AA5B20D03EF400871618 /* PrimeTests.swift in Sources */,
+				4861AA6820D044ED00871618 /* OrderingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

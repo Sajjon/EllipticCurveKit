@@ -10,17 +10,17 @@ import Foundation
 
 extension Array where Element: BinaryInteger {
 
-    func droppingTrailingZeros() -> [Element] {
-        var elements = self
-        elements.dropTrailingZeros()
-        return elements
-    }
-
-    mutating func dropTrailingZeros() {
-        while last == 0 {
-            removeLast()
-        }
-    }
+//    func droppingTrailingZeros() -> [Element] {
+//        var elements = self
+//        elements.dropTrailingZeros()
+//        return elements
+//    }
+//
+//    mutating func dropTrailingZeros() {
+//        while last == 0 {
+//            removeLast()
+//        }
+//    }
 
     func droppingLeadingZeros() -> [Element] {
         var elements = self

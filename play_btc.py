@@ -1,10 +1,9 @@
-#!/usr/bin/env python2
-
-# Use Python 2.7 not Python 3.X
+#!/usr/bin/env python3
 
 import random
 import hashlib
 import base64
+import base58
 import binascii
 from collections import namedtuple
 
@@ -91,11 +90,11 @@ def Base(n,b):
 def MsgMagic(message):
     return "\x18Bitcoin Signed Message:\n"+chr(len(message))+message
 
-def Hash(m,method):
-    h=hashlib.new(method)
-    h.update(m)
+# def Hash(m,method):
+#     h=hashlib.new(method)
+#     h.update(m)
 
-    return h.digest()
+#     return h.digest()
 
 def b58encode(v):
     #Encode a byte string to the Base58
@@ -207,7 +206,7 @@ def Int2Byte(n,b):
     
     for _ in range(b):
         (n,m)=divmod(n,256)
-        out=chr(m)+out
+        out=chr(int(m))+out
     
     return out
 
@@ -472,15 +471,16 @@ class EllipticCurvePoint:
     #     else:
     #         return binascii.hexlify(pubaddr)
     def AddressFromPublicKey(self,pk,should_base58_encode):
-        kh=chr(0)+Hash(Hash(pk,"SHA256"),"RIPEMD160")
-        cs=Hash(Hash(kh,"SHA256"),"SHA256")[:4]
+        assert 1 == 2 # make crash
+        # kh=chr(0)+Hash(Hash(pk,"SHA256"),"RIPEMD160")
+        # cs=Hash(Hash(kh,"SHA256"),"SHA256")[:4]
 
-        pubaddr=kh+cs
+        # pubaddr=kh+cs
 
-        if should_base58_encode:
-            return b58encode(pubaddr)
-        else:
-            return binascii.hexlify(pubaddr)
+        # if should_base58_encode:
+        #     return b58encode(pubaddr)
+        # else:
+        #     return binascii.hexlify(pubaddr)
 
     def PublicKeyFromD(self,d,uncompressed):
         return self.CreatePublicKey(self*d,uncompressed)
@@ -567,7 +567,8 @@ def to_bytes_32(v):
 def class_name(v):
     return type(v).__name__
 
-def public_key_on_many_formats(public_key_point_x, public_key_point_y):
+def public_key_on_many_formats(privkey, public_key_point_x, public_key_point_y):
+    key = to_bytes_32(privkey)
     public_x = public_key_point_x
     public_y = public_key_point_y
 
@@ -601,14 +602,10 @@ def public_key_on_many_formats(public_key_point_x, public_key_point_y):
     addr = extRipe + chksum # Step 8
     addr_c = extRipe_c + chksum_c # Step 8
 
-    # print("Public Key (130 characters [0-9A-F]):", bytetohex(public_key))
-    public_key_uncompressed_130char_hex_uppercased = binascii.hexlify(public_key)
-    # print("Public Key (compressed, 66 characters [0-9A-F]):", bytetohex(compressed_public_key))
-    public_key_compressed_66char_hex_uppercased = binascii.hexlify(compressed_public_key)
-    # print("Public Address:", base58.b58encode(addr))
-    public_address_uncompressed_base58 = base58.b58encode(addr)
-    # print("Public Address Compressed:", base58.b58encode(addr_c))
-    public_address_compressed_base58 = base58.b58encode(addr_c)
+    public_key_uncompressed_130char_hex_uppercased = public_key.hex()
+    public_key_compressed_66char_hex_uppercased = compressed_public_key.hex()
+    public_address_uncompressed_base58 = base58.b58encode(addr).hex()
+    public_address_compressed_base58 = base58.b58encode(addr_c).hex()
 
     ## WIF https://en.bitcoin.it/wiki/Wallet_import_format
     ## compressed WIF http://sourceforge.net/mailarchive/forum.php?thread_name=CAPg%2BsBhDFCjAn1tRRQhaudtqwsh4vcVbxzm%2BAA2OuFxN71fwUA%40mail.gmail.com&forum_name=bitcoin-development
@@ -622,7 +619,7 @@ def public_key_on_many_formats(public_key_point_x, public_key_point_y):
     addr = keyWIF + chksum # Step 8
     addr_c = keyWIF_c + chksum_c # Step 8
     # print("Private Key Hexadecimal Format (64 characters [0-9A-F]):", bytetohex(key))
-    private_key_64chars_hex_uppercased = bytetohex(key)
+    private_key_64chars_hex_uppercased = binascii.hexlify(key)
     # print("Private Key WIF (51 Base58 characters):", base58.b58encode(addr))
     private_key_wif_base58_51chars = base58.b58encode(addr)
     # print("Private Key WIF Compressed (52 Base58 characters):", base58.b58encode(addr_c),"\n")
@@ -647,9 +644,9 @@ Returns:
 Raises:
     ValueError: The secret key is not in the valid range [1,N-1].
 """
-def sk_to_pk_many_formats(sk):
-    pk_x, pk_y = sk_to_pk(sk)
-    return public_key_on_many_formats(pk_x, pk_y)
+def sk_to_pk_many_formats(private_key):
+    pk_x, pk_y = sk_to_pk(private_key)
+    return public_key_on_many_formats(private_key, pk_x, pk_y)
 
 def sk_to_pk(sk):
     """
@@ -702,7 +699,7 @@ def sk_to_pk(sk):
     # by using the binary representation of sk this can be done in 256
     # iterations (double-and-add)
     ret = None
-    for i in xrange(256):
+    for i in range(256):
         if sk & (1 << i):
             if ret is None:
                 ret = G
@@ -725,40 +722,33 @@ def Bitcoin():
 def main():
     print("START")
     bitcoin=Bitcoin()
-    # Mainnet => start with leading 5
-    # Testnet => start with leading 9
-    input_private_key_uncompressed_wif_51chars_base58_mainnet_thus_starting_with_leading_5 = "5J8kgEmHqTH9VYLd34DP6uGVmwbDXnQFQwDvZndVP4enBqz2GuM"
-    privkey = input_private_key_uncompressed_wif_51chars_base58_mainnet_thus_starting_with_leading_5
-
-    expected_address_uncompressed = "157k4yFLw92XzCYysoS64hif6tcGdDULm6"
-
-    assert expected_address_uncompressed == bitcoin.AddressFromPrivate(privkey,should_base58_encode=True)
     # WIF stands for "Wallet Import Format"
-    expected_private_key_compressed_wif_52chars_base58_mainnet_thus_starting_with_leading_K_or_L = "KxdDnBkVJrzGUyKc45BeZ3hQ1Mx2JsPcceL3RiQ4GP7kSTX682Jj"
+    # In Bitcoin the WIFs begins with a leading char according to this formula
+    # BTC WIF MAINNET
+    ## uncompressed: `5`
+    ## compressed: `K`
+    # BTC WIF TESTNET
+    ## uncompressed: `9`
+    ## compressed: `L`
+
     expected_private_key_hex_64chars_uppercased = "29EE955FEDA1A85F87ED4004958479706BA6C71FC99A67697A9A13D9D08C618E"
+    sevenFormats = sk_to_pk_many_formats(int(expected_private_key_hex_64chars_uppercased, 16))
+    
+    expected_private_key_uncompressed_wif_base58_51chars = "5J8kgEmHqTH9VYLd34DP6uGVmwbDXnQFQwDvZndVP4enBqz2GuM"
+    expected_private_key_compressed_wif_base58_52chars = "KxdDnBkVJrzGUyKc45BeZ3hQ1Mx2JsPcceL3RiQ4GP7kSTX682Jj"
     expected_private_key_base64_44chars = "Ke6VX+2hqF+H7UAElYR5cGumxx/JmmdpepoT2dCMYY4="
+
     expected_public_key_uncompressed_130chars_hex_lowercased = "04f979f942ae743f27902b62ca4e8a8fe0f8a979ee3ad7bd0817339a665c3e7f4fb8cf959134b5c66bcc333a968b26d0adaccfad26f1ea8607d647e5b679c49184"
     expected_public_key_compressed_66chars_hex_lowercased = "02f979f942ae743f27902b62ca4e8a8fe0f8a979ee3ad7bd0817339a665c3e7f4f"
 
-    expected_address_compressed = "1Dhtb2eZb3wq9kyUoY9oJPZXJrtPjUgDBU"
+    expected_public_address_uncompressed = "157k4yFLw92XzCYysoS64hif6tcGdDULm6"
+    expected_public_address_compressed = "1Dhtb2eZb3wq9kyUoY9oJPZXJrtPjUgDBU"
+
     expected_ZILLIQA_public_address_without_leading_0x = "59BB614648F828A3D6AFD7E488E358CDE177DAA0"
 
-    assert expected_public_key_uncompressed_130chars_hex_lowercased == bitcoin.PublicKeyFromPrivateKeyAs130CharHex(privkey)
-
-    # sevenFormats = sk_to_pk_many_formats(int(expected_private_key_hex_64chars_uppercased, 16))
+    assert expected_public_key_uncompressed_130chars_hex_lowercased == sevenFormats.public_keys.hex_130chars
+    assert expected_public_key_compressed_66chars_hex_lowercased == sevenFormats.public_keys.compressed_hex_66chars
 
     print("DONE: Success")
-    
-    # #Sign a message with the current address
-    # m="Hello World"
-    # sig=bitcoin.SignMessage("Hello World", privkey)
-    # #Verify the message using only the bitcoin adress, the signature and the message.
-    # #Not using the public key as it is not needed.
-    # if bitcoin.VerifyMessageFromAddress(adr,m,sig):
-    #     print "Message verified"
-    
-    # #Generate some addresses
-    # print "Here are some adresses and associated private keys"
-    # bitcoin.AddressGenerator(10)
     
 if __name__ == "__main__": main()

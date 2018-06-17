@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
+		482B154320D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */; };
+		482B154720D4135D001B437D /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154520D41359001B437D /* PrivateKey.swift */; };
+		482B154A20D41371001B437D /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154820D4136D001B437D /* PublicKey.swift */; };
+		482B154E20D4138F001B437D /* KeyCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154C20D4138C001B437D /* KeyCreator.swift */; };
+		482B155120D413B8001B437D /* Prime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B155020D413B8001B437D /* Prime.swift */; };
+		482B155520D413E4001B437D /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B155420D413E4001B437D /* Point.swift */; };
+		482B155720D413FE001B437D /* PointOnEllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B155620D413FE001B437D /* PointOnEllipticCurve.swift */; };
+		482B155920D4163F001B437D /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B155820D4163F001B437D /* Field.swift */; };
+		482B155B20D465BE001B437D /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B155A20D465BE001B437D /* Operations.swift */; };
 		4830CB1820CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830CB1720CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift */; };
 		4861AA5520D03EB100871618 /* StringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5220D03EB100871618 /* StringUtilsTests.swift */; };
 		4861AA5720D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5420D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift */; };
@@ -41,6 +50,15 @@
 /* Begin PBXFileReference section */
 		1EC9D765543237D4FC0A37DA /* Pods-SwiftCryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.release.xcconfig"; sourceTree = "<group>"; };
 		30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.release.xcconfig"; sourceTree = "<group>"; };
+		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
+		482B154520D41359001B437D /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		482B154820D4136D001B437D /* PublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKey.swift; sourceTree = "<group>"; };
+		482B154C20D4138C001B437D /* KeyCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCreator.swift; sourceTree = "<group>"; };
+		482B155020D413B8001B437D /* Prime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prime.swift; sourceTree = "<group>"; };
+		482B155420D413E4001B437D /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		482B155620D413FE001B437D /* PointOnEllipticCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOnEllipticCurve.swift; sourceTree = "<group>"; };
+		482B155820D4163F001B437D /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		482B155A20D465BE001B437D /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
 		4830CB1720CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyDataConvertible+BigUInt.swift"; sourceTree = "<group>"; };
 		4861AA5220D03EB100871618 /* StringUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtilsTests.swift; sourceTree = "<group>"; };
 		4861AA5420D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayUtilDropLeadingZerosTests.swift; sourceTree = "<group>"; };
@@ -108,6 +126,57 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		482B154120D41053001B437D /* KeyGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */,
+			);
+			path = KeyGeneration;
+			sourceTree = "<group>";
+		};
+		482B154420D41350001B437D /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				482B154520D41359001B437D /* PrivateKey.swift */,
+				482B154820D4136D001B437D /* PublicKey.swift */,
+			);
+			path = Keys;
+			sourceTree = "<group>";
+		};
+		482B154B20D41382001B437D /* KeyCreator */ = {
+			isa = PBXGroup;
+			children = (
+				482B154C20D4138C001B437D /* KeyCreator.swift */,
+			);
+			path = KeyCreator;
+			sourceTree = "<group>";
+		};
+		482B154F20D413A7001B437D /* Prime */ = {
+			isa = PBXGroup;
+			children = (
+				482B155020D413B8001B437D /* Prime.swift */,
+			);
+			path = Prime;
+			sourceTree = "<group>";
+		};
+		482B155220D413CB001B437D /* Curve */ = {
+			isa = PBXGroup;
+			children = (
+				48F22CC220C7FD9D004A18CA /* EllipticCurve.swift */,
+				482B155820D4163F001B437D /* Field.swift */,
+			);
+			path = Curve;
+			sourceTree = "<group>";
+		};
+		482B155320D413D8001B437D /* Points */ = {
+			isa = PBXGroup;
+			children = (
+				482B155420D413E4001B437D /* Point.swift */,
+				482B155620D413FE001B437D /* PointOnEllipticCurve.swift */,
+			);
+			path = Points;
+			sourceTree = "<group>";
+		};
 		4861AA5120D03EB100871618 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,7 +238,12 @@
 		4861AA6E20D048FC00871618 /* EllipticCurve */ = {
 			isa = PBXGroup;
 			children = (
-				48F22CC220C7FD9D004A18CA /* EllipticCurve.swift */,
+				482B155320D413D8001B437D /* Points */,
+				482B155220D413CB001B437D /* Curve */,
+				482B154F20D413A7001B437D /* Prime */,
+				482B154B20D41382001B437D /* KeyCreator */,
+				482B154420D41350001B437D /* Keys */,
+				482B155A20D465BE001B437D /* Operations.swift */,
 			);
 			path = EllipticCurve;
 			sourceTree = "<group>";
@@ -177,11 +251,11 @@
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
-				48F22CAE20C70DE5004A18CA /* Tests */,
-				48F22CA720C70DC1004A18CA /* Source */,
-				48F22C8E20C70D87004A18CA /* Products */,
-				46A05956EC0C820C8AEE53C7 /* Pods */,
 				285EE9D7DD122B692B0588B3 /* Frameworks */,
+				46A05956EC0C820C8AEE53C7 /* Pods */,
+				48F22C8E20C70D87004A18CA /* Products */,
+				48F22CA720C70DC1004A18CA /* Source */,
+				48F22CAE20C70DE5004A18CA /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -208,6 +282,7 @@
 		48F22CAE20C70DE5004A18CA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				482B154120D41053001B437D /* KeyGeneration */,
 				4861AA5D20D03F6800871618 /* KeyDataConvertible */,
 				4861AA5820D03EEE00871618 /* ThirdParty */,
 				4861AA5120D03EB100871618 /* Utils */,
@@ -387,11 +462,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482B154A20D41371001B437D /* PublicKey.swift in Sources */,
 				48F22CB520C70E44004A18CA /* String_Extension.swift in Sources */,
+				482B155920D4163F001B437D /* Field.swift in Sources */,
+				482B155B20D465BE001B437D /* Operations.swift in Sources */,
 				48F22CC320C7FD9D004A18CA /* EllipticCurve.swift in Sources */,
 				48F22CB720C72879004A18CA /* Array_Extension.swift in Sources */,
+				482B154E20D4138F001B437D /* KeyCreator.swift in Sources */,
 				4830CB1820CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift in Sources */,
+				482B155520D413E4001B437D /* Point.swift in Sources */,
+				482B155720D413FE001B437D /* PointOnEllipticCurve.swift in Sources */,
 				48F22CB320C70E17004A18CA /* KeyDataConvertible.swift in Sources */,
+				482B155120D413B8001B437D /* Prime.swift in Sources */,
+				482B154720D4135D001B437D /* PrivateKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +486,7 @@
 				4861AA5520D03EB100871618 /* StringUtilsTests.swift in Sources */,
 				4861AA6A20D045BF00871618 /* DataToStringBackToDataTests.swift in Sources */,
 				4861AA5C20D03F0A00871618 /* BigUIntInitializerTests.swift in Sources */,
+				482B154320D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				4861AA5720D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift in Sources */,
 				4861AA6920D0459E00871618 /* ToDecimalStringTests.swift in Sources */,
 				4861AA6620D0428B00871618 /* ToHexStringTests.swift in Sources */,

@@ -439,7 +439,7 @@ class EllipticCurvePoint:
 
         return PublicKeys(public_key_uncompressed_130char_hex_uppercased, public_key_compressed_66char_hex_uppercased)
 
-    def DeriveKeysAndAddressesFromPrivateKeyWifUncompressed(self, priv_wif_uncompressed):
+    def DeriveKeysAndAddressesFromPrivateKeyWifUncompressedOrCompressed(self, priv_wif_uncompressed):
         (private_key_D, compressed_format) = self.DFromPrivateKeyWifBase58Encoded(priv_wif_uncompressed)
         private_key_byte_array = to_bytes_32(private_key_D)
         return self.DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_byte_array)
@@ -621,8 +621,12 @@ def test_8_formats_using_private_key_hex64char(private_key_64):
     print "TEST verifying 8 formats from private key 64 PASSED"
 
 def test_8_formats_using_private_key_wif_uncompressed(private_key_wif_uncompressed):
-    test_8_formats(Bitcoin().DeriveKeysAndAddressesFromPrivateKeyWifUncompressed(private_key_wif_uncompressed))
+    test_8_formats(Bitcoin().DeriveKeysAndAddressesFromPrivateKeyWifUncompressedOrCompressed(private_key_wif_uncompressed))
     print "TEST verifying 8 formats from private key WIF uncompressed PASSED"
+
+def test_8_formats_using_private_key_wif_compressed(private_key_wif_compressed):
+    test_8_formats(Bitcoin().DeriveKeysAndAddressesFromPrivateKeyWifUncompressedOrCompressed(private_key_wif_compressed))
+    print "TEST verifying 8 formats from private key WIF compressed PASSED"
 
 def test_8_formats(eightFormats):
     assert expected_public_key_uncompressed_130chars_hex_lowercased == binascii.hexlify(eightFormats.public_keys.hex_130chars)
@@ -659,6 +663,7 @@ def run_tests():
 
     # TEST 2 - Private Key WIF Base58 encoded Uncompressed to all other formats
     test_8_formats_using_private_key_wif_uncompressed(expected_private_key_uncompressed_wif_base58_51chars)
+    test_8_formats_using_private_key_wif_compressed(expected_private_key_compressed_wif_base58_52chars)
     print "ALL TESTS PASSED :D"
 
 def main():

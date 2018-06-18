@@ -558,28 +558,6 @@ def Bitcoin():
 
 
 ### KEY DERIVATION
-
-# def from_long(v, prefix, base, charset):
-#     """The inverse of to_long. Convert an integer to an arbitrary base.
-#     v: the integer value to convert
-#     prefix: the number of prefixed 0s to include
-#     base: the new base
-#     charset: an array indicating what printable character to use for each value.
-#     """
-#     l = bytearray()
-#     while v > 0:
-#         v, mod = divmod(v, base)
-#         l.append(charset(mod))
-#     l.extend([charset(0)] * prefix)
-#     l.reverse()
-#     return bytes(l)
-
-# def to_bytes_32(v):
-#     v = from_long(v, 0, 256, lambda x: x)
-#     if len(v) > 32:
-#         raise ValueError("input to to_bytes_32 is too large")
-#     return ((b'\0' * 32) + v)[-32:]
-
 def class_name(v):
     return type(v).__name__
 

@@ -496,7 +496,7 @@ class EllipticCurvePoint:
         private_key_wif_base58_51chars = b58encode(secaddr)
         private_key_wif_compressed_base58_52chars = b58encode(secaddr_c)
 
-        private_keys_on_three_formats = PrivateKeys(private_key, private_key_wif_base58_51chars, private_key_wif_compressed_base58_52chars)
+        private_keys_on_three_formats = PrivateKeys(binascii.hexlify(private_key), private_key_wif_base58_51chars, private_key_wif_compressed_base58_52chars)
         
         return EightFormats(private_keys_on_three_formats, public_keys_on_two_formats, public_addresses_on_three_formats)
 
@@ -614,7 +614,7 @@ def main():
     assert expected_public_key_uncompressed_130chars_hex_lowercased == binascii.hexlify(eightFormats.public_keys.hex_130chars)
     assert expected_public_key_compressed_66chars_hex_lowercased == binascii.hexlify(eightFormats.public_keys.compressed_hex_66chars)
 
-    assert expected_private_key_hex_64chars_lowercased == binascii.hexlify(eightFormats.private_keys.hex_64chars)
+    assert expected_private_key_hex_64chars_lowercased == eightFormats.private_keys.hex_64chars
     assert expected_private_key_uncompressed_wif_base58_51chars == eightFormats.private_keys.wif_base58_51chars
     assert expected_private_key_compressed_wif_base58_52chars == eightFormats.private_keys.wif_compressed_base58_52chars
 
@@ -624,7 +624,7 @@ def main():
     expected_ZILLIQA_public_address = "0x59bb614648f828a3d6afd7e488e358cde177daa0"
     assert expected_ZILLIQA_public_address == eightFormats.public_addresses.zilliqa_public_address
 
-    bitcoin.AddressGenerator(10)
+    # bitcoin.AddressGenerator(10)
 
     print("DONE: Success")
     

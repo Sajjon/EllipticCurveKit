@@ -672,7 +672,7 @@ def test_generating_printing_new_addresses():
     print "Generated %d new wallets" % (count)
     for f8 in generated:
         print "\n\nPRINTING NEW KEY ON EIGHT FORMATS\n"
-        print "Private key 64 hex: `%s`\nPrivate Key WIF uncompressed: `%s`\nPrivate Key WIF compressed: `%s`\nPublic Key Uncompressed: `%s`\nPublic Key Compressed: `%s`\nPublic Address Uncompressed: `%s`\nPublic Address Compressed: `%s`\nPublic Address ZILLIQA: `%s`\n" % (f8.private_keys.hex_64chars, f8.private_keys.wif_base58_51chars, f8.private_keys.wif_compressed_base58_52chars, binascii.hexlify(f8.public_keys.hex_130chars), binascii.hexlify(f8.public_keys.compressed_hex_66chars), f8.public_addresses.base58_34chars, f8.public_addresses.compressed_base58_34chars, f8.public_addresses.zilliqa_public_address) 
+        print "Private key 64 hex: %s\nPrivate Key WIF uncompressed: %s\nPrivate Key WIF compressed: %s\nPublic Key Uncompressed: %s\nPublic Key Compressed: %s\nPublic Address Uncompressed: %s\nPublic Address Compressed: %s\nPublic Address ZILLIQA: %s\n" % (f8.private_keys.hex_64chars, f8.private_keys.wif_base58_51chars, f8.private_keys.wif_compressed_base58_52chars, f8.public_keys.hex_130chars, f8.public_keys.compressed_hex_66chars, f8.public_addresses.base58_34chars, f8.public_addresses.compressed_base58_34chars, f8.public_addresses.zilliqa_public_address) 
     print "TEST creating new addresses PASSED"
 
 def run_tests():

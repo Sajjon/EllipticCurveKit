@@ -440,9 +440,9 @@ class EllipticCurvePoint:
         return PublicKeys(public_key_uncompressed_130char_hex_uppercased, public_key_compressed_66char_hex_uppercased)
 
     def DeriveKeysAndAddressesFromPrivateKeyWifUncompressed(self, priv_wif_uncompressed):
-        (private_key_bytes_D, compressed_format) = self.DFromPrivateKeyWifBase58Encoded(priv_wif_uncompressed)
-        private_key_point_Q = self * private_key_bytes_D
-        return self.DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_point_Q)
+        (private_key_D, compressed_format) = self.DFromPrivateKeyWifBase58Encoded(priv_wif_uncompressed)
+        private_key_byte_array = to_bytes_32(private_key_D)
+        return self.DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_byte_array)
 
 
     # Code found here: https://gist.github.com/UdjinM6/07f1feae8b7495c67480
@@ -566,7 +566,29 @@ def Bitcoin():
     return EllipticCurvePoint([Gx,Gy,1],a,b,p,n)
 
 
+def from_long(v, prefix, base, charset):
+    """The inverse of to_long. Convert an integer to an arbitrary base.
+    v: the integer value to convert
+    prefix: the number of prefixed 0s to include
+    base: the new base
+    charset: an array indicating what printable character to use for each value.
+    """
+    l = bytearray()
+    while v > 0:
+        try:
+            v, mod = divmod(v, base)
+            l.append(charset(mod))
+        except Exception:
+            raise EncodingError("can't convert to character corresponding to %d" % mod)
+    l.extend([charset(0)] * prefix)
+    l.reverse()
+    return bytes(l)
 
+def to_bytes_32(v):
+    v = from_long(v, 0, 256, lambda x: x)
+    if len(v) > 32:
+        raise ValueError("input to to_bytes_32 is too large")
+    return ((b'\0' * 32) + v)[-32:]
 
 ### KEY DERIVATION
 def class_name(v):
@@ -636,7 +658,7 @@ def run_tests():
     test_8_formats_using_private_key_hex64char(private_key_64)
 
     # TEST 2 - Private Key WIF Base58 encoded Uncompressed to all other formats
-    # test_8_formats_using_private_key_wif_uncompressed(expected_private_key_uncompressed_wif_base58_51chars)
+    test_8_formats_using_private_key_wif_uncompressed(expected_private_key_uncompressed_wif_base58_51chars)
     print "ALL TESTS PASSED :D"
 
 def main():

@@ -466,13 +466,27 @@ class EllipticCurvePoint:
         public_address_uncompressed_base58_34chars = b58encode(pubaddr) # OLD: str(b58encode(pubaddr), 'utf-8')
         public_address_compressed_base58_34chars = b58encode(pubaddr_c)
 
+        length = len(public_address_uncompressed_base58_34chars)
+        if length > 34 or length < 33:
+            print "Length of `public_address_uncompressed_base58_34chars` expeced to be 33 or 34, was in fact: %d" % (len(public_address_uncompressed_base58_34chars))
+            print "value is: `%s`" % (public_address_uncompressed_base58_34chars)
+            print "should append leading zeros?"
+            print "Here is the private key: %s" % (binascii.hexlify(private_key))
+            assert False, "Incorrect length UNcompressed pub addr"
+        
+        length = len(public_address_compressed_base58_34chars)
+        if length > 34 or length < 33:
+            print "Length of `public_address_compressed_base58_34chars` expeced to be 33 or 34, was in fact: %d" % (len(public_address_compressed_base58_34chars))
+            print "value is: `%s`" % (public_address_compressed_base58_34chars)
+            print "should append leading zeros?"
+            print "Here is the private key: %s" % (binascii.hexlify(private_key))
+            assert False, "Incorrect length of COMPRESSED pub addr"
+
         # Zilliqa Public address = RIGHTMOST 20 bytes of sha256(compressed_public_key)
         zilliqa_public_address = "0x" + binascii.hexlify(hashlib.sha256(public_key_compressed).digest()[12:40]) # foobarbarbarbarbarbuzbuzfoobarbuzbuz.hex()
 
         public_addresses_on_three_formats = PublicAddresses(public_address_uncompressed_base58_34chars, public_address_compressed_base58_34chars, zilliqa_public_address)
     
-
-
 
         # PRIVATE KEY WALLET IMPORT FORMAT
         keyWIF = cointype[1] + private_key
@@ -488,7 +502,6 @@ class EllipticCurvePoint:
 
         private_keys_on_three_formats = PrivateKeys(binascii.hexlify(private_key), private_key_wif_base58_51chars, private_key_wif_compressed_base58_52chars)
         public_keys = PublicKeys(binascii.hexlify(public_key_uncompressed), binascii.hexlify(public_key_compressed))
-
 
         # ASSERT CORRECT FORMATTING
         f8 = EightFormats(private_keys_on_three_formats, public_keys, public_addresses_on_three_formats)
@@ -508,10 +521,12 @@ class EllipticCurvePoint:
         assert 66 == len(f8.public_keys.compressed_hex_66chars)
 
         assert isinstance(f8.public_addresses.base58_34chars, str)
-        assert 34 == len(f8.public_addresses.base58_34chars)
+        length = len(f8.public_addresses.base58_34chars)
+        assert 33 <= length <= 34
 
         assert isinstance(f8.public_addresses.compressed_base58_34chars, str)
-        assert 34 == len(f8.public_addresses.compressed_base58_34chars)
+        length = len(f8.public_addresses.compressed_base58_34chars)
+        assert 33 <= length <= 34
 
         assert f8.public_addresses.compressed_base58_34chars != f8.public_addresses.base58_34chars, "Compressed and non compressed public address should not be equal"
 
@@ -666,13 +681,21 @@ def test_calc_privkey_D_from_privkey_wif(privkey, privkey_wif, privkey_wif_compr
     assert d == d_wif_uncompressed # trivial
     print "TEST privkey D calculation PASSED"
 
-def test_generating_printing_new_addresses():
-    count = 3
+def print_eight_formats_info(f8):
+    print "Private key 64 hex: %s\nPrivate Key WIF uncompressed: %s\nPrivate Key WIF compressed: %s\nPublic Key Uncompressed: %s\nPublic Key Compressed: %s\nPublic Address Uncompressed: %s\nPublic Address Compressed: %s\nPublic Address ZILLIQA: %s\n" % (f8.private_keys.hex_64chars, f8.private_keys.wif_base58_51chars, f8.private_keys.wif_compressed_base58_52chars, f8.public_keys.hex_130chars, f8.public_keys.compressed_hex_66chars, f8.public_addresses.base58_34chars, f8.public_addresses.compressed_base58_34chars, f8.public_addresses.zilliqa_public_address) 
+
+def test_generating_printing_new_addresses(count, print_info_for_all=False):
     generated = Bitcoin().AddressGenerator(count)
     print "Generated %d new wallets" % (count)
     for f8 in generated:
-        print "\n\nPRINTING NEW KEY ON EIGHT FORMATS\n"
-        print "Private key 64 hex: %s\nPrivate Key WIF uncompressed: %s\nPrivate Key WIF compressed: %s\nPublic Key Uncompressed: %s\nPublic Key Compressed: %s\nPublic Address Uncompressed: %s\nPublic Address Compressed: %s\nPublic Address ZILLIQA: %s\n" % (f8.private_keys.hex_64chars, f8.private_keys.wif_base58_51chars, f8.private_keys.wif_compressed_base58_52chars, f8.public_keys.hex_130chars, f8.public_keys.compressed_hex_66chars, f8.public_addresses.base58_34chars, f8.public_addresses.compressed_base58_34chars, f8.public_addresses.zilliqa_public_address) 
+        if print_info_for_all:
+            print "\n\nPRINTING NEW KEY ON EIGHT FORMATS\n"
+            print_eight_formats_info(f8)
+
+        if len(f8.public_addresses.base58_34chars) != 34 or len(f8.public_addresses.compressed_base58_34chars) != 34:
+            print "One of the two Base58 enc Public addresses not of length 34, please verify correctness"
+            print_eight_formats_info(f8)
+
     print "TEST creating new addresses PASSED"
 
 def run_tests():
@@ -688,7 +711,7 @@ def run_tests():
     test_8_formats_using_private_key_wif_uncompressed(expected_private_key_uncompressed_wif_base58_51chars)
     test_8_formats_using_private_key_wif_compressed(expected_private_key_compressed_wif_base58_52chars)
 
-    test_generating_printing_new_addresses()
+    test_generating_printing_new_addresses(count=100, print_info_for_all=False)
     print "ALL TESTS PASSED :D"
 
 def main():

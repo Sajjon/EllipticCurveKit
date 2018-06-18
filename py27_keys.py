@@ -377,30 +377,16 @@ class EllipticCurvePoint:
             y=self.p-y
 
         return False
-
-    # def AddressFromPrivate(self,priv,should_base58_encode):
-    #     #Transform a private key to a bitcoin address.
-    #     (d,uncompressed)=self.DFromPriv(priv)
-        
-    #     return self.AddressFromD(d,uncompressed,should_base58_encode)
     
     #def PrivFromD(self,d,uncompressed):
-    def PRIVATE_RAW_KEY_FromD(self, d, uncompressed):
-        #Encode a private key self.d to base58 encoding.
+    def PrivateKeyRawFromD(self, d):
         p=Int2Byte(d,32)
         p="\x80"+p
-        
-        if not uncompressed:
-            p+=chr(1)
 
         cs=Hash(Hash(p,"SHA256"),"SHA256")[:4]
 
         private_key_64 = p+cs
-        print "PRIVATE KEY CREATED FROM D"
-        debug(private_key_64)
-        assert 123 == 431
         return private_key_64
-        # return b58encode()
     
     def DFromPrivateKeyWifBase58Encoded(self, priv):
         uncompressed = (len(priv) == 51)
@@ -538,18 +524,17 @@ class EllipticCurvePoint:
     # def KeysOnEightFormatsFromXAndY(self,private_key_data,pubkey_x,pubkey_y):
     #     return public_key_on_many_formats(private_key_data, pubkey_x, pubkey_y)
 
-    def AddressGenerator(self,k,uncompressed=True,should_base58_encode=False):
+    def AddressGenerator(self, k):
         #Generate Bitcoin address and write them in the multibit format.
         #Change the date as you like.
-        liste={}
+        my_list = []
         for i in range(k):
             d = self.GenerateD()
-            private_key_data = self.PrivFromD(d,uncompressed,should_base58_encode=should_base58_encode)
+            private_key_data = self.PrivateKeyRawFromD(d,)
             format8 = self.DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_data)
-            liste[i] = [format8, private_key_data]
-            print("%s %s" % (format8.public_addresses.base58_34chars, private_key_data))
+            my_list.append(format8)
 
-        return liste
+        return my_list
 
     # def sk_to_pk_many_formats(private_key):
     #     pk_x, pk_y = sk_to_pk(private_key)
@@ -652,6 +637,15 @@ def test_calc_privkey_D_from_privkey_wif(privkey, privkey_wif, privkey_wif_compr
     assert d == d_wif_uncompressed # trivial
     print "TEST privkey D calculation PASSED"
 
+def test_generating_printing_new_addresses():
+    count = 3
+    generated = Bitcoin().AddressGenerator(count)
+    print "Generated %d new wallets" % (count)
+    for f8 in generated:
+        print "\n\nPRINTING NEW KEY ON EIGHT FORMATS\n"
+        print "Private key 64 hex: `%s`\nPrivate Key WIF uncompressed: `%s`\nPrivate Key WIF compressed: `%s`\nPublic Key Uncompressed: `%s`\nPublic Key Compressed: `%s`\nPublic Address Uncompressed: `%s`\nPublic Address Compressed: `%s`\nPublic Address ZILLIQA: `%s`\n" % (f8.private_keys.hex_64chars, f8.private_keys.wif_base58_51chars, f8.private_keys.wif_compressed_base58_52chars, binascii.hexlify(f8.public_keys.hex_130chars), binascii.hexlify(f8.public_keys.compressed_hex_66chars), f8.public_addresses.base58_34chars, f8.public_addresses.compressed_base58_34chars, f8.public_addresses.zilliqa_public_address) 
+    print "TEST creating new addresses PASSED"
+
 def run_tests():
     private_key_64 = binascii.unhexlify(expected_private_key_hex_64chars_lowercased)
 
@@ -664,10 +658,11 @@ def run_tests():
     # TEST 2 - Private Key WIF Base58 encoded Uncompressed to all other formats
     test_8_formats_using_private_key_wif_uncompressed(expected_private_key_uncompressed_wif_base58_51chars)
     test_8_formats_using_private_key_wif_compressed(expected_private_key_compressed_wif_base58_52chars)
+
+    test_generating_printing_new_addresses()
     print "ALL TESTS PASSED :D"
 
 def main():
     run_tests()
-    # bitcoin.AddressGenerator(10)
     
 if __name__ == "__main__": main()

@@ -471,7 +471,6 @@ class EllipticCurvePoint:
 
         public_addresses_on_three_formats = PublicAddresses(public_address_uncompressed_base58_25to34chars, public_address_compressed_base58_25to34chars, zilliqa_public_address)
     
-
         # PRIVATE KEY WALLET IMPORT FORMAT
         keyWIF = cointype[1] + private_key
         keyWIF_c = cointype[1] + private_key + b"\x01"
@@ -516,14 +515,7 @@ class EllipticCurvePoint:
 
         assert isinstance(f8.public_addresses.zilliqa_public_address, str)
         assert 42 == len(f8.public_addresses.zilliqa_public_address)
-
         return f8
-
-    # def CalculatePublicKeyCurvePointFromPrivateKeyWifUncompressed(self, privkey_wif_uncompressed):
-    #     private_key_bytes_D = self.DFromPrivateKeyWifBase58Encoded(privkey_wif_uncompressed)
-    #     public_key_curve_point = self.CalculatePublicKeyCurvePointFromPrivateKeyBytesD(private_key_bytes_D)
-    #     private_key_64 = private_key_bytes_D
-    #     return (private_key_64, public_key_curve_point)
 
     def CalculatePublicKeyCurvePointFromPrivateKeyHex64Chars(self, privkey_hex_64):
         private_key_bytes_D = self.DFromPrivateKeyHex64(privkey_hex_64)
@@ -542,19 +534,7 @@ class EllipticCurvePoint:
         pk_y = Int2Byte(Q.x[1], 32)
         return PointOnCurve(pk_x, pk_y)
 
-    # def KeysOnEightFormatsFromPrivateKeyHex64Chars(self, privkey_hex_64):
-    #     pub_key_point = self.CalculatePublicKeyCurvePointFromPrivateKeyHex64Chars(privkey_hex_64)
-    #     return self.KeysOnEightFormats(privkey_hex_64, pub_key_point)
-
-    # def KeysOnEightFormats(self,private_key_data,public_key_point):
-    #     return self.KeysOnEightFormatsFromXAndY(private_key_data, public_key_point.x, public_key_point.y)
-
-    # def KeysOnEightFormatsFromXAndY(self,private_key_data,pubkey_x,pubkey_y):
-    #     return public_key_on_many_formats(private_key_data, pubkey_x, pubkey_y)
-
     def AddressGenerator(self, k):
-        #Generate Bitcoin address and write them in the multibit format.
-        #Change the date as you like.
         my_list = []
         for i in range(k):
             d = self.GenerateD()
@@ -563,10 +543,6 @@ class EllipticCurvePoint:
             my_list.append(format8)
 
         return my_list
-
-    # def sk_to_pk_many_formats(private_key):
-    #     pk_x, pk_y = sk_to_pk(private_key)
-    # return public_key_on_many_formats(private_key, pk_x, pk_y)
 
 def Bitcoin():
     a=0

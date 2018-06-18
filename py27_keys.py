@@ -378,15 +378,14 @@ class EllipticCurvePoint:
 
         return False
     
-    #def PrivFromD(self,d,uncompressed):
-    def PrivateKeyRawFromD(self, d):
+    def PrivateKeyWIFBase58UncompressedFromD(self, d):
         p=Int2Byte(d,32)
         p="\x80"+p
 
         cs=Hash(Hash(p,"SHA256"),"SHA256")[:4]
 
-        private_key_64 = p+cs
-        return private_key_64
+        private_key_wif_uncompressed = b58encode(p+cs)
+        return private_key_wif_uncompressed
     
     def DFromPrivateKeyWifBase58Encoded(self, priv):
         uncompressed = (len(priv) == 51)
@@ -434,10 +433,10 @@ class EllipticCurvePoint:
     # Code found here: https://gist.github.com/UdjinM6/07f1feae8b7495c67480
     def DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(self, private_key_bytes_array):
         public_key_curve_point = self.CalculatePublicKeyCurvePointFromPrivateKeyHex64Chars(private_key_bytes_array)    
-        public_keys_on_two_formats = self.PublicKeysFromPublicKeyCurvePoint(public_key_curve_point)
+        intermediate_pubkeys = self.PublicKeysFromPublicKeyCurvePoint(public_key_curve_point)
 
-        public_key_uncompressed = public_keys_on_two_formats.hex_130chars
-        public_key_compressed = public_keys_on_two_formats.compressed_hex_66chars
+        public_key_uncompressed = intermediate_pubkeys.hex_130chars
+        public_key_compressed = intermediate_pubkeys.compressed_hex_66chars
 
         private_key = private_key_bytes_array
 
@@ -488,8 +487,38 @@ class EllipticCurvePoint:
         private_key_wif_compressed_base58_52chars = b58encode(secaddr_c)
 
         private_keys_on_three_formats = PrivateKeys(binascii.hexlify(private_key), private_key_wif_base58_51chars, private_key_wif_compressed_base58_52chars)
-        
-        return EightFormats(private_keys_on_three_formats, public_keys_on_two_formats, public_addresses_on_three_formats)
+        public_keys = PublicKeys(binascii.hexlify(public_key_uncompressed), binascii.hexlify(public_key_compressed))
+
+
+        # ASSERT CORRECT FORMATTING
+        f8 = EightFormats(private_keys_on_three_formats, public_keys, public_addresses_on_three_formats)
+        assert isinstance(f8.private_keys.hex_64chars, str)
+        assert 64 == len(f8.private_keys.hex_64chars)
+
+        assert isinstance(f8.private_keys.wif_base58_51chars, str)
+        assert 51 == len(f8.private_keys.wif_base58_51chars)
+
+        assert isinstance(f8.private_keys.wif_compressed_base58_52chars, str)
+        assert 52 == len(f8.private_keys.wif_compressed_base58_52chars)
+
+        assert isinstance(f8.public_keys.hex_130chars, str)
+        assert 130 == len(f8.public_keys.hex_130chars)
+
+        assert isinstance(f8.public_keys.compressed_hex_66chars, str)
+        assert 66 == len(f8.public_keys.compressed_hex_66chars)
+
+        assert isinstance(f8.public_addresses.base58_34chars, str)
+        assert 34 == len(f8.public_addresses.base58_34chars)
+
+        assert isinstance(f8.public_addresses.compressed_base58_34chars, str)
+        assert 34 == len(f8.public_addresses.compressed_base58_34chars)
+
+        assert f8.public_addresses.compressed_base58_34chars != f8.public_addresses.base58_34chars, "Compressed and non compressed public address should not be equal"
+
+        assert isinstance(f8.public_addresses.zilliqa_public_address, str)
+        assert 42 == len(f8.public_addresses.zilliqa_public_address)
+
+        return f8
 
     # def CalculatePublicKeyCurvePointFromPrivateKeyWifUncompressed(self, privkey_wif_uncompressed):
     #     private_key_bytes_D = self.DFromPrivateKeyWifBase58Encoded(privkey_wif_uncompressed)
@@ -530,8 +559,8 @@ class EllipticCurvePoint:
         my_list = []
         for i in range(k):
             d = self.GenerateD()
-            private_key_data = self.PrivateKeyRawFromD(d,)
-            format8 = self.DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_data)
+            private_key_wif_uncompressed = self.PrivateKeyWIFBase58UncompressedFromD(d)
+            format8 = self.DeriveKeysAndAddressesFromPrivateKeyWifUncompressedOrCompressed(private_key_wif_uncompressed)
             my_list.append(format8)
 
         return my_list
@@ -614,8 +643,8 @@ def test_8_formats_using_private_key_wif_compressed(private_key_wif_compressed):
     print "TEST verifying 8 formats from private key WIF compressed PASSED"
 
 def test_8_formats(eightFormats):
-    assert expected_public_key_uncompressed_130chars_hex_lowercased == binascii.hexlify(eightFormats.public_keys.hex_130chars)
-    assert expected_public_key_compressed_66chars_hex_lowercased == binascii.hexlify(eightFormats.public_keys.compressed_hex_66chars)
+    assert expected_public_key_uncompressed_130chars_hex_lowercased == eightFormats.public_keys.hex_130chars
+    assert expected_public_key_compressed_66chars_hex_lowercased == eightFormats.public_keys.compressed_hex_66chars
 
     assert expected_private_key_hex_64chars_lowercased == eightFormats.private_keys.hex_64chars
     assert expected_private_key_uncompressed_wif_base58_51chars == eightFormats.private_keys.wif_base58_51chars

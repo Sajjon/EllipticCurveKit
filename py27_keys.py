@@ -1,9 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
+
+# Use Python 2.7 not Python 3.X
+# Downloaded from:
+# https://github.com/HurlSly/BitcoinECCPython/blob/master/BitcoinECC.py
 
 import random
 import hashlib
 import base64
-import base58
+# import base58
 import binascii
 from collections import namedtuple
 
@@ -121,45 +125,6 @@ def b58encode(v):
             break
     
     return (digit[0]*pad)+result
-
-# def b58decode(v):
-#     #Decode a Base58 string to byte string
-#     digit="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-#     base=len(digit)
-#     val=0    
-#     for c in v:
-#         val*=base
-#         val+=digit.find(c)
-
-#     result=""
-#     while val:
-#         (val,mod)=divmod(val,256)
-#         result=chr(mod)+result
-
-#     pad=0
-#     for c in v:
-#         if c==digit[0]:
-#             pad+=1
-#         else:
-#             break
-
-#     return "\x00"*pad+result
-
-def b58decode_no_padding(v):
-    #Decode a Base58 string to byte string
-    digit="123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-    base=len(digit)
-    val=0    
-    for c in v:
-        val*=base
-        val+=digit.find(c)
-
-    result=""
-    while val:
-        (val,mod)=divmod(val,256)
-        result=chr(mod)+result
-
-    return result
 
 def b58decode(v):
     #Decode a Base58 string to byte string
@@ -412,55 +377,68 @@ class EllipticCurvePoint:
 
     def PrivFromD(self,d,uncompressed,should_base58_encode):
         #Encode a private key self.d to base58 encoding.
+
+        print("d")
+        debug(d)
+
         p=Int2Byte(d,32)
+
+        print("p BEF APPEND")
+        debug(p)
+
         p="\x80"+p
         
         if not uncompressed:
             p+=chr(1)
 
-        cs=Hash(Hash(p,"SHA256"),"SHA256")[:4]
+        print("p")
+        debug(p)
+        # p_hexlified = binascii.hexlify(p)
+        p_encoded = p.encode('utf-8')
+        print("p_encoded")
+        debug(p_encoded)
+        hash_inner=Hash(p_encoded,"SHA256")
+        debug(hash_inner)
+        hash_outer=Hash(hash_inner,"SHA256")
+        debug(hash_outer)
 
-        pk = p+cs
+        cs=hash_outer[:4]
+
+        print('cs')
+        debug(cs)
+
+        pk = p_encoded+cs
 
         if should_base58_encode:
             return b58encode(pk)
         else:
             return pk
     
-    def DFromWIFBase58PrivateKey(self,priv):
+    def DFromPrivateKeyWifBase58Encoded(self,priv):
         uncompressed=(len(priv)==51)
         priv=b58decode(priv)
-        return self.DFromPrivateKeyHex64Char(priv,uncompressed)
 
-    def DFromPrivateKeyHex64Char(self,priv,uncompressed=True):
-        assert len(priv) == 64
         if uncompressed:
             priv=priv[:-4]
         else:
             priv=priv[:-5]
-        debug(priv)
-        debug(priv[1:])
-        return (Byte2Int(priv[1:]), uncompressed)
 
-    # def AddressFromPublicKey(self,Q,uncompressed):
-    #     #Find the bitcoin address from the public key self.Q
-    #     #We do normalization to go from the projective coordinates to the usual
-    #     # (x,y) coordinates.
-    #     Q.Normalize()
-    #     if uncompressed:
-    #         pk=chr(4)+Int2Byte(Q.x[0],32)+Int2Byte(Q.x[1],32)
-    #     else:
-    #         pk=chr(2+Q.x[1]%2)+Int2Byte(Q.x[0],32)
+        return (self.DFromPrivateKeyWif(priv),uncompressed)
 
-    #     kh=chr(0)+Hash(Hash(pk,"SHA256"),"RIPEMD160")
-    #     cs=Hash(Hash(kh,"SHA256"),"SHA256")[:4]
+    def DFromPrivateKeyWif(self,priv):
+        return self.DFromPrivK(priv[1:])
 
-    #     return b58encode(kh+cs)
+    def DFromPrivateKeyHex64(self,sk):
+        # bytes_array = binascii.unhexlify(sk)
+        return self.DFromPrivK(sk)
+
+    def DFromPrivK(self,priv):
+        return Byte2Int(priv)
 
     def PublicKeyFromPrivateKeyAsBytes(self,priv):
         (d,uncompressed)=self.DFromPriv(priv)
-        pk = self.PublicKeyFromD(d,uncompressed)
-        return pk
+        (pubkey, pubkey_point) = self.PublicKeyFromD(d,uncompressed)
+        return pubkey
 
     def PublicKeyFromPrivateKeyAs130CharHex(self,priv):
         return binascii.hexlify(self.PublicKeyFromPrivateKeyAsBytes(priv))
@@ -470,18 +448,6 @@ class EllipticCurvePoint:
         pk = self.PublicKeyFromD(d,uncompressed)
         return self.AddressFromPublicKey(pk,should_base58_encode)
 
-    # def AddressFromPublicKey(self,Q,uncompressed,should_base58_encode):
-    #     pk = self.CreatePublicKey(Q, uncompressed)
-
-    #     kh=chr(0)+Hash(Hash(pk,"SHA256"),"RIPEMD160")
-    #     cs=Hash(Hash(kh,"SHA256"),"SHA256")[:4]
-
-    #     pubaddr=kh+cs
-
-    #     if should_base58_encode:
-    #         return b58encode(pubaddr)
-    #     else:
-    #         return binascii.hexlify(pubaddr)
     def AddressFromPublicKey(self,pk,should_base58_encode):
         kh=chr(0)+Hash(Hash(pk,"SHA256"),"RIPEMD160")
         cs=Hash(Hash(kh,"SHA256"),"SHA256")[:4]
@@ -496,37 +462,41 @@ class EllipticCurvePoint:
     def PublicKeyFromD(self,d,uncompressed):
         return self.CreatePublicKey(self*d,uncompressed)
 
-    # def CreatePublicKey(self,Q,uncompressed):
-    #     #Find the bitcoin address from the public key self.Q
-    #     #We do normalization to go from the projective coordinates to the usual
-    #     # (x,y) coordinates.
-    #     Q.Normalize()
-    #     if uncompressed:
-    #         pk=chr(4)+Int2Byte(Q.x[0],32)+Int2Byte(Q.x[1],32)
-    #     else:
-    #         pk=chr(2+Q.x[1]%2)+Int2Byte(Q.x[0],32)
-    #     return pk
-
     def CreatePublicKey(self,Q,uncompressed):
-        public_key_point = CreatePublicKeyXAndYComponents(Q)
+        public_key_point = self.CreatePublicKeyXAndYComponents(Q)
+
         pk_x = public_key_point.x
         pk_y = public_key_point.y
-
-        # public_key = b'\4' + to_bytes_32(public_x) + to_bytes_32(public_y)
-        # compressed_public_key = bytearray.fromhex("%02x%064x" % (2 + (public_y & 1), public_x))
 
         if uncompressed:
             pk = chr(4) + pk_x + pk_y
         else:
             pk = chr(2 + pk_y & 1) + pk_x
 
-        return pk
+        print "KEYS:"
+        print "Uncompressed:"
+        # debug(pk)
+        debug(binascii.hexlify(pk))
+        pkx_bytes = int(binascii.hexlify(pk_x), 16)
+        pky_bytes = int(binascii.hexlify(pk_y), 16) # binascii.unhexlify(pk_y)
+        part1 = pky_bytes & 1
+        part2 = chr(2 + part1)
+        debug(part2)
+        debug(pk_x)
+        cpk = part2 + pk_x
+        print "Compressed:"
+        debug(binascii.hexlify(cpk))
+
+        return (pk, public_key_point)
 
     def CalculatePublicKeyXAndYComponentsFromPrivKey64Hex(self, privkey_hex_64):
-        (d,uncompressed)=self.DFromPrivateKeyHex64Char(privkey_hex_64)
-        private_key_data = self.PrivFromD(d,uncompressed,should_base58_encode=False)
-        assert private_key_data == privkey_hex_64
-        public_key_point = self.CreatePublicKeyXAndYComponents(d)  
+        d=self.DFromPrivateKeyHex64(privkey_hex_64)
+
+        # private_key_data = self.PrivFromD(d,uncompressed=True,should_base58_encode=False)
+        # debug(private_key_data)
+        # debug(privkey_hex_64)
+        # assert private_key_data == privkey_hex_64
+        (pubk, public_key_point) = self.PublicKeyFromD(d,uncompressed=True)
         return public_key_point
 
 
@@ -537,6 +507,11 @@ class EllipticCurvePoint:
         Q.Normalize()
         pk_x = Int2Byte(Q.x[0], 32)
         pk_y = Int2Byte(Q.x[1], 32)
+
+        # debug(pk_x)
+        # debug(pk_y)
+        # assert 7 == 4
+
         return PointOnCurve(pk_x, pk_y)
 
     def IsValid(self,addr):
@@ -553,9 +528,9 @@ class EllipticCurvePoint:
         return self.KeysOnEightFormats(privkey_hex_64, pub_key_point)
 
     def KeysOnEightFormats(self,private_key_data,public_key_point):
-        return self.KeysOnEightFormats(private_key_data, public_key_point.x, public_key_point.y)
+        return self.KeysOnEightFormatsFromXAndY(private_key_data, public_key_point.x, public_key_point.y)
 
-    def KeysOnEightFormats(self,private_key_data,pubkey_x,pubkey_y):
+    def KeysOnEightFormatsFromXAndY(self,private_key_data,pubkey_x,pubkey_y):
         return public_key_on_many_formats(private_key_data, pubkey_x, pubkey_y)
 
     def AddressGenerator(self,k,uncompressed=True,should_base58_encode=False):
@@ -625,11 +600,8 @@ def from_long(v, prefix, base, charset):
     """
     l = bytearray()
     while v > 0:
-        try:
-            v, mod = divmod(v, base)
-            l.append(charset(mod))
-        except Exception:
-            raise EncodingError("can't convert to character corresponding to %d" % mod)
+        v, mod = divmod(v, base)
+        l.append(charset(mod))
     l.extend([charset(0)] * prefix)
     l.reverse()
     return bytes(l)
@@ -647,14 +619,60 @@ PrivateKeys = namedtuple('PrivateKeys', 'hex_64chars wif_base58_51chars wif_comp
 PublicKeys = namedtuple('PublicKeys', 'hex_130chars compressed_hex_66chars')
 PublicAddresses = namedtuple('PublicAddresses', 'base58_34chars compressed_base58_34chars zilliqa_public_address')
 EightFormats = namedtuple('EightFormats', 'private_keys public_keys public_addresses')
+
+# Code found here: https://gist.github.com/UdjinM6/07f1feae8b7495c67480
+# should port to python 2.7
 def public_key_on_many_formats(privkey, public_key_point_x, public_key_point_y):
-    key = to_bytes_32(privkey)
+
+    # assert 1 == 0, "Code in this method was probably intended for python 3.X, needs to be ported to 2.7"
+    # key = to_bytes_32(privkey)
+
+    # public_y = binascii.hexlify(bytearray(public_key_point_y))
+    # public_x = binascii.hexlify(bytearray(public_key_point_x))
+    # key = binascii.hexlify(bytearray(privkey))
+
+    print "START, input values:"
+    debug(privkey)
+    debug(public_key_point_x)
+    debug(public_key_point_y)
+
+    key = privkey
     public_x = public_key_point_x
     public_y = public_key_point_y
+    # print "Hexlified:"
 
-    public_key = b'\4' + to_bytes_32(public_x) + to_bytes_32(public_y)
+    # public_x = binascii.hexlify(public_key_point_x)
+    # public_y = binascii.hexlify(public_key_point_y)
+    # debug(key)
+    # debug(public_x)
+    # debug(public_y)
 
-    compressed_public_key = bytearray.fromhex("%02x%064x" % (2 + (public_y & 1), public_x))
+    # pkx = int(public_x, 16)
+    pkx = int(binascii.hexlify(public_x), 16)
+    debug(pkx)
+    # pkx = binascii.hexlify(public_x)
+    # debug(pkx)
+    # pkx = bytearray.fromhex(pkx)
+    # debug(pkx)
+    part1 = (pkx & 1)
+    part2 = 2 + part1
+    debug(pkx)
+    debug(part1)
+    debug(part2)
+    part3 = "%02x%064x" % (part2, pkx)
+    compressed_public_key = bytearray.fromhex(part3)
+    # compressed_public_key = chr(2 + public_y & 1) + public_x
+    # public_key = b'\4' + to_bytes_32(public_x) + to_bytes_32(public_y)
+    public_key = chr(4) + public_x + public_y
+
+    print "KLAR?"
+    klar_pubkey_compressed = binascii.hexlify(compressed_public_key)
+    klar_pubkey_uncompressed = binascii.hexlify(public_key)
+    klar_pubkey_uncompressed_alt2 = "4" + binascii.hexlify(public_key_point_x) + binascii.hexlify(public_key_point_y)
+    debug(klar_pubkey_compressed)
+    debug(klar_pubkey_uncompressed)
+    debug(klar_pubkey_uncompressed_alt2)
+    assert 1 == 4
 
     ## https://en.bitcoin.it/wiki/Technical_background_of_Bitcoin_addresses
 
@@ -808,7 +826,13 @@ def main():
     ## compressed: `L`
 
     expected_private_key_hex_64chars_lowercased = "29ee955feda1a85f87ed4004958479706ba6c71fc99a67697a9a13d9d08c618e"
-    private_key_64 = expected_private_key_hex_64chars_lowercased.encode('ascii')
+    # private_key_64 = expected_private_key_hex_64chars_lowercased.encode('ascii')
+
+    # ALEX VERIFIED, this is how we want to convert string to byte array, NOT USING `encode('ascii')`
+    private_key_64 = binascii.unhexlify(expected_private_key_hex_64chars_lowercased)
+    # debug(experim)
+    # assert private_key_64 == experim
+    # assert 1 == 2
     # eightFormats = public_key_on_many_formats(int(expected_private_key_hex_64chars_lowercased, 16))
 
     expected_private_key_uncompressed_wif_base58_51chars = "5J8kgEmHqTH9VYLd34DP6uGVmwbDXnQFQwDvZndVP4enBqz2GuM"
@@ -839,7 +863,7 @@ def main():
     ### CREATION
     # #Generate some addresses
     print("Here are some adresses and associated private keys")
-    bitcoin.AddressGenerator(10)
+    # bitcoin.AddressGenerator(10)
 
     print("DONE: Success")
     

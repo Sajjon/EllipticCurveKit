@@ -439,8 +439,13 @@ class EllipticCurvePoint:
 
         return PublicKeys(public_key_uncompressed_130char_hex_uppercased, public_key_compressed_66char_hex_uppercased)
 
+    def DeriveKeysAndAddressesFromPrivateKeyWifUncompressed(self, priv_wif_uncompressed):
+        (private_key_bytes_D, compressed_format) = self.DFromPrivateKeyWifBase58Encoded(priv_wif_uncompressed)
+        private_key_point_Q = self * private_key_bytes_D
+        return self.DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_point_Q)
+
+
     # Code found here: https://gist.github.com/UdjinM6/07f1feae8b7495c67480
-    # should port to python 2.7
     def DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(self, private_key_bytes_array):
         public_key_curve_point = self.CalculatePublicKeyCurvePointFromPrivateKeyHex64Chars(private_key_bytes_array)    
         public_keys_on_two_formats = self.PublicKeysFromPublicKeyCurvePoint(public_key_curve_point)
@@ -499,6 +504,12 @@ class EllipticCurvePoint:
         private_keys_on_three_formats = PrivateKeys(binascii.hexlify(private_key), private_key_wif_base58_51chars, private_key_wif_compressed_base58_52chars)
         
         return EightFormats(private_keys_on_three_formats, public_keys_on_two_formats, public_addresses_on_three_formats)
+
+    # def CalculatePublicKeyCurvePointFromPrivateKeyWifUncompressed(self, privkey_wif_uncompressed):
+    #     private_key_bytes_D = self.DFromPrivateKeyWifBase58Encoded(privkey_wif_uncompressed)
+    #     public_key_curve_point = self.CalculatePublicKeyCurvePointFromPrivateKeyBytesD(private_key_bytes_D)
+    #     private_key_64 = private_key_bytes_D
+    #     return (private_key_64, public_key_curve_point)
 
     def CalculatePublicKeyCurvePointFromPrivateKeyHex64Chars(self, privkey_hex_64):
         private_key_bytes_D = self.DFromPrivateKeyHex64(privkey_hex_64)
@@ -569,26 +580,29 @@ EightFormats = namedtuple('EightFormats', 'private_keys public_keys public_addre
 def debug(value):
     print("Type: `%s`, value=`%s`" % (class_name(value), value))
 
-def main():
-    print("START")
-    bitcoin = Bitcoin()
-    expected_private_key_hex_64chars_lowercased = "29ee955feda1a85f87ed4004958479706ba6c71fc99a67697a9a13d9d08c618e"
 
-    # ALEX VERIFIED, this is how we want to convert string to byte array, NOT USING `encode('ascii')`
-    private_key_64 = binascii.unhexlify(expected_private_key_hex_64chars_lowercased)
+# TESTS
+expected_private_key_hex_64chars_lowercased = "29ee955feda1a85f87ed4004958479706ba6c71fc99a67697a9a13d9d08c618e"
+expected_private_key_uncompressed_wif_base58_51chars = "5J8kgEmHqTH9VYLd34DP6uGVmwbDXnQFQwDvZndVP4enBqz2GuM"
+expected_private_key_compressed_wif_base58_52chars = "KxdDnBkVJrzGUyKc45BeZ3hQ1Mx2JsPcceL3RiQ4GP7kSTX682Jj"
+# expected_private_key_base64_44chars = "Ke6VX+2hqF+H7UAElYR5cGumxx/JmmdpepoT2dCMYY4="
 
-    eightFormats = bitcoin.DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_64)
+expected_public_key_uncompressed_130chars_hex_lowercased = "04f979f942ae743f27902b62ca4e8a8fe0f8a979ee3ad7bd0817339a665c3e7f4fb8cf959134b5c66bcc333a968b26d0adaccfad26f1ea8607d647e5b679c49184"
+expected_public_key_compressed_66chars_hex_lowercased = "02f979f942ae743f27902b62ca4e8a8fe0f8a979ee3ad7bd0817339a665c3e7f4f"
 
-    expected_private_key_uncompressed_wif_base58_51chars = "5J8kgEmHqTH9VYLd34DP6uGVmwbDXnQFQwDvZndVP4enBqz2GuM"
-    expected_private_key_compressed_wif_base58_52chars = "KxdDnBkVJrzGUyKc45BeZ3hQ1Mx2JsPcceL3RiQ4GP7kSTX682Jj"
-    # expected_private_key_base64_44chars = "Ke6VX+2hqF+H7UAElYR5cGumxx/JmmdpepoT2dCMYY4="
+expected_public_address_uncompressed = "157k4yFLw92XzCYysoS64hif6tcGdDULm6"
+expected_public_address_compressed = "1Dhtb2eZb3wq9kyUoY9oJPZXJrtPjUgDBU"
+expected_ZILLIQA_public_address = "0x59bb614648f828a3d6afd7e488e358cde177daa0"
 
-    expected_public_key_uncompressed_130chars_hex_lowercased = "04f979f942ae743f27902b62ca4e8a8fe0f8a979ee3ad7bd0817339a665c3e7f4fb8cf959134b5c66bcc333a968b26d0adaccfad26f1ea8607d647e5b679c49184"
-    expected_public_key_compressed_66chars_hex_lowercased = "02f979f942ae743f27902b62ca4e8a8fe0f8a979ee3ad7bd0817339a665c3e7f4f"
+def test_8_formats_using_private_key_hex64char(private_key_64):
+    test_8_formats(Bitcoin().DeriveKeysAndAddressesFromPrivateKeyAsHex64Chars(private_key_64))
+    print "TEST verifying 8 formats from private key 64 PASSED"
 
-    expected_public_address_uncompressed = "157k4yFLw92XzCYysoS64hif6tcGdDULm6"
-    expected_public_address_compressed = "1Dhtb2eZb3wq9kyUoY9oJPZXJrtPjUgDBU"
+def test_8_formats_using_private_key_wif_uncompressed(private_key_wif_uncompressed):
+    test_8_formats(Bitcoin().DeriveKeysAndAddressesFromPrivateKeyWifUncompressed(private_key_wif_uncompressed))
+    print "TEST verifying 8 formats from private key WIF uncompressed PASSED"
 
+def test_8_formats(eightFormats):
     assert expected_public_key_uncompressed_130chars_hex_lowercased == binascii.hexlify(eightFormats.public_keys.hex_130chars)
     assert expected_public_key_compressed_66chars_hex_lowercased == binascii.hexlify(eightFormats.public_keys.compressed_hex_66chars)
 
@@ -599,11 +613,34 @@ def main():
     assert expected_public_address_uncompressed == eightFormats.public_addresses.base58_34chars
     assert expected_public_address_compressed == eightFormats.public_addresses.compressed_base58_34chars
 
-    expected_ZILLIQA_public_address = "0x59bb614648f828a3d6afd7e488e358cde177daa0"
     assert expected_ZILLIQA_public_address == eightFormats.public_addresses.zilliqa_public_address
 
-    # bitcoin.AddressGenerator(10)
+def test_calc_privkey_D_from_privkey_wif(privkey, privkey_wif, privkey_wif_compressed):
+    bitcoin = Bitcoin()
+    (d_wif_uncompressed, _) = bitcoin.DFromPrivateKeyWifBase58Encoded(expected_private_key_uncompressed_wif_base58_51chars)
+    (d_wif_compressed, _) = bitcoin.DFromPrivateKeyWifBase58Encoded(expected_private_key_compressed_wif_base58_52chars)
+    d = bitcoin.DFromPrivateKeyHex64(privkey)
+    assert d == d # trivial
+    assert d_wif_uncompressed == d_wif_compressed
+    assert d == d_wif_compressed
+    assert d == d_wif_uncompressed # trivial
+    print "TEST privkey D calculation PASSED"
 
-    print("DONE: Success")
+def run_tests():
+    private_key_64 = binascii.unhexlify(expected_private_key_hex_64chars_lowercased)
+
+    # TEST 0 - WIF import
+    test_calc_privkey_D_from_privkey_wif(private_key_64, expected_private_key_uncompressed_wif_base58_51chars, expected_private_key_compressed_wif_base58_52chars)
+
+    # TEST 1 - Private Key as Hex string, 64 chars to all other formats
+    test_8_formats_using_private_key_hex64char(private_key_64)
+
+    # TEST 2 - Private Key WIF Base58 encoded Uncompressed to all other formats
+    # test_8_formats_using_private_key_wif_uncompressed(expected_private_key_uncompressed_wif_base58_51chars)
+    print "ALL TESTS PASSED :D"
+
+def main():
+    run_tests()
+    # bitcoin.AddressGenerator(10)
     
 if __name__ == "__main__": main()

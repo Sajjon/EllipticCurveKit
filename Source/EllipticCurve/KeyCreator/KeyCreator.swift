@@ -1,57 +1,25 @@
 //
-//  EllipticCurve.swift
+//  KeyCreator.swift
 //  SwiftCrypto
 //
-//  Created by Alexander Cyon on 2018-06-06.
+//  Created by Alexander Cyon on 2018-06-15.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
 //
 
 import Foundation
 
-// Thanks to certicom for tutorials about Elliptic Curve Cryptograph
-// https://www.certicom.com/content/certicom/en/ecc.html
-// https://www.certicom.com/content/certicom/en/ecc-tutorial.html
-
-/// Elliptic Curve over the field of integers modulo a prime
-/// The curve of points satisfying y^2 = x^3 + a*x + b (mod p).
-public struct EllipticCurve {
-    public typealias NumberType = Int
-
-    private let p: NumberType
-    private let a: NumberType
-    private let b: NumberType
-
-    public init(prime p: NumberType, a: NumberType, b: NumberType) {
-        self.p = p
-        self.a = a
-        self.b = b
-    }
+public protocol KeyCreator {
+    func publicKeyFromPrivateKey(_ privateKey: PrivateKey) -> PublicKey
 }
 
-public extension EllipticCurve {
-    func containsPoint(_ point: Point) -> Bool {
-        fatalError()
-    }
-}
-
-public struct Point {
-    public typealias NumberType = EllipticCurve.NumberType
-    public let x: NumberType
-    public let y: NumberType
-    public init(x: NumberType, y: NumberType) {
-        self.x = x
-        self.y = y
-    }
-}
-
-struct PointOnEllipticCurve {
-
-    private let curve: EllipticCurve
-    private let point: Point
-
-    public init(curve: EllipticCurve, point: Point) {
+public class DefaultKeyCreator: KeyCreator {
+    let curve: EllipticCurve
+    init(curve: EllipticCurve) {
         self.curve = curve
-        self.point = point
+    }
+
+    func publicKeyFromPrivateKey(_ privateKey: PrivateKey) -> PublicKey {
+        fatalError()
     }
 }
 

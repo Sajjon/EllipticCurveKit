@@ -7,13 +7,3 @@
 //
 
 import Foundation
-
-public struct Point {
-    public let x: Number
-    public let y: Number
-    public let isInfinity: Bool
-    public init(x: Number, y: Number, isInfinity: Bool) {
-        self.x = x
-        self.y = y
-    }
-}

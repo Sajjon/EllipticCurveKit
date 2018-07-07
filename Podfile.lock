@@ -1,23 +1,24 @@
 PODS:
-  - BigInt (3.0.2):
+  - BigInt (3.1.0):
     - SipHash (~> 1.2)
-  - SipHash (1.2.1)
+  - CryptoSwift (0.10.0)
+  - SipHash (1.2.2)
 
 DEPENDENCIES:
-  - BigInt (from `../BigInt_Sajjon_Fork`)
+  - BigInt
+  - CryptoSwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BigInt
+    - CryptoSwift
     - SipHash
 
-EXTERNAL SOURCES:
-  BigInt:
-    :path: "../BigInt_Sajjon_Fork"
-
 SPEC CHECKSUMS:
-  BigInt: ccd78bad696ee15e2adb0c9545b73830549a733d
-  SipHash: b26918dbe6925368d4322374371437c62c9038e2
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
 
-PODFILE CHECKSUM: 4b024944d31d58ef772473f1d5d0d96c83edf6ea
+PODFILE CHECKSUM: 7047c327dd2aa40e7a150200d8e10117ac85dc5c
 
 COCOAPODS: 1.5.3

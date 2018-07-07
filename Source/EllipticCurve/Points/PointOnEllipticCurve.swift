@@ -7,14 +7,3 @@
 //
 
 import Foundation
-
-public struct PointOnEllipticCurve {
-
-    private let curve: EllipticCurve
-    private let point: Point
-
-    public init(curve: EllipticCurve, point: Point) {
-        self.curve = curve
-        self.point = point
-    }
-}

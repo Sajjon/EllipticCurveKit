@@ -9,10 +9,8 @@
 import Foundation
 import BigInt
 
-public typealias KeyData = BigUInt
-
-extension BigUInt: KeyDataConvertible {}
-public extension BigUInt {
+extension Number: KeyDataConvertible {}
+public extension Number {
 
     init(lsbZeroIndexed words: [Word]) {
         self.init(words: words)

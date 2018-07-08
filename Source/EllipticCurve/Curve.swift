@@ -49,15 +49,9 @@ struct Point: Equatable {
 public typealias HexString = String
 struct PublicKeyPoint {
 
-    /// point.x with prefix dependening on sign of `y`
     let x: Number
     let y: Number
     let isYOdd: Bool
-
-    enum Format {
-        case uncompressed
-        case compressed
-    }
 
     static func prefixByteCompressed(isYOdd: Bool) -> Byte {
         return isYOdd ? 0x03 : 0x02
@@ -127,7 +121,59 @@ extension PrivateKey {
     }
 }
 
+/// WIF == Wallet Import Format
+struct PrivateKeysWIF {
+    let compressed: Base58Encoded
+    let uncompressed: Base58Encoded
+
+
+    init(privateKey: PrivateKey, network: Network) {
+
+        let prefixByte: Byte = network.privateKeyWifPrefix
+        let prefix = Data([prefixByte])
+        let suffixByte: Byte = network.privateKeyWifSuffix
+        let suffix = Data([suffixByte])
+
+        let privateKeyData = privateKey.number.asData()
+        let keyWIFUncompressed = prefix + privateKeyData
+        let keyWIFCompressed = prefix + privateKeyData + suffix
+
+        let checkSumUncompressed = Crypto.sha2Sha256_twice(keyWIFUncompressed).prefix(4)
+        let checkSumCompressed = Crypto.sha2Sha256_twice(keyWIFCompressed).prefix(4)
+
+        let uncompressedData: Data = keyWIFUncompressed + checkSumUncompressed
+        let compressedData: Data = keyWIFCompressed + checkSumCompressed
+
+        self.compressed = Base58.encode(compressedData)
+        self.uncompressed = Base58.encode(uncompressedData)
+    }
+}
+
 public typealias Base58Encoded = String
+
+enum Network {
+    case testnet
+    case mainnet
+
+    var pubkeyhash: Byte {
+        switch self {
+        case .mainnet: return 0x00
+        case .testnet: return 0x6f
+        }
+    }
+
+    var privateKeyWifPrefix: Byte {
+        switch self {
+        case .mainnet: return 0x80
+        case .testnet: return 0xef
+        }
+    }
+
+    var privateKeyWifSuffix: Byte {
+        return 0x01
+    }
+}
+
 
 /// A Bitcoin address looks like 1MsScoe2fTJoq4ZPdQgqyhgWeoNamYPevy and is derived from an elliptic curve public key
 /// plus a set of network parameters.
@@ -139,18 +185,6 @@ struct PublicAddress {
     let base58: (uncompressed: Base58Encoded, compressed: Base58Encoded)
     let zilliqa: HexString
     let network: Network
-
-    enum Network {
-        case testnet
-        case mainnet
-
-        var pubkeyhash: Byte {
-            switch self {
-            case .mainnet: return 0x00
-            case .testnet: return 0x6f
-            }
-        }
-    }
 
     /// Version = 1 byte of 0 (zero); on the test network, this is 1 byte of 111
     /// Key hash = Version concatenated with RIPEMD-160(SHA-256(public key))
@@ -220,10 +254,6 @@ func point_mul(_ p: Point, _ n: Number) -> Point {
     return r
 }
 
-//func publicKeyPoint(from number: Number) -> PublicKeyPoint {
-//    let point = G * number
-//    return PublicKeyPoint(from: point)
-//}
 
 /**
 func sha256(_ b: XXX) -> XYX {

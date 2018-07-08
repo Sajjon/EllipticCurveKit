@@ -83,10 +83,47 @@ struct PublicKeyPoint {
         return hex
     }
 
-    init(from point: Point) {
+    init(point: Point) {
         self.x = point.x
         self.y = point.y
         self.isYOdd = point.y.isOdd()
+    }
+}
+
+extension PublicKeyPoint {
+    init(privateKey: PrivateKey) {
+        let point = G * privateKey.number
+        self.init(point: point)
+    }
+}
+
+struct PrivateKey {
+    let number: Number
+
+    init(number: Number) {
+        self.number = number
+    }
+}
+
+extension PrivateKey {
+    init(base64: Data) {
+        self.init(number: Number(data: base64))
+    }
+
+    init?(base64: String) {
+        guard let data = Data(base64Encoded: base64) else { return nil }
+        self.init(base64: data)
+    }
+
+    init?(hex: String) {
+        guard let number = Number(hexString: hex) else { return nil }
+        self.init(number: number)
+    }
+}
+
+extension PrivateKey {
+    func base64Encoded() -> String {
+        return number.asData().base64EncodedString()
     }
 }
 
@@ -183,10 +220,10 @@ func point_mul(_ p: Point, _ n: Number) -> Point {
     return r
 }
 
-func publicKeyPoint(from number: Number) -> PublicKeyPoint {
-    let point = G * number
-    return PublicKeyPoint(from: point)
-}
+//func publicKeyPoint(from number: Number) -> PublicKeyPoint {
+//    let point = G * number
+//    return PublicKeyPoint(from: point)
+//}
 
 /**
 func sha256(_ b: XXX) -> XYX {

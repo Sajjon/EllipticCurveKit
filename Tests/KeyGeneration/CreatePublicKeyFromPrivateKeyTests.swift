@@ -11,6 +11,10 @@ import BigInt
 
 @testable import SwiftCrypto
 
+// This is a completely uninteresting private key for a wallet with no funds.
+private let privateKeyHex = "29EE955FEDA1A85F87ED4004958479706BA6C71FC99A67697A9A13D9D08C618E"
+private let privateKeyBase64 = "Ke6VX+2hqF+H7UAElYR5cGumxx/JmmdpepoT2dCMYY4="
+
 class CreatePublicKeyFromPrivateKeyTests: XCTestCase {
 
     override func setUp() {
@@ -18,27 +22,20 @@ class CreatePublicKeyFromPrivateKeyTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    func testPrivateKeyFromBase64() {
+        let frombase64 = PrivateKey(base64: privateKeyBase64)!
+        let fromHex = PrivateKey(hex: privateKeyHex)!
+        XCTAssertEqual(frombase64.number.asHexString(), fromHex.number.asHexString())
+    }
+
+    func testPrivateKeyBase64Encoding() {
+        let frombase64 = PrivateKey(base64: privateKeyBase64)!
+        XCTAssertEqual(frombase64.base64Encoded(), privateKeyBase64)
+    }
+
     func testPublicKeyFromPrivateKey() {
-
-        let expectedPrivateKeyOnBase64Format = "Ke6VX+2hqF+H7UAElYR5cGumxx/JmmdpepoT2dCMYY4="
-
-        let dataFromBase64 = Data(base64Encoded: expectedPrivateKeyOnBase64Format)!
-        let numberFromData = Number(data: dataFromBase64)
-
-
-
-        // This is a completely uninteresting private key for a wallet with no funds.
-        let privateKeyHexString = "29EE955FEDA1A85F87ED4004958479706BA6C71FC99A67697A9A13D9D08C618E"
-
-        XCTAssertEqual(privateKeyHexString, numberFromData.asHexString())
-
-        let number = Number(hexString: privateKeyHexString)!
-
-        XCTAssertEqual(number.magnitude.serialize().base64EncodedString(), expectedPrivateKeyOnBase64Format)
-
-
-
-        let publicKey = publicKeyPoint(from: number)
+        let privateKey = PrivateKey(hex: privateKeyHex)!
+        let publicKey = PublicKeyPoint(privateKey: privateKey)
         XCTAssertEqual(publicKey.x.asHexString(), "F979F942AE743F27902B62CA4E8A8FE0F8A979EE3AD7BD0817339A665C3E7F4F")
         XCTAssertEqual(publicKey.y.asHexString(), "B8CF959134B5C66BCC333A968B26D0ADACCFAD26F1EA8607D647E5B679C49184")
 

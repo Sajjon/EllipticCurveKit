@@ -54,6 +54,10 @@ public extension Number {
         }
         return hexString
     }
+
+    func asData() -> Data {
+        return magnitude.serialize()
+    }
 }
 
 public func pow(_ base: Number, _ exponent: Number, _ modulus: Number) -> Number {

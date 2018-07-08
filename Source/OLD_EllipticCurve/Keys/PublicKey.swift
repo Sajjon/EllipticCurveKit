@@ -33,20 +33,6 @@ public struct PublicKeyCurvePoint {
         self.x = x
         self.y = y
     }
-//
-//    init<C>(privateKey: PrivateKey, curve: C) where C: EllipticCurveOverFiniteField {
-//        let Q = privateKey
-//            /**
-//                Find the bitcoin address from the public key self.Q
-//                We do normalization to go from the projective coordinates to the usual
-//                (x,y) coordinates.
-//            */
-//            Q.Normalize()
-//
-//            x = Int2Byte(Q.x[0], 32)
-//            y = Int2Byte(Q.x[1], 32)
-//
-//    }
 }
 
 public struct PublicKey {
@@ -63,7 +49,6 @@ public struct PublicKey {
         }
     }
     
-//    public let publicKey: [UInt8]
     public let point: PublicKeyCurvePoint
     public let publicKey: String
     public let format: Format
@@ -84,19 +69,14 @@ extension PublicKey: CustomStringConvertible {
 }
 
 private func derivePublicKey(from point: PublicKeyCurvePoint, formatted format: PublicKey.Format) -> String {
-    let pk_x = point.x
-    let pk_y = point.y
-
-//    pkx_bytes = int(binascii.hexlify(pk_x), 16)
-//    pky_bytes = int(binascii.hexlify(pk_y), 16)
-
-//    uncompressed = chr(4) + pk_x + pk_y
-//    compressed =  chr(2 + (pky_bytes & 1)) + pk_x
-
     switch format {
     case .uncompressed:
-        return Number([Number.Word(4)] + pk_x.words + pk_y.words).asHexString()
+        let number = Number([Number.Word(4)] + point.x.words + point.y.words)
+        return number.asHexString()
     case .compressed:
-        fatalError() // chr(2 + (pky_bytes & 1)) + pk_x
+        let bit: Bit = point.y.magnitude[bitAt: 0] && true
+        let prefix: Number.Word = bit ? 3 : 2
+        let number = Number([prefix] + point.x.words)
+        return number.asHexString()
     }
 }

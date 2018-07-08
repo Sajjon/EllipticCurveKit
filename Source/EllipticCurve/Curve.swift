@@ -119,7 +119,7 @@ struct PublicAddress {
     /// Key hash = Version concatenated with RIPEMD-160(SHA-256(public key))
     /// Checksum = 1st 4 bytes of SHA-256(SHA-256(Key hash))
     /// Bitcoin Address = Base58Encode(Key hash concatenated with Checksum)
-    init(point: PublicKeyPoint, network: Network = .mainnet) {
+    init(point: PublicKeyPoint, network: Network) {
 
 
         let uncompressedData = Data(hex: point.uncompressed())

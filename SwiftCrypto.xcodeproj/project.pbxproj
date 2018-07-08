@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
-		482B154320D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */; };
 		4830CB1820CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830CB1720CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift */; };
-		4861AA5520D03EB100871618 /* StringUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5220D03EB100871618 /* StringUtilsTests.swift */; };
-		4861AA5720D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861AA5420D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift */; };
+		489119A520F209BA00F86528 /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119A420F209BA00F86528 /* Curve.swift */; };
+		489119A620F209C400F86528 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891199B20F2097C00F86528 /* Number.swift */; };
+		489119AB20F268C700F86528 /* SHA2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119AA20F268C700F86528 /* SHA2Tests.swift */; };
+		489119AD20F2690300F86528 /* SHA3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119AC20F2690300F86528 /* SHA3Tests.swift */; };
+		489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */; };
 		48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881B20E90FC2004C7B7D /* Crypto.swift */; };
-		48B4882120E90FC2004C7B7D /* RIPEMD160+Compress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881D20E90FC2004C7B7D /* RIPEMD160+Compress.swift */; };
 		48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */; };
 		48B4882320E90FC2004C7B7D /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881F20E90FC2004C7B7D /* Base58.swift */; };
 		48F22C9720C70D88004A18CA /* SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */; };
@@ -57,8 +58,11 @@
 		4891199F20F2097C00F86528 /* PublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKey.swift; sourceTree = "<group>"; };
 		489119A020F2097C00F86528 /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
 		489119A220F2097C00F86528 /* Prime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prime.swift; sourceTree = "<group>"; };
+		489119A420F209BA00F86528 /* Curve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curve.swift; sourceTree = "<group>"; };
+		489119A820F21AE400F86528 /* PythonModulusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonModulusTests.swift; sourceTree = "<group>"; };
+		489119AA20F268C700F86528 /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
+		489119AC20F2690300F86528 /* SHA3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA3Tests.swift; sourceTree = "<group>"; };
 		48B4881B20E90FC2004C7B7D /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
-		48B4881D20E90FC2004C7B7D /* RIPEMD160+Compress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RIPEMD160+Compress.swift"; sourceTree = "<group>"; };
 		48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		48B4881F20E90FC2004C7B7D /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
 		48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +133,7 @@
 			children = (
 				4861AA5220D03EB100871618 /* StringUtilsTests.swift */,
 				4861AA5420D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift */,
+				489119A820F21AE400F86528 /* PythonModulusTests.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -196,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				4891199A20F2097C00F86528 /* BitArray.swift */,
-				4891199B20F2097C00F86528 /* Number.swift */,
 				4891199C20F2097C00F86528 /* EllipticCurveOverFiniteField.swift */,
 			);
 			path = Curve;
@@ -220,6 +224,24 @@
 			path = Prime;
 			sourceTree = "<group>";
 		};
+		489119A320F209AA00F86528 /* EllipticCurve */ = {
+			isa = PBXGroup;
+			children = (
+				4891199B20F2097C00F86528 /* Number.swift */,
+				489119A420F209BA00F86528 /* Curve.swift */,
+			);
+			path = EllipticCurve;
+			sourceTree = "<group>";
+		};
+		489119A920F268AF00F86528 /* Cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				489119AA20F268C700F86528 /* SHA2Tests.swift */,
+				489119AC20F2690300F86528 /* SHA3Tests.swift */,
+			);
+			path = Cryptography;
+			sourceTree = "<group>";
+		};
 		48B4881A20E90FC2004C7B7D /* Cryptography */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +255,6 @@
 		48B4881C20E90FC2004C7B7D /* RIPEMD160 */ = {
 			isa = PBXGroup;
 			children = (
-				48B4881D20E90FC2004C7B7D /* RIPEMD160+Compress.swift */,
 				48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */,
 			);
 			path = RIPEMD160;
@@ -263,6 +284,7 @@
 		48F22CA720C70DC1004A18CA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				489119A320F209AA00F86528 /* EllipticCurve */,
 				4891199820F2097C00F86528 /* OLD_EllipticCurve */,
 				48B4881A20E90FC2004C7B7D /* Cryptography */,
 				4861AA6C20D048DD00871618 /* Extensions */,
@@ -275,6 +297,7 @@
 		48F22CAE20C70DE5004A18CA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				489119A920F268AF00F86528 /* Cryptography */,
 				482B154120D41053001B437D /* KeyGeneration */,
 				4861AA5D20D03F6800871618 /* KeyDataConvertible */,
 				4861AA5820D03EEE00871618 /* ThirdParty */,
@@ -457,10 +480,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				489119A620F209C400F86528 /* Number.swift in Sources */,
 				48F22CB520C70E44004A18CA /* String_Extension.swift in Sources */,
 				48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */,
-				48B4882120E90FC2004C7B7D /* RIPEMD160+Compress.swift in Sources */,
 				48F22CB720C72879004A18CA /* Array_Extension.swift in Sources */,
+				489119A520F209BA00F86528 /* Curve.swift in Sources */,
 				4830CB1820CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift in Sources */,
 				48B4882320E90FC2004C7B7D /* Base58.swift in Sources */,
 				48F22CB320C70E17004A18CA /* KeyDataConvertible.swift in Sources */,
@@ -472,9 +496,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4861AA5520D03EB100871618 /* StringUtilsTests.swift in Sources */,
-				482B154320D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
-				4861AA5720D03EB100871618 /* ArrayUtilDropLeadingZerosTests.swift in Sources */,
+				489119AD20F2690300F86528 /* SHA3Tests.swift in Sources */,
+				489119AB20F268C700F86528 /* SHA2Tests.swift in Sources */,
+				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

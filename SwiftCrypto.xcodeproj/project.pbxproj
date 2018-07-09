@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
-		4830CB1820CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4830CB1720CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift */; };
 		489119A520F209BA00F86528 /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119A420F209BA00F86528 /* Curve.swift */; };
 		489119A620F209C400F86528 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891199B20F2097C00F86528 /* Number.swift */; };
 		489119AB20F268C700F86528 /* SHA2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119AA20F268C700F86528 /* SHA2Tests.swift */; };
@@ -17,11 +16,15 @@
 		48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881B20E90FC2004C7B7D /* Crypto.swift */; };
 		48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */; };
 		48B4882320E90FC2004C7B7D /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881F20E90FC2004C7B7D /* Base58.swift */; };
+		48B94BE520F3F2A50041389D /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE420F3F2A50041389D /* Signature.swift */; };
+		48B94BE720F3F2B10041389D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE620F3F2B10041389D /* Message.swift */; };
+		48D1101820F3D7BA005A212A /* PublicKeyPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101720F3D7BA005A212A /* PublicKeyPoint.swift */; };
+		48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101920F3D7E3005A212A /* PrivateKey.swift */; };
+		48D1101C20F3D812005A212A /* PrivateKeyWIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */; };
+		48D1101E20F3D832005A212A /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101D20F3D832005A212A /* Address.swift */; };
+		48D1102120F3D856005A212A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1102020F3D856005A212A /* Network.swift */; };
 		48F22C9720C70D88004A18CA /* SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */; };
 		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F22CB320C70E17004A18CA /* KeyDataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CB220C70E17004A18CA /* KeyDataConvertible.swift */; };
-		48F22CB520C70E44004A18CA /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CB420C70E44004A18CA /* String_Extension.swift */; };
-		48F22CB720C72879004A18CA /* Array_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F22CB620C72879004A18CA /* Array_Extension.swift */; };
 		8823FC9573D8C1AF8B8D30CD /* Pods_SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665161916806AD945170E11A /* Pods_SwiftCrypto.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +41,6 @@
 /* Begin PBXFileReference section */
 		1EC9D765543237D4FC0A37DA /* Pods-SwiftCryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.release.xcconfig"; sourceTree = "<group>"; };
 		30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.release.xcconfig"; sourceTree = "<group>"; };
-		4828F93020F0A4C7004FDB0D /* SwiftCrypto.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftCrypto.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
 		4830CB1720CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyDataConvertible+BigUInt.swift"; sourceTree = "<group>"; };
 		4861AA5220D03EB100871618 /* StringUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtilsTests.swift; sourceTree = "<group>"; };
@@ -65,6 +67,13 @@
 		48B4881B20E90FC2004C7B7D /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		48B4881F20E90FC2004C7B7D /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
+		48B94BE420F3F2A50041389D /* Signature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
+		48B94BE620F3F2B10041389D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		48D1101720F3D7BA005A212A /* PublicKeyPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyPoint.swift; sourceTree = "<group>"; };
+		48D1101920F3D7E3005A212A /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyWIF.swift; sourceTree = "<group>"; };
+		48D1101D20F3D832005A212A /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		48D1102020F3D856005A212A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22C9620C70D87004A18CA /* SwiftCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22CA820C70DC1004A18CA /* SwiftCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCrypto.h; sourceTree = "<group>"; };
@@ -227,8 +236,11 @@
 		489119A320F209AA00F86528 /* EllipticCurve */ = {
 			isa = PBXGroup;
 			children = (
+				48B94BE320F3F2870041389D /* Signing */,
+				48D1101520F3D740005A212A /* Keys */,
 				4891199B20F2097C00F86528 /* Number.swift */,
 				489119A420F209BA00F86528 /* Curve.swift */,
+				48D1102020F3D856005A212A /* Network.swift */,
 			);
 			path = EllipticCurve;
 			sourceTree = "<group>";
@@ -260,10 +272,47 @@
 			path = RIPEMD160;
 			sourceTree = "<group>";
 		};
+		48B94BE320F3F2870041389D /* Signing */ = {
+			isa = PBXGroup;
+			children = (
+				48B94BE420F3F2A50041389D /* Signature.swift */,
+				48B94BE620F3F2B10041389D /* Message.swift */,
+			);
+			path = Signing;
+			sourceTree = "<group>";
+		};
+		48D1101420F3D6EA005A212A /* OLD */ = {
+			isa = PBXGroup;
+			children = (
+				4861AA6C20D048DD00871618 /* Extensions */,
+				4861AA6D20D048E900871618 /* KeyData */,
+				4891199820F2097C00F86528 /* OLD_EllipticCurve */,
+			);
+			path = OLD;
+			sourceTree = "<group>";
+		};
+		48D1101520F3D740005A212A /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				48D1101F20F3D840005A212A /* Address */,
+				48D1101720F3D7BA005A212A /* PublicKeyPoint.swift */,
+				48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */,
+				48D1101920F3D7E3005A212A /* PrivateKey.swift */,
+			);
+			path = Keys;
+			sourceTree = "<group>";
+		};
+		48D1101F20F3D840005A212A /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				48D1101D20F3D832005A212A /* Address.swift */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
-				4828F93020F0A4C7004FDB0D /* SwiftCrypto.playground */,
 				285EE9D7DD122B692B0588B3 /* Frameworks */,
 				46A05956EC0C820C8AEE53C7 /* Pods */,
 				48F22C8E20C70D87004A18CA /* Products */,
@@ -285,10 +334,8 @@
 			isa = PBXGroup;
 			children = (
 				489119A320F209AA00F86528 /* EllipticCurve */,
-				4891199820F2097C00F86528 /* OLD_EllipticCurve */,
 				48B4881A20E90FC2004C7B7D /* Cryptography */,
-				4861AA6C20D048DD00871618 /* Extensions */,
-				4861AA6D20D048E900871618 /* KeyData */,
+				48D1101420F3D6EA005A212A /* OLD */,
 				4861AA6B20D048B900871618 /* SupportingFiles */,
 			);
 			path = Source;
@@ -480,15 +527,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48D1102120F3D856005A212A /* Network.swift in Sources */,
+				48D1101E20F3D832005A212A /* Address.swift in Sources */,
+				48D1101C20F3D812005A212A /* PrivateKeyWIF.swift in Sources */,
+				48B94BE520F3F2A50041389D /* Signature.swift in Sources */,
 				489119A620F209C400F86528 /* Number.swift in Sources */,
-				48F22CB520C70E44004A18CA /* String_Extension.swift in Sources */,
+				48D1101820F3D7BA005A212A /* PublicKeyPoint.swift in Sources */,
 				48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */,
-				48F22CB720C72879004A18CA /* Array_Extension.swift in Sources */,
 				489119A520F209BA00F86528 /* Curve.swift in Sources */,
-				4830CB1820CA76A3007E5364 /* KeyDataConvertible+BigUInt.swift in Sources */,
 				48B4882320E90FC2004C7B7D /* Base58.swift in Sources */,
-				48F22CB320C70E17004A18CA /* KeyDataConvertible.swift in Sources */,
+				48B94BE720F3F2B10041389D /* Message.swift in Sources */,
 				48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */,
+				48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

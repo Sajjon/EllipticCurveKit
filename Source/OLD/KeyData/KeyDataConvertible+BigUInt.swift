@@ -9,7 +9,7 @@
 import Foundation
 import BigInt
 
-extension Number: KeyDataConvertible {}
+//extension Number: KeyDataConvertible {}
 public extension Number {
 
     init(lsbZeroIndexed words: [Word]) {

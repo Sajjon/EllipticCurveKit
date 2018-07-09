@@ -35,16 +35,22 @@ public extension Number {
         self.init(decimalString, radix: 10)
     }
 
-    func isOdd() -> Bool {
-        func _isOdd(_ number: Number) -> Bool {
-            return number.magnitude[bitAt: 0]
-        }
+    var isOdd: Bool {
+        return magnitude[bitAt: 0]
+    }
 
-        assert(_isOdd(1))
-        assert(!_isOdd(2))
-        assert(_isOdd(3))
-        assert(!_isOdd(4))
-        return _isOdd(self)
+    func asHexString(uppercased: Bool = true) -> String {
+        return toString(uppercased: uppercased, radix: 16)
+    }
+
+    func asDecimalString(uppercased: Bool = true) -> String {
+        return toString(uppercased: uppercased, radix: 10)
+    }
+
+    func toString(uppercased: Bool = true, radix: Int) -> String {
+        let stringRepresentation = String(self, radix: radix)
+        guard uppercased else { return stringRepresentation }
+        return stringRepresentation.uppercased()
     }
 
     func asHexStringLength64(uppercased: Bool = true) -> String {

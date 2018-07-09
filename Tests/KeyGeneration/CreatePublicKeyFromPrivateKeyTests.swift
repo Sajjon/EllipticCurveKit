@@ -33,21 +33,21 @@ class CreatePublicKeyFromPrivateKeyTests: XCTestCase {
         XCTAssertEqual(frombase64.base64Encoded(), privateKeyBase64)
     }
 
-    func testMainnetKeys() {
+    func testCreatingPublicKeyAndAddressesFromPrivateKey() {
         let privateKey = PrivateKey(hex: privateKeyHex)!
         let publicKey = PublicKeyPoint(privateKey: privateKey)
         XCTAssertEqual(publicKey.x.asHexString(), "F979F942AE743F27902B62CA4E8A8FE0F8A979EE3AD7BD0817339A665C3E7F4F")
         XCTAssertEqual(publicKey.y.asHexString(), "B8CF959134B5C66BCC333A968B26D0ADACCFAD26F1EA8607D647E5B679C49184")
 
-        XCTAssertEqual(publicKey.compressed(), "02F979F942AE743F27902B62CA4E8A8FE0F8A979EE3AD7BD0817339A665C3E7F4F")
-        XCTAssertEqual(publicKey.uncompressed(), "04F979F942AE743F27902B62CA4E8A8FE0F8A979EE3AD7BD0817339A665C3E7F4FB8CF959134B5C66BCC333A968B26D0ADACCFAD26F1EA8607D647E5B679C49184")
+        XCTAssertEqual(publicKey.hex.compressed, "02F979F942AE743F27902B62CA4E8A8FE0F8A979EE3AD7BD0817339A665C3E7F4F")
+        XCTAssertEqual(publicKey.hex.uncompressed, "04F979F942AE743F27902B62CA4E8A8FE0F8A979EE3AD7BD0817339A665C3E7F4FB8CF959134B5C66BCC333A968B26D0ADACCFAD26F1EA8607D647E5B679C49184")
 
-        let testnetAddress = PublicAddress(point: publicKey, network: .testnet)
+        let testnetAddress = PublicAddress(publicKeyPoint: publicKey, network: .testnet)
         XCTAssertEqual(testnetAddress.base58.uncompressed, "mjdhN2LKkATnmK2bbNQTtcvyxtCyUcPDLY")
         XCTAssertEqual(testnetAddress.base58.compressed, "mtDqt5jYQ5P5vsT6X78B8JmrArV6fM7YjU")
         XCTAssertEqual(testnetAddress.zilliqa, "59BB614648F828A3D6AFD7E488E358CDE177DAA0")
 
-        let mainnetAddress = PublicAddress(point: publicKey, network: .mainnet)
+        let mainnetAddress = PublicAddress(publicKeyPoint: publicKey, network: .mainnet)
         XCTAssertEqual(mainnetAddress.base58.uncompressed, "157k4yFLw92XzCYysoS64hif6tcGdDULm6")
         XCTAssertEqual(mainnetAddress.base58.compressed, "1Dhtb2eZb3wq9kyUoY9oJPZXJrtPjUgDBU")
         XCTAssertEqual(mainnetAddress.zilliqa, "59BB614648F828A3D6AFD7E488E358CDE177DAA0") // unknown how to format for mainnet, default to same as testnet for now.

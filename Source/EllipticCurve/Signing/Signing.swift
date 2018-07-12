@@ -61,11 +61,11 @@ func schnorr_sign(message: Message, privateKey: PrivateKey, publicKey: PublicKey
         k = n - k
     }
 
-    let e = Crypto.sha2Sha256(R.x.asData() + publicKey.data.compressed + message.asData()).toNumber()
+    let e = Crypto.sha2Sha256(Data(hex: R.x.asHexStringLength64()) + publicKey.data.compressed + message.asData()).toNumber()
 
     /// GOTCHA: `secp256k1` uses `mod p` for all operations, but for the creation of the Schnorr signature, we use `mod n`, ref: https://gist.github.com/kallewoof/5d623445802a84f17cc7ff5572109074#gotchas
-    let signatureSuffix = mod(k + e + privateKey.number, modulus: n)
-    let signatureHex = R.x.asHexString() + signatureSuffix.asHexString()
+    let signatureSuffix = modN(k + e * privateKey.number)
+    let signatureHex = R.x.asHexStringLength64() + signatureSuffix.asHexStringLength64()
     return Signature(hex: signatureHex)
 }
 
@@ -79,8 +79,6 @@ func schnorr_verify(message: Message, publicKey: PublicKey, signature: Signature
         r < p,
         s < n
         else { return false }
-
-
 
     let e: Number = {
         let inputData: Data = Data(hex: rHex) + publicKey.data.compressed + message.asData()

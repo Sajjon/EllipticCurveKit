@@ -64,9 +64,9 @@ class SignignAndVerificationTests: XCTestCase {
 
         XCTAssertTrue(schnorr_verify(message: message, publicKey: publicKey, signature: expectedSignature))
 
-//        let signatureFromMessage = schnorr_sign(message: message, privateKey: privateKey, publicKey: publicKey)
-//        XCTAssertEqual(signatureFromMessage, expectedSignature)
+        let signatureFromMessage = schnorr_sign(message: message, privateKey: privateKey, publicKey: publicKey)
+        XCTAssertEqual(signatureFromMessage, expectedSignature)
 
-//        XCTAssertTrue(schnorr_verify(message: message, publicKey: publicKey, signature: signatureFromMessage))
+        XCTAssertTrue(schnorr_verify(message: message, publicKey: publicKey, signature: signatureFromMessage))
     }
 }

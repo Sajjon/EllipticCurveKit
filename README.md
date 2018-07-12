@@ -6,26 +6,26 @@
 <!-- MarkdownTOC -->
 
 - [Goal](#goal)
-    - [Swifty?](#swifty)
-    - [Usage](#usage)
+	- [Swifty?](#swifty)
+	- [Usage](#usage)
 - [Alternatives](#alternatives)
-    - [Bitcoin C Bindings](#bitcoin-c-bindings)
-    - [Pure Swift](#pure-swift)
+	- [Bitcoin C Bindings](#bitcoin-c-bindings)
+	- [Pure Swift](#pure-swift)
 - [Status](#status)
-    - [Proof Of Concept code](#proof-of-concept-code)
-    - [Status of goal](#status-of-goal)
+	- [Proof Of Concept code](#proof-of-concept-code)
+	- [Status of goal](#status-of-goal)
 - [Dependencies](#dependencies)
-    - [Big Numbers](#big-numbers)
-        - [Apple Accelerate vBignum](#apple-accelerate-vbignum)
-        - [Hash functions](#hash-functions)
+	- [Big Numbers](#big-numbers)
+		- [Apple Accelerate vBignum](#apple-accelerate-vbignum)
+		- [Hash functions](#hash-functions)
 - [Key inspiration](#key-inspiration)
 - [Roadmap](#roadmap)
-    - [Signatures](#signatures)
-    - [Key Formats](#key-formats)
-        - [Private Key](#private-key)
-        - [Public Key](#public-key)
-    - [Public Addresses](#public-addresses)
-    - [Common Curves](#common-curves)
+	- [Signatures](#signatures)
+	- [Key Formats](#key-formats)
+		- [Private Key](#private-key)
+		- [Public Key](#public-key)
+	- [Public Addresses](#public-addresses)
+	- [Common Curves](#common-curves)
 
 <!-- /MarkdownTOC -->
 
@@ -109,7 +109,7 @@ The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyug
 - [x] Generate Elliptic Curve Key Pair  
 - [x] Derive address (starting with Bitcoin)  
 - [x] Verify signature (Schnorr signature)  
-- [ ] Sign message (Schnorr sign: currently working on this)  
+- [x] Sign message 
 
 ## Status of goal
 - [ ] "Swifty"   
@@ -148,7 +148,7 @@ I have used lots of open source projects as inspiration. Bitcoin Improvement Pro
 ## Signatures
 - [ ] ECDSA  
 - [ ] ed25519 (EdDSA)  
-- [x] Schnorr (right now only `schnorr_verify` is working, but soon `schnorr_sign` too).
+- [x] Schnorr
 
 ## Key Formats
 ### Private Key

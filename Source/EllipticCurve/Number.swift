@@ -66,3 +66,9 @@ public extension Number {
         return magnitude.serialize()
     }
 }
+
+extension Data {
+    func toNumber() -> Number {
+        return Number(data: self)
+    }
+}

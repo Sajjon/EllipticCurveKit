@@ -42,6 +42,14 @@ public extension PrivateKey {
 }
 
 public extension PrivateKey {
+
+    func asData() -> Data {
+        let fromHex: Data =  Data(hex: number.asHexString())
+        let fromSerialized = number.asData()
+        assert(fromHex == fromSerialized)
+        return number.asData()
+    }
+
     func base64Encoded() -> String {
         return number.asData().base64EncodedString()
     }

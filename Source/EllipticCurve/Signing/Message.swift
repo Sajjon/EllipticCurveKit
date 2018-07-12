@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Message: Equatable, CustomStringConvertible {
-    let hexString: HexString
+    private let hexString: HexString
 
     public init(hex: HexString) {
         self.hexString = hex
@@ -17,6 +17,7 @@ public struct Message: Equatable, CustomStringConvertible {
 }
 
 public extension Message {
+
     var description: String {
         return hexString
     }

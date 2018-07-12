@@ -3,6 +3,33 @@
 
 ## STATUS (2018-07-12): Proof of concept in progress.
 
+<!-- MarkdownTOC -->
+
+- [Goal](#goal)
+    - [Swifty?](#swifty)
+    - [Usage](#usage)
+- [Alternatives](#alternatives)
+    - [Bitcoin C Bindings](#bitcoin-c-bindings)
+    - [Pure Swift](#pure-swift)
+- [Status](#status)
+    - [Proof Of Concept code](#proof-of-concept-code)
+    - [Status of goal](#status-of-goal)
+- [Dependencies](#dependencies)
+    - [Big Numbers](#big-numbers)
+        - [Apple Accelerate vBignum](#apple-accelerate-vbignum)
+        - [Hash functions](#hash-functions)
+- [Key inspiration](#key-inspiration)
+- [Roadmap](#roadmap)
+    - [Signatures](#signatures)
+    - [Key Formats](#key-formats)
+        - [Private Key](#private-key)
+        - [Public Key](#public-key)
+    - [Public Addresses](#public-addresses)
+    - [Common Curves](#common-curves)
+
+<!-- /MarkdownTOC -->
+
+
 # Goal
 "Swifty", safe and fast Elliptic Curve Cryptography SDK in pure Swift (no dependency to a library written in any other language than Swift).
 

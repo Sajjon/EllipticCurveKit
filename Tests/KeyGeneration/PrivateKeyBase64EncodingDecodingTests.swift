@@ -13,7 +13,7 @@ import XCTest
 private let privateKeyHex = "29EE955FEDA1A85F87ED4004958479706BA6C71FC99A67697A9A13D9D08C618E"
 private let privateKeyBase64 = "Ke6VX+2hqF+H7UAElYR5cGumxx/JmmdpepoT2dCMYY4="
 
-class PrivateKeyBase64EncodingDecodingTests: XCTest {
+class PrivateKeyBase64EncodingDecodingTests: XCTestCase {
     func testPrivateKeyFromBase64() {
         let frombase64 = PrivateKey(base64: privateKeyBase64)!
         let fromHex = PrivateKey(hex: privateKeyHex)!

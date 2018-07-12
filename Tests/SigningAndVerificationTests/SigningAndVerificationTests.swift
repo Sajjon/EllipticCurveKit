@@ -6,13 +6,18 @@
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
 //
 
-import Foundation
 import XCTest
+import BigInt
+
 @testable import SwiftCrypto
 
 // The three test vectors below are found at:
 //  https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors
-class SignignAndVerificationTests: XCTest {
+class SignignAndVerificationTests: XCTestCase {
+
+    func testFoobar() {
+        XCTAssertEqual(1, 1)
+    }
 
     // `Test vector 1`
     func testSigningAndVerifyingSignatures1() {

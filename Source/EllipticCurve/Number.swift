@@ -37,20 +37,7 @@ public extension Number {
 
     var isEven: Bool {
         guard self.sign == .plus else { fatalError("what to do when negative?") }
-        print("Printing self")
-        print(self.asHexString())
-        print(self)
-        print("Printing magnitude")
-        print(magnitude)
-        print(magnitude.serialize().toHexString())
-        if magnitude % 2 == 0 {
-            print("is even")
-            return true
-        } else {
-            print("is odd")
-            return false
-        }
-
+        return magnitude[bitAt: 0] == false
     }
 
     func asHexString(uppercased: Bool = true) -> String {
@@ -76,20 +63,6 @@ public extension Number {
     }
 
     func asData() -> Data {
-        let uppercaseHex = asHexString(uppercased: true)
-        let lowercaseHex = asHexString(uppercased: false)
-        let dataFromUppercaseHex = Data(hex: uppercaseHex)
-        let dataFromLowercaseHex = Data(hex: lowercaseHex)
-        assert(dataFromUppercaseHex == dataFromLowercaseHex, "Should equal, \(dataFromUppercaseHex.toHexString()) != \(dataFromLowercaseHex.toHexString())")
-
-        let serializedData = magnitude.serialize()
-
-        assert(serializedData == dataFromUppercaseHex, "Should equal, \(serializedData.toHexString()) != \(dataFromUppercaseHex.toHexString())")
-
-        return serializedData//magnitude.serialize()
+        return magnitude.serialize()
     }
-}
-
-public func pow(_ base: Number, _ exponent: Number, _ modulus: Number) -> Number {
-    return base.power(exponent, modulus: modulus)
 }

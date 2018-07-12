@@ -120,6 +120,7 @@ I have used lots of open source projects as inspiration. Bitcoin Improvement Pro
 # Roadmap
 ## Signatures
 - [ ] ECDSA  
+- [ ] ed25519 (EdDSA)  
 - [x] Schnorr (right now only `schnorr_verify` is working, but soon `schnorr_sign` too).
 
 ## Key Formats
@@ -137,43 +138,10 @@ I have used lots of open source projects as inspiration. Bitcoin Improvement Pro
 - [x] Zilliqa (testnet)
 
 ## Common Curves
-These curves are listed by the CLI command `openssl ecparam -list_curves`
 
-- [ ] secp112r1 (SECG/WTLS curve over a 112 bit prime field)  
-- [ ] secp112r2 (SECG curve over a 112 bit prime field)  
-- [ ] secp128r1 (SECG curve over a 128 bit prime field)  
-- [ ] secp128r2 (SECG curve over a 128 bit prime field)  
-- [ ] secp160k1 (SECG curve over a 160 bit prime field)  
-- [ ] secp160r1 (SECG curve over a 160 bit prime field)  
-- [ ] secp160r2 (SECG/WTLS curve over a 160 bit prime field)  
-- [ ] secp192k1 (SECG curve over a 192 bit prime field)  
-- [ ] secp224k1 (SECG curve over a 224 bit prime field)  
-- [ ] secp224r1 (NIST/SECG curve over a 224 bit prime field)  
-- [x] secp256k1 (SECG curve over a 256 bit prime field)  
-- [ ] secp384r1 (NIST/SECG curve over a 384 bit prime field)  
-- [ ] secp521r1 (NIST/SECG curve over a 521 bit prime field)  
-- [ ] prime192v1 (NIST/X9.62/SECG curve over a 192 bit prime field)  
-- [ ] prime192v2 (X9.62 curve over a 192 bit prime field)  
-- [ ] prime192v3 (X9.62 curve over a 192 bit prime field)  
-- [ ] prime239v1 (X9.62 curve over a 239 bit prime field)  
-- [ ] prime239v2 (X9.62 curve over a 239 bit prime field)  
-- [ ] prime239v3 (X9.62 curve over a 239 bit prime field)  
-- [ ] prime256v1 (X9.62/SECG curve over a 256 bit prime field)  
-- [ ] sect113r1  (SECG curve over a 113 bit binary field)  
-- [ ] sect113r2  (SECG curve over a 113 bit binary field)  
-- [ ] sect131r1  (SECG/WTLS curve over a 131 bit binary field)  
-- [ ] sect131r2  (SECG curve over a 131 bit binary field)  
-- [ ] sect163k1  (NIST/SECG/WTLS curve over a 163 bit binary field)  
-- [ ] sect163r1  (SECG curve over a 163 bit binary field)  
-- [ ] sect163r2  (NIST/SECG curve over a 163 bit binary field)  
-- [ ] sect193r1  (SECG curve over a 193 bit binary field)  
-- [ ] sect193r2  (SECG curve over a 193 bit binary field)  
-- [ ] sect233k1  (NIST/SECG/WTLS curve over a 233 bit binary field)  
-- [ ] sect233r1  (NIST/SECG/WTLS curve over a 233 bit binary field)  
-- [ ] sect239k1  (SECG curve over a 239 bit binary field)  
-- [ ] sect283k1  (NIST/SECG curve over a 283 bit binary field)  
-- [ ] sect283r1  (NIST/SECG curve over a 283 bit binary field)  
-- [ ] sect409k1  (NIST/SECG curve over a 409 bit binary field)  
-- [ ] sect409r1  (NIST/SECG curve over a 409 bit binary field)  
-- [ ] sect571k1  (NIST/SECG curve over a 571 bit binary field)  
-- [ ] sect571r1  (NIST/SECG curve over a 571 bit binary field)  
+It is plan to support most of the common curves listed by running CLI command `openssl ecparam -list_curves`, but these four are the ones I will be starting with:
+
+- [x] secp256k1 (Bitcoin, Ethereum, Zilliqa)
+- [] secp256r1 (NEO)
+- [] X25519 - [Curve25519 used for ECDH](https://en.wikipedia.org/wiki/Curve25519) (Nano, Stellar)
+- [] prime256v1 (Cardano)

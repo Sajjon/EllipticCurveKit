@@ -40,7 +40,7 @@ protocol EllipticCurveCryptographySigning {
 }
 ```
 
-Since both protocols above require an [`associatedtype`](https://docs.swift.org/swift-book/LanguageGuide/Generics.html) which specify which [Curve](#common-Curves) and [Signature](#signatures) to use, we can use type-erased types, similar to Swift Foundation's [AnyCollection](https://developer.apple.com/documentation/swift/anycollection) or [AnyHashable](https://developer.apple.com/documentation/swift/anyhashable). We use type-erased wrappers `AnyKeyGenerator` and `AnyKeySigner` below: 
+Since both protocols above require an [`associatedtype`](https://docs.swift.org/swift-book/LanguageGuide/Generics.html) which specify which [Curve](#common-curves) and [Signature](#signatures) to use, we can use type-erased types, similar to Swift Foundation's [AnyCollection](https://developer.apple.com/documentation/swift/anycollection) or [AnyHashable](https://developer.apple.com/documentation/swift/anyhashable). We use type-erased wrappers `AnyKeyGenerator` and `AnyKeySigner` below: 
 
 ```swift
 let privateKey = PrivateKey(hex: "B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF")!

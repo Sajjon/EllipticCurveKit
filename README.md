@@ -65,17 +65,14 @@ There are many - production like alternatives to this Swift SDK. The goal of thi
 
 ## Bitcoin C Bindings
 The [Bitcoin Core's secp256k1 library](https://github.com/bitcoin-core/secp256k1) developed in C seems to be the industry standard library for Elliptic Curve Cryptography. It is proven and robust and has many developers, why many projects in other programming languages just provide and a wrapper around it. Here is a short list of Bitcoin secp256k1 C library wrappers:
-### Other languages
-[Go](https://github.com/toxeus/go-secp256k1))
-[Javascript](https://github.com/cryptocoinjs/secp256k1-node)
-[PHP](https://github.com/Bit-Wasp/secp256k1-php)
-[Python Binding](https://github.com/petertodd/python-bitcoinlib)
-[Ruby](https://github.com/lian/bitcoin-ruby)
-[Rust](https://github.com/rust-bitcoin/rust-bitcoinconsensus)
-[Scala](https://github.com/bitcoin-s/bitcoin-s-core)
 
-### Swift
-There are some bindings to bitcoin-core/secp256k1 in Swift too. The most promising seems to be [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit) (here are some others [Boilertalk/secp256k1.swift](https://github.com/Boilertalk/secp256k1.swift), [noxproject/ASKSecp256k1](https://github.com/noxproject/ASKSecp256k1), [pebble8888/secp256k1swift](https://github.com/pebble8888/secp256k1swift) and [skywinder/ios-secp256k1](https://github.com/skywinder/ios-secp256k1)). kishikawakatsumi/BitcoinKit stands out since it provides additional Swift layers to bitcoin-core/secp256k1. For production purposes I recommend looking at [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit).
+> ### Other languages
+> [Go](https://github.com/toxeus/go-secp256k1), [Javascript](https://github.com/cryptocoinjs/secp256k1-node), [PHP](https://github.com/Bit-Wasp/secp256k1-php), [Python Binding](https://github.com/petertodd/python-bitcoinlib), [Ruby](https://github.com/lian/bitcoin-ruby), [Rust](https://github.com/rust-bitcoin/rust-bitcoinconsensus), [Scala](https://github.com/bitcoin-s/bitcoin-s-core)   
+
+> ### Bitcoin C Bindings (Swift)
+> There are some bindings to bitcoin-core/secp256k1 in Swift too. The most promising seems to be [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit) (here are some others [Boilertalk/secp256k1.swift](https://github.com/Boilertalk/secp256k1.swift), [noxproject/ASKSecp256k1](https://github.com/noxproject/ASKSecp256k1), [pebble8888/secp256k1swift](https://github.com/pebble8888/secp256k1swift) and [skywinder/ios-secp256k1](https://github.com/skywinder/ios-secp256k1). 
+
+> The SDK *kishikawakatsumi/BitcoinKit* stands out since it provides additional Swift layers to *bitcoin-core/secp256k1*. For production purposes I recommend looking at [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit).
 
 ## Pure Swift
 The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyugit/EllipticCurve](https://github.com/hyugit/EllipticCurve). The code is very Swifty and nice indeed, great work by [Huang Yu aka hyugit](https://github.com/hyugit)! However, the code runs too slow. Taking over 10 minutes for Key generation. While my SDK takes around 10 seconds (of course that is too slow too by a factor of at least 100.).

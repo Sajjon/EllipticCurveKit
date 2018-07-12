@@ -10,12 +10,12 @@ import Foundation
 
 /// WIF == Wallet Import Format
 public typealias Base58Encoded = String
-struct PrivateKeysWIF {
+public struct PrivateKeyWIF {
     let compressed: Base58Encoded
     let uncompressed: Base58Encoded
 
 
-    init(privateKey: PrivateKey, network: Network) {
+    public init(privateKey: PrivateKey, network: Network) {
 
         let prefixByte: Byte = network.privateKeyWifPrefix
         let prefix = Data([prefixByte])

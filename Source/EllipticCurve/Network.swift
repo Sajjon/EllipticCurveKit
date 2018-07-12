@@ -8,7 +8,9 @@
 
 import Foundation
 
-enum Network {
+public typealias Byte = UInt8
+
+public enum Network {
     case testnet
     case mainnet
 

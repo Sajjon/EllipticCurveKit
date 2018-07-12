@@ -27,7 +27,7 @@ public extension PrivateKey {
 }
 
 public extension PrivateKey {
-    init<C>(on curve: C) where C: EllipticCurveOverFiniteField {
+    public init<C>(on curve: C) where C: EllipticCurveOverFiniteField {
         var privateKey: PrivateKey?
         while privateKey == nil {
             privateKey = PrivateKey(randomBigNumber: BigInt(sign: .plus, magnitude: BigUInt.randomInteger(withMaximumWidth: 256)), on: curve)
@@ -35,7 +35,7 @@ public extension PrivateKey {
         self = privateKey!
     }
 
-    init?<C>(hexString: String, on curve: C) where C: EllipticCurveOverFiniteField {
+    public init?<C>(hexString: String, on curve: C) where C: EllipticCurveOverFiniteField {
         guard let bigNumber = Number(hexString: hexString) else { print("Failed to create number from hexstring");return nil }
         self.init(randomBigNumber: bigNumber, on: curve)
     }
@@ -47,7 +47,7 @@ public extension PrivateKey {
     }
 }
 
-extension PrivateKey: CustomStringConvertible {
+public extension PrivateKey: CustomStringConvertible {
     public var description: String {
         return toHexString()
     }

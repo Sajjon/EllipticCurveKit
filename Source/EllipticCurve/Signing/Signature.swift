@@ -8,17 +8,25 @@
 
 import Foundation
 
-struct Signature {
-    let data: Data
+public struct Signature: Equatable, CustomStringConvertible {
+    let hexString: HexString
 
-    init?(data: Data) {
-        guard data.bytes.count == 64 else { return nil }
-        self.data = data
+    public init(hex: HexString) {
+        self.hexString = hex
+        assert(hex.count % 2 == 0)
     }
 }
 
-extension Signature {
-    init?(number: Number) {
-        self.init(data: number.asData())
+public extension Signature {
+    public init(number: Number) {
+        self.init(hex: number.asHexString())
+    }
+
+    public init(data: Data) {
+        self.init(hex: data.toHexString())
+    }
+
+    var description: String {
+        return hexString
     }
 }

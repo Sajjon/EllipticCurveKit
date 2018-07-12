@@ -17,8 +17,8 @@ public protocol EllipticCurveOverFiniteField: Equatable {
     var b: Number { get }
     var P: Number { get }
     var N: Number { get }
-    init(G: (x: Number, y: Number, z: Number), a: Number, b: Number, P: Number, N: Number)
-    init<C>(curve: C) where C: EllipticCurveOverFiniteField
+    public init(G: (x: Number, y: Number, z: Number), a: Number, b: Number, P: Number, N: Number)
+    public init<C>(curve: C) where C: EllipticCurveOverFiniteField
 }
 
 public extension EllipticCurveOverFiniteField {
@@ -28,15 +28,15 @@ public extension EllipticCurveOverFiniteField {
 }
 
 public extension EllipticCurveOverFiniteField {
-    init(G: (x: Number, y: Number, z: Number), a: Number, b: Number, P: Number) {
+    public init(G: (x: Number, y: Number, z: Number), a: Number, b: Number, P: Number) {
         self.init(G: G, a: a, b: b, P: P, N: 0)
     }
 
-    init(a: Number, b: Number, P: Number) {
+    public init(a: Number, b: Number, P: Number) {
         self.init(G: (x: 0, y: 0, z: 0), a: a, b: b, P: P)
     }
 
-    init<C>(curve: C) where C: EllipticCurveOverFiniteField {
+    public init<C>(curve: C) where C: EllipticCurveOverFiniteField {
         self.init(G: curve.G, a: curve.a, b: curve.b, P: curve.P, N: curve.N)
     }
 }

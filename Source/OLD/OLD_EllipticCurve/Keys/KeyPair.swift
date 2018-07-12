@@ -27,7 +27,7 @@ public struct KeyPair {
     }
 }
 
-extension KeyPair: CustomStringConvertible {
+public extension KeyPair: CustomStringConvertible {
     public var description: String {
         return "PrivateKey: \(privateKey)\nPublicKey: \(publicKey)"
     }

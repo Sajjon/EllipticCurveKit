@@ -62,7 +62,7 @@ public struct PublicKey {
     }
 }
 
-extension PublicKey: CustomStringConvertible {
+public extension PublicKey: CustomStringConvertible {
     public var description: String {
         return publicKey
     }

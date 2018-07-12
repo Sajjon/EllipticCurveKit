@@ -9,14 +9,14 @@
 import Foundation
 import BigInt
 
-//extension Number: KeyDataConvertible {}
+//public extension Number: KeyDataConvertible {}
 public extension Number {
 
-    init(lsbZeroIndexed words: [Word]) {
+    public init(lsbZeroIndexed words: [Word]) {
         self.init(words: words)
     }
 
-    init?(msbZeroIndexed string: String, radix: Int) {
+    public init?(msbZeroIndexed string: String, radix: Int) {
         let string = radix == 16 ? string.droppingTwoLeadinHexCharsIfNeeded() : string
         self.init(string, radix: radix)
     }

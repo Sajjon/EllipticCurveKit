@@ -8,16 +8,28 @@
 
 import Foundation
 
-struct Message {
-    let data: Data
+public struct Message: Equatable, CustomStringConvertible {
+    let hexString: HexString
 
-    init(data: Data) {
-        self.data = data
+    public init(hex: HexString) {
+        self.hexString = hex
     }
 }
 
-extension Message {
-    init(number: Number) {
-        self.init(data: number.asData())
+public extension Message {
+    var description: String {
+        return hexString
+    }
+
+    public init(number: Number) {
+        self.init(hex: number.asHexString())
+    }
+
+    public init(data: Data) {
+        self.init(hex: data.toHexString())
+    }
+
+    func asData() -> Data {
+        return Data(hex: hexString)
     }
 }

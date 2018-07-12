@@ -9,7 +9,11 @@ def class_name(v):
     return type(v).__name__
 
 def debug(value, variable_name):
-    print('`{}`: `{}` = value=`{}`'.format(variable_name, class_name(value), value))
+	value_print_friendly = value
+	if isinstance(value, bytes):
+		value_print_friendly = 'hex=`{}`, int=`{}`'.format(str(binascii.hexlify(value), 'utf-8'), int.from_bytes(value, byteorder="big"))
+
+	print('`{}`: `{}` = value=`{}`'.format(variable_name, class_name(value), value_print_friendly))
 
 
 
@@ -39,7 +43,14 @@ def bytes_point(p):
     return (b'\x03' if p[1] & 1 else b'\x02') + p[0].to_bytes(32, byteorder="big")
 
 def sha256(b):
-    return int.from_bytes(hashlib.sha256(b).digest(), byteorder="big")
+
+	# hexlified = binascii.hexlify(b)
+	# hexstring = str(hexlified, 'utf-8')
+	# encoded = hexstring.encode('utf-8')
+
+	# return int.from_bytes(hashlib.sha256(encoded).digest(), byteorder="big")
+
+	return int.from_bytes(hashlib.sha256(b).digest(), byteorder="big")
 
 def on_curve(point):
     return (pow(point[1], 2, p) - pow(point[0], 3, p)) % p == 7
@@ -65,13 +76,31 @@ def schnorr_verify(msg, pubkey_point, sig):
 	if (not on_curve(pubkey_point)):
 		print('NOT ON CURVE')
 		return False
+	
 	r = int.from_bytes(sig[0:32], byteorder="big")
 	s = int.from_bytes(sig[32:64], byteorder="big")
+
+	debug(hex(r), 'hex(r)')
+	debug(hex(s), 'hex(s)')
+	
 	if r >= p or s >= n:
 		print('r or s to big')
 		return False
-	e = sha256(sig[0:32] + bytes_point(pubkey_point) + msg)
+
+	pubkey_compressed_bytes = bytes_point(pubkey_point)
+	debug(sig[0:32], 'sig[0:32] (a.k.a. `e.0`)')
+	debug(pubkey_compressed_bytes, 'pubkey_compressed_bytes (a.k.a. e.1)')
+	debug(msg, 'msg (a.k.a. e.2)')
+
+	e = sha256(sig[0:32] + pubkey_compressed_bytes + msg)
+
+	debug(hex(e), 'hex(e)')
+
 	R = point_add(point_mul(G, s), point_mul(pubkey_point, n - e))
+	
+	debug(R[0], 'R[0]')
+	debug(R[1], 'R[1]')
+
 	if R is None:
 		assert True == False, "R should not be none"
 	if jacobi(R[1]) != 1:
@@ -116,9 +145,11 @@ def test_vector(private_key, expected_public_key, message, signature):
 	signature = bytes.fromhex(signature)
 
 
+	calculated_signature = schnorr_sign(message, private_key)
+	# debug(calculated_signature, 'calculated_signature')
 	debug_assert_equal(
 		signature,
-		schnorr_sign(message, private_key)
+		calculated_signature
 	)
 	print("TEST SIGNING PASSED")
 
@@ -135,6 +166,7 @@ def test_vector1():
 		private_key = '0000000000000000000000000000000000000000000000000000000000000001',
 		expected_public_key = '0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798',
 		message = '0000000000000000000000000000000000000000000000000000000000000000',
+		# signature = '0582344958B04A9B2BCC63C09222F0540167C846512143B37B1978269737EAE16A7DFD9B9D2F751E99FEDC934E8EC5000AEEC240AFAD10A6A6D9F5D104247A99'
 		signature = '787A848E71043D280C50470E8E1532B2DD5D20EE912A45DBDD2BD1DFBF187EF67031A98831859DC34DFFEEDDA86831842CCD0079E1F92AF177F7F22CC1DCED05'
 	)
 	print("TEST VECTOR 1 PASSED")
@@ -144,6 +176,7 @@ def test_vector2():
 		private_key = 'B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF',
 		expected_public_key = '02DFF1D77F2A671C5F36183726DB2341BE58FEAE1DA2DECED843240F7B502BA659',
 		message = '243F6A8885A308D313198A2E03707344A4093822299F31D0082EFA98EC4E6C89',
+		# signature = 'EB3D32A4DEF40C1CB6F6182BC14CEF27F5BFE8BF649C83DC842E90EE7B380F0AFBB45E1B4A98F564DE7DB8286FAA162258398885DF55007C9D4928BB2AF68196'
 		signature = '2A298DACAE57395A15D0795DDBFD1DCB564DA82B0F269BC70A74F8220429BA1D1E51A22CCEC35599B8F266912281F8365FFC2D035A230434A1A64DC59F7013FD'
 	)
 	print("TEST VECTOR 2 PASSED")
@@ -153,15 +186,27 @@ def test_vector3():
 		private_key = 'C90FDAA22168C234C4C6628B80DC1CD129024E088A67CC74020BBEA63B14E5C7',
 		expected_public_key = '03FAC2114C2FBB091527EB7C64ECB11F8021CB45E8E7809D3C0938E4B8C0E5F84B',
 		message = '5E2D58D8B3BCDF1ABADEC7829054F90DDA9805AAB56C77333024B9D0A508B75C',
+		# signature = '002A4FE22683AF06767E083B84A47495A66811EC3706FB54AD17DCD50CD8F9B413188B94DDDD8A406089DEBD22B6EE7B5EF0B0EFBCBC9E59A8A9978CE932941B'
 		signature = '00DA9B08172A9B6F0466A2DEFD817F2D7AB437E0D253CB5395A963866B3574BE00880371D01766935B92D2AB4CD5C8A2A5837EC57FED7660773A05F0DE142380'
 	)
 	print("TEST VECTOR 3 PASSED")
+
+# OTHER Test Vector source: https://gist.github.com/kallewoof/5d623445802a84f17cc7ff5572109074
+def test_vector_ext4():
+	# test_vector(
+	# 	private_key = '',
+	# 	expected_public_key = '',
+	# 	message = '',
+	# 	signature = ''
+	# )
+	print("TEST VECTOR 4 NOT IMPLEMENTED YET")
 
 # https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#Test_vectors
 def run_all_tests():
 	test_vector1()
 	test_vector2()
 	test_vector3()
+	# test_vector_ext4()
 	print("ALL TESTS PASSED :D")
 
 run_all_tests()

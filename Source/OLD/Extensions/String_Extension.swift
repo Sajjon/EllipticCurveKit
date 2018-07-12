@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
 
     func droppingTwoLeadinHexCharsIfNeeded() -> String {
         guard starts(with: "0x") else { return self }
@@ -70,7 +70,7 @@ extension String {
 }
 
 // MARK: - Mutating
-extension String {
+public extension String {
     mutating func dropTwoLeadinHexCharsIfNeeded() {
         self = droppingTwoLeadinHexCharsIfNeeded()
     }

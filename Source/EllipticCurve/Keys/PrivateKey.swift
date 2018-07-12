@@ -8,31 +8,40 @@
 
 import Foundation
 
-struct PrivateKey {
+public struct PrivateKey {
+    public enum Format {
+        case raw
+        indirect case wif(WIF)
+        public enum WIF {
+            case uncompressed(PrivateKeyWIF)
+            case compressed(PrivateKeyWIF)
+        }
+    }
+    
     let number: Number
 
-    init(number: Number) {
+    public init(number: Number) {
         self.number = number
     }
 }
 
-extension PrivateKey {
-    init(base64: Data) {
+public extension PrivateKey {
+    public init(base64: Data) {
         self.init(number: Number(data: base64))
     }
 
-    init?(base64: String) {
+    public init?(base64: String) {
         guard let data = Data(base64Encoded: base64) else { return nil }
         self.init(base64: data)
     }
 
-    init?(hex: String) {
+    public init?(hex: String) {
         guard let number = Number(hexString: hex) else { return nil }
         self.init(number: number)
     }
 }
 
-extension PrivateKey {
+public extension PrivateKey {
     func base64Encoded() -> String {
         return number.asData().base64EncodedString()
     }

@@ -1,5 +1,5 @@
 //
-//  PublicKeyPoint.swift
+//  PublicKey.swift
 //  SwiftCrypto
 //
 //  Created by Alexander Cyon on 2018-07-09.
@@ -8,39 +8,26 @@
 
 import Foundation
 
-extension Data {
-    init(_ byte: Byte) {
-        self.init([byte])
-    }
-
-    static var empty: Data {
-        return Data()
-    }
-}
-
 public typealias HexString = String
-
-struct PublicKeyPoint {
+public struct PublicKey {
 
     let point: Point
     let data: (uncompressed: Data, compressed: Data)
     let hex: (uncompressed: HexString, compressed: HexString)
 
-    init(point: Point) {
+    public init(point: Point) {
         let x = point.x
         let y = point.y
         let xData = x.asData()
         let yData = y.asData()
 
         let uncompressedPrefix = Data(0x04)
-        let compresssedPrefix = Data(y.isOdd ? 0x03 : 0x02)
+        let compresssedPrefix = Data(y.isEven ? 0x02 : 0x03)
 
         let uncompressed = [uncompressedPrefix, xData, yData]
         let compressed = [compresssedPrefix, xData]
 
-//        let uncompressedData = uncompressedPrefix + xData + yData
         let uncompressedData: Data = uncompressed.reduce(.empty, +)
-//        let compressedData = compresssedPrefix + xData
         let compressedData: Data = compressed.reduce(.empty, +)
 
         let uncompressedHex = uncompressed.map { $0.toHexString() }.joined().uppercased()
@@ -56,18 +43,14 @@ struct PublicKeyPoint {
     }
 }
 
-extension PublicKeyPoint {
-    init(privateKey: PrivateKey) {
+public extension PublicKey {
+    public init(privateKey: PrivateKey) {
         let point = G * privateKey.number
         self.init(point: point)
     }
 }
 
-extension PublicKeyPoint {
-    var isYOdd: Bool {
-        return point.y.isOdd
-    }
-
+public extension PublicKey {
     var x: Number {
         return point.x
     }

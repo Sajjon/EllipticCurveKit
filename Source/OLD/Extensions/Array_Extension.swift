@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Array where Element: BinaryInteger {
+public extension Array where Element: BinaryInteger {
 
 //    func droppingTrailingZeros() -> [Element] {
 //        var elements = self

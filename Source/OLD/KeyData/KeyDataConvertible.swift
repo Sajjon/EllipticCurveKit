@@ -20,28 +20,28 @@ public protocol KeyDataConvertible:
 {
     associatedtype Word
 
-    init(lsbZeroIndexed: [Word])
-    init(msbZeroIndexed: [Word])
-    init?(msbZeroIndexed: String, radix: Int)
+    public init(lsbZeroIndexed: [Word])
+    public init(msbZeroIndexed: [Word])
+    public init?(msbZeroIndexed: String, radix: Int)
 }
 
 
 public extension KeyDataConvertible {
-    init(msbZeroIndexed: [Word]) {
+    public init(msbZeroIndexed: [Word]) {
         self.init(lsbZeroIndexed: Array(msbZeroIndexed.droppingLeadingZeros().reversed()))
     }
 }
 
 // MARK: - Convenience
 public extension KeyDataConvertible {
-    init?(msbZeroIndexed string: String) {
+    public init?(msbZeroIndexed string: String) {
         self.init(msbZeroIndexed: string, radix: 16)
     }
 }
 
 // MARK: - ExpressibleByArrayLiteral
 public extension KeyDataConvertible {
-    init(arrayLiteral elements: Word...) {
+    public init(arrayLiteral elements: Word...) {
         self.init(msbZeroIndexed: elements)
     }
 }

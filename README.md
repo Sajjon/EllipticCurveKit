@@ -9,29 +9,9 @@
 ## Swifty?
 Swift is a very expressible, [type safe](https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html), and [fast](https://benchmarksgame-team.pages.debian.net/benchmarksgame/faster/swift.html) programming language having the mottos ["Clarity is more important than brevity" and "Clarity at the point of use"](https://swift.org/documentation/api-design-guidelines/#fundamentals) which makes it read out as English. The main goal of this Swift SDK is to be Swifty (while also safe and fast). By the way, did you know that [Swift is the fastest growing programming language](https://www.wired.com/story/apples-swift-programming-language-is-now-top-tier/)? 
 
+## Usage
+[Swift is perfect for Protocol Oriented Programming (POP)](https://blog.bobthedeveloper.io/introduction-to-protocol-oriented-programming-in-swift-b358fe4974f) and strongly typed language, which allows for these kinds of protocols.
 
-```swift
-// This takes around 43 seconds which of course is terribly unacceptable. My goal is 0.01 seconds.
-// TEST VECTOR 2: https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors
-
-let privateKey = PrivateKey(hex: "B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF")!
-
-// `AnyKeyGenerator` is a type erasure type, just like Swift Foundation's `AnyCollection`
-let keyPair = AnyKeyGenerator<Secp256k1>.restoreKeyPairFrom(privateKey: privateKey, format: .raw)
-
-let signature = Signature(hex: "2A298DACAE57395A15D0795DDBFD1DCB564DA82B0F269BC70A74F8220429BA1D1E51A22CCEC35599B8F266912281F8365FFC2D035A230434A1A64DC59F7013FD")
-
-let message = Message(hex: "243F6A8885A308D313198A2E03707344A4093822299F31D0082EFA98EC4E6C89")
-
-if AnyKeySigner<Schnorr<Secp256k1>>.verify(message, wasSignedBy: signature, using: keyPair) {
-    print("'It's working, it's working!' - Anakin Skywalker ( https://youtu.be/AXwGVXD7qEQ )")
-}
-
-```
-
-[`AnyKeyGenerator`] is A type-erased wrapper over any KeyGenerator, just like [Swift Foundation's `AnyCollection`](https://developer.apple.com/documentation/swift/anycollection)
-
-Made possible by the fact that [Swift is perfect for Protocol Oriented Programming (POP)](https://blog.bobthedeveloper.io/introduction-to-protocol-oriented-programming-in-swift-b358fe4974f) strong type safety:
 ```swift
 protocol EllipticCurveCryptographyKeyGeneration {
 
@@ -60,6 +40,26 @@ protocol EllipticCurveCryptographySigning {
 }
 ```
 
+Since both protocols above require an [`associatedtype`](https://docs.swift.org/swift-book/LanguageGuide/Generics.html) which specify which [Curve](#common-Curves) and [Signature](#signatures) to use, we can use type-erased types, similar to Swift Foundation's [AnyCollection](https://developer.apple.com/documentation/swift/anycollection) or [AnyHashable](https://developer.apple.com/documentation/swift/anyhashable). We use type-erased wrappers `AnyKeyGenerator` and `AnyKeySigner` below: 
+
+```swift
+let privateKey = PrivateKey(hex: "B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF")!
+
+let keyPair = AnyKeyGenerator<Secp256k1>.restoreKeyPairFrom(privateKey: privateKey, format: .raw)
+
+let signature = Signature(hex: "2A298DACAE57395A15D0795DDBFD1DCB564DA82B0F269BC70A74F8220429BA1D1E51A22CCEC35599B8F266912281F8365FFC2D035A230434A1A64DC59F7013FD")
+
+let message = Message(hex: "243F6A8885A308D313198A2E03707344A4093822299F31D0082EFA98EC4E6C89")
+
+if AnyKeySigner<Schnorr<Secp256k1>>.verify(message, wasSignedBy: signature, using: keyPair) {
+    print("'It's working, it's working!' - Anakin Skywalker ( https://youtu.be/AXwGVXD7qEQ )")
+}
+```
+
+The code above takes around 43 seconds to execute, which of course is terribly unacceptable. My goal is 0.01 seconds. But as mentioned, this SDK is just in a proof-of-concept stage.
+
+The privatekey, signature, and message hex strings above are *"Test Vector 2"* from the [Bitcoin BIP-Schnorr wiki](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors).
+
 # Alternatives
 There are many - production like alternatives to this Swift SDK. The goal of this library is to be rid of dependencies to C (and other programming languages) code. While there is alternative to this Swift SDK that is written in pure swift, it is too slow (read #pure-swift).
 
@@ -72,7 +72,7 @@ The [Bitcoin Core's secp256k1 library](https://github.com/bitcoin-core/secp256k1
 > ### Bitcoin C Bindings (Swift)
 > There are some bindings to bitcoin-core/secp256k1 in Swift too. The most promising seems to be [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit) (here are some others [Boilertalk/secp256k1.swift](https://github.com/Boilertalk/secp256k1.swift), [noxproject/ASKSecp256k1](https://github.com/noxproject/ASKSecp256k1), [pebble8888/secp256k1swift](https://github.com/pebble8888/secp256k1swift) and [skywinder/ios-secp256k1](https://github.com/skywinder/ios-secp256k1). 
 
-> The SDK *kishikawakatsumi/BitcoinKit* stands out since it provides additional Swift layers to *bitcoin-core/secp256k1*. For production purposes I recommend looking at [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit).
+> The SDK *kishikawakatsumi/BitcoinKit* stands out since it provides additional Swift layers to *bitcoin-core/secp256k1*. For production purposes, I recommend looking at [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit).
 
 ## Pure Swift
 The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyugit/EllipticCurve](https://github.com/hyugit/EllipticCurve). The code is very Swifty and nice indeed, great work by [Huang Yu aka hyugit](https://github.com/hyugit)! However, the code runs too slow. Taking over 10 minutes for Key generation. While my SDK takes around 10 seconds (of course that is too slow too by a factor of at least 100.).

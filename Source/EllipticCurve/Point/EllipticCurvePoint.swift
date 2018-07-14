@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Potential speed up of Point Artihmetic checkout: https://github.com/conz27/crypto-test-vectors/blob/master/ecc.py
+
 public protocol EllipticCurvePoint: Equatable, CustomStringConvertible {
     associatedtype Curve: EllipticCurve
     var x: Number { get }

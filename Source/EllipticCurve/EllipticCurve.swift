@@ -12,18 +12,20 @@ public protocol EllipticCurve { //where Point.Curve == Self {
     //    associatedtype Point: EllipticCurvePoint
     typealias Point = AffinePoint<Self>
     static var P: Number { get }
-    static var N: Number { get }
     static var a: Number { get }
     static var b: Number { get }
     static var G: Point { get }
+    static var N: Number { get }
+    static var h: Number { get }
 }
 
 private extension EllipticCurve {
     var P: Number { return Self.P }
-    var N: Number { return Self.N }
     var a: Number { return Self.a }
     var b: Number { return Self.b }
     var G: Point { return Self.G }
+    var N: Number { return Self.N }
+    var h: Number { return Self.h }
 }
 
 extension EllipticCurve {

@@ -112,7 +112,7 @@ The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyug
 - [x] Sign message 
 
 ## Status of goal
-- [ ] "Swifty"   
+- [x] "Swifty"   
 - [ ] Safe  
 - [ ] Fast  
 

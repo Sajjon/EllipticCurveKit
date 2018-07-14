@@ -8,11 +8,14 @@
 
 import Foundation
 
-public struct KeyPair {
-    let privateKey: PrivateKey
-    let publicKey: PublicKey
+public struct KeyPair<Curve: EllipticCurve> {
+    public typealias PrivateKeyType = PrivateKey<Curve>
+    public typealias PublicKeyType = PublicKey<Curve>
 
-    public init(`private`: PrivateKey, `public`: PublicKey) {
+    let privateKey: PrivateKeyType
+    let publicKey: PublicKeyType
+
+    public init(`private`: PrivateKeyType, `public`: PublicKeyType) {
         self.privateKey = `private`
         self.publicKey = `public`
     }

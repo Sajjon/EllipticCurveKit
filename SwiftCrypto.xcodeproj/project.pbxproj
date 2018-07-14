@@ -10,6 +10,7 @@
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
 		48687FAD20F7E4BE00F2AFA4 /* PointArithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FAC20F7E4BE00F2AFA4 /* PointArithmetic.swift */; };
 		48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */; };
+		48687FB220F8AFA600F2AFA4 /* PrivateKeyWIFFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FB120F8AFA600F2AFA4 /* PrivateKeyWIFFormatTests.swift */; };
 		487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */; };
 		4885ABA620F77D6B00115FE0 /* Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA520F77D6B00115FE0 /* Signing.swift */; };
 		4885ABA820F77ECB00115FE0 /* KeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA720F77ECB00115FE0 /* KeyPair.swift */; };
@@ -21,6 +22,8 @@
 		48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881B20E90FC2004C7B7D /* Crypto.swift */; };
 		48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */; };
 		48B4882320E90FC2004C7B7D /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881F20E90FC2004C7B7D /* Base58.swift */; };
+		48B6284420FA0DC400001BDC /* EllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6284320FA0DC400001BDC /* EllipticCurve.swift */; };
+		48B6284620FA0E2C00001BDC /* EllipticCurvePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6284520FA0E2C00001BDC /* EllipticCurvePoint.swift */; };
 		48B94BE520F3F2A50041389D /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE420F3F2A50041389D /* Signature.swift */; };
 		48B94BE720F3F2B10041389D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE620F3F2B10041389D /* Message.swift */; };
 		48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE920F3F4BC0041389D /* Data_Extension.swift */; };
@@ -55,6 +58,7 @@
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		48687FAC20F7E4BE00F2AFA4 /* PointArithmetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointArithmetic.swift; sourceTree = "<group>"; };
 		48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacobianPoint.swift; sourceTree = "<group>"; };
+		48687FB120F8AFA600F2AFA4 /* PrivateKeyWIFFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyWIFFormatTests.swift; sourceTree = "<group>"; };
 		4885ABA520F77D6B00115FE0 /* Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signing.swift; sourceTree = "<group>"; };
 		4885ABA720F77ECB00115FE0 /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 		48B4881B20E90FC2004C7B7D /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		48B4881F20E90FC2004C7B7D /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
+		48B6284320FA0DC400001BDC /* EllipticCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurve.swift; sourceTree = "<group>"; };
+		48B6284520FA0E2C00001BDC /* EllipticCurvePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurvePoint.swift; sourceTree = "<group>"; };
 		48B94BE420F3F2A50041389D /* Signature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
 		48B94BE620F3F2B10041389D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		48B94BE920F3F4BC0041389D /* Data_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_Extension.swift; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */,
+				48687FB120F8AFA600F2AFA4 /* PrivateKeyWIFFormatTests.swift */,
 				48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */,
 			);
 			path = KeyGeneration;
@@ -153,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				48B94BEB20F3F4D50041389D /* AffinePoint.swift */,
+				48B6284520FA0E2C00001BDC /* EllipticCurvePoint.swift */,
 				48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */,
 				48687FAC20F7E4BE00F2AFA4 /* PointArithmetic.swift */,
 			);
@@ -169,6 +177,7 @@
 				4891199B20F2097C00F86528 /* Number.swift */,
 				489119A420F209BA00F86528 /* Protocols.swift */,
 				48D1102020F3D856005A212A /* Network.swift */,
+				48B6284320FA0DC400001BDC /* EllipticCurve.swift */,
 			);
 			path = EllipticCurve;
 			sourceTree = "<group>";
@@ -481,6 +490,7 @@
 			files = (
 				48D1102120F3D856005A212A /* Network.swift in Sources */,
 				48D1101E20F3D832005A212A /* Address.swift in Sources */,
+				48B6284620FA0E2C00001BDC /* EllipticCurvePoint.swift in Sources */,
 				48F242F820F7DD2600FB36DF /* Secp256k1.swift in Sources */,
 				48D1101C20F3D812005A212A /* PrivateKeyWIF.swift in Sources */,
 				48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */,
@@ -489,6 +499,7 @@
 				48687FAD20F7E4BE00F2AFA4 /* PointArithmetic.swift in Sources */,
 				489119A620F209C400F86528 /* Number.swift in Sources */,
 				48D1101820F3D7BA005A212A /* PublicKey.swift in Sources */,
+				48B6284420FA0DC400001BDC /* EllipticCurve.swift in Sources */,
 				48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */,
 				48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */,
 				489119A520F209BA00F86528 /* Protocols.swift in Sources */,
@@ -511,6 +522,7 @@
 				48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
 				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,
+				48687FB220F8AFA600F2AFA4 /* PrivateKeyWIFFormatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

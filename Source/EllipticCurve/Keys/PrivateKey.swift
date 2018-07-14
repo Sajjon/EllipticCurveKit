@@ -8,25 +8,26 @@
 
 import Foundation
 
-public struct PrivateKey {
+public struct PrivateKey<Curve: EllipticCurve> {
     public enum Format {
         case raw
         indirect case wif(WIF)
         public enum WIF {
-            case uncompressed(PrivateKeyWIF)
-            case compressed(PrivateKeyWIF)
+            case uncompressed(PrivateKeyWIF<Curve>)
+            case compressed(PrivateKeyWIF<Curve>)
         }
     }
     
     let number: Number
 
-    public init(number: Number) {
+    public init?(number: Number) {
+        guard case 1..<Curve.N = number else { return nil }
         self.number = number
     }
 }
 
 public extension PrivateKey {
-    public init(base64: Data) {
+    public init?(base64: Data) {
         self.init(number: Number(data: base64))
     }
 
@@ -48,6 +49,6 @@ public extension PrivateKey {
     }
 
     func base64Encoded() -> String {
-        return number.asData().base64EncodedString()
+        return asData().base64EncodedString()
     }
 }

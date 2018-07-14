@@ -13,7 +13,9 @@ import Foundation
 /// A standard address is built by taking the RIPE-MD160 hash of the public key bytes, with a version prefix and a
 /// checksum suffix, then encoding it textually as base58. The version prefix is used to both denote the network for
 /// which the address is valid.
-public struct PublicAddress {
+public struct PublicAddress<Curve: EllipticCurve> {
+    public typealias PublicKeyType = PublicKey<Curve>
+
     let hash: (uncompressed: Data, compressed: Data)
     let base58: (uncompressed: Base58Encoded, compressed: Base58Encoded)
     let zilliqa: HexString
@@ -23,7 +25,7 @@ public struct PublicAddress {
     /// Key hash = Version concatenated with RIPEMD-160(SHA-256(public key))
     /// Checksum = 1st 4 bytes of SHA-256(SHA-256(Key hash))
     /// Bitcoin Address = Base58Encode(Key hash concatenated with Checksum)
-    public init(publicKeyPoint: PublicKey, network: Network) {
+    public init(publicKeyPoint: PublicKeyType, network: Network) {
 
 
         let uncompressedData = publicKeyPoint.data.uncompressed

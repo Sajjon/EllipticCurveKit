@@ -15,10 +15,6 @@ import BigInt
 //  https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors
 class SignignAndVerificationTests: XCTestCase {
 
-    func testFoobar() {
-        XCTAssertEqual(1, 1)
-    }
-
     // `Test vector 1`
     func testSigningAndVerifyingSignatures1() {
         signingAndVerifyingSignaturesTest(
@@ -53,20 +49,19 @@ class SignignAndVerificationTests: XCTestCase {
     }
 
     private func signingAndVerifyingSignaturesTest(privateKey priHex: String, compressedPublicKey: String, uncompressedPublicKey: String, message mHex: String, signature sigHex: String) {
-        let privateKey = PrivateKey(hex: priHex)!
-        let publicKey = PublicKey(privateKey: privateKey)
+        let privateKey = PrivateKey<Secp256k1>(hex: priHex)!
+        let keyPair = AnyKeyGenerator<Secp256k1>.restoreKeyPairFrom(privateKey: privateKey)
+        let publicKey = keyPair.publicKey
 
         XCTAssertEqual(publicKey.hex.uncompressed, uncompressedPublicKey)
         XCTAssertEqual(publicKey.hex.compressed, compressedPublicKey)
 
         let message = Message(hex: mHex)
-        let expectedSignature = Signature(hex: sigHex)
+        let expectedSignature = Signature<Secp256k1>(hex: sigHex)!
 
-        XCTAssertTrue(schnorr_verify(message: message, publicKey: publicKey, signature: expectedSignature))
+        XCTAssertTrue(AnyKeySigner<Schnorr<Secp256k1>>.verify(message, wasSignedBy: expectedSignature, publicKey: publicKey))
 
-        let signatureFromMessage = schnorr_sign(message: message, privateKey: privateKey, publicKey: publicKey)
+        let signatureFromMessage = AnyKeySigner<Schnorr<Secp256k1>>.sign(message, using: keyPair)
         XCTAssertEqual(signatureFromMessage, expectedSignature)
-
-        XCTAssertTrue(schnorr_verify(message: message, publicKey: publicKey, signature: signatureFromMessage))
     }
 }

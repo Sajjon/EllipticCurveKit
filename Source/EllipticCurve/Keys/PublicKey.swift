@@ -9,7 +9,8 @@
 import Foundation
 
 public typealias HexString = String
-public struct PublicKey {
+public struct PublicKey<Curve: EllipticCurve> {
+    public typealias Point = AffinePoint<Curve>
 
     let point: Point
     let data: (uncompressed: Data, compressed: Data)
@@ -44,8 +45,8 @@ public struct PublicKey {
 }
 
 public extension PublicKey {
-    public init(privateKey: PrivateKey) {
-        let point = G * privateKey.number
+    public init(privateKey: PrivateKey<Curve>) {
+        let point = Curve.G * privateKey.number
         self.init(point: point)
     }
 }

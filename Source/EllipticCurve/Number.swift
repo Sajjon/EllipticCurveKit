@@ -63,7 +63,7 @@ public extension Number {
     }
 
     func asData() -> Data {
-        return magnitude.serialize()
+        return Data(hex: asHexStringLength64())
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Wallet {
-    let keyPair: KeyPair
-    let publicAddress: PublicAddress
+public struct Wallet<Curve: EllipticCurve> {
+    let keyPair: KeyPair<Curve>
+    let publicAddress: PublicAddress<Curve>
 }

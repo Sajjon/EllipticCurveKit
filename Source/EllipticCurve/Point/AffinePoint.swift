@@ -56,7 +56,7 @@ public extension AffinePoint {
 
         let λ = modP {
             if p1 == p2 {
-                return 3 * p1.x² * powModP(2 * p1.y, P - 2)
+                return (3 * p1.x² + Curve.a) * powModP(2 * p1.y, P - 2)
             } else {
                 return (p2.y - p1.y) * powModP(p2.x - p1.x, P - 2)
             }

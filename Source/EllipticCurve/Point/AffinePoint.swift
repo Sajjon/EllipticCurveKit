@@ -18,15 +18,15 @@ public struct AffinePoint<CurveType: EllipticCurve>: EllipticCurvePoint {
     }()
 
     public lazy var y²: Number = {
-        return pow(y, 2, Curve.P)
+        return squareModP(y)
     }()
 
     public lazy var x²: Number = {
-        return pow(x, 2, Curve.P)
+        return squareModP(x)
     }()
 
     public lazy var x³: Number = {
-        return pow(x, 3, Curve.P)
+        return cubeModP(x)
     }()
 
     public init(x: Number, y: Number) {
@@ -35,4 +35,54 @@ public struct AffinePoint<CurveType: EllipticCurve>: EllipticCurvePoint {
         self.x = x
         self.y = y
     }
+}
+
+
+// EllipticCurvePoint
+public extension AffinePoint {
+
+    /// From: https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#specification
+    /// "Addition of points refers to the usual elliptic curve group operation."
+    /// reference: https://en.wikipedia.org/wiki/Elliptic_curve#The_group_law
+    static func addition(_ p1: AffinePoint?, _ p2: AffinePoint?) -> AffinePoint? {
+        guard var p1 = p1 else { return p2 }
+        guard let p2 = p2 else { return p1 }
+
+        if p1.x == p2.x && p1.y != p2.y {
+            return nil
+        }
+
+        let P = Curve.P
+
+        let λ = modP {
+            if p1 == p2 {
+                return 3 * p1.x² * powModP(2 * p1.y, P - 2)
+            } else {
+                return (p2.y - p1.y) * powModP(p2.x - p1.x, P - 2)
+            }
+        }
+
+        let x3 = modP { λ * λ - p1.x - p2.x }
+        let y =  modP { λ * (p1.x - x3) - p1.y }
+
+        return AffinePoint(x: x3, y: y)
+
+    }
+
+    /// From: https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#specification
+    /// "Multiplication of an integer and a point refers to the repeated application of the group operation."
+    /// reference: https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication
+    static func * (point: AffinePoint, number: Number) -> AffinePoint {
+        var P: AffinePoint? = point
+        var n = number
+        var r: AffinePoint!
+        for i in 0..<256 { // n.bitWidth
+            if n.magnitude[bitAt: i] {
+                r = addition(r, P)
+            }
+            P = addition(P, P)
+        }
+        return r
+    }
+
 }

@@ -19,6 +19,12 @@ public protocol EllipticCurve { //where Point.Curve == Self {
     static var h: Number { get }
 }
 
+public extension EllipticCurve {
+    static func addition(_ p1: Point?, _ p2: Point?) -> Point? {
+        return Point.addition(p1, p2)
+    }
+}
+
 private extension EllipticCurve {
     var P: Number { return Self.P }
     var a: Number { return Self.a }
@@ -54,58 +60,5 @@ public extension EllipticCurve {
             return pow(number, division.quotient, P)
         }
         return jacobi(point.y) // can be changed to jacobi(point.y * point.z % Curve.P)
-    }
-
-
-    static func sign(message: Message, keyPair: KeyPair<Self>) -> Signature<Self> {
-        return sign(message: message, privateKey: keyPair.privateKey, publicKey: keyPair.publicKey)
-    }
-    
-    static func sign(message: Message, privateKey: PrivateKey<Self>, publicKey: PublicKey<Self>) -> Signature<Self> {
-        // `k` denotes `Nonce` ?
-        // SOURCE: https://github.com/yuntai/schnorr-examples/blob/master/schnorr/schnorr.py
-        //
-
-        // `k = an ephemeral random value (supposed to change for every signature)
-        // ref: https://gist.github.com/kallewoof/5d623445802a84f17cc7ff5572109074#test-vector-1
-
-        // this fact is NOT VERIFIED, the inital implementation of this code uses:
-        // https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#appendix-a-reference-code
-        // where `k = sha256(seckey + msg)`
-        //
-        // But hey, 2 vs 1. So `k` should probably be `nonce`/random?
-        var k = Number(data: Crypto.sha2Sha256(privateKey.asData() + message.asData()))
-        let R = G * k // `nonce point`? ( https://github.com/yuntai/schnorr-examples/blob/master/schnorr/schnorr.py )
-
-        /// "Choose a random `k` from the allowed set" https://en.wikipedia.org/wiki/Schnorr_signature
-        /// Here we make sure that k is not too large.
-        if jacobi(R) != 1 {
-            k = N - k
-        }
-
-        let e = Crypto.sha2Sha256(R.x.asData() + publicKey.data.compressed + message.asData()).toNumber()
-
-        /// GOTCHA: `secp256k1` uses `mod P` for all operations, but for the creation of the Schnorr signature, we use `mod n`, ref: https://gist.github.com/kallewoof/5d623445802a84f17cc7ff5572109074#gotchas
-        let signatureSuffix = modN { k + e * privateKey.number }
-        return Signature<Self>(r: R.x, s: signatureSuffix)!
-    }
-
-    static func addition(_ p1: Point?, _ p2: Point?) -> Point? {
-        return Point.addition(p1, p2)
-    }
-
-    static func verify(_ message: Message, wasSignedBy signature: Signature<Self>, publicKey: PublicKey<Self>) -> Bool {
-        guard publicKey.point.isOnCurve() else { return false }
-        let r = signature.r
-        let s = signature.s
-        let e = Crypto.sha2Sha256(r.asData() + publicKey.data.compressed + message.asData()).toNumber()
-
-        guard
-            let R = addition(G * s, publicKey.point * (N - e)),
-            jacobi(R) == 1,
-            R.x == r /// When Jacobian: `R.x == r` can be changed to `R.x == ((R.z)^2 * r) % P.`
-            else { return false }
-
-        return true
     }
 }

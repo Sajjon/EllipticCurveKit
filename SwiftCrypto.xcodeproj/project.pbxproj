@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
+		4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A03E20FD2983004BC02C /* AnyKeySigner.swift */; };
+		4848A04220FD312F004BC02C /* Schnorr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A04120FD312F004BC02C /* Schnorr.swift */; };
 		48687FAD20F7E4BE00F2AFA4 /* PointArithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FAC20F7E4BE00F2AFA4 /* PointArithmetic.swift */; };
 		48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */; };
 		487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */; };
 		4885ABA620F77D6B00115FE0 /* Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA520F77D6B00115FE0 /* Signing.swift */; };
 		4885ABA820F77ECB00115FE0 /* KeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA720F77ECB00115FE0 /* KeyPair.swift */; };
 		4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA920F77EE600115FE0 /* Wallet.swift */; };
-		489119A520F209BA00F86528 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119A420F209BA00F86528 /* Protocols.swift */; };
+		489119A520F209BA00F86528 /* AnyKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119A420F209BA00F86528 /* AnyKeyGenerator.swift */; };
 		489119A620F209C400F86528 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891199B20F2097C00F86528 /* Number.swift */; };
 		489119AB20F268C700F86528 /* SHA2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119AA20F268C700F86528 /* SHA2Tests.swift */; };
 		489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */; };
@@ -57,6 +59,8 @@
 		30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.release.xcconfig"; sourceTree = "<group>"; };
 		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
+		4848A04120FD312F004BC02C /* Schnorr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schnorr.swift; sourceTree = "<group>"; };
 		48687FAC20F7E4BE00F2AFA4 /* PointArithmetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointArithmetic.swift; sourceTree = "<group>"; };
 		48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacobianPoint.swift; sourceTree = "<group>"; };
 		4885ABA520F77D6B00115FE0 /* Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signing.swift; sourceTree = "<group>"; };
@@ -64,7 +68,7 @@
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		4885ABAB20F7871800115FE0 /* Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Play.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
-		489119A420F209BA00F86528 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
 		489119AA20F268C700F86528 /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
 		4898EDFE20FA243E00B6F773 /* Secp256r1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1.swift; sourceTree = "<group>"; };
 		4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1_PointArthmeticTests.swift; sourceTree = "<group>"; };
@@ -147,6 +151,14 @@
 			path = KeyGeneration;
 			sourceTree = "<group>";
 		};
+		4848A04020FD311D004BC02C /* CommonSigning */ = {
+			isa = PBXGroup;
+			children = (
+				4848A04120FD312F004BC02C /* Schnorr.swift */,
+			);
+			path = CommonSigning;
+			sourceTree = "<group>";
+		};
 		4861AA6B20D048B900871618 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,7 +188,8 @@
 				48B94BE320F3F2870041389D /* Signing */,
 				48D1101520F3D740005A212A /* Keys */,
 				4891199B20F2097C00F86528 /* Number.swift */,
-				489119A420F209BA00F86528 /* Protocols.swift */,
+				4848A03E20FD2983004BC02C /* AnyKeySigner.swift */,
+				489119A420F209BA00F86528 /* AnyKeyGenerator.swift */,
 				48D1102020F3D856005A212A /* Network.swift */,
 				48B6284320FA0DC400001BDC /* EllipticCurve.swift */,
 			);
@@ -239,6 +252,7 @@
 		48B94BE320F3F2870041389D /* Signing */ = {
 			isa = PBXGroup;
 			children = (
+				4848A04020FD311D004BC02C /* CommonSigning */,
 				48B94BE420F3F2A50041389D /* Signature.swift */,
 				48B94BE620F3F2B10041389D /* Message.swift */,
 				4885ABA520F77D6B00115FE0 /* Signing.swift */,
@@ -529,14 +543,16 @@
 				48D1101820F3D7BA005A212A /* PublicKey.swift in Sources */,
 				48B6284420FA0DC400001BDC /* EllipticCurve.swift in Sources */,
 				48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */,
+				4848A04220FD312F004BC02C /* Schnorr.swift in Sources */,
 				48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */,
-				489119A520F209BA00F86528 /* Protocols.swift in Sources */,
+				489119A520F209BA00F86528 /* AnyKeyGenerator.swift in Sources */,
 				48B4882320E90FC2004C7B7D /* Base58.swift in Sources */,
 				48B94BE720F3F2B10041389D /* Message.swift in Sources */,
 				48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */,
 				4885ABA820F77ECB00115FE0 /* KeyPair.swift in Sources */,
 				48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */,
 				4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */,
+				4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */,
 				4885ABA620F77D6B00115FE0 /* Signing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

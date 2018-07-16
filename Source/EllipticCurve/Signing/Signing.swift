@@ -9,8 +9,10 @@
 import Foundation
 
 public protocol Signing {
-    associatedtype CurveType: EllipticCurve
-}
-public struct Schnorr<Curve: EllipticCurve>: Signing {
-    public typealias CurveType = Curve
+    /// Elliptic Curve used, e.g. `secp256k1`
+    associatedtype Curve: EllipticCurve
+
+    static func sign(_ message: Message, using keyPair: KeyPair<Curve>) -> Signature<Curve>
+
+    static func verify(_ message: Message, wasSignedBy signature: Signature<Curve>, publicKey: PublicKey<Curve>) -> Bool
 }

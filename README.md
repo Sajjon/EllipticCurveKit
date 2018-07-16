@@ -174,7 +174,6 @@ I have used lots of open source projects as inspiration. Bitcoin Improvement Pro
 
 It is plan to support most of the common curves listed by running CLI command `openssl ecparam -list_curves`, but these four are the ones I will be starting with:
 
-- [x] secp256k1 (Bitcoin, Ethereum, Zilliqa, Radix)
-- [x] secp256r1 (NEO)
+- [x] secp256k1 (Bitcoin, Ethereum, Cardano, Zilliqa, Radix)
+- [x] secp256r1 (NEO, Cardano)
 - [ ] X25519 - [Curve25519 used for ECDH](https://en.wikipedia.org/wiki/Curve25519) (Nano, Stellar)
-- [ ] prime256v1 (Cardano)

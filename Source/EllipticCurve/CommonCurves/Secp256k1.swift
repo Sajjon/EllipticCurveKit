@@ -8,12 +8,13 @@
 
 import Foundation
 
+/// The curve E: `y² = x³ + ax + b` over Fp
+/// `secp256r1` Also known as the `Bitcoin curve` (though used by Ethereum, Zilliqa, Radix)
 public struct Secp256k1: EllipticCurve {
 
     /// `2^256 −2^32 −2^9 −2^8 −2^7 −2^6 −2^4 − 1` <=> `2^256 - 2^32 - 977`
     public static let P = Number(hexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")!
 
-    // The curve E: `y^2 = x^3 + ax + b` over Fp
     public static let a = Number(0)
     public static let b = Number(7)
     public static let G = Point(

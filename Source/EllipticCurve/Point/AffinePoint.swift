@@ -63,9 +63,9 @@ public extension AffinePoint {
         }
         let λ² = squareModP(λ)
         let x3 = modP { λ² - p1.x - p2.x }
-        let y =  modP { λ * (p1.x - x3) - p1.y }
+        let y3 =  modP { λ * (p1.x - x3) - p1.y }
 
-        return AffinePoint(x: x3, y: y)
+        return AffinePoint(x: x3, y: y3)
     }
 
     /// From: https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#specification

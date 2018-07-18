@@ -34,9 +34,7 @@ public struct PublicAddress<Curve: EllipticCurve> {
         let zilliqaData = Crypto.sha2Sha256(compressedData)
         let number = Number(data: zilliqaData)
         let zilliqaDataString = number.asHexStringLength64()
-        print(zilliqaDataString)
         let zilliqaAddress = String(zilliqaDataString.suffix(40))
-        print(zilliqaAddress)
         self.zilliqa = zilliqaAddress
 
         let uncompressedHash = Data([network.pubkeyhash]) + Crypto.sha2Sha256_ripemd160(uncompressedData)

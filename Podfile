@@ -1,16 +1,33 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
+workspace 'SwiftCrypto'
+
+def pods()
+	pod 'BigInt'
+  pod 'CryptoSwift'
+end
+
 target 'SwiftCrypto' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+	project 'SwiftCrypto.xcodeproj'
   use_frameworks!
 
-  pod 'BigInt'
-  pod 'CryptoSwift'
+	pods
 
   target 'SwiftCryptoTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
+end
+
+target 'ExampleiOS' do
+	project 'Example/ExampleiOS'
+	use_frameworks!
+
+	pods
+
+	target 'ExampleiOSTests' do
+		inherit! :search_paths
+	end
 end

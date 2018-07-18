@@ -1,5 +1,5 @@
 framework module SipHash {
-  umbrella header "SipHash-umbrella.h"
+  umbrella header "SipHash-iOS11.4-umbrella.h"
 
   export *
   module * { export * }

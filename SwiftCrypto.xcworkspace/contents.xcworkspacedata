@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Example/ExampleiOS.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:SwiftCrypto.xcodeproj">
    </FileRef>
    <FileRef

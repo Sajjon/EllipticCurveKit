@@ -41,6 +41,7 @@
 		48F242EE20F7D2C600FB36DF /* KeyGenSignAndVerifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242ED20F7D2C600FB36DF /* KeyGenSignAndVerifyTests.swift */; };
 		48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */; };
 		48F242F820F7DD2600FB36DF /* Secp256k1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F620F7DD2200FB36DF /* Secp256k1.swift */; };
+		48F9814B20FE49E70013FC92 /* PerformanceSecp256r1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F9814A20FE49E70013FC92 /* PerformanceSecp256r1Tests.swift */; };
 		8823FC9573D8C1AF8B8D30CD /* Pods_SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665161916806AD945170E11A /* Pods_SwiftCrypto.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyBase64EncodingDecodingTests.swift; sourceTree = "<group>"; };
 		48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningAndVerificationTests.swift; sourceTree = "<group>"; };
 		48F242F620F7DD2200FB36DF /* Secp256k1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256k1.swift; sourceTree = "<group>"; };
+		48F9814A20FE49E70013FC92 /* PerformanceSecp256r1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceSecp256r1Tests.swift; sourceTree = "<group>"; };
 		665161916806AD945170E11A /* Pods_SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2A764FF59FB28920DD81F9 /* Pods-SwiftCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCryptoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */,
+				48F9814A20FE49E70013FC92 /* PerformanceSecp256r1Tests.swift */,
 			);
 			path = Secp256r1;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				48F242EE20F7D2C600FB36DF /* KeyGenSignAndVerifyTests.swift in Sources */,
 				4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */,
 				48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
+				48F9814B20FE49E70013FC92 /* PerformanceSecp256r1Tests.swift in Sources */,
 				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,
 			);

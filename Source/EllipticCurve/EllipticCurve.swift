@@ -8,8 +8,7 @@
 
 import Foundation
 
-public protocol EllipticCurve { //where Point.Curve == Self {
-    //    associatedtype Point: EllipticCurvePoint
+public protocol EllipticCurve {
     typealias Point = AffinePoint<Self>
     static var P: Number { get }
     static var a: Number { get }

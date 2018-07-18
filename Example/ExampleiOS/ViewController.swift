@@ -63,13 +63,16 @@ private extension ViewController {
     func secp256r1Multiplication() {
         print("STARTING SECP256R1 MULTIPLICATION")
         DispatchQueue.global(qos: .userInitiated).async {
+            let begin = clock()
             let privateKey = PrivateKey<Secp256r1>(hex: "3D40F190DA0C18E94DB98EC34305113AAE7C51B51B6570A8FDDAA3A981CD69C3")!
             let publicKey = PublicKey<Secp256r1>(privateKey: privateKey)
             assert(publicKey.point.x == Number(hexString: "ED4AB8839C65C65A88F0F288ED9C443F9C5488323E61ED7DBB8EDF9BE6B1746D")!)
             assert(publicKey.point.y == Number(hexString: "3E13BE2FFCB19403A761420B1D26AF55E265A6F924FE0B7174D4D3654249092F")!)
+            let diff = Double(clock() - begin) / Double(CLOCKS_PER_SEC)
             DispatchQueue.main.async { [weak self] in
-                print("SECP256R1 MULTIPLICATION WAS SUCCESSFUL")
-                self?.label.text = publicKey.hex.compressed
+                let message = "Time: `\(diff)` seconds"
+                print("Success! \(message)")
+                self?.label.text = message
             }
         }
         print("(multiplication running in background)")

@@ -152,6 +152,11 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework"
 fi
+if [[ "$CONFIGURATION" == "FastTestable" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework"
+fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
 fi

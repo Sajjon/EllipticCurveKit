@@ -12,9 +12,9 @@ public typealias HexString = String
 public struct PublicKey<Curve: EllipticCurve> {
     public typealias Point = AffinePoint<Curve>
 
-    let point: Point
+    public let point: Point
     let data: (uncompressed: Data, compressed: Data)
-    let hex: (uncompressed: HexString, compressed: HexString)
+    public let hex: (uncompressed: HexString, compressed: HexString)
 
     public init(point: Point) {
         let x = point.x

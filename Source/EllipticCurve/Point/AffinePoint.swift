@@ -95,7 +95,7 @@ public extension AffinePoint {
         var P: AffinePoint? = point
         var n = number
         var r: AffinePoint!
-        for i in 0..<256 { // n.bitWidth
+        for i in 0..<256 {
             if n.magnitude[bitAt: i] {
                 r = addition(r, P)
             }

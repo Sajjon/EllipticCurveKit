@@ -474,9 +474,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (

@@ -47,7 +47,7 @@ class MultipliplicationPerformanceTests: XCTestCase {
 
     // Using `Release` optimization flags and NOT using `Debug Executable` when running tests yields the following results:
     // On Macbook Pro 2016, 2.9 GHZ, 16 GB 2133 MHZ Ram:
-    // Using `measure` closure: Takes real time ~22 minutes, measured time ~124 seconds
+    // Using `measure` closure: Takes real time ~2 minutes, measured time ~10 seconds
     func test1000LowMultiplications() {
         var calculated = [AffinePoint<Secp256r1>]()
         let count = lastTwoCharsInHexRepresentationOfXValueOfPoints.count

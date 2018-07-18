@@ -15,12 +15,6 @@ public protocol EllipticCurvePoint: Equatable, CustomStringConvertible {
     var x: Number { get }
     var y: Number { get }
 
-    /* `mutating get` allows for `lazy var` implementations of those variables in a struct conforming to this protocol */
-    var ax: Number { mutating get }
-    var y²: Number { mutating get }
-    var x²: Number { mutating get }
-    var x³: Number { mutating get }
-
     init(x: Number, y: Number)
 
     static func addition(_ p1: Self?, _ p2: Self?) -> Self?
@@ -37,24 +31,13 @@ public extension EllipticCurvePoint {
         return Self.modP(expression)
     }
 
-    static func powModP(_ base: Number, _ exponent: Number) -> Number {
-        return pow(base, exponent, Curve.P)
+
+    static func modInverseP(_ v: Number, _ w: Number) -> Number {
+        return modularInverse(v, w, mod: Curve.P)
     }
 
-    static func squareModP(_ base: Number) -> Number {
-        return powModP(base, 2)
-    }
-
-    func squareModP(_ base: Number) -> Number {
-        return Self.squareModP(base)
-    }
-
-    static func cubeModP(_ base: Number) -> Number {
-        return powModP(base, 3)
-    }
-
-    func cubeModP(_ base: Number) -> Number {
-        return Self.cubeModP(base)
+    func modInverseP(_ v: Number, _ w: Number) -> Number {
+        return Self.modInverseP(v, w)
     }
 
     var description: String {
@@ -73,8 +56,15 @@ public extension EllipticCurvePoint {
     ///     <=>
     ///     a = (x³ + b -y²)/x
     func isOnCurve() -> Bool {
-        var p = self
+        let a = Curve.a
         let b = Curve.b
-        return modP { p.y² - p.x³ - p.ax } == b
+        let x = self.x
+        let y = self.y
+
+        let y² = modP { y * y }
+        let x³ = modP { x * x * x }
+        let ax = modP { a * x }
+
+        return modP { y² - x³ - ax } == b
     }
 }

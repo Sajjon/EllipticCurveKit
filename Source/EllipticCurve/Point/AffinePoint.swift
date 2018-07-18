@@ -8,26 +8,11 @@
 
 import Foundation
 
+
 public struct AffinePoint<CurveType: EllipticCurve>: EllipticCurvePoint {
     public typealias Curve = CurveType
     public let x: Number
     public let y: Number
-
-    public lazy var ax: Number = {
-        return Curve.a * x
-    }()
-
-    public lazy var y²: Number = {
-        return squareModP(y)
-    }()
-
-    public lazy var x²: Number = {
-        return squareModP(x)
-    }()
-
-    public lazy var x³: Number = {
-        return cubeModP(x)
-    }()
 
     public init(x: Number, y: Number) {
         precondition(x >= 0, "Coordinates should have non negative values, x was negative: `\(x)`")
@@ -37,7 +22,6 @@ public struct AffinePoint<CurveType: EllipticCurve>: EllipticCurvePoint {
     }
 }
 
-
 // EllipticCurvePoint
 public extension AffinePoint {
 
@@ -45,7 +29,11 @@ public extension AffinePoint {
     /// "Addition of points refers to the usual elliptic curve group operation."
     /// reference: https://en.wikipedia.org/wiki/Elliptic_curve#The_group_law
     static func addition(_ p1: AffinePoint?, _ p2: AffinePoint?) -> AffinePoint? {
-        guard var p1 = p1 else { return p2 }
+        return addition_v2(p1, p2)
+    }
+
+    static func addition_v1(_ p1: AffinePoint?, _ p2: AffinePoint?) -> AffinePoint? {
+        guard let p1 = p1 else { return p2 }
         guard let p2 = p2 else { return p1 }
 
         if p1.x == p2.x && p1.y != p2.y {
@@ -56,14 +44,46 @@ public extension AffinePoint {
 
         let λ = modP {
             if p1 == p2 {
-                return (3 * p1.x² + Curve.a) * powModP(2 * p1.y, P - 2)
+                return (3 * (p1.x * p1.x) + Curve.a) * (2 * p1.y).power(P - 2, modulus: P)
             } else {
-                return (p2.y - p1.y) * powModP(p2.x - p1.x, P - 2)
+                return (p2.y - p1.y) * (p2.x - p1.x).power(P - 2, modulus: P)
             }
         }
-        let λ² = squareModP(λ)
-        let x3 = modP { λ² - p1.x - p2.x }
+        let x3 = modP { λ * λ - p1.x - p2.x }
         let y3 =  modP { λ * (p1.x - x3) - p1.y }
+
+        return AffinePoint(x: x3, y: y3)
+    }
+
+    static func addition_v2(_ p1: AffinePoint?, _ p2: AffinePoint?) -> AffinePoint? {
+        guard let p1 = p1 else { return p2 }
+        guard let p2 = p2 else { return p1 }
+
+        if p1.x == p2.x && p1.y != p2.y {
+            return nil
+        }
+
+        if p1 == p2 {
+            /// or `p2`, irrelevant since they equal each other
+            return doublePoint(p1)
+        } else {
+            return addPoint(p1, to: p2)
+        }
+    }
+
+    private static func addPoint(_ p1: AffinePoint, to p2: AffinePoint) -> AffinePoint {
+        precondition(p1 != p2)
+        let λ = modInverseP(p2.y - p1.y, p2.x - p1.x)
+        let x3 = modP { λ * λ - p1.x - p2.x }
+        let y3 = modP { λ * (p1.x - x3) - p1.y }
+        return AffinePoint(x: x3, y: y3)
+    }
+
+    private static func doublePoint(_ p: AffinePoint) -> AffinePoint {
+        let λ = modInverseP(3 * (p.x * p.x) + Curve.a, 2 * p.y)
+
+        let x3 = modP { λ * λ - 2 * p.x }
+        let y3 = modP { λ * (p.x - x3) - p.y }
 
         return AffinePoint(x: x3, y: y3)
     }

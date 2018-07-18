@@ -36,6 +36,7 @@
 		48D1101C20F3D812005A212A /* PrivateKeyWIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */; };
 		48D1101E20F3D832005A212A /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101D20F3D832005A212A /* Address.swift */; };
 		48D1102120F3D856005A212A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1102020F3D856005A212A /* Network.swift */; };
+		48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EB887F20FF2D5900974DF9 /* ModularInverse.swift */; };
 		48F22C9720C70D88004A18CA /* SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */; };
 		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48F242EE20F7D2C600FB36DF /* KeyGenSignAndVerifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242ED20F7D2C600FB36DF /* KeyGenSignAndVerifyTests.swift */; };
@@ -87,6 +88,7 @@
 		48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyWIF.swift; sourceTree = "<group>"; };
 		48D1101D20F3D832005A212A /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		48D1102020F3D856005A212A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		48EB887F20FF2D5900974DF9 /* ModularInverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularInverse.swift; sourceTree = "<group>"; };
 		48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22C9620C70D87004A18CA /* SwiftCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22CA820C70DC1004A18CA /* SwiftCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCrypto.h; sourceTree = "<group>"; };
@@ -292,6 +294,14 @@
 			path = Address;
 			sourceTree = "<group>";
 		};
+		48EB887E20FF2D4C00974DF9 /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				48EB887F20FF2D5900974DF9 /* ModularInverse.swift */,
+			);
+			path = Math;
+			sourceTree = "<group>";
+		};
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +326,7 @@
 		48F22CA720C70DC1004A18CA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				48EB887E20FF2D4C00974DF9 /* Math */,
 				48B94BE820F3F4B00041389D /* Extensions */,
 				489119A320F209AA00F86528 /* EllipticCurve */,
 				48B4881A20E90FC2004C7B7D /* Cryptography */,
@@ -557,6 +568,7 @@
 				4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */,
 				4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */,
 				4885ABA620F77D6B00115FE0 /* Signing.swift in Sources */,
+				48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

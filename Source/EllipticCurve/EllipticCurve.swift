@@ -56,8 +56,7 @@ public extension EllipticCurve {
     static func jacobi(_ point: Point) -> Number {
         func jacobi(_ number: Number) -> Number {
             let division = (P - 1).quotientAndRemainder(dividingBy: 2)
-            /// pow(number, floor((P - 1) / 2), P)
-            return pow(number, division.quotient, P)
+            return number.power(division.quotient, modulus: P)
         }
         return jacobi(point.y) // can be changed to jacobi(point.y * point.z % Curve.P)
     }

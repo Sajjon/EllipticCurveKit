@@ -8,10 +8,6 @@
 
 import Foundation
 
-public func pow(_ base: Number, _ exponent: Number, _ modulus: Number) -> Number {
-    return base.power(exponent, modulus: modulus)
-}
-
 public func mod(_ number: Number, modulus: Number) -> Number {
     var mod = number % modulus
     if mod < 0 {

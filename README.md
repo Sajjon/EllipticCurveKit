@@ -1,7 +1,5 @@
-## ⚠️ THIS SDK IS NOT SAFE, NOT PRODUCTION READY ⚠️ (but hey, I am working on it... 👨🏻‍🔬)
-#### I'm no cryptography expert, I'm learning as I go. If you find mistakes, inaccuracies or if you have suggestions for improvements in the content of this README, comments in the source code or the code itself, I would appreciate if you [submit an issue](https://github.com/Sajjon/SwiftCrypto/issues/new).
-
-## STATUS (2018-07-12): Proof of concept in progress.
+## ⚠️ THIS SDK IS NOT SAFE/PRODUCTION READY (YET!) ⚠️ 
+#### I'm no cryptography expert, If you find mistakes, inaccuracies or if you have suggestions for improvements of this README or the source code, please [submit an issue](https://github.com/Sajjon/SwiftCrypto/issues/new)!
 
 <!-- MarkdownTOC -->
 
@@ -12,7 +10,6 @@
     - [Bitcoin C Bindings](#bitcoin-c-bindings)
     - [Pure Swift](#pure-swift)
 - [Status](#status)
-    - [Proof Of Concept code](#proof-of-concept-code)
     - [Status of goal](#status-of-goal)
 - [Dependencies](#dependencies)
     - [Big Numbers](#big-numbers)
@@ -111,18 +108,14 @@ The [Bitcoin Core's secp256k1 library](https://github.com/bitcoin-core/secp256k1
 The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyugit/EllipticCurve](https://github.com/hyugit/EllipticCurve). The code is very Swifty and nice indeed, great work by [Huang Yu aka hyugit](https://github.com/hyugit)! However, the code runs too slow. Taking over 10 minutes for Key generation. While this SDK takes around 0.1 seconds (using `Release` optimization flags).
 
 # Status
-## Proof Of Concept code
-- [x] Generate Elliptic Curve Key Pair  
-- [x] Derive address (starting with Bitcoin)  
-- [x] Verify signature (Schnorr signature)  
-- [x] Sign message 
+
+This SDK is in a proof-of-concept stage, but most features are supported, the code is Swifty and fast, but not yet safe to use. I'm working on optimizing the performance first, then making it safe to use.
 
 ## Status of goal
 - [x] "Swifty"   
 - [x] Fast  
 - [ ] Safe  
 
-This is a working in progress SDK, right now only the curve [`secp256k1`](https://en.bitcoin.it/wiki/Secp256k1)([litterature](http://www.secg.org/sec2-v2.pdf)) is supported, but planning to support all the common curves:
 
 # Dependencies
 This SDK should never require any bridge to some C library (OpenSSL or bitcoin core for example) or even Objective-C. This SDK should be "Swifty" through and through. 

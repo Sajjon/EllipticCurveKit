@@ -89,7 +89,7 @@ if AnyKeySigner<Schnorr<Secp256k1>>.verify(message, wasSignedBy: signature, publ
 }
 ```
 
-The code above takes around 43 seconds to execute, which of course is terribly unacceptable. My goal is 0.01 seconds. But as mentioned, this SDK is just in a proof-of-concept stage.
+The code above takes around 0.5 seconds to execute (using `Release` optimization flags), which I'm working on optimizing.
 
 The privatekey, signature, and message hex strings above are *"Test Vector 2"* from the [Bitcoin BIP-Schnorr wiki](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors).
 
@@ -108,7 +108,7 @@ The [Bitcoin Core's secp256k1 library](https://github.com/bitcoin-core/secp256k1
 > The SDK *kishikawakatsumi/BitcoinKit* stands out since it provides additional Swift layers to *bitcoin-core/secp256k1*. For production purposes, I recommend looking at [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit).
 
 ## Pure Swift
-The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyugit/EllipticCurve](https://github.com/hyugit/EllipticCurve). The code is very Swifty and nice indeed, great work by [Huang Yu aka hyugit](https://github.com/hyugit)! However, the code runs too slow. Taking over 10 minutes for Key generation. While my SDK takes around 10 seconds (of course that is too slow too by a factor of at least 100.).
+The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyugit/EllipticCurve](https://github.com/hyugit/EllipticCurve). The code is very Swifty and nice indeed, great work by [Huang Yu aka hyugit](https://github.com/hyugit)! However, the code runs too slow. Taking over 10 minutes for Key generation. While this SDK takes around 0.1 seconds (using `Release` optimization flags).
 
 # Status
 ## Proof Of Concept code
@@ -119,8 +119,8 @@ The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyug
 
 ## Status of goal
 - [x] "Swifty"   
+- [x] Fast  
 - [ ] Safe  
-- [ ] Fast  
 
 This is a working in progress SDK, right now only the curve [`secp256k1`](https://en.bitcoin.it/wiki/Secp256k1)([litterature](http://www.secg.org/sec2-v2.pdf)) is supported, but planning to support all the common curves:
 

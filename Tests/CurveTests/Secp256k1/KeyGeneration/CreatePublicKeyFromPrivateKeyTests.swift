@@ -18,7 +18,6 @@ class CreatePublicKeyFromPrivateKeyTests: XCTestCase {
 
     private let privateKey = PrivateKey<Secp256k1>(hex: privateKeyHex)!
 
-    // this is slow
     private lazy var publicKey = PublicKey<Secp256k1>(privateKey: privateKey)
 
     func testCreatingPublicKeyAndAddressesFromPrivateKey() {

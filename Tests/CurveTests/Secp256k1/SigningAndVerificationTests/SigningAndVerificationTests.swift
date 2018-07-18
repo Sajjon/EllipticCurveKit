@@ -49,19 +49,22 @@ class SignignAndVerificationTests: XCTestCase {
     }
 
     private func signingAndVerifyingSignaturesTest(privateKey priHex: String, compressedPublicKey: String, uncompressedPublicKey: String, message mHex: String, signature sigHex: String) {
-        let privateKey = PrivateKey<Secp256k1>(hex: priHex)!
-        let keyPair = AnyKeyGenerator<Secp256k1>.restoreKeyPairFrom(privateKey: privateKey)
-        let publicKey = keyPair.publicKey
+        self.measure {
 
-        XCTAssertEqual(publicKey.hex.uncompressed, uncompressedPublicKey)
-        XCTAssertEqual(publicKey.hex.compressed, compressedPublicKey)
+            let privateKey = PrivateKey<Secp256k1>(hex: priHex)!
+            let keyPair = AnyKeyGenerator<Secp256k1>.restoreKeyPairFrom(privateKey: privateKey)
+            let publicKey = keyPair.publicKey
 
-        let message = Message(hex: mHex)
-        let expectedSignature = Signature<Secp256k1>(hex: sigHex)!
+            XCTAssertEqual(publicKey.hex.uncompressed, uncompressedPublicKey)
+            XCTAssertEqual(publicKey.hex.compressed, compressedPublicKey)
 
-        XCTAssertTrue(AnyKeySigner<Schnorr<Secp256k1>>.verify(message, wasSignedBy: expectedSignature, publicKey: publicKey))
+            let message = Message(hex: mHex)
+            let expectedSignature = Signature<Secp256k1>(hex: sigHex)!
 
-        let signatureFromMessage = AnyKeySigner<Schnorr<Secp256k1>>.sign(message, using: keyPair)
-        XCTAssertEqual(signatureFromMessage, expectedSignature)
+            XCTAssertTrue(AnyKeySigner<Schnorr<Secp256k1>>.verify(message, wasSignedBy: expectedSignature, publicKey: publicKey))
+
+            let signatureFromMessage = AnyKeySigner<Schnorr<Secp256k1>>.sign(message, using: keyPair)
+            XCTAssertEqual(signatureFromMessage, expectedSignature)
+        }
     }
 }

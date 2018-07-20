@@ -19,6 +19,12 @@ public protocol EllipticCurve {
 }
 
 public extension EllipticCurve {
+    static var order: Number {
+        return N
+    }
+}
+
+public extension EllipticCurve {
     static func addition(_ p1: Point?, _ p2: Point?) -> Point? {
         return Point.addition(p1, p2)
     }
@@ -40,6 +46,14 @@ extension EllipticCurve {
 
     static func modN(_ expression: () -> Number) -> Number {
         return mod(expression(), modulus: N)
+    }
+
+    static func modInverseP(_ v: Number, _ w: Number) -> Number {
+        return modularInverse(v, w, mod: P)
+    }
+
+    static func modInverseN(_ v: Number, _ w: Number) -> Number {
+        return modularInverse(v, w, mod: N)
     }
 }
 

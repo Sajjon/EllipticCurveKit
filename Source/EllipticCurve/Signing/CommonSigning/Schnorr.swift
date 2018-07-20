@@ -19,18 +19,10 @@ public extension Schnorr {
     }
 
     static func sign(_ message: Message, privateKey: PrivateKey<Curve>, publicKey: PublicKey<Curve>) -> Signature<Curve> {
-        // `k` denotes `Nonce` ?
-        // SOURCE: https://github.com/yuntai/schnorr-examples/blob/master/schnorr/schnorr.py
-        //
+        /// assign `K` according RFC-6979:
+        ///
+        /// https://tools.ietf.org/html/rfc6979
 
-        // `k = an ephemeral random value (supposed to change for every signature)
-        // ref: https://gist.github.com/kallewoof/5d623445802a84f17cc7ff5572109074#test-vector-1
-
-        // this fact is NOT VERIFIED, the inital implementation of this code uses:
-        // https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#appendix-a-reference-code
-        // where `k = sha256(seckey + msg)`
-        //
-        // But hey, 2 vs 1. So `k` should probably be `nonce`/random?
         var k = Number(data: Crypto.sha2Sha256(privateKey.asData() + message.asData()))
         let R = Curve.G * k // `nonce point`? ( https://github.com/yuntai/schnorr-examples/blob/master/schnorr/schnorr.py )
 
@@ -62,3 +54,4 @@ public extension Schnorr {
         return true
     }
 }
+

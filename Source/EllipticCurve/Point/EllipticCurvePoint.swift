@@ -31,13 +31,20 @@ public extension EllipticCurvePoint {
         return Self.modP(expression)
     }
 
-
     static func modInverseP(_ v: Number, _ w: Number) -> Number {
-        return modularInverse(v, w, mod: Curve.P)
+        return Curve.modInverseP(v, w)
     }
 
     func modInverseP(_ v: Number, _ w: Number) -> Number {
         return Self.modInverseP(v, w)
+    }
+
+    static func modInverseN(_ v: Number, _ w: Number) -> Number {
+        return Curve.modInverseN(v, w)
+    }
+
+    func modInverseN(_ v: Number, _ w: Number) -> Number {
+        return Self.modInverseN(v, w)
     }
 
     var description: String {

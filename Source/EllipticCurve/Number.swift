@@ -19,7 +19,10 @@ public extension Number {
     }
 
     public init(sign: Number.Sign = .plus, data: Data) {
-        let magnitude = Number.Magnitude(data)
+        self.init(sign: sign, Number.Magnitude(data))
+    }
+
+    public init(sign: Number.Sign = .plus, _ magnitude: Number.Magnitude) {
         self.init(sign: sign, magnitude: magnitude)
     }
 

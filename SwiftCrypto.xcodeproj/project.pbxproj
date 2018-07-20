@@ -22,6 +22,10 @@
 		489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */; };
 		4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EDFE20FA243E00B6F773 /* Secp256r1.swift */; };
 		4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */; };
+		48A5541D2100F0F900A4B7FB /* Curve25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5541C2100F0F900A4B7FB /* Curve25519.swift */; };
+		48A5541F2100F31400A4B7FB /* ECDSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5541E2100F31400A4B7FB /* ECDSA.swift */; };
+		48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5542421011D0600A4B7FB /* ECDSATests.swift */; };
+		48A554262101233100A4B7FB /* SignatureNonce+RFC-6979.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A554222101137C00A4B7FB /* SignatureNonce+RFC-6979.swift */; };
 		48AC5CF820FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC5CF720FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift */; };
 		48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC5D2520FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift */; };
 		48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881B20E90FC2004C7B7D /* Crypto.swift */; };
@@ -74,6 +78,10 @@
 		489119AA20F268C700F86528 /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
 		4898EDFE20FA243E00B6F773 /* Secp256r1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1.swift; sourceTree = "<group>"; };
 		4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1_PointArthmeticTests.swift; sourceTree = "<group>"; };
+		48A5541C2100F0F900A4B7FB /* Curve25519.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curve25519.swift; sourceTree = "<group>"; };
+		48A5541E2100F31400A4B7FB /* ECDSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECDSA.swift; sourceTree = "<group>"; };
+		48A554222101137C00A4B7FB /* SignatureNonce+RFC-6979.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignatureNonce+RFC-6979.swift"; sourceTree = "<group>"; };
+		48A5542421011D0600A4B7FB /* ECDSATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECDSATests.swift; sourceTree = "<group>"; };
 		48AC5CF720FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipliplicationPerformanceSecp256r1Tests.swift; sourceTree = "<group>"; };
 		48AC5D2520FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipliplicationPerformanceSecp256k1Tests.swift; sourceTree = "<group>"; };
 		48B4881B20E90FC2004C7B7D /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
@@ -163,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				4848A04120FD312F004BC02C /* Schnorr.swift */,
+				48A5541E2100F31400A4B7FB /* ECDSA.swift */,
 			);
 			path = CommonSigning;
 			sourceTree = "<group>";
@@ -240,6 +249,22 @@
 			path = Secp256r1;
 			sourceTree = "<group>";
 		};
+		48A554202101064D00A4B7FB /* Schnorr */ = {
+			isa = PBXGroup;
+			children = (
+				48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */,
+			);
+			path = Schnorr;
+			sourceTree = "<group>";
+		};
+		48A554212101065700A4B7FB /* ECDSA */ = {
+			isa = PBXGroup;
+			children = (
+				48A5542421011D0600A4B7FB /* ECDSATests.swift */,
+			);
+			path = ECDSA;
+			sourceTree = "<group>";
+		};
 		48AC5CF620FF3F0300AE4B77 /* PerformanceTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +306,7 @@
 				48B94BE420F3F2A50041389D /* Signature.swift */,
 				48B94BE620F3F2B10041389D /* Message.swift */,
 				4885ABA520F77D6B00115FE0 /* Signing.swift */,
+				48A554222101137C00A4B7FB /* SignatureNonce+RFC-6979.swift */,
 			);
 			path = Signing;
 			sourceTree = "<group>";
@@ -368,7 +394,8 @@
 		48F242F120F7D40600FB36DF /* SigningAndVerificationTests */ = {
 			isa = PBXGroup;
 			children = (
-				48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */,
+				48A554212101065700A4B7FB /* ECDSA */,
+				48A554202101064D00A4B7FB /* Schnorr */,
 			);
 			path = SigningAndVerificationTests;
 			sourceTree = "<group>";
@@ -378,6 +405,7 @@
 			children = (
 				48F242F620F7DD2200FB36DF /* Secp256k1.swift */,
 				4898EDFE20FA243E00B6F773 /* Secp256r1.swift */,
+				48A5541C2100F0F900A4B7FB /* Curve25519.swift */,
 			);
 			path = CommonCurves;
 			sourceTree = "<group>";
@@ -557,6 +585,7 @@
 			files = (
 				48D1102120F3D856005A212A /* Network.swift in Sources */,
 				48D1101E20F3D832005A212A /* Address.swift in Sources */,
+				48A5541F2100F31400A4B7FB /* ECDSA.swift in Sources */,
 				48B6284620FA0E2C00001BDC /* EllipticCurvePoint.swift in Sources */,
 				48F242F820F7DD2600FB36DF /* Secp256k1.swift in Sources */,
 				4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */,
@@ -570,7 +599,9 @@
 				48B6284420FA0DC400001BDC /* EllipticCurve.swift in Sources */,
 				48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */,
 				4848A04220FD312F004BC02C /* Schnorr.swift in Sources */,
+				48A5541D2100F0F900A4B7FB /* Curve25519.swift in Sources */,
 				48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */,
+				48A554262101233100A4B7FB /* SignatureNonce+RFC-6979.swift in Sources */,
 				489119A520F209BA00F86528 /* AnyKeyGenerator.swift in Sources */,
 				48B4882320E90FC2004C7B7D /* Base58.swift in Sources */,
 				48B94BE720F3F2B10041389D /* Message.swift in Sources */,
@@ -594,6 +625,7 @@
 				48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
 				48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */,
 				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
+				48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */,
 				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

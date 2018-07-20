@@ -11,6 +11,7 @@ import Foundation
 /// The curve E: `y² = x³ + ax + b` over Fp
 /// `secp256r1` Also known as `NIST P-256`, also known as `prime256v1`
 /// Used by `Neo` and `Cardano`
+/// https://www.ietf.org/rfc/rfc5480.txt
 public struct Secp256r1: EllipticCurve {
 
     /// `2^256 - 2^224 + 2^192 + 2^96 - 1` <=> `2^224 * (2^32 − 1) + 2^192 +2^96 − 1`

@@ -21,3 +21,14 @@ public struct KeyPair<Curve: EllipticCurve> {
     }
 }
 
+public extension KeyPair {
+    init(`private`: PrivateKeyType) {
+        let publicKey = PublicKey(privateKey: `private`)
+        self.init(private: `private`, public: publicKey)
+    }
+
+    init?(privateKeyHex: String) {
+        guard let privateKey = PrivateKeyType(hex: privateKeyHex) else { return nil }
+        self.init(private: privateKey)
+    }
+}

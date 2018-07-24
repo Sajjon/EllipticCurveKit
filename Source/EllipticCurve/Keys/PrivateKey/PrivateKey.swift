@@ -9,19 +9,26 @@
 import Foundation
 
 public struct PrivateKey<Curve: EllipticCurve> {
-    public enum Format {
-        case raw
-        indirect case wif(WIF)
-        public enum WIF {
-            case uncompressed(PrivateKeyWIF<Curve>)
-            case compressed(PrivateKeyWIF<Curve>)
-        }
-    }
-    
+
     let number: Number
 
+    public static func generateNew() -> PrivateKey {
+        let byteCount = (Curve.order - 1).as256bitLongData().bytes.count
+        var privateKey: PrivateKey!
+        repeat {
+            guard let randomBytes = try? securelyGenerateBytes(count: byteCount) else { continue }
+            let randomNumber = Number(data: Data(bytes: randomBytes))
+            privateKey = PrivateKey(number: randomNumber)
+        } while privateKey == nil
+        return privateKey
+    }
+
+    public init() {
+        self = PrivateKey.generateNew()
+    }
+
     public init?(number: Number) {
-        guard case 1..<Curve.N = number else { return nil }
+        guard case 1..<Curve.order = number else { return nil }
         self.number = number
     }
 }
@@ -45,7 +52,7 @@ public extension PrivateKey {
 public extension PrivateKey {
 
     func asData() -> Data {
-        return number.asData()
+        return number.as256bitLongData()
     }
 
     func base64Encoded() -> String {

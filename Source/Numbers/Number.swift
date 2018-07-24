@@ -65,8 +65,12 @@ public extension Number {
         return hexString
     }
 
-    func asData() -> Data {
+    func as256bitLongData() -> Data {
         return Data(hex: asHexStringLength64())
+    }
+
+    func asTrimmedData() -> Data {
+        return self.magnitude.serialize()
     }
 }
 

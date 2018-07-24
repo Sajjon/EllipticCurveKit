@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Security
 
 public protocol EllipticCurveCryptographyKeyGeneration {
     /// Elliptic Curve used, e.g. `secp256k1`
@@ -20,28 +20,27 @@ public protocol EllipticCurveCryptographyKeyGeneration {
     static func restoreKeyPairFrom(privateKey: PrivateKeyType) -> KeyPairType
 
     /// A `Wallet` is a `KeyPair` and with `PublicAddresses` derived (compressed/uncompressed)
-    static func createWallet(using keyPair: KeyPairType) -> WalletType
+    static func createWallet<S: DistributedSystem>(using keyPair: KeyPairType, for system: S) -> Wallet<S>
 }
 
 public extension EllipticCurveCryptographyKeyGeneration {
     public typealias PrivateKeyType = PrivateKey<Curve>
     public typealias KeyPairType = KeyPair<Curve>
-    public typealias WalletType = Wallet<Curve>
 }
 
 public struct AnyKeyGenerator<Curve: EllipticCurve>: EllipticCurveCryptographyKeyGeneration {}
 public extension AnyKeyGenerator {
 
     static func generateNewKeyPair() -> KeyPairType {
-        fatalError()
+        let privateKey = PrivateKeyType()
+        return KeyPairType(private: privateKey)
     }
 
     static func restoreKeyPairFrom(privateKey: PrivateKeyType) -> KeyPairType {
-        let publickey = PublicKeyType(privateKey: privateKey)
-        return KeyPairType(private: privateKey, public: publickey)
+        return KeyPairType(private: privateKey)
     }
 
-    static func createWallet(using keyPair: KeyPairType) -> WalletType {
+    static func createWallet<S: DistributedSystem>(using keyPair: KeyPairType, for system: S) -> Wallet<S> {
         fatalError()
     }
 }
@@ -50,5 +49,4 @@ public extension AnyKeyGenerator {
     typealias KeyPairType = KeyPair<Curve>
     typealias PrivateKeyType = PrivateKey<Curve>
     typealias PublicKeyType = PublicKey<Curve>
-    typealias WalletType = Wallet<Curve>
 }

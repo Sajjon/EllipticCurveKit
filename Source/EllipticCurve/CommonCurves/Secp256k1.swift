@@ -24,5 +24,6 @@ public struct Secp256k1: EllipticCurve {
 
     public static let N = Number(hexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")!
     public static let h = Number(1)
+    public static let name = CurveName.secp256k1
 }
 

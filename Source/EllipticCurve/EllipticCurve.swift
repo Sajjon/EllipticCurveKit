@@ -8,6 +8,10 @@
 
 import Foundation
 
+public enum CurveName {
+    case secp256k1, secp256r1
+}
+
 public protocol EllipticCurve {
     typealias Point = AffinePoint<Self>
     static var P: Number { get }
@@ -16,6 +20,7 @@ public protocol EllipticCurve {
     static var G: Point { get }
     static var N: Number { get }
     static var h: Number { get }
+    static var name: CurveName { get }
 }
 
 public extension EllipticCurve {
@@ -54,23 +59,5 @@ extension EllipticCurve {
 
     static func modInverseN(_ v: Number, _ w: Number) -> Number {
         return modularInverse(v, w, mod: N)
-    }
-}
-
-public extension EllipticCurve {
-
-    /// "Jacobian coordinates Elliptic Curve operations can be implemented more efficiently by using Jacobian coordinates. Elliptic Curve operations implemented this way avoid many intermediate modular inverses (which are computationally expensive), and the scheme proposed in this document is in fact designed to not need any inversions at all for validation. When operating on a point P with Jacobian coordinates (x,y,z), for which x(P) is defined as `x/z^2` and y(P) is defined as `y/z^3`"
-    /// REFERENCE TO: https://en.wikibooks.org/wiki/Cryptography/Prime_Curve/Jacobian_Coordinates
-    ///
-    /// WHEN Jacobian Coordinates: "jacobi(point.y) can be implemented as jacobi(point.y * point.z mod P)."
-    //
-    /// Can be computed more efficiently using an extended GCD algorithm.
-    /// reference: https://en.wikipedia.org/wiki/Jacobi_symbol#Calculating_the_Jacobi_symbol
-    static func jacobi(_ point: Point) -> Number {
-        func jacobi(_ number: Number) -> Number {
-            let division = (P - 1).quotientAndRemainder(dividingBy: 2)
-            return number.power(division.quotient, modulus: P)
-        }
-        return jacobi(point.y) // can be changed to jacobi(point.y * point.z % Curve.P)
     }
 }

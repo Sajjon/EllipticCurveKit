@@ -33,14 +33,14 @@ class MultipliplicationPerformanceSecp256r1Tests: XCTestCase {
         let expected = zip(xNum, yNum).map { AffinePoint<Secp256r1>(x: $0, y: $1) }
         var calculated = [AffinePoint<Secp256r1>]()
         let count = expected.count
-        self.measure {
+//        self.measure {
             for D in 1...count {
                 let p = Secp256r1.G * (Secp256r1.N - Number(D))
                 if calculated.count < count {
                     calculated.append(p)
                 }
             }
-        }
+//        }
         XCTAssertEqual(calculated.count, count)
         for i in 0..<count {
             XCTAssertEqual(calculated[i], expected[i])
@@ -49,18 +49,18 @@ class MultipliplicationPerformanceSecp256r1Tests: XCTestCase {
 
     // Using `Release` optimization flags and NOT using `Debug Executable` when running tests yields the following results:
     // On Macbook Pro 2016, 2.9 GHZ, 16 GB 2133 MHZ Ram:
-    // Using `measure` closure: Takes real time ~2 minutes, measured time ~10 seconds
+    // Using `measure` closure: Takes real time ~1 minutes, measured time ~5 seconds
     func test1000LowMultiplications() {
         var calculated = [AffinePoint<Secp256r1>]()
         let count = lastTwoCharsInHexRepresentationOfXValueOfPoints.count
-        self.measure {
+//        self.measure {
             for D in 1...count {
                 let p = Secp256r1.G * (Number(1 + D))
                 if calculated.count < count {
                     calculated.append(p)
                 }
             }
-        }
+//        }
         XCTAssertEqual(calculated.count, count)
 
         func lastTwoCharsOfX(_ point: AffinePoint<Secp256r1>) -> String {

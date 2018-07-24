@@ -15,11 +15,10 @@ import BigInt
 
 class Secp256r1_PointArthmeticTests: XCTestCase {
 
-
     /// Private Key WIF example from http://docs.neo.org/en-us/utility/sdk/common.html
     func testSecp256r1TestVector1() {
         let privateKey = PrivateKey<Secp256r1>(hex: "0x3D40F190DA0C18E94DB98EC34305113AAE7C51B51B6570A8FDDAA3A981CD69C3")!
-        let privateKeyWIF = PrivateKeyWIF(privateKey: privateKey, network: .mainnet)
+        let privateKeyWIF = PrivateKeyWIF(privateKey: privateKey, system: Neo(.mainnet))
 
 
         XCTAssertEqual(privateKeyWIF.compressed, "KyGnCKKnL1xCZ8V2bo8vZvTpVrwAGnAXTmRqBEwA5JG2mqdgfgSx")
@@ -40,7 +39,7 @@ class Secp256r1_PointArthmeticTests: XCTestCase {
     /// Some uninteresting private key generated using https://neotracker.io/wallet
     func testSecp256r1TestVector2() {
         let privateKey = PrivateKey<Secp256r1>(hex: "0x1D6DAF1F253F4568030E70108826E729662407EEF24D10F98ACA7B0F24843115")!
-        let privateKeyWIF = PrivateKeyWIF(privateKey: privateKey, network: .mainnet)
+        let privateKeyWIF = PrivateKeyWIF(privateKey: privateKey, system: Neo(.mainnet))
 
 
         XCTAssertEqual(privateKeyWIF.compressed, "KxCv5WKisEr8ELERwA3BSrAGH8hMwze5hEoCSveGcaz52UekU128")
@@ -60,7 +59,7 @@ class Secp256r1_PointArthmeticTests: XCTestCase {
     /// Some uninteresting private key generated using https://neotracker.io/wallet
     func testSecp256r1TestVector3() {
         let privateKey = PrivateKey<Secp256r1>(hex: "0x7D7DC5F71EB29DDAF80D6214632EEAE03D9058AF1FB6D22ED80BADB62BC1A534")!
-        let privateKeyWIF = PrivateKeyWIF(privateKey: privateKey, network: .mainnet)
+        let privateKeyWIF = PrivateKeyWIF(privateKey: privateKey, system: Neo(.mainnet))
 
 
         XCTAssertEqual(privateKeyWIF.compressed, "L1RedRJLmYY3Ck2ozMYfeWjAMgxfXKvqEyfNpdMdggFi4P4XKFoA")

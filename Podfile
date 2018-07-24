@@ -5,7 +5,8 @@ workspace 'SwiftCrypto'
 
 def pods()
 	pod 'BigInt'
-  pod 'CryptoSwift'
+  	pod 'CryptoSwift'
+  	# pod 'SwiftyRSA', :git => 'https://github.com/TakeScoop/SwiftyRSA.git', :commit => 'e2e73c62b6'
 end
 
 target 'SwiftCrypto' do

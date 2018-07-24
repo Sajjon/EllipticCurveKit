@@ -19,8 +19,8 @@ public struct PublicKey<Curve: EllipticCurve> {
     public init(point: Point) {
         let x = point.x
         let y = point.y
-        let xData = x.asData()
-        let yData = y.asData()
+        let xData = x.as256bitLongData()
+        let yData = y.as256bitLongData()
 
         let uncompressedPrefix = Data(0x04)
         let compresssedPrefix = Data(y.isEven ? 0x02 : 0x03)

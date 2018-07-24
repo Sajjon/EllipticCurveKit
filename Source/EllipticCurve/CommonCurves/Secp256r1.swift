@@ -9,7 +9,7 @@
 import Foundation
 
 /// The curve E: `y² = x³ + ax + b` over Fp
-/// `secp256r1` Also known as `NIST P-256`, also known as `prime256v1`
+/// `secp256r1` Also known as `prime256v1`, `NIST P-256` or just `P-256`
 /// Used by `Neo` and `Cardano`
 /// https://www.ietf.org/rfc/rfc5480.txt
 public struct Secp256r1: EllipticCurve {
@@ -26,4 +26,5 @@ public struct Secp256r1: EllipticCurve {
 
     public static let N = Number(hexString: "0xFFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551")!
     public static let h = Number(1)
+    public static let name = CurveName.secp256r1
 }

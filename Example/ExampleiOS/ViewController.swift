@@ -73,9 +73,9 @@ private extension ViewController {
             assert(publicKey.point.y == Number(hexString: "3E13BE2FFCB19403A761420B1D26AF55E265A6F924FE0B7174D4D3654249092F")!)
             let diff = Double(clock() - begin) / Double(CLOCKS_PER_SEC)
             DispatchQueue.main.async { [weak self] in
-                let message = "SECP256R1: \(diff)s"
-                print("Success! \(message)")
-                self?.label.text = message
+                let text = "SECP256R1: \(diff)s"
+                print("Success! \(text)")
+                self?.label.text = text
             }
         }
         print("(multiplication running in background)")
@@ -91,9 +91,14 @@ private extension ViewController {
             assert(publicKey.point.y == Number(hexString: "B8CF959134B5C66BCC333A968B26D0ADACCFAD26F1EA8607D647E5B679C49184")!)
             let diff = Double(clock() - begin) / Double(CLOCKS_PER_SEC)
             DispatchQueue.main.async { [weak self] in
-                let message = "SECP256K1: \(diff)s"
-                print("Success! \(message)")
-                self?.label.text = message
+//                let text = "SECP256K1: \(diff)s"
+//                r: "efd48b2aacb6a8fd1140dd9cd45e81d69d2c877b56aaf991c34d0ea84eaf3716",
+//                s: "f7cb1c942d657c41d436c7a1b6e29f65f3e900dbb9aff4064dc4ab2f843acda8",
+                let r = Number(hexString: "efd48b2aacb6a8fd1140dd9cd45e81d69d2c877b56aaf991c34d0ea84eaf3716")!
+                let s = Number(hexString: "f7cb1c942d657c41d436c7a1b6e29f65f3e900dbb9aff4064dc4ab2f843acda8")!
+                let text = sigencode_der(r: r, s: s)
+                print("Success! \(text)")
+                self?.label.text = text
             }
         }
         print("(multiplication running in background)")

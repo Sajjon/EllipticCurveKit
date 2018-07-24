@@ -23,18 +23,15 @@ class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
 
         var calculated = [String]()
         let count = expected.count
-        self.measure {
+//        self.measure {
             for D in 1...count {
                 let privateKey = PrivateKey<Secp256k1>(number: Secp256k1.N - Number(D))!
-                let publicAddress = PublicAddress<Secp256k1>(
-                    publicKeyPoint: PublicKey(privateKey: privateKey),
-                    network: .mainnet
-                )
+                let publicAddress = PublicAddress(privateKey: privateKey, system: Bitcoin(.mainnet))
                 if calculated.count < count {
                     calculated.append(publicAddress.base58.uncompressed)
                 }
             }
-        }
+//        }
         XCTAssertEqual(calculated.count, expected.count)
         for i in 0..<count {
             XCTAssertEqual(calculated[i], expected[i])
@@ -48,17 +45,17 @@ class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
         continueAfterFailure = false
         var calculated = [String]()
         let count = lastTwoCharsBase58UncompressedAddress.count
-        self.measure {
+//        self.measure {
             for D in 1...count {
                 let publicKey = PublicKey<Secp256k1>(point: Secp256k1.G * (Number(D)))
-                let publicAddress = PublicAddress<Secp256k1>(publicKeyPoint: publicKey, network: .mainnet)
+                let publicAddress = PublicAddress(publicKeyPoint: publicKey, system: Bitcoin(.mainnet))
                 let uncompressedBase58Address = publicAddress.base58.uncompressed
                 let lastTwoChars = String(uncompressedBase58Address.suffix(2))
                 if calculated.count < count {
                     calculated.append(lastTwoChars)
                 }
             }
-        }
+//        }
         XCTAssertEqual(calculated.count, lastTwoCharsBase58UncompressedAddress.count)
         for i in 0..<count {
             XCTAssertEqual(calculated[i], lastTwoCharsBase58UncompressedAddress[i])

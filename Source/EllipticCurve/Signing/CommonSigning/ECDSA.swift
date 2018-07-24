@@ -8,6 +8,7 @@
 
 import Foundation
 import BigInt
+import CryptoSwift
 
 public struct ECDSA<CurveType: EllipticCurve>: Signing {
     public typealias Curve = CurveType
@@ -51,33 +52,29 @@ public extension ECDSA {
          6. Calculate `s = k^(-1) * (z + r * seckey) mod n`. If `s == 0`, go back to step 3.
          7. The signature is the pair `(r, s)`
          */
-
-        let e = hash(message.asData())
-        let z = Data(e.reversed().suffix(Curve.N.magnitude.bitWidth)).toNumber()
+        let z = message.asData().toNumber()
 
         var r: Number = 0
         var s: Number = 0
         let d = privateKey.number
 
         repeat {
-//            let z = BigInt(bigEndianParts: data)
-            //TODO SAFE - "Select a cryptographically secure random integer `k`" - assert that this is safe
-            let k = Number(BigUInt.randomInteger(lessThan: Curve.N.magnitude))
+            var k = privateKey.signatureNonceK(forHashedData: z.as256bitLongData(), digestLength: CryptoSwift.SHA2.Variant.sha256.digestLength)
+            k = Curve.modN { k } // make sure k belongs to [0, n - 1]
+
             let point: Curve.Point = Curve.G * k
             r = Curve.modN { point.x }
             guard !r.isZero else { continue }
             let kInverse = Curve.modInverseN(1, k)
             s = Curve.modN { kInverse * (z + r * d) }
         } while s.isZero
-        return Signature(r: r, s: s)!
+        return Signature(r: r, s: s, ensureLowSAccordingToBIP62: Curve.name == .secp256k1)!
     }
 
+    /// TODO implement Greg Maxwells trick for verify: https://github.com/indutny/elliptic/commit/b950448bc9c7af9ffd077b32919fe6e7b72b2eba
     /// Assumes that signature.r and signature.s ~= 1...Curve.N
     static func verify(_ message: Message, wasSignedBy signature: Signature<Curve>, publicKey: PublicKey<Curve>) -> Bool {
         guard publicKey.point.isOnCurve() else { return false }
-
-
-//        let z = BigInt(bigEndianParts: message.data)
         let z = message.asData().toNumber()
         let r = signature.r
         let s = signature.s
@@ -88,29 +85,12 @@ public extension ECDSA {
         let u1 = Curve.modN { sInverse * z }
         let u2 = Curve.modN { sInverse * r }
 
-//        let verification = Curve.modN { point.x }
-//
-//        return (r == verification)
-
         guard
             let R = Curve.addition(Curve.G * u1, H * u2),
-            Curve.jacobi(R) == 1,
-            R.x == r /// When Jacobian: `R.x == r` can be changed to `R.x == ((R.z)^2 * r) % P.`
+            case let verification = Curve.modN({ R.x }),
+            verification == r
             else { return false }
 
         return true
-
-//        guard publicKey.point.isOnCurve() else { return false }
-//        let r = signature.r
-//        let s = signature.s
-//        let e = Crypto.sha2Sha256(r.asData() + publicKey.data.compressed + message.asData()).toNumber()
-//
-//        guard
-//            let R = Curve.addition((Curve.G * s), (publicKey.point * (Curve.N - e))),
-//            Curve.jacobi(R) == 1,
-//            R.x == r /// When Jacobian: `R.x == r` can be changed to `R.x == ((R.z)^2 * r) % P.`
-//            else { return false }
-//
-//        return true
     }
 }

@@ -113,7 +113,7 @@ This SDK is in a proof-of-concept stage, but most features are supported, the co
 
 ## Status of goal
 - [x] "Swifty"   
-- [x] Fast  
+- [x] Fast (fastest pure Swift ECC SDK, but 250x slower than Bitcoin C SDK)
 - [ ] Safe  
 
 
@@ -145,9 +145,9 @@ I have used lots of open source projects as inspiration. Bitcoin Improvement Pro
 
 # Roadmap
 ## Signatures
-- [ ] ECDSA  
-- [ ] ed25519 (EdDSA)  
+- [x] ECDSA  
 - [x] Schnorr
+- [ ] ed25519 (EdDSA)  
 
 ## Key Formats
 ### Private Key
@@ -167,6 +167,6 @@ I have used lots of open source projects as inspiration. Bitcoin Improvement Pro
 
 It is plan to support most of the common curves listed by running CLI command `openssl ecparam -list_curves`, but these four are the ones I will be starting with:
 
-- [x] secp256k1 (Bitcoin, Ethereum, Cardano, Zilliqa, Radix)
-- [x] secp256r1 (NEO, Cardano)
-- [ ] X25519 - [Curve25519 used for ECDH](https://en.wikipedia.org/wiki/Curve25519) (Nano, Stellar)
+- [x] secp256k1 (Bitcoin, Ethereum, Zilliqa, Radix)
+- [x] secp256r1 (NEO)
+- [ ] X25519 - [Curve25519 used for ECDH](https://en.wikipedia.org/wiki/Curve25519) (Nano, Stellar, Cardano)

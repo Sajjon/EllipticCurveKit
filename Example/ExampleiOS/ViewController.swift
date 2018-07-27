@@ -91,12 +91,7 @@ private extension ViewController {
             assert(publicKey.point.y == Number(hexString: "B8CF959134B5C66BCC333A968B26D0ADACCFAD26F1EA8607D647E5B679C49184")!)
             let diff = Double(clock() - begin) / Double(CLOCKS_PER_SEC)
             DispatchQueue.main.async { [weak self] in
-//                let text = "SECP256K1: \(diff)s"
-//                r: "efd48b2aacb6a8fd1140dd9cd45e81d69d2c877b56aaf991c34d0ea84eaf3716",
-//                s: "f7cb1c942d657c41d436c7a1b6e29f65f3e900dbb9aff4064dc4ab2f843acda8",
-                let r = Number(hexString: "efd48b2aacb6a8fd1140dd9cd45e81d69d2c877b56aaf991c34d0ea84eaf3716")!
-                let s = Number(hexString: "f7cb1c942d657c41d436c7a1b6e29f65f3e900dbb9aff4064dc4ab2f843acda8")!
-                let text = sigencode_der(r: r, s: s)
+                let text = "SECP256K1: \(diff)s"
                 print("Success! \(text)")
                 self?.label.text = text
             }

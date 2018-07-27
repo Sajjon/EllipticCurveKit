@@ -13,6 +13,7 @@ public enum CurveName {
 }
 
 public protocol EllipticCurve {
+    static var form: EllipticCurveForm { get }
     typealias Point = AffinePoint<Self>
     static var P: Number { get }
     static var a: Number { get }
@@ -21,6 +22,10 @@ public protocol EllipticCurve {
     static var N: Number { get }
     static var h: Number { get }
     static var name: CurveName { get }
+}
+
+public extension EllipticCurve {
+    static var form: EllipticCurveForm { return .shortWeierstrass }
 }
 
 public extension EllipticCurve {

@@ -45,6 +45,7 @@
 		48B94BE720F3F2B10041389D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE620F3F2B10041389D /* Message.swift */; };
 		48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE920F3F4BC0041389D /* Data_Extension.swift */; };
 		48B94BEC20F3F4D50041389D /* AffinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BEB20F3F4D50041389D /* AffinePoint.swift */; };
+		48C3A4F8210B9F6A00282E1C /* EllipticCurveForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */; };
 		48CCEE6E2104ECFD00E0EE34 /* DER.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCEE6D2104ECFD00E0EE34 /* DER.swift */; };
 		48D1101820F3D7BA005A212A /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101720F3D7BA005A212A /* PublicKey.swift */; };
 		48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101920F3D7E3005A212A /* PrivateKey.swift */; };
@@ -109,6 +110,7 @@
 		48B94BE620F3F2B10041389D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		48B94BE920F3F4BC0041389D /* Data_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_Extension.swift; sourceTree = "<group>"; };
 		48B94BEB20F3F4D50041389D /* AffinePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinePoint.swift; sourceTree = "<group>"; };
+		48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurveForm.swift; sourceTree = "<group>"; };
 		48CCEE6D2104ECFD00E0EE34 /* DER.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DER.swift; sourceTree = "<group>"; };
 		48D1101720F3D7BA005A212A /* PublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKey.swift; sourceTree = "<group>"; };
 		48D1101920F3D7E3005A212A /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				48B94BE320F3F2870041389D /* Signing */,
 				48D1101520F3D740005A212A /* Keys */,
 				48B6284320FA0DC400001BDC /* EllipticCurve.swift */,
+				48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */,
 			);
 			path = EllipticCurve;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */,
 				4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */,
 				4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */,
+				48C3A4F8210B9F6A00282E1C /* EllipticCurveForm.swift in Sources */,
 				4885ABA620F77D6B00115FE0 /* Signing.swift in Sources */,
 				48A19CD62107C42C005FF9F1 /* WIFFormatter.swift in Sources */,
 				48A19CDE2107C481005FF9F1 /* Bitcoin.swift in Sources */,

@@ -47,7 +47,7 @@ private enum DERCode: Byte {
     case INTEGER = 0x02
 }
 
-extension DERCode {
+private extension DERCode {
     var hex: String {
         return Int(rawValue).evenNumberedHexStringChars
     }

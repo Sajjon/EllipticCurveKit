@@ -38,6 +38,16 @@
                ReferencedContainer = "container:ExampleiOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48F22C9520C70D87004A18CA"
+               BuildableName = "SwiftCryptoTests.xctest"
+               BlueprintName = "SwiftCryptoTests"
+               ReferencedContainer = "container:../SwiftCrypto.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

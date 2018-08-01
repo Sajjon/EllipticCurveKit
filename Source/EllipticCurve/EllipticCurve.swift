@@ -15,23 +15,24 @@ public enum CurveName {
 public protocol EllipticCurve {
     static var form: EllipticCurveForm { get }
     typealias Point = AffinePoint<Self>
-    static var P: Number { get }
+    static var modulus: Number { get }
     static var a: Number { get }
     static var b: Number { get }
-    static var G: Point { get }
-    static var N: Number { get }
-    static var h: Number { get }
+    static var generator: Point { get }
+    static var order: Number { get }
+    static var cofactor: Number { get }
     static var name: CurveName { get }
 }
 
 public extension EllipticCurve {
-    static var form: EllipticCurveForm { return .shortWeierstrass }
+    static var P: Number { return modulus }
+    static var N: Number { return order }
+    static var G: Point { return generator }
+    static var h: Number { return cofactor }
 }
 
 public extension EllipticCurve {
-    static var order: Number {
-        return N
-    }
+    static var form: EllipticCurveForm { return .shortWeierstrass }
 }
 
 public extension EllipticCurve {
@@ -59,10 +60,10 @@ extension EllipticCurve {
     }
 
     static func modInverseP(_ v: Number, _ w: Number) -> Number {
-        return modularInverse(v, w, mod: P)
+        return divide(v, by: w, mod: P)
     }
 
     static func modInverseN(_ v: Number, _ w: Number) -> Number {
-        return modularInverse(v, w, mod: N)
+        return divide(v, by: w, mod: N)
     }
 }

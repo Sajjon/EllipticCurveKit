@@ -15,23 +15,52 @@ import BigInt
 
 class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+        continueAfterFailure = false
+    }
+
     // Using `Release` optimization flags and NOT using `Debug Executable` when running tests yields the following results:
     // On Macbook Pro 2016, 2.9 GHZ, 16 GB 2133 MHZ Ram:
-    // Using `measure` closure: Takes real time ~1 minute, measured time ~5 seconds
+    // Using `measure` closure: Takes real time ~1 minute, measured time (MY: 4.802 s, Projective: 2.4 s)
     func test30HighMultiplications() {
         let expected = ["1JPbzbsAx1HyaDQoLMapWGoqf9pD5uha5m", "1Knh2eFMtzMEtmvGHW14ELG8F9Ny6jV4s3", "15K4QVHD5T1KvW4it56qNuGJoTGMpUaFMj", "1F3zbGb5JLBnmCAAYjCCv35zkggrXfi8LR", "1LWBSfTeaLRNS1vyGSKy2BVW2nd6W9sk8Q", "1J2zofmGpMUSaNGdTZEhMRYXdWsBQFMpS", "1XunvtCGpmb7uw9qxWwaZFfHNFdUmuMVG", "1MFyofP8SVtsEYDHQbZg7XJgfDeSP4ysPm", "1GLiZZVt326aA8JHG2dEJHC591DXDQNKTs", "18PUeum1Su423DmV2jEGdSd3ewiPfsZZ7z", "1zrbUnLczbHkA6pzXuZDD6jNsoKMqGBcy", "1PMB9Etp3xaDKxpmofy1MmjJF1kvCtH8UA", "122Vo9PeKd4j8zSGBeQHdmks6GnkpycXNz", "1KWhn5gquQvXyXp9BMgJ6HYfNwpHZDmJ5c", "1E1oVu22jUEvmQTFDy9bTgabSfmns6fQFY", "1ADGZZSKRqz3ydkn714Qzw1FJSbUZZGEr1", "14X7DSjXSQBqvFVshZuNwVW6GZyNp79AjF", "12TqhXBmGoaaJoudt1MdysYb2JqGWUGoL1", "1Fp1zhPoKnKfm8MLYkQZ33GZRbJpE9inpB", "17QPbFArTP6M6QRg2ZE18D3fvzZYxnRUSb", "18yhGBghaycjg3UhR2fiquffntYQpUGDE7", "1E7rN6ZJ7g6mHYEZ643bJSFXSkwLw6Zzam", "16oS9HkwfDmrCSGkaFe7KDQgkMFy5GXFoc", "12gG3cNVexUjXCY3KqHi891Kiafsb8AaBy", "1N1sRyurQe7YouraPgh4rxV8JfARdv7zAH", "14AJuXrdKFD8RzVtsF89FYVN4DSmb9xEPf", "12GQjWsXZ7rfRYCR4E5bHMg8AkoSxmPBox", "1NMiUoStJMYxfWw6APLRoMs24Fqsr9tmg7", "1KVPFr2XEwessL8J4zmqi5yFqD2BYVJ2Dk", "1LJ5utuGegyKa6YbVTtxzZndFnSdHNzC5C"]
 
         var calculated = [String]()
         let count = expected.count
-//        self.measure {
+
+
+        let secp256k1 = ShortWeierstraßCurve(
+            a: Number(0),
+            b: Number(7),
+            galoisField: Field(modulus: Number(hexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")!)
+        )
+        let generatorAffine = ShortWeierstraßCurve.Affine(
+            Number(hexString: "0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798")!,
+            Number(hexString: "0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8")!
+        )
+
+        let generatorProjective = secp256k1.affineToProjective(generatorAffine)
+
+        self.measure {
             for D in 1...count {
                 let privateKey = PrivateKey<Secp256k1>(number: Secp256k1.N - Number(D))!
-                let publicAddress = PublicAddress(privateKey: privateKey, system: Bitcoin(.mainnet))
+//                let publicKeyPoint = Secp256k1.generator * privateKey.number
+
+
+
+//                let publicKeyPoint_ = affineMultiplication(privateKey.number, point: generator, curve: secp256k1)
+                let publicKeyPointProjective = multiplicationProjective(privateKey.number, point: generatorProjective, curve: secp256k1)
+                let publicKeyPointAffine = secp256k1.projectiveToAffine(publicKeyPointProjective)
+                let publicKeyPoint = AffinePoint<Secp256k1>(x: publicKeyPointAffine.x, y: publicKeyPointAffine.y)
+
+                let publicKey = PublicKey<Secp256k1>(point: publicKeyPoint)
+                let publicAddress = PublicAddress(publicKeyPoint: publicKey, system: Bitcoin(.mainnet))
                 if calculated.count < count {
                     calculated.append(publicAddress.base58.uncompressed)
                 }
             }
-//        }
+        }
         XCTAssertEqual(calculated.count, expected.count)
         for i in 0..<count {
             XCTAssertEqual(calculated[i], expected[i])

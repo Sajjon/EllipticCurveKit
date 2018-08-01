@@ -15,11 +15,11 @@ public struct PrivateKey<Curve: EllipticCurve> {
     public static func generateNew() -> PrivateKey {
         let byteCount = (Curve.order - 1).as256bitLongData().bytes.count
         var privateKey: PrivateKey!
-        repeat {
+        while privateKey == nil {
             guard let randomBytes = try? securelyGenerateBytes(count: byteCount) else { continue }
             let randomNumber = Number(data: Data(bytes: randomBytes))
             privateKey = PrivateKey(number: randomNumber)
-        } while privateKey == nil
+        }
         return privateKey
     }
 

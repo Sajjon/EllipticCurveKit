@@ -129,6 +129,7 @@ public enum EllipticCurveForm {
     ///
     /// # Equation
     ///     𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑x²𝑑𝑦²
+    /// - Requires: `𝑎𝑑(𝑎−𝑑) ≠ 0`
     ///
     ///
     /// # 𝐸 is birationally equivalent to Weierstrass form:

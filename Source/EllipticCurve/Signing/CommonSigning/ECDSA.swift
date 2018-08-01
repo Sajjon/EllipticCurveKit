@@ -58,7 +58,7 @@ public extension ECDSA {
         var s: Number = 0
         let d = privateKey.number
 
-        repeat {
+        while s.isZero {
             var k = privateKey.signatureNonceK(forHashedData: z.as256bitLongData(), digestLength: CryptoSwift.SHA2.Variant.sha256.digestLength)
             k = Curve.modN { k } // make sure k belongs to [0, n - 1]
 
@@ -67,7 +67,7 @@ public extension ECDSA {
             guard !r.isZero else { continue }
             let kInverse = Curve.modInverseN(1, k)
             s = Curve.modN { kInverse * (z + r * d) }
-        } while s.isZero
+        }
         return Signature(r: r, s: s, ensureLowSAccordingToBIP62: Curve.name == .secp256k1)!
     }
 

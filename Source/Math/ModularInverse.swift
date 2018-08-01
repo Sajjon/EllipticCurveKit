@@ -8,7 +8,7 @@
 
 import Foundation
 
-public func mod(_ number: Number, modulus: Number) -> Number {
+public func mod<T>(_ number: T, modulus: T) -> T where T: BinaryInteger {
     var mod = number % modulus
     if mod < 0 {
         mod = mod + modulus
@@ -17,44 +17,67 @@ public func mod(_ number: Number, modulus: Number) -> Number {
     return mod
 }
 
-func modularInverse<T: BinaryInteger>(_ x: T, _ y: T, mod: T) -> T {
-    let x = x > 0 ? x : x + mod
-    let y = y > 0 ? y : y + mod
+public func mod<T>(_ modulus: T, expression: () -> T) -> T where T: BinaryInteger {
+    return mod(expression(), modulus: modulus)
+}
 
-    let inverse = extendedEuclideanAlgorithm(z: y, a: mod)
+/// "m such that (n * m) % p == 1"
+func inverse(of n: Number, modulus p: Number) -> Number {
+    let euclideanResult = extendedGreatestCommonDivisor(n, p)
+    let gcd = euclideanResult.gcd
+    let x = euclideanResult.bézoutCoefficients.0
+    let y = euclideanResult.bézoutCoefficients.1
+    let lhs = mod(p) { n * x + p * y }
+    assert(lhs == gcd)
+    guard gcd == 1 else { fatalError("No inverse") }
+    return mod(x, modulus: p)
+}
 
-    var result = (inverse * x) % mod
+func divide<T: BinaryInteger>(_ x: T, by y: T, mod p: T) -> T {
+    let x = x > 0 ? x : x + p
+    let y = y > 0 ? y : y + p
+    let euclideanResult = extendedGreatestCommonDivisor(y, p)
+    let inverse = euclideanResult.bézoutCoefficients.0
+    return mod(inverse * x, modulus: p)
+}
 
-    let zero: T = 0
-    if result < zero {
-        result = result + mod
+struct ExtendedEuclideanAlgorithmResult<T: BinaryInteger> {
+
+    /// Greatest Common Divisor
+    let gcd: T
+    let bézoutCoefficients: (T, T)
+    let quotientsByTheGCD: (T, T)
+}
+
+/// https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
+func extendedGreatestCommonDivisor<T: BinaryInteger>(_ a: T, _ b: T) -> ExtendedEuclideanAlgorithmResult<T> {
+
+    var s: T = 0
+    var oldS: T = 1
+
+    var t: T = 1
+    var oldT: T = 0
+
+    var r: T = b
+    var oldR: T = a
+
+    while r != 0 {
+        let q = oldR.quotientAndRemainder(dividingBy: r).quotient
+        (oldR, r) = (r, oldR - q * r)
+        (oldS, s) = (s, oldS - q * s)
+        (oldT, t) = (t, oldT - q * t)
+
     }
-
-    return result
+    let bézoutCoefficients = (oldS, oldT)
+    let gcd = oldR
+    let quotientsByTheGCD = (t, s)
+    return ExtendedEuclideanAlgorithmResult(
+        gcd: gcd,
+        bézoutCoefficients: bézoutCoefficients,
+        quotientsByTheGCD: quotientsByTheGCD
+    )
 }
 
 private func division<T: BinaryInteger>(_ a: T, _ b: T) -> (quotient: T, remainder: T) {
     return (a / b, a % b)
-}
-
-/// https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
-private func extendedEuclideanAlgorithm<T: BinaryInteger>(z: T, a: T) -> T {
-    var i = a
-    var j = z
-    var y1: T = 1
-    var y2: T = 0
-
-    let zero: T = 0
-    while j > zero {
-        let (quotient, remainder) = division(i, j)
-
-        let y = y2 - y1 * quotient
-
-        i = j
-        j = remainder
-        y2 = y1
-        y1 = y
-    }
-
-    return y2 % a
 }

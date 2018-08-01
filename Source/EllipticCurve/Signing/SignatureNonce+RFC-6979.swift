@@ -61,7 +61,7 @@ extension PrivateKey {
         // 3.2.h.1
         var T: [Byte]
         var k: Number = 0
-        repeat { // Note: the probability of not succeeding at the first try is about 2^-127.
+        while true { // Note: the probability of not succeeding at the first try is about 2^-127.
             T = []
 
             // 3.2.h.2
@@ -79,7 +79,7 @@ extension PrivateKey {
 
             K = hmac(V + [0])
             V = hmac(V)
-        } while true
+        }
 
         return k
     }

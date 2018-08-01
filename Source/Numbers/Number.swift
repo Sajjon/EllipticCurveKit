@@ -47,8 +47,8 @@ public extension Number {
         return toString(uppercased: uppercased, radix: 16)
     }
 
-    func asDecimalString(uppercased: Bool = true) -> String {
-        return toString(uppercased: uppercased, radix: 10)
+    func asDecimalString() -> String {
+        return toString(radix: 10)
     }
 
     func toString(uppercased: Bool = true, radix: Int) -> String {
@@ -78,4 +78,22 @@ extension Data {
     func toNumber() -> Number {
         return Number(data: self)
     }
+}
+
+precedencegroup ExponentiationPrecedence {
+    associativity: right
+    higherThan: MultiplicationPrecedence
+}
+
+infix operator ** : ExponentiationPrecedence
+
+public func ** (_ base: Number, _ exponent: Number) -> Number {
+    guard exponent.bitWidth < 32 else { fatalError("exponent too big") }
+    let decimalString = exponent.asDecimalString()
+    let intExponent = Int(decimalString)!
+    return base ** intExponent
+}
+
+public func ** (_ base: Number, _ exponent: Int) -> Number {
+    return base.power(exponent)
 }

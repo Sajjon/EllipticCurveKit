@@ -16,7 +16,6 @@ def debug(value, variable_name):
 	print('`{}`: `{}` = value=`{}`'.format(variable_name, class_name(value), value_print_friendly))
 
 
-
 def point_add(p1, p2):
     if (p1 is None):
         return p2

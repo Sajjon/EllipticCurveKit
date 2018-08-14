@@ -81,7 +81,6 @@
 		4885ABA520F77D6B00115FE0 /* Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signing.swift; sourceTree = "<group>"; };
 		4885ABA720F77ECB00115FE0 /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
-		4885ABAB20F7871800115FE0 /* Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Play.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		489096C021137DC5002D0A02 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
@@ -463,7 +462,6 @@
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
-				4885ABAB20F7871800115FE0 /* Play.playground */,
 				285EE9D7DD122B692B0588B3 /* Frameworks */,
 				46A05956EC0C820C8AEE53C7 /* Pods */,
 				48F22C8E20C70D87004A18CA /* Products */,

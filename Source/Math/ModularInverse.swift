@@ -8,7 +8,21 @@
 
 import Foundation
 
-public func mod<T>(_ number: T, modulus: T) -> T where T: BinaryInteger {
+public extension Number {
+    func modulus(_ p: Number) -> Number {
+        return mod(self, modulus: p)
+    }
+
+    func modulus(_ expression: () -> Number) -> Number {
+        return modulus(expression())
+    }
+
+    static func % (lhs: Number, rhs: Number) -> Number {
+        return lhs.modulus(rhs)
+    }
+}
+
+func mod<T>(_ number: T, modulus: T) -> T where T: BinaryInteger {
     var mod = number % modulus
     if mod < 0 {
         mod = mod + modulus
@@ -17,21 +31,21 @@ public func mod<T>(_ number: T, modulus: T) -> T where T: BinaryInteger {
     return mod
 }
 
-public func mod<T>(_ modulus: T, expression: () -> T) -> T where T: BinaryInteger {
+func mod<T>(_ modulus: T, expression: () -> T) -> T where T: BinaryInteger {
     return mod(expression(), modulus: modulus)
 }
 
 /// "m such that (n * m) % p == 1"
-func inverse(of n: Number, modulus p: Number) -> Number {
-    let euclideanResult = extendedGreatestCommonDivisor(n, p)
-    let gcd = euclideanResult.gcd
-    let x = euclideanResult.bézoutCoefficients.0
-    let y = euclideanResult.bézoutCoefficients.1
-    let lhs = mod(p) { n * x + p * y }
-    assert(lhs == gcd)
-    guard gcd == 1 else { fatalError("No inverse") }
-    return mod(x, modulus: p)
-}
+//func inverse(of n: Number, modulus p: Number) -> Number {
+//    let euclideanResult = extendedGreatestCommonDivisor(n, p)
+//    let gcd = euclideanResult.gcd
+//    let x = euclideanResult.bézoutCoefficients.0
+//    let y = euclideanResult.bézoutCoefficients.1
+//    let lhs = mod(p) { n * x + p * y }
+//    assert(lhs == gcd)
+//    guard gcd == 1 else { fatalError("No inverse") }
+//    return mod(x, modulus: p)
+//}
 
 func divide<T: BinaryInteger>(_ x: T, by y: T, mod p: T) -> T {
     let x = x > 0 ? x : x + p

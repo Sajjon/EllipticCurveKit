@@ -11,6 +11,8 @@
 import Foundation
 import CryptoSwift
 
+public typealias Byte = UInt8
+
 public struct Crypto {}
 public extension Crypto {
 

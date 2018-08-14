@@ -29,19 +29,6 @@ class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
         var calculated = [String]()
         let count = expected.count
 
-
-        let secp256k1 = ShortWeierstraßCurve(
-            a: Number(0),
-            b: Number(7),
-            galoisField: Field(modulus: Number(hexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")!)
-        )
-        let generatorAffine = ShortWeierstraßCurve.Affine(
-            Number(hexString: "0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798")!,
-            Number(hexString: "0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8")!
-        )
-
-        let generatorProjective = secp256k1.affineToProjective(generatorAffine)
-
         self.measure {
             for D in 1...count {
                 let privateKey = PrivateKey<Secp256k1>(number: Secp256k1.N - Number(D))!

@@ -15,3 +15,35 @@ import Foundation
 public struct Curve25519 {
 
 }
+
+//class WeierstraßCurve: Curve {}
+//class KoblitzCurve: ShortWeierstraßCurve {}
+
+//typealias Transformation<From: Curve, To: Curve> = (AffinePointOnCurve<From>) -> AffinePointOnCurve<To>
+//typealias ToShortWeierstraßPointTransformation<From: ConvertibleToShortWeierstraß> = Transformation<From, ShortWeierstraßCurve>
+//typealias ToMontgomeryPointTransformation<From: ConvertibleToMontgomery> = Transformation<From, MontgomeryCurve>
+//
+//protocol ConvertibleToShortWeierstraß: Curve {
+//    func toShortWeierstraß() -> (ShortWeierstraßCurve, ToShortWeierstraßPointTransformation<Self>)
+//}
+//
+//protocol ConvertibleToMontgomery: Curve {
+//    func toMontgomery() -> (MontgomeryCurve, ToMontgomeryPointTransformation<Self>)
+//}
+
+//final class MontgomeryCurve: Curve {
+//
+//}
+//
+//final class EdwardsCurve: Curve, ConvertibleToMontgomery {
+//    func toMontgomery() -> (MontgomeryCurve, ToMontgomeryPointTransformation<EdwardsCurve>) {
+//        fatalError()
+//    }
+//}
+
+//class TwistedEdwardsCurve: ShortWeierstraßCurve, ConvertibleToMontgomery {
+//    func toMontgomery() -> MontgomeryCurve {
+//        fatalError()
+//    }
+//}
+

@@ -8,7 +8,6 @@
 
 import Foundation
 
-public typealias Byte = UInt8
 
 public protocol NetworkInformation {
     var pubkeyhash: Byte { get }

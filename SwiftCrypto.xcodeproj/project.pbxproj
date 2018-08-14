@@ -8,57 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
-		4824B761210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B760210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift */; };
-		482598FD210F14820023E010 /* ModularSquareRootsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482598FC210F14820023E010 /* ModularSquareRootsTests.swift */; };
-		4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A03E20FD2983004BC02C /* AnyKeySigner.swift */; };
-		4848A04220FD312F004BC02C /* Schnorr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A04120FD312F004BC02C /* Schnorr.swift */; };
-		48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */; };
-		487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */; };
-		4885ABA620F77D6B00115FE0 /* Signing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA520F77D6B00115FE0 /* Signing.swift */; };
-		4885ABA820F77ECB00115FE0 /* KeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA720F77ECB00115FE0 /* KeyPair.swift */; };
-		4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA920F77EE600115FE0 /* Wallet.swift */; };
-		489119A520F209BA00F86528 /* AnyKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119A420F209BA00F86528 /* AnyKeyGenerator.swift */; };
+		4824B76821123AF100112764 /* AffinePointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76621123AED00112764 /* AffinePointOnCurve.swift */; };
+		4824B76921123AF600112764 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B763211239D900112764 /* Field.swift */; };
+		4824B76B21123B0600112764 /* ProjectivePointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76A21123B0600112764 /* ProjectivePointOnCurve.swift */; };
+		4824B76D2113104800112764 /* TwoDimensionalPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76C2113104700112764 /* TwoDimensionalPoint.swift */; };
+		4824B76F2113105F00112764 /* ThreeDimensionalPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76E2113105F00112764 /* ThreeDimensionalPoint.swift */; };
+		4824B772211310A600112764 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B771211310A600112764 /* Point.swift */; };
+		4824B77621132DD800112764 /* JacobianPointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77521132DD800112764 /* JacobianPointOnCurve.swift */; };
+		4824B77821132E5B00112764 /* ThreeDimensionalPointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77721132E5B00112764 /* ThreeDimensionalPointOnCurve.swift */; };
+		4824B77A21132ED000112764 /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77921132ED000112764 /* Curve.swift */; };
+		4824B77C21132EEF00112764 /* ShortWeierstraßCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77B21132EEF00112764 /* ShortWeierstraßCurve.swift */; };
+		4824B77F2113492400112764 /* MontgomeryCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77E2113492400112764 /* MontgomeryCurve.swift */; };
+		4824B7812113492E00112764 /* EdwardsCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B7802113492E00112764 /* EdwardsCurve.swift */; };
+		4824B7832113493800112764 /* TwistedEdwardsCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B7822113493800112764 /* TwistedEdwardsCurve.swift */; };
+		4851B42821136331002404AF /* ExpressibleByAffineCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */; };
+		4851B42A2113633E002404AF /* ExpressibleByProjectiveCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4851B4292113633E002404AF /* ExpressibleByProjectiveCoordinates.swift */; };
+		4858F2DA2121AB0D00ECEC93 /* Secp256k1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F620F7DD2200FB36DF /* Secp256k1.swift */; };
+		4858F2DB21220A2300ECEC93 /* Secp256r1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EDFE20FA243E00B6F773 /* Secp256r1.swift */; };
+		4858F2DD2122DCCC00ECEC93 /* ShortWeierstrassPointMultiplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B760210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift */; };
+		48819DE02116037E00BDE952 /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48819DDF2116037E00BDE952 /* Ed25519.swift */; };
+		489096C121137DC5002D0A02 /* Equation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489096C021137DC5002D0A02 /* Equation.swift */; };
 		489119A620F209C400F86528 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891199B20F2097C00F86528 /* Number.swift */; };
-		489119AB20F268C700F86528 /* SHA2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119AA20F268C700F86528 /* SHA2Tests.swift */; };
-		489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */; };
-		4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EDFE20FA243E00B6F773 /* Secp256r1.swift */; };
-		4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */; };
 		48A19CCE2107681E005FF9F1 /* SecureRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CCD2107681E005FF9F1 /* SecureRandom.swift */; };
 		48A19CD021076B6E005FF9F1 /* KeychainStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CCF21076B6E005FF9F1 /* KeychainStatus.swift */; };
-		48A19CD32107C405005FF9F1 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CD22107C405005FF9F1 /* Address.swift */; };
-		48A19CD62107C42C005FF9F1 /* WIFFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CD52107C42C005FF9F1 /* WIFFormatter.swift */; };
-		48A19CD92107C44F005FF9F1 /* DistributedSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CD82107C44F005FF9F1 /* DistributedSystem.swift */; };
-		48A19CDB2107C462005FF9F1 /* NetworkInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CDA2107C462005FF9F1 /* NetworkInformation.swift */; };
-		48A19CDE2107C481005FF9F1 /* Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CDD2107C481005FF9F1 /* Bitcoin.swift */; };
-		48A19CE02107C493005FF9F1 /* Zilliqa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CDF2107C493005FF9F1 /* Zilliqa.swift */; };
-		48A19CE22107C4A5005FF9F1 /* Neo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CE12107C4A5005FF9F1 /* Neo.swift */; };
-		48A5541D2100F0F900A4B7FB /* Curve25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5541C2100F0F900A4B7FB /* Curve25519.swift */; };
-		48A5541F2100F31400A4B7FB /* ECDSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5541E2100F31400A4B7FB /* ECDSA.swift */; };
-		48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A5542421011D0600A4B7FB /* ECDSATests.swift */; };
-		48A554262101233100A4B7FB /* SignatureNonce+RFC-6979.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A554222101137C00A4B7FB /* SignatureNonce+RFC-6979.swift */; };
-		48AC5CF820FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC5CF720FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift */; };
-		48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AC5D2520FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift */; };
 		48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881B20E90FC2004C7B7D /* Crypto.swift */; };
 		48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */; };
 		48B4882320E90FC2004C7B7D /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881F20E90FC2004C7B7D /* Base58.swift */; };
-		48B6284420FA0DC400001BDC /* EllipticCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6284320FA0DC400001BDC /* EllipticCurve.swift */; };
-		48B6284620FA0E2C00001BDC /* EllipticCurvePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B6284520FA0E2C00001BDC /* EllipticCurvePoint.swift */; };
-		48B94BE520F3F2A50041389D /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE420F3F2A50041389D /* Signature.swift */; };
-		48B94BE720F3F2B10041389D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE620F3F2B10041389D /* Message.swift */; };
 		48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE920F3F4BC0041389D /* Data_Extension.swift */; };
-		48B94BEC20F3F4D50041389D /* AffinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BEB20F3F4D50041389D /* AffinePoint.swift */; };
-		48C3A4FB210CFB6D00282E1C /* EllipticCurveForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */; };
 		48C3A4FD210DAF6D00282E1C /* SquareRoots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3A4FC210DAF6D00282E1C /* SquareRoots.swift */; };
 		48CCEE6E2104ECFD00E0EE34 /* DER.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCEE6D2104ECFD00E0EE34 /* DER.swift */; };
-		48D1101820F3D7BA005A212A /* PublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101720F3D7BA005A212A /* PublicKey.swift */; };
-		48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101920F3D7E3005A212A /* PrivateKey.swift */; };
-		48D1101C20F3D812005A212A /* PrivateKeyWIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */; };
-		48D1101E20F3D832005A212A /* PublicAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101D20F3D832005A212A /* PublicAddress.swift */; };
 		48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EB887F20FF2D5900974DF9 /* ModularInverse.swift */; };
 		48F22C9720C70D88004A18CA /* SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* SwiftCrypto.framework */; };
 		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */; };
-		48F242F820F7DD2600FB36DF /* Secp256k1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F620F7DD2200FB36DF /* Secp256k1.swift */; };
 		8823FC9573D8C1AF8B8D30CD /* Pods_SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665161916806AD945170E11A /* Pods_SwiftCrypto.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,16 +57,32 @@
 		1EC9D765543237D4FC0A37DA /* Pods-SwiftCryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.release.xcconfig"; sourceTree = "<group>"; };
 		30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.release.xcconfig"; sourceTree = "<group>"; };
 		4824B760210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortWeierstrassPointMultiplicationTests.swift; sourceTree = "<group>"; };
+		4824B763211239D900112764 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		4824B76621123AED00112764 /* AffinePointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinePointOnCurve.swift; sourceTree = "<group>"; };
+		4824B76A21123B0600112764 /* ProjectivePointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectivePointOnCurve.swift; sourceTree = "<group>"; };
+		4824B76C2113104700112764 /* TwoDimensionalPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoDimensionalPoint.swift; sourceTree = "<group>"; };
+		4824B76E2113105F00112764 /* ThreeDimensionalPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDimensionalPoint.swift; sourceTree = "<group>"; };
+		4824B771211310A600112764 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		4824B77521132DD800112764 /* JacobianPointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacobianPointOnCurve.swift; sourceTree = "<group>"; };
+		4824B77721132E5B00112764 /* ThreeDimensionalPointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDimensionalPointOnCurve.swift; sourceTree = "<group>"; };
+		4824B77921132ED000112764 /* Curve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curve.swift; sourceTree = "<group>"; };
+		4824B77B21132EEF00112764 /* ShortWeierstraßCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortWeierstraßCurve.swift"; sourceTree = "<group>"; };
+		4824B77E2113492400112764 /* MontgomeryCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MontgomeryCurve.swift; sourceTree = "<group>"; };
+		4824B7802113492E00112764 /* EdwardsCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdwardsCurve.swift; sourceTree = "<group>"; };
+		4824B7822113493800112764 /* TwistedEdwardsCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwistedEdwardsCurve.swift; sourceTree = "<group>"; };
 		482598FC210F14820023E010 /* ModularSquareRootsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularSquareRootsTests.swift; sourceTree = "<group>"; };
 		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
 		4848A04120FD312F004BC02C /* Schnorr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schnorr.swift; sourceTree = "<group>"; };
-		48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacobianPoint.swift; sourceTree = "<group>"; };
+		4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressibleByAffineCoordinates.swift; sourceTree = "<group>"; };
+		4851B4292113633E002404AF /* ExpressibleByProjectiveCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressibleByProjectiveCoordinates.swift; sourceTree = "<group>"; };
+		48819DDF2116037E00BDE952 /* Ed25519.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ed25519.swift; sourceTree = "<group>"; };
 		4885ABA520F77D6B00115FE0 /* Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signing.swift; sourceTree = "<group>"; };
 		4885ABA720F77ECB00115FE0 /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		4885ABAB20F7871800115FE0 /* Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Play.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		489096C021137DC5002D0A02 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
 		489119AA20F268C700F86528 /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
@@ -190,6 +187,37 @@
 			path = ShortWeierstrass;
 			sourceTree = "<group>";
 		};
+		4824B762211239A600112764 /* Field */ = {
+			isa = PBXGroup;
+			children = (
+				4824B76521123AD700112764 /* CoordinateSystems */,
+				4824B763211239D900112764 /* Field.swift */,
+			);
+			path = Field;
+			sourceTree = "<group>";
+		};
+		4824B76521123AD700112764 /* CoordinateSystems */ = {
+			isa = PBXGroup;
+			children = (
+				4824B7702113108600112764 /* Point */,
+				4824B76621123AED00112764 /* AffinePointOnCurve.swift */,
+				4824B76A21123B0600112764 /* ProjectivePointOnCurve.swift */,
+				4824B77521132DD800112764 /* JacobianPointOnCurve.swift */,
+			);
+			path = CoordinateSystems;
+			sourceTree = "<group>";
+		};
+		4824B7702113108600112764 /* Point */ = {
+			isa = PBXGroup;
+			children = (
+				4824B76C2113104700112764 /* TwoDimensionalPoint.swift */,
+				4824B771211310A600112764 /* Point.swift */,
+				4824B76E2113105F00112764 /* ThreeDimensionalPoint.swift */,
+				4824B77721132E5B00112764 /* ThreeDimensionalPointOnCurve.swift */,
+			);
+			path = Point;
+			sourceTree = "<group>";
+		};
 		482B154120D41053001B437D /* KeyGeneration */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +232,7 @@
 			children = (
 				4848A04120FD312F004BC02C /* Schnorr.swift */,
 				48A5541E2100F31400A4B7FB /* ECDSA.swift */,
+				48819DDF2116037E00BDE952 /* Ed25519.swift */,
 			);
 			path = CommonSigning;
 			sourceTree = "<group>";
@@ -218,25 +247,33 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		48687FAE20F7E4EB00F2AFA4 /* Point */ = {
+		48687FAE20F7E4EB00F2AFA4 /* OLD POINT */ = {
 			isa = PBXGroup;
 			children = (
 				48B94BEB20F3F4D50041389D /* AffinePoint.swift */,
+				48B6284320FA0DC400001BDC /* EllipticCurve.swift */,
 				48B6284520FA0E2C00001BDC /* EllipticCurvePoint.swift */,
-				48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */,
 			);
-			path = Point;
+			path = "OLD POINT";
 			sourceTree = "<group>";
 		};
 		489119A320F209AA00F86528 /* EllipticCurve */ = {
 			isa = PBXGroup;
 			children = (
+				4824B762211239A600112764 /* Field */,
 				48A19CD72107C43B005FF9F1 /* DistributedSystem */,
-				48687FAE20F7E4EB00F2AFA4 /* Point */,
+				48687FAE20F7E4EB00F2AFA4 /* OLD POINT */,
 				48F242F520F7DD0500FB36DF /* CommonCurves */,
 				48B94BE320F3F2870041389D /* Signing */,
 				48D1101520F3D740005A212A /* Keys */,
-				48B6284320FA0DC400001BDC /* EllipticCurve.swift */,
+				4824B77921132ED000112764 /* Curve.swift */,
+				4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */,
+				4851B4292113633E002404AF /* ExpressibleByProjectiveCoordinates.swift */,
+				4824B77B21132EEF00112764 /* ShortWeierstraßCurve.swift */,
+				489096C021137DC5002D0A02 /* Equation.swift */,
+				4824B77E2113492400112764 /* MontgomeryCurve.swift */,
+				4824B7802113492E00112764 /* EdwardsCurve.swift */,
+				4824B7822113493800112764 /* TwistedEdwardsCurve.swift */,
 				48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */,
 			);
 			path = EllipticCurve;
@@ -660,44 +697,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48D1101E20F3D832005A212A /* PublicAddress.swift in Sources */,
-				48A5541F2100F31400A4B7FB /* ECDSA.swift in Sources */,
-				48B6284620FA0E2C00001BDC /* EllipticCurvePoint.swift in Sources */,
-				48F242F820F7DD2600FB36DF /* Secp256k1.swift in Sources */,
 				48CCEE6E2104ECFD00E0EE34 /* DER.swift in Sources */,
-				48A19CE22107C4A5005FF9F1 /* Neo.swift in Sources */,
-				4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */,
-				48D1101C20F3D812005A212A /* PrivateKeyWIF.swift in Sources */,
+				4824B76821123AF100112764 /* AffinePointOnCurve.swift in Sources */,
+				4824B77621132DD800112764 /* JacobianPointOnCurve.swift in Sources */,
 				48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */,
-				48B94BEC20F3F4D50041389D /* AffinePoint.swift in Sources */,
-				48B94BE520F3F2A50041389D /* Signature.swift in Sources */,
-				48A19CD32107C405005FF9F1 /* Address.swift in Sources */,
 				489119A620F209C400F86528 /* Number.swift in Sources */,
-				48D1101820F3D7BA005A212A /* PublicKey.swift in Sources */,
-				48B6284420FA0DC400001BDC /* EllipticCurve.swift in Sources */,
+				4858F2DB21220A2300ECEC93 /* Secp256r1.swift in Sources */,
+				4824B76921123AF600112764 /* Field.swift in Sources */,
+				4851B42821136331002404AF /* ExpressibleByAffineCoordinates.swift in Sources */,
 				48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */,
-				4848A04220FD312F004BC02C /* Schnorr.swift in Sources */,
-				48A5541D2100F0F900A4B7FB /* Curve25519.swift in Sources */,
-				48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */,
-				48A554262101233100A4B7FB /* SignatureNonce+RFC-6979.swift in Sources */,
-				48A19CE02107C493005FF9F1 /* Zilliqa.swift in Sources */,
+				4824B76D2113104800112764 /* TwoDimensionalPoint.swift in Sources */,
+				4824B77821132E5B00112764 /* ThreeDimensionalPointOnCurve.swift in Sources */,
 				48A19CCE2107681E005FF9F1 /* SecureRandom.swift in Sources */,
-				489119A520F209BA00F86528 /* AnyKeyGenerator.swift in Sources */,
 				48A19CD021076B6E005FF9F1 /* KeychainStatus.swift in Sources */,
 				48B4882320E90FC2004C7B7D /* Base58.swift in Sources */,
-				48A19CD92107C44F005FF9F1 /* DistributedSystem.swift in Sources */,
-				48A19CDB2107C462005FF9F1 /* NetworkInformation.swift in Sources */,
-				48B94BE720F3F2B10041389D /* Message.swift in Sources */,
+				4851B42A2113633E002404AF /* ExpressibleByProjectiveCoordinates.swift in Sources */,
+				4858F2DA2121AB0D00ECEC93 /* Secp256k1.swift in Sources */,
+				4824B77F2113492400112764 /* MontgomeryCurve.swift in Sources */,
+				4824B76F2113105F00112764 /* ThreeDimensionalPoint.swift in Sources */,
 				48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */,
-				4885ABA820F77ECB00115FE0 /* KeyPair.swift in Sources */,
-				48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */,
-				4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */,
-				4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */,
-				48C3A4FB210CFB6D00282E1C /* EllipticCurveForm.swift in Sources */,
-				4885ABA620F77D6B00115FE0 /* Signing.swift in Sources */,
+				4824B77A21132ED000112764 /* Curve.swift in Sources */,
+				4824B76B21123B0600112764 /* ProjectivePointOnCurve.swift in Sources */,
+				489096C121137DC5002D0A02 /* Equation.swift in Sources */,
+				48819DE02116037E00BDE952 /* Ed25519.swift in Sources */,
+				4824B7832113493800112764 /* TwistedEdwardsCurve.swift in Sources */,
+				4824B77C21132EEF00112764 /* ShortWeierstraßCurve.swift in Sources */,
+				4824B7812113492E00112764 /* EdwardsCurve.swift in Sources */,
 				48C3A4FD210DAF6D00282E1C /* SquareRoots.swift in Sources */,
-				48A19CD62107C42C005FF9F1 /* WIFFormatter.swift in Sources */,
-				48A19CDE2107C481005FF9F1 /* Bitcoin.swift in Sources */,
+				4824B772211310A600112764 /* Point.swift in Sources */,
 				48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,16 +733,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				489119AB20F268C700F86528 /* SHA2Tests.swift in Sources */,
-				4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */,
-				48AC5CF820FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */,
-				48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
-				48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */,
-				482598FD210F14820023E010 /* ModularSquareRootsTests.swift in Sources */,
-				4824B761210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift in Sources */,
-				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
-				48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */,
-				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,
+				4858F2DD2122DCCC00ECEC93 /* ShortWeierstrassPointMultiplicationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

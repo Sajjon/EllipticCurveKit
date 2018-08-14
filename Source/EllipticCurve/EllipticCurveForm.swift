@@ -23,13 +23,9 @@ import Foundation
 /// D = 𝟘.𝟚𝟝M
 /// I = 𝟙𝟘𝟘M (EXPENSIVE!)
 ///
-/// Scalars for curves are in the ring ℤ𝗉 (mod P), i.e. of the finite field GF, where the characteristics of the field GF (written `char(GF)` or `ch(GF)`) not equals 𝟚 and not equals 𝟛 (ch(GF)≠𝟚 and ch(GF)≠𝟛).
+/// Scalars for curves are in the ring ℤ𝑝 (mod 𝑝), i.e. of the finite field GF, where the characteristics of the field GF (written `char(GF)` or `ch(GF)`) not equals 𝟚 and not equals 𝟛 (ch(GF)≠𝟚 and ch(GF)≠𝟛).
 /// The Characteristics of a field: "is defined to be the smallest number of times one must use the ring's multiplicative identity (𝟙) in a sum to get the additive identity (𝟘)", ref: https://en.wikipedia.org/wiki/Characteristic_(algebra)
-/// REQUIREMENTS
-/// P is prime, P > 𝟛
-/// 𝟜A³ + 𝟚𝟟B² (mod P) ≠ 𝟘
 /// Reminder of Greek Alphabet:
-///
 /// `𝜓` reads out "psi"
 /// `𝜑` reads out "phi"
 /// Notation: `𝐸𝖰 ⟶ 𝐸𝖶, (𝑥, 𝑦)` describes a mapping from "𝐸𝖰" to "𝐸𝖶", which are two different forms of the same field.
@@ -54,9 +50,28 @@ public enum EllipticCurveForm {
     ///
     ///
     /// # Equation
-    ///      𝑆: 𝑦² = 𝑥³ + 𝐴𝑥 + 𝐵
+    ///      𝑆: 𝑦² = 𝑥³ + 𝑎𝑥 + 𝑏
+    /// - Requires: `𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘 in 𝔽_𝑝 (mod 𝑝)`
     ///
     case shortWeierstrass
+
+    ///
+    /// Montgomery form (`𝑀`) for a curve.
+    /// # Equation
+    ///     𝑀: 𝑏𝑦² = 𝑥(𝑥² + 𝑎𝑥 + 1)
+    /// - Requires: `𝑏(𝑎² - 𝟜) ≠ 𝟘 in 𝔽_𝑝` (or equivalently: `𝑏 ≠ 𝟘` and `𝑎² ≠ 𝟜`)
+    ///
+    /// # 𝑀 is birationally equivalent to Weierstrass form:
+    ///     𝑊: 𝑣² = 𝑡³ + 𝑡(𝟛-𝑎²)/(𝟛𝑏²) + (𝟚𝑎³-𝟡𝑎)/(𝟚𝟟𝑏³), where 𝑢 = 𝑥/𝑏, 𝑣 = 𝑦/𝑏, 𝑡 = 𝑢 + 𝑎/𝟛𝑏
+    ///
+    /// # Mapping from Montgomery to Weierstrass form:
+    ///     𝜓: 𝐸𝑀 ⟶ 𝐸𝖶, (𝑥, 𝑦) ⟼ (𝑡, 𝑣) = ( 𝑥𝑏⁻¹ + (𝟛𝑏)⁻¹𝑎, 𝑦𝑏⁻¹ ), `𝖶𝑎 := (𝟛-𝑎²)/(𝟛𝑏²)`, `𝖶𝑏 := (𝟚𝑎³-𝟡𝑎)/(𝟚𝟟𝑏³)`
+    ///
+    /// # Mapping from Weierstrass to Montgomery form, with two requirements:
+    /// - Requires: 𝜑 requires: `𝑧³ + 𝑎𝑧 + 𝑏 = 𝟘` to have at least one root `𝜋` in `𝔽_𝑝` AND `𝟛𝜋² + 𝑎` is a quadratic residue in `𝔽_𝑝`
+    ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝑀, (𝑡, 𝑣) ⟼ (𝑥, 𝑦) = { 𝑠 = sqrt(𝟛𝜋² + 𝑎)⁻¹ } = ( 𝑠(𝑡-𝜋), 𝑠𝑣), `𝑀𝑎 := 𝟛𝜋𝑠`, `𝑀𝑏 := 𝑠`
+    ///
+    case montgomery
 
     ///
     /// Extended Jacobi Quartic form (`𝑄`) of a curve.
@@ -73,15 +88,15 @@ public enum EllipticCurveForm {
     /// # 𝑄 is birationally equivalent to Weierstrass form:
     ///     𝑊: 𝑣² = 𝑢³ - 𝟜𝑎𝑢² + (𝟜𝑎² - 𝟜𝑑)𝑢
     ///
-    /// # Mappings to Weierstrass form:
-    ///     𝜓: 𝐸𝖰 ⟶ 𝐸𝖶, (𝑥, 𝑦) ⟼ ( (𝟚𝑦+𝟚)𝑥⁻² + 𝟚𝑎, (𝟚𝑦+𝟚)𝟚𝑥⁻³ + 𝟚𝑎*𝟚𝑥⁻¹ )
+    /// # Mapping from Extended Jacobi Quartic to Weierstrass form:
+    ///     𝜓: 𝐸𝖰 ⟶ 𝐸𝖶, (𝑥, 𝑦) ⟼ (𝑢, 𝑣) = ( (𝟚𝑦+𝟚)𝑥⁻² + 𝟚𝑎, (𝟚𝑦+𝟚)𝟚𝑥⁻³ + 𝟚𝑎*𝟚𝑥⁻¹ )
     ///
     ///     ⇔ substitution: { 🐶 = 𝟚𝑦+𝟚, 🐱 = 𝑥⁻², 🐭 = 𝟚𝑎, 🐹 = 𝟚𝑥⁻¹ } ⇔
     ///
-    ///     𝜓: 𝐸𝖰 ⟶ 𝐸𝖶, (𝑥, 𝑦) ⟼ ( 🐱🐶 + 🐭, 🐹🐱🐶 + 🐭🐹)
+    ///     𝜓: 𝐸𝖰 ⟶ 𝐸𝖶, (𝑥, 𝑦) ⟼ (𝑢, 𝑣) = ( 🐱🐶 + 🐭, 🐹🐱🐶 + 🐭🐹)
     ///
-    /// # Mappings to Extended Jacobi Quartic form:
-    ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝖰, (𝑢, 𝑣) ⟼ ( 𝟚𝑢𝑣⁻¹, (𝑢-𝟚𝑎)𝑢²𝟚𝑣⁻² - 𝟙 )
+    /// # Mapping from Weierstrass to Extended Jacobi Quartic form:
+    ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝖰, (𝑢, 𝑣) ⟼ (𝑥, 𝑦) = ( 𝟚𝑢𝑣⁻¹, (𝑢-𝟚𝑎)𝑢²𝟚𝑣⁻² - 𝟙 )
     ///
     case extendedJacobiQuartic
 
@@ -101,20 +116,20 @@ public enum EllipticCurveForm {
     ///     𝑊: 𝑣² = 𝑢³ - (𝑑⁴+𝟚𝟙𝟞𝑑𝑎)𝟜𝟠⁻¹𝑢 + (𝑑⁶-𝟝𝟜𝟘𝑑³𝑎-𝟝𝟠𝟛𝟚𝑎²)𝟠𝟞𝟜⁻¹
     ///
     ///
-    /// # Mappings to Weierstrass form:
-    ///     𝜓: 𝐸𝐻 ⟶ 𝐸𝑊, (𝑥, 𝑦) ⟼ ( ((𝑑³-𝟚𝟟𝑎)𝑥)/(𝟛(𝟛+𝟛𝑦+𝑑𝑥)) - 𝑑²/𝟜, ((𝑑³-𝟚𝟟𝑎)(𝟙-𝑦))/(𝟚(𝟛+𝟛𝑦+𝑑𝑥)) )
+    /// # Mapping from Twisted Hessian to Weierstrass form:
+    ///     𝜓: 𝐸𝐻 ⟶ 𝐸𝑊, (𝑥, 𝑦) ⟼ (𝑢, 𝑣) = ( ((𝑑³-𝟚𝟟𝑎)𝑥)/(𝟛(𝟛+𝟛𝑦+𝑑𝑥)) - 𝑑²/𝟜, ((𝑑³-𝟚𝟟𝑎)(𝟙-𝑦))/(𝟚(𝟛+𝟛𝑦+𝑑𝑥)) )
     ///
     ///     ⇔ substitution: { 🐶 = 𝑑³-𝟚𝟟𝑎, 🐱 = 𝟛+𝟛𝑦+𝑑𝑥 } ⇔
     ///
-    ///     𝜓: 𝐸𝐻 ⟶ 𝐸𝖶, (𝑥, 𝑦) ⟼ (𝑥🐶(𝟛🐱)⁻¹ - 𝑑²/𝟜, (𝟙-𝑦)🐶(𝟚🐱)⁻¹ )
+    ///     𝜓: 𝐸𝐻 ⟶ 𝐸𝖶, (𝑥, 𝑦) ⟼ (𝑢, 𝑣) = (𝑥🐶(𝟛🐱)⁻¹ - 𝑑²/𝟜, (𝟙-𝑦)🐶(𝟚🐱)⁻¹ )
     ///
     ///
-    /// # Mappings to Twisted Hessian form:
-    ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝐻, (𝑢, 𝑣) ⟼ ( (𝟙𝟠𝑑²+𝟟𝟚𝑢)/(𝑑³-𝟙𝟚𝑑𝑢-𝟙𝟘𝟠𝑎+𝟚𝟜𝑣), 𝟙-𝟜𝟠𝑣/(𝑑³-𝟙𝟚𝑑𝑢-𝟙𝟘𝟠𝑎+𝟚𝟜𝑣) )
+    /// # Mapping from Weierstrass to Twisted Hessian form:
+    ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝐻, (𝑢, 𝑣) ⟼ (𝑥, 𝑦) = ( (𝟙𝟠𝑑²+𝟟𝟚𝑢)/(𝑑³-𝟙𝟚𝑑𝑢-𝟙𝟘𝟠𝑎+𝟚𝟜𝑣), 𝟙-𝟜𝟠𝑣/(𝑑³-𝟙𝟚𝑑𝑢-𝟙𝟘𝟠𝑎+𝟚𝟜𝑣) )
     ///
     ///     ⇔ substitution: { 🐶 = (𝑑³-𝟙𝟚𝑑𝑢-𝟙𝟘𝟠𝑎+𝟚𝟜𝑣)⁻¹ } ⇔
     ///
-    ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝐻, (𝑢, 𝑣) ⟼ ( (𝟙𝟠(𝑑²+𝟜𝑢)🐶, (𝟙-𝟜𝟠𝑣)🐶 )
+    ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝐻, (𝑢, 𝑣) ⟼ (𝑥, 𝑦) = ( (𝟙𝟠(𝑑²+𝟜𝑢)🐶, (𝟙-𝟜𝟠𝑣)🐶 )
     ///
     case twistedHessian
 
@@ -128,7 +143,7 @@ public enum EllipticCurveForm {
     ///
     ///
     /// # Equation
-    ///     𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑x²𝑑𝑦²
+    ///     𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑x²𝑦²
     /// - Requires: `𝑎𝑑(𝑎−𝑑) ≠ 0`
     ///
     ///
@@ -136,16 +151,16 @@ public enum EllipticCurveForm {
     ///     𝑊: 𝑣² = 𝑢³ + 𝟚(𝑎+𝑑)𝑢² + (𝑎-𝑑)²𝑢
     ///
     ///
-    /// # Mappings to Weierstrass form:
-    ///     𝜓: 𝐸𝐸 ⟶ 𝐸𝑊, (𝑥, 𝑦) ⟼ ( (𝟙+𝑦)²(𝟙-𝑑𝑥²)/𝑥², 𝟚(𝟙+𝑦)²(𝟙-𝑑𝑥²)/𝑥³ )
+    /// # Mapping from Twisted Edwards to Weierstrass form:
+    ///     𝜓: 𝐸𝐸 ⟶ 𝐸𝑊, (𝑥, 𝑦) ⟼ (𝑥', 𝑦') = ( (𝟙+𝑦)²(𝟙-𝑑𝑥²)/𝑥², 𝟚(𝟙+𝑦)²(𝟙-𝑑𝑥²)/𝑥³ )
     ///
     ///     ⇔ substitution: { 🐶 = (𝟙+𝑦)², 🐱 = 𝟙-𝑑𝑥² } ⇔
     ///
-    ///     𝜓: 𝐸𝐸 ⟶ 𝐸𝑊, (𝑥, 𝑦) ⟼ (🐶🐱𝑥⁻², 🐶🐱𝟚𝑥³)
+    ///     𝜓: 𝐸𝐸 ⟶ 𝐸𝑊, (𝑥, 𝑦) ⟼ (𝑥', 𝑦') = (🐶🐱𝑥⁻², 🐶🐱𝟚𝑥³)
     ///
     ///
-    /// # Mappings to Twisted Edwards form:
-    ///     𝜑: 𝐸𝑊 ⟶ 𝐸𝐸, (𝑥, 𝑦) ⟼ (𝟚𝑢𝑣⁻¹, (𝑢-𝑎+𝑑)(𝑢+𝑎-𝑑)⁻¹)
+    /// # Mapping from Weierstrass to Twisted Edwards form:
+    ///     𝜑: 𝐸𝑊 ⟶ 𝐸𝐸, (𝑥', 𝑦') ⟼ (𝑥, 𝑦) = (𝟚𝑢𝑣⁻¹, (𝑢-𝑎+𝑑)(𝑢+𝑎-𝑑)⁻¹)
     ///
     case twistedEdwards
 
@@ -165,20 +180,20 @@ public enum EllipticCurveForm {
     /// # 𝐼 is birationally equivalent to:
     ///     𝑊: 𝑣² = 𝑢(𝑢-𝑎)(𝑢-𝑏)
     ///
-    /// # Mappings to Weierstrass form:
-    ///     𝜓: 𝐸𝐼 ⟶ 𝐸𝑊, (𝑠, 𝑐, 𝑑) ⟼ ( (𝟙+𝑐)(𝟙+𝑑)𝑠⁻², -(𝟙+𝑐)(𝟙+𝑑)(𝑐+𝑑)𝑠⁻³)
+    /// # Mapping from Twisted Jacobi intersection to Weierstrass form:
+    ///     𝜓: 𝐸𝐼 ⟶ 𝐸𝑊, (𝑠, 𝑐, 𝑑) ⟼ (𝑢, 𝑣) = ( (𝟙+𝑐)(𝟙+𝑑)𝑠⁻², -(𝟙+𝑐)(𝟙+𝑑)(𝑐+𝑑)𝑠⁻³)
     ///
     ///     ⇔ substitution: { 🐶 = (𝟙+𝑐), 🐱 = 𝟙+𝑑, 🐭 = 𝑠⁻² } ⇔
     ///
-    ///     𝜓 ⟼ (🐶🐱🐭, -🐶🐱🐭(𝑐+𝑑)𝑠⁻¹)
+    ///     𝜓 ⟼ (𝑢, 𝑣) = (🐶🐱🐭, -🐶🐱🐭(𝑐+𝑑)𝑠⁻¹)
     ///
     ///
-    /// # Mapping to Twisted Jacobi intersection form:
-    ///     𝜑: 𝐸𝑊 ⟶ 𝐸𝐼, (𝑢, 𝑣) ⟼ (  𝟚𝑣(𝑎𝑏-𝑢²)⁻¹,  𝟚u(𝑏-𝑢)(𝑎𝑏-𝑢²)⁻¹ -𝟙,  𝟚u(𝑎-𝑢)(𝑎𝑏-𝑢²)⁻¹ -𝟙 )
+    /// # Mapping from Weierstrass to Twisted Jacobi intersection form:
+    ///     𝜑: 𝐸𝑊 ⟶ 𝐸𝐼, (𝑢, 𝑣) ⟼ (𝑠, 𝑐, 𝑑) = (  𝟚𝑣(𝑎𝑏-𝑢²)⁻¹,  𝟚u(𝑏-𝑢)(𝑎𝑏-𝑢²)⁻¹ -𝟙,  𝟚u(𝑎-𝑢)(𝑎𝑏-𝑢²)⁻¹ -𝟙 )
     ///
     ///     ⇔ substitution: { 🐶 = (𝑎𝑏-𝑢²)⁻¹, 🐱 = 𝟚𝑢 } ⇔
     ///
-    ///     𝜑 ⟼ (𝟚𝑣🐶, (𝑏-𝑢)🐶🐱 -𝟙, (𝑎-𝑢)🐶🐱 -𝟙)
+    ///     𝜑 ⟼ (𝑠, 𝑐, 𝑑) = (𝟚𝑣🐶, (𝑏-𝑢)🐶🐱 -𝟙, (𝑎-𝑢)🐶🐱 -𝟙)
     ///
     case twistedJacobiIntersection
 }

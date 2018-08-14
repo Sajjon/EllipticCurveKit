@@ -87,6 +87,13 @@ precedencegroup ExponentiationPrecedence {
 
 infix operator ** : ExponentiationPrecedence
 
+public func ^ (_ base: Number, _ exponent: Number) -> Number {
+    return base ** exponent
+}
+public func ^ (_ base: Number, _ exponent: Int) -> Number {
+    return base ** exponent
+}
+
 public func ** (_ base: Number, _ exponent: Number) -> Number {
     guard exponent.bitWidth < 32 else { fatalError("exponent too big") }
     let decimalString = exponent.asDecimalString()

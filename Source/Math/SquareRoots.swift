@@ -24,14 +24,14 @@ func tonelliShanks(_ n: Number, modulus p: Number) -> [Number]? {
     // Step 1: By factoring out powers of 2, find Q and S such that p^d - 1 = Q 2^S with Q odd
     s = 0
     q = p - 1
-    while mod(q, modulus: 2) == 0 {
+    while q % 2 == 0 {
         s += 1
         q /= 2
     }
 
     if s == 1 {
         r = n.power((p + 1) / 4, modulus: p)
-        if mod(r*r, modulus: p) == n {
+        if r**2 % p == n {
             return [r, p - r]
         }
     }
@@ -53,7 +53,7 @@ func tonelliShanks(_ n: Number, modulus p: Number) -> [Number]? {
         i = 0
         var tt: Number = t
         while tt != 1 {
-            tt = mod(tt * tt, modulus: p)
+            tt = tt**2 % p
             i += 1
             if i == m { return nil }
         }
@@ -63,19 +63,19 @@ func tonelliShanks(_ n: Number, modulus p: Number) -> [Number]? {
         /// Calculates 2^(m - i - 1)
         let exponentForB = Number(2).power((m - i - 1), modulus: p - 1)
         b = c.power(exponentForB, modulus: p)
-        c = mod(p) { b * b }
-        r = mod(p) { r * b }
-        t = mod(p) { t * c }
+        c =  (b**2) % p //mod(p) { b * b }
+        r =  (r*b) % p //mod(p) { r * b }
+        t =  (t*c) % p //mod(p) { t * c }
         m = i
     }
 
-    if mod(r * r, modulus: p) == n { return [r, p - r] }
+    if r**2 % p == n { return [r, p - r] }
     return nil
 }
 
 /// Calculate the square roots 𝑥² ≡ n (mod p).
 public func squareRoots(of n: Number, modulus p: Number) -> [Number]? {
-    let n = mod(n, modulus: p)
+    let n = n % p
 
     guard n != 0 else { return [0] }
     guard p != 2 else { return [n] }
@@ -83,13 +83,13 @@ public func squareRoots(of n: Number, modulus p: Number) -> [Number]? {
     guard legendreSymbol(n, modulus: p) == 1 else { return nil }
 
     // Common case #1
-    if mod(p, modulus: 4) == 3 {
+    if p % 4 == 3 {
         let x = n.power((p + 1)/4, modulus: p)
         return [x, p-x]
     }
 
     // Common case #2
-    if mod(p, modulus: 8) == 5 {
+    if p % 8 == 5 {
         if n == n.power((p + 3)/4, modulus: p) {
             let x = n.power((p + 3)/8, modulus: p)
             return [x, p-x]
@@ -98,7 +98,7 @@ public func squareRoots(of n: Number, modulus p: Number) -> [Number]? {
 
         guard let ts = tonelliShanks(p - 1, modulus: p) else { return nil }
 
-        let x = mod(ts[0] * s, modulus: p)
+        let x = (ts[0] * s) % p
         return [x, p-x]
     }
 

@@ -74,24 +74,24 @@ class ModularSquareRootsTests: XCTestCase {
         _testAllSquareRoots(p)
     }
 
-    func testInverse() {
-        let p = Number(7873)
-
-        for n in Number(1)..<100 {
-            var allValid = Set<Number>()
-            for m in Number(0)..<p {
-                if mod((n * m), modulus: p) == 1 {
-                    allValid.insert(m)
-                    break
-                }
-            }
-
-            XCTAssertTrue(
-                allValid.contains(
-                    inverse(of: n, modulus: p)
-            ))
-        }
-    }
+//    func testInverse() {
+//        let p = Number(7873)
+//
+//        for n in Number(1)..<100 {
+//            var allValid = Set<Number>()
+//            for m in Number(0)..<p {
+//                if mod((n * m), modulus: p) == 1 {
+//                    allValid.insert(m)
+//                    break
+//                }
+//            }
+//
+//            XCTAssertTrue(
+//                allValid.contains(
+//                    divide(of: n, modulus: p)
+//            ))
+//        }
+//    }
 
     func testModularInverse() {
         func _test(modInvOf x: Number, mod p: Number, expect expected: Number) {
@@ -101,7 +101,7 @@ class ModularSquareRootsTests: XCTestCase {
             )
 
             XCTAssertEqual(
-                Field(modulus: p).divide(1, by: x),
+                Field(modulus: p).modInverse((1, x),
                 expected
             )
         }

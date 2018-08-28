@@ -15,9 +15,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-               BuildableName = "SwiftCrypto.framework"
-               BlueprintName = "SwiftCrypto"
-               ReferencedContainer = "container:SwiftCrypto.xcodeproj">
+               BuildableName = "EllipticCurveKit.framework"
+               BlueprintName = "EllipticCurveKit"
+               ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48F22C9520C70D87004A18CA"
+               BuildableName = "EllipticCurveKitTests.xctest"
+               BlueprintName = "EllipticCurveKitTests"
+               ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,38 +42,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "48F22C9520C70D87004A18CA"
-               BuildableName = "SwiftCryptoTests.xctest"
-               BlueprintName = "SwiftCryptoTests"
-               ReferencedContainer = "container:SwiftCrypto.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "BigIntPrimeTests">
-               </Test>
-               <Test
-                  Identifier = "PrimeTests/testFirst10KPrimes()">
-               </Test>
-               <Test
-                  Identifier = "UIntPrimeTests/testFirst10KPrimes()">
-               </Test>
-               <Test
-                  Identifier = "UIntPrimeTests/testSomePrettyBigPrimesDoubledVerifyNotPrime()">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-            BuildableName = "SwiftCrypto.framework"
-            BlueprintName = "SwiftCrypto"
-            ReferencedContainer = "container:SwiftCrypto.xcodeproj">
+            BuildableName = "EllipticCurveKit.framework"
+            BlueprintName = "EllipticCurveKit"
+            ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -79,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-            BuildableName = "SwiftCrypto.framework"
-            BlueprintName = "SwiftCrypto"
-            ReferencedContainer = "container:SwiftCrypto.xcodeproj">
+            BuildableName = "EllipticCurveKit.framework"
+            BlueprintName = "EllipticCurveKit"
+            ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -97,9 +87,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-            BuildableName = "SwiftCrypto.framework"
-            BlueprintName = "SwiftCrypto"
-            ReferencedContainer = "container:SwiftCrypto.xcodeproj">
+            BuildableName = "EllipticCurveKit.framework"
+            BlueprintName = "EllipticCurveKit"
+            ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

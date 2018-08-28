@@ -10,17 +10,12 @@ import Foundation
 
 ///      𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑x²𝑦²
 /// - Requires: `𝑎𝑑(𝑎−𝑑) ≠ 0`
-public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates , OverGaloisField, CustomStringConvertible {
+public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates, CustomStringConvertible {
 
-    public let equation: TwoDimensionalImbalancedEquation
-    public let order: Number
-    public let curveId: SpecificCurve
     public let a: Number
     public let d: Number
     public let galoisField: Field
-
-    public var generator: TwoDimensionalPoint
-    public let cofactor: Number
+    public let equation: TwoDimensionalImbalancedEquation
 
     struct Requirements {
         static func areFullfilled(a: Number, d: Number, over field: Field) -> Bool {
@@ -31,70 +26,29 @@ public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleBy
     init?(
         a: Number,
         d: Number,
-        galoisField field: Field,
-        generator: TwoDimensionalPoint,
-        cofactor: Number,
-        order: Number,
-        curveId: SpecificCurve,
-        equation: TwoDimensionalImbalancedEquation
+        galoisField field: Field
         ) {
 
         guard Requirements.areFullfilled(a: a, d: d, over: field) else { return nil }
 
         self.a = a
         self.d = d
-        self.generator = generator
-        self.cofactor = cofactor
         self.galoisField = field
-        self.order = order
-        self.curveId = curveId
-        self.equation = equation
+        self.equation = TwoDimensionalImbalancedEquation(lhs: { x, y in
+
+            let x² = x**2
+            let y² = y**2
+
+            return field.mod { a*x² + y² }
+        }, rhs: { x, y in
+
+            let x² = x**2
+            let y² = y**2
+
+            return field.mod { 1 + d*x²*y² }
+        })
     }
 
-    init?(
-        a: Number,
-        d: Number,
-        parameters: CurveParameterExpressible,
-        equation: TwoDimensionalImbalancedEquation) {
-        self.init(
-            a: a,
-            d: d,
-            galoisField: parameters.galoisField,
-            generator: parameters.generator,
-            cofactor: parameters.cofactor,
-            order: parameters.order,
-            curveId: parameters.curveId,
-            equation: equation
-        )
-    }
-
-    init?(
-        a: Number,
-        d: Number,
-        parameters: CurveParameterExpressible
-        ) {
-
-        let field = parameters.galoisField
-
-        self.init(
-            a: a,
-            d: d,
-            parameters: parameters,
-            equation: TwoDimensionalImbalancedEquation(lhs: { x, y in
-
-                let x² = x**2
-                let y² = y**2
-
-                return field.mod { a*x² + y² }
-            }, rhs: { x, y in
-
-                let x² = x**2
-                let y² = y**2
-
-                return field.mod { 1 + d*x²*y² }
-            })
-        )
-    }
 }
 
 public extension TwistedEdwardsCurve {

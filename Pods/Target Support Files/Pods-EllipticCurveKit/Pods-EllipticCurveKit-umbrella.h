@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_SwiftCryptoTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_SwiftCryptoTestsVersionString[];
+FOUNDATION_EXPORT double Pods_EllipticCurveKitVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_EllipticCurveKitVersionString[];
 

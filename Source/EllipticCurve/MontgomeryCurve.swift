@@ -10,8 +10,8 @@ import Foundation
 
 ///     𝑀: 𝑏𝑦² = 𝑥(𝑥² + 𝑎𝑥 + 1)
 /// - Requires: `𝑏(𝑎² - 𝟜) ≠ 𝟘 in 𝔽_𝑝` (or equivalently: `𝑏 ≠ 𝟘` and `𝑎² ≠ 𝟜`)
-public struct MontgomeryCurve: ExpressibleByAffineCoordinates, OverGaloisField, CustomStringConvertible {
-    public let curveId: SpecificCurve
+public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConvertible {
+//    public let curveId: SpecificCurve
 
 
     /// https://www.hyperelliptic.org/EFD/g1p/auto-montgom-xz.html
@@ -37,14 +37,10 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, OverGaloisField, 
         }
     }
 
-    public let order: Number
-    public let generator: TwoDimensionalPoint
-
-    public let cofactor: Number
-
-    public let galoisField: Field
     private let a: Number
     private let b: Number
+    public let galoisField: Field
+    public let order: Number // can this be removed? is it really needed by Montomery Ladder?
 
     // For Curve25519: a = 486662, thus `a24` = `121666`, in some code bases you might see the number `121666`.
     let a24: Number
@@ -54,11 +50,7 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, OverGaloisField, 
         a: Number,
         b: Number,
         galoisField field: Field,
-        generator: TwoDimensionalPoint,
-        cofactor: Number,
-        order: Number,
-        curveId: SpecificCurve,
-        equation: TwoDimensionalBalancedEquation
+        order: Number
         ) {
 
         guard Requirements.areFullfilled(a: a, b: b, over: field) else { return nil }
@@ -66,29 +58,16 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, OverGaloisField, 
         self.a = a
         self.b = b
         self.a24 = field.mod((a + 2)/4)
-        self.generator = generator
-        self.cofactor = cofactor
         self.galoisField = field
         self.order = order
-        self.curveId = curveId
-        self.equation = equation
-    }
 
-    init?(
-        a: Number,
-        b: Number,
-        parameters: CurveParameterExpressible,
-        equation: TwoDimensionalBalancedEquation) {
-        self.init(
-            a: a,
-            b: b,
-            galoisField: parameters.galoisField,
-            generator: parameters.generator,
-            cofactor: parameters.cofactor,
-            order: parameters.order,
-            curveId: parameters.curveId,
-            equation: equation
-        )
+        self.equation = TwoDimensionalBalancedEquation(lhs: { x in
+            field.mod { x * (x**2 + a*x + 1) }
+        }, rhs: { y in
+            field.mod { b * y**2 }
+        }, yFromX: { x in
+            field.squareRoots(of: x).map { field.modInverse($0, b) }
+        })
     }
 
     struct Requirements {
@@ -97,27 +76,6 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, OverGaloisField, 
         }
     }
 
-    init?(
-        a: Number,
-        b: Number,
-        parameters: CurveParameterExpressible
-        ) {
-
-        let field = parameters.galoisField
-
-        self.init(
-            a: a,
-            b: b,
-            parameters: parameters,
-            equation: TwoDimensionalBalancedEquation(lhs: { x in
-                field.mod { x * (x**2 + a*x + 1) }
-            }, rhs: { y in
-                field.mod { b * y**2 }
-            }, yFromX: { x in
-                field.squareRoots(of: x).map { field.modInverse($0, b) }
-            })
-        )
-    }
 
     /// Returns a list of the y-coordinates on the curve at given x.
     func getY(fromX x: Number) -> [Number] {
@@ -134,32 +92,6 @@ private extension MontgomeryCurve {
      * Here it is not ok to simply swap the pointers, which whould lead to
      * different memory access patterns when `n1` and `n2`, are used afterwards.
      */
-    /// C CODE: https://github.com/wolfeidau/mbedtls/blob/4c7eb1131c185cb44d76d43342398882c5c485db/source/bignum.c#L256-285
-    /// PYTHON CODE v1:
-//    def swap(P,Q,m):
-//        l = max(len(bin(P.X)),len(bin(P.Z)),len(bin(Q.X)),len(bin(Q.Z))) - 2
-//        d = (m<<(l+2)) - m
-//        notd = ~d
-//        px = P.X & d
-//        pz = P.Z & d
-//        qx = Q.X & notd
-//        qz = Q.Z & notd
-//        return Point(px+qx,pz+qz)
-    //
-    /// PYTHON CODE v2: https://gist.github.com/natmchugh/87c03e82a85219e1fb6d#L55-L57
-//    def cswap(self, a, b, c):
-//        mask = c * self.mask
-//        return (a & ~mask) | (b & mask)  , (b & ~mask) | (a & mask)
-    //
-    /// JAVA CODE: https://github.com/google/tink/blob/master/java/src/main/java/com/google/crypto/tink/subtle/Curve25519.java#L230-L237
-//    static void swapConditional(long[] a, long[] b, int iswap) {
-//        int swap = -iswap;
-//        for (int i = 0; i < Field25519.LIMB_CNT; i++) {
-//            int x = swap & (((int) a[i]) ^ ((int) b[i]));
-//            a[i] = ((int) a[i]) ^ x;
-//            b[i] = ((int) b[i]) ^ x;
-//        }
-//    }
     func safeConditionalSwap(_ n1: inout Number, and n2: inout Number, `if` shouldSwap: Bool) {
         guard n1 != n2 else { fatalError("n1 and n2 cannot be same number") }
         var XORed = n1

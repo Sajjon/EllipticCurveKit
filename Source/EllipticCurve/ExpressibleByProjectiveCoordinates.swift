@@ -15,7 +15,8 @@ public protocol ExpressibleByProjectiveCoordinates: Curve {
     func addProjective(point p1: Projective, to p2: Projective) -> Projective
     func doubleProjective(point: Projective) -> Projective
     func multiplyProjective(point: Projective, by number: Number) -> Projective
-    func projectiveMultiplicationOfGenerator(times number: Number) -> Projective
+
+//    func projectiveMultiplicationOfGenerator(times number: Number) -> Projective
 
     func affineToProjective(_ affinePoint: AffinePointOnCurve<Self>) -> Projective
     func projectiveToAffine(_ projectivePoint: Projective) -> AffinePointOnCurve<Self>
@@ -26,13 +27,9 @@ public extension ExpressibleByProjectiveCoordinates {
         return Self.identityPointProjective
     }
 
-    var generatorProjective: Projective {
-        return affineToProjective(AffinePointOnCurve<Self>(point: generator))
-    }
-
-    func projectiveMultiplicationOfGenerator(times number: Number) -> Projective {
-        return multiplyProjective(point: generatorProjective, by: number)
-    }
+//    func projectiveMultiplicationOfGenerator(times number: Number) -> Projective {
+//        return multiplyProjective(point: generatorProjective, by: number)
+//    }
 }
 
 public extension ExpressibleByProjectiveCoordinates {

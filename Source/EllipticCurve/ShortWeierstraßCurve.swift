@@ -12,29 +12,16 @@ import Foundation
 /// - Requires: `𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘 in 𝔽_𝑝 (mod 𝑝)`
 public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates, CustomStringConvertible {
 
-    public let generator: TwoDimensionalPoint
-
-    public let cofactor: Number
-
-    public let curveId: SpecificCurve
-
-    public let order: Number
-
-    public let galoisField: Field
-    public let equation: TwoDimensionalBalancedEquation
 
     private let a: Number
     private let b: Number
+    public let galoisField: Field
+    public let equation: TwoDimensionalBalancedEquation
 
     public init?(
         a: Number,
         b: Number,
-        galoisField: Field,
-        generator: TwoDimensionalPoint,
-        cofactor: Number,
-        order: Number,
-        curveId: SpecificCurve,
-        equation: TwoDimensionalBalancedEquation
+        galoisField: Field
         ) {
 
         guard Requirements.areFullfilled(a: a, b: b, over: galoisField) else { return nil }
@@ -42,28 +29,14 @@ public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, Expressible
         self.a = a
         self.b = b
         self.galoisField = galoisField
-        self.generator = generator
-        self.order = order
-        self.cofactor = cofactor
-        self.curveId = curveId
-        self.equation = equation
-    }
-
-    public init?(
-        a: Number,
-        b: Number,
-        parameters: CurveParameterExpressible,
-        equation: TwoDimensionalBalancedEquation
-        ) {
-        self.init(
-            a: a,
-            b: b,
-            galoisField: parameters.galoisField,
-            generator: parameters.generator,
-            cofactor: parameters.cofactor,
-            order: parameters.order,
-            curveId: parameters.curveId,
-            equation: equation
+        self.equation = TwoDimensionalBalancedEquation(
+            lhs: { x in
+                galoisField.mod { x**3 + a*x + b }
+        }, rhs: { y in
+            galoisField.mod { y**2 }
+        }, yFromX: { x in
+            galoisField.squareRoots(of: x)
+        }
         )
     }
 
@@ -73,56 +46,17 @@ public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, Expressible
         }
     }
 
-    init?(
-        a: Number,
-        b: Number,
-        parameters: CurveParameterExpressible
-    ) {
-        let field = parameters.galoisField
-        let newEquation = TwoDimensionalBalancedEquation(
-            lhs: { x in
-                field.mod { x**3 + a*x + b }
-            }, rhs: { y in
-                field.mod { y**2 }
-            }, yFromX: { x in
-                field.squareRoots(of: x)
-            }
-        )
-
-        self.init(a: a, b: b, parameters: parameters, equation: newEquation)
-    }
-
     /// Returns a list of the y-coordinates on the curve at given x.
     func getY(fromX x: Number) -> [Number] {
         return equation.getYFrom(x: x)
-//        let y² = equatequation2Dion.solveLHS(x: x)
-//        guard let squares = squareRoots(of: y², modulus: galoisField.modulus) else { return [] }
-//        var result = [Number]()
-//        for y in squares {
-//            // TODO: check inverted point?
-//            guard containsPoint(Affine(x: x, y: y)) else { continue }
-//            result.append(y)
-//        }
-//        return result
     }
 }
 
 // MARK: - ExpressibleByAffineCoordinates
 public extension ShortWeierstraßCurve {
 
-//    var equation: Equation { return equation2D }
-
     static let identityPointAffine: Affine = .infinity
     static let identityPointProjective = Projective(x: 0, y: 1, z: 0)
-
-//    func containsPoint<P>(_ p: P) -> Bool where P: Point {
-//        // the inifinity point IS indeed on the curve
-//        guard !isIdentity(point: p) else { return true }
-//
-//        guard let point = p as? TwoDimensionalPoint else { fatalError("point should have at least two dimensions") }
-//        return equation.isZero(x: point.x, y: point.y)
-//    }
-
 
     func isIdentity<P>(point: P) -> Bool where P: Point {
         if let affine = point as? Affine {
@@ -186,8 +120,8 @@ public extension ShortWeierstraßCurve {
         let X = projectivePoint.x
         let Y = projectivePoint.y
         let Z = projectivePoint.z
-        let x = modInverseN(X, Z) // galoisField.divide(X, by: Z)
-        let y = modInverseN(Y, Z) // galoisField.divide(Y, by: Z)
+        let x = modInverseP(X, Z) // galoisField.divide(X, by: Z)
+        let y = modInverseP(Y, Z) // galoisField.divide(Y, by: Z)
         return Affine(x: x, y: y)
     }
 

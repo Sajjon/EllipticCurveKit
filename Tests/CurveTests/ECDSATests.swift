@@ -10,7 +10,7 @@ import XCTest
 import CryptoSwift
 import BigInt
 
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 // Test vectors: https://github.com/trezor/trezor-crypto/blob/957b8129bded180c8ac3106e61ff79a1a3df8893/tests/test_check.c#L1959-L1965
 // Signature data from: https://github.com/oleganza/CoreBitcoin/blob/master/CoreBitcoinTestsOSX/BTCKeyTests.swift

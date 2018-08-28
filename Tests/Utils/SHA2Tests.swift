@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 class SHA2Tests: XCTestCase {
     

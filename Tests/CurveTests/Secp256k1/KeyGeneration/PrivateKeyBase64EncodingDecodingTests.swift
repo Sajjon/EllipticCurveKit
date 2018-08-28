@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 private let hex = "29EE955FEDA1A85F87ED4004958479706BA6C71FC99A67697A9A13D9D08C618E"
 private let base64 = "Ke6VX+2hqF+H7UAElYR5cGumxx/JmmdpepoT2dCMYY4="

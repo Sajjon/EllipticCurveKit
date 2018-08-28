@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 class ShortWeierstrassPointMultiplicationTests: XCTestCase {
 

@@ -9,12 +9,17 @@
 import Foundation
 import BigInt
 
-public class Field: CustomStringConvertible {
+public struct Field: CustomStringConvertible {
 
     let modulus: Number
 
     init(modulus: Number) {
         self.modulus = modulus
+    }
+
+    init?(_ hex: String) {
+        guard let number = Number(hexString: hex) else { return nil }
+        self.init(modulus: number)
     }
 }
 
@@ -33,7 +38,7 @@ public extension Field {
     }
 
     func squareRoots(of x: Number) -> [Number] {
-        guard let roots = SwiftCrypto.squareRoots(of: x, modulus: modulus) else { return [] }
+        guard let roots = EllipticCurveKit.squareRoots(of: x, modulus: modulus) else { return [] }
         return roots
     }
 }

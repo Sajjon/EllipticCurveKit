@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 import BigInt
 
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 class Secp256r1_PointArthmeticTests: XCTestCase {
 

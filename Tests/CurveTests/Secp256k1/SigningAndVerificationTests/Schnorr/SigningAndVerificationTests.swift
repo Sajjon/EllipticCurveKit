@@ -9,7 +9,7 @@
 import XCTest
 import BigInt
 
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 // The three test vectors below are found at:
 //  https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors

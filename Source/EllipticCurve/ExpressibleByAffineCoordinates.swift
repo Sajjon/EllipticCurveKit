@@ -21,6 +21,12 @@ public protocol ExpressibleByAffineCoordinates: Curve {
 }
 
 public extension ExpressibleByAffineCoordinates {
+    func multiply(point: TwoDimensionalPoint, by number: Number) -> TwoDimensionalPoint {
+        return multiplyAffine(point: Affine(point: point), by: number)
+    }
+}
+
+public extension ExpressibleByAffineCoordinates {
 
     var identityPointAffine: AffinePointOnCurve<Self> {
         return Self.identityPointAffine
@@ -48,9 +54,5 @@ public extension ExpressibleByAffineCoordinates {
             P = addition(P, P)
         }
         return r
-    }
-
-    static func *(number: Number, curve: Self) -> Affine {
-        return curve.multiplyAffine(point: Affine(point: curve.generator), by: number)
     }
 }

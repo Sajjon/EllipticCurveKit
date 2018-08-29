@@ -1,0 +1,5 @@
+#include "base_tests.xcconfig"
+#include "ellipticcurvekit_debug.xcconfig"
+
+INFOPLIST_FILE = Tests/SupportingFiles/EllipticCurveKit-Tests-Info.plist
+PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EllipticCurveKitTests

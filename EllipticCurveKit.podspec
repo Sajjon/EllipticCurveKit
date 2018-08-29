@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
 
     s.dependency 'EquationKit', :git => 'https://github.com/Sajjon/EquationKit.git'
     s.dependency 'BigInt',      :git => 'https://github.com/attaswift/BigInt.git'
-
+    s.dependency 'CryptoSwift', :git => 'https://github.com/krzyzanowskim/CryptoSwift.git'
 end

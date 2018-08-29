@@ -1,21 +1,13 @@
 ## ⚠️ THIS SDK IS NOT SAFE/PRODUCTION READY (YET!) ⚠️ 
-#### I'm no cryptography expert, If you find mistakes, inaccuracies or if you have suggestions for improvements of this README or the source code, please [submit an issue](https://github.com/Sajjon/SwiftCrypto/issues/new)!
+#### I'm no cryptography expert, If you find mistakes, inaccuracies or if you have suggestions for improvements of this README or the source code, please [submit an issue](https://github.com/Sajjon/EllipticCurveKit/issues/new)!
 
 <!-- MarkdownTOC -->
 
 - [Goal](#goal)
     - [Swifty?](#swifty)
     - [Usage](#usage)
-- [Alternatives](#alternatives)
-    - [Bitcoin C Bindings](#bitcoin-c-bindings)
-    - [Pure Swift](#pure-swift)
 - [Status](#status)
     - [Status of goal](#status-of-goal)
-- [Dependencies](#dependencies)
-    - [Big Numbers](#big-numbers)
-        - [Apple Accelerate vBignum](#apple-accelerate-vbignum)
-        - [Hash functions](#hash-functions)
-- [Key inspiration](#key-inspiration)
 - [Roadmap](#roadmap)
     - [Signatures](#signatures)
     - [Key Formats](#key-formats)
@@ -90,23 +82,6 @@ The code above takes around 0.5 seconds to execute (using `Release` optimization
 
 The privatekey, signature, and message hex strings above are *"Test Vector 2"* from the [Bitcoin BIP-Schnorr wiki](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors).
 
-# Alternatives
-There are many - production like alternatives to this Swift SDK. The goal of this library is to be rid of dependencies to C (and other programming languages) code. While there is alternative to this Swift SDK that is written in pure swift, it is too slow (read #pure-swift).
-
-## Bitcoin C Bindings
-The [Bitcoin Core's secp256k1 library](https://github.com/bitcoin-core/secp256k1) developed in C seems to be the industry standard library for Elliptic Curve Cryptography. It is proven and robust and has many developers, why many projects in other programming languages just provide and a wrapper around it. Here is a short list of Bitcoin secp256k1 C library wrappers:
-
-> ### Other languages
-> [Go](https://github.com/toxeus/go-secp256k1), [Javascript](https://github.com/cryptocoinjs/secp256k1-node), [PHP](https://github.com/Bit-Wasp/secp256k1-php), [Python Binding](https://github.com/petertodd/python-bitcoinlib), [Ruby](https://github.com/lian/bitcoin-ruby), [Rust](https://github.com/rust-bitcoin/rust-bitcoinconsensus), [Scala](https://github.com/bitcoin-s/bitcoin-s-core)   
-
-> ### Bitcoin C Bindings (Swift)
-> There are some bindings to bitcoin-core/secp256k1 in Swift too. The most promising seems to be [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit) (here are some others [Boilertalk/secp256k1.swift](https://github.com/Boilertalk/secp256k1.swift), [noxproject/ASKSecp256k1](https://github.com/noxproject/ASKSecp256k1), [pebble8888/secp256k1swift](https://github.com/pebble8888/secp256k1swift) and [skywinder/ios-secp256k1](https://github.com/skywinder/ios-secp256k1). 
-
-> The SDK *kishikawakatsumi/BitcoinKit* stands out since it provides additional Swift layers to *bitcoin-core/secp256k1*. For production purposes, I recommend looking at [kishikawakatsumi/BitcoinKit](https://github.com/kishikawakatsumi/BitcoinKit).
-
-## Pure Swift
-The only Pure Swift Elliptic Curve cryptography SDK I have found so far is [hyugit/EllipticCurve](https://github.com/hyugit/EllipticCurve). The code is very Swifty and nice indeed, great work by [Huang Yu aka hyugit](https://github.com/hyugit)! However, the code runs too slow. Taking over 10 minutes for Key generation. While this SDK takes around 0.1 seconds (using `Release` optimization flags).
-
 # Status
 
 This SDK is in a proof-of-concept stage, but most features are supported, the code is Swifty and fast, but not yet safe to use. I'm working on optimizing the performance first, then making it safe to use.
@@ -116,32 +91,6 @@ This SDK is in a proof-of-concept stage, but most features are supported, the co
 - [x] Fast (fastest pure Swift ECC SDK, but 250x slower than Bitcoin C SDK)
 - [ ] Safe  
 
-
-# Dependencies
-This SDK should never require any bridge to some C library (OpenSSL or bitcoin core for example) or even Objective-C. This SDK should be "Swifty" through and through. 
-
-## Big Numbers
-Elliptic Curve Cryptography requires big numbers (256 bits and more), but natively we only have support for 64 bits (on 64-bit platforms) using [`UInt64`](https://developer.apple.com/documentation/swift/uint64). I started on developing [my own BigInt code, which I eventually throw away](https://github.com/Sajjon/SwiftCrypto/commit/b447188a4dd303b14eb8c483bb6fde6c351c815c) since Apple Developer [Karoy Lorentey a.k.a. *"lorentey"*](https://github.com/lorentey) already created BigInt SDK [attaswift/BigInt](https://github.com/attaswift/BigInt) which works beautifully. I am also keeping an eye on a [BigInt implementation from Apple, which is in prototype stage](https://github.com/apple/swift/blob/master/test/Prototypes/BigInt.swift), might switch over to it if ever officially released.
-
-I have also evalutated [hyugit/UInt256](https://github.com/hyugit/UInt256) which conforms to Swifts [FixedWidthInteger protocol](https://developer.apple.com/documentation/swift/fixedwidthinteger), but that won't scale well since we might need 512 and 1024 bit large numbers. I also suspect that arithemtic operations in [attaswift/BigInt](https://github.com/attaswift/BigInt) are faster than [hyugit/UInt256](https://github.com/hyugit/UInt256) (needs verification). There are also *discontinued* [CryptoCoinSwift/UInt256](https://github.com/CryptoCoinSwift/UInt256) which seems inferior to hyugit/UInt256. 
-
-### Apple Accelerate vBignum
-[Apple's library Accelerate](https://developer.apple.com/documentation/accelerate) seems to offer BigNumbers but in a very unswifty way using `UnsafePointer`s here is addition of [vbignum's vU256](https://developer.apple.com/documentation/accelerate/veclib/vbignum):
-```swift
-func vU256Add(_ a: UnsafePointer<vU256>, 
-            _ b: UnsafePointer<vU256>, 
-            _ result: UnsafeMutablePointer<vU256>)
-```
-
-However, I should probably investigate it further and measure performance. Perhaps a small struct wrapping it and decorating it with a Swifty API would give greater performance than attaswift/BigInt.
-
-### Hash functions
-I use the SHA-256 hashing functions provided by [krzyzanowskim/CryptoSwift](https://github.com/krzyzanowskim/CryptoSwift).
-
-# Key inspiration
-I have used lots of open source projects as inspiration. Bitcoin Improvement Proposal Wiki [bip-schnorr](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki) by the bitcoin core developer [Pieter Wuille a.k.a. *"Sipa"*](https://github.com/sipa) has been a priceless inspiration for Schnorr Signature.
-
-[Sylvestre Blanc a.k.a. *"HurlSly"*](https://github.com/HurlSly)'s [Python Code](https://github.com/HurlSly/BitcoinECCPython/blob/master/BitcoinECC.py) has also been very helpful.
 
 # Roadmap
 ## Signatures

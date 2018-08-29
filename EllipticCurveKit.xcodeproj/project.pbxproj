@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08B28EC19FA43D9681D88350 /* Pods_EllipticCurveKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E702435B716071B4AA8888 /* Pods_EllipticCurveKitTests.framework */; };
 		4824B76821123AF100112764 /* AffinePointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76621123AED00112764 /* AffinePointOnCurve.swift */; };
 		4824B76921123AF600112764 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B763211239D900112764 /* Field.swift */; };
 		4824B76B21123B0600112764 /* ProjectivePointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76A21123B0600112764 /* ProjectivePointOnCurve.swift */; };
@@ -38,10 +37,9 @@
 		48C3A4FD210DAF6D00282E1C /* SquareRoots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3A4FC210DAF6D00282E1C /* SquareRoots.swift */; };
 		48CCEE6E2104ECFD00E0EE34 /* DER.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCEE6D2104ECFD00E0EE34 /* DER.swift */; };
 		48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EB887F20FF2D5900974DF9 /* ModularInverse.swift */; };
-		48F22C9720C70D88004A18CA /* EllipticCurveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */; };
-		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48F22C9720C70D88004A18CA /* .framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* .framework */; };
+		48F22CAA20C70DC9004A18CA /* EllipticCurveKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48FF10F62122FBE700AA788A /* ECCBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF10F52122FBE700AA788A /* ECCBase.swift */; };
-		906F954CB5C2DBE40DDCA931 /* Pods_EllipticCurveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B11D266AF9C7DFC41BED662 /* Pods_EllipticCurveKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,15 +48,11 @@
 			containerPortal = 48F22C8420C70D87004A18CA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 48F22C8C20C70D87004A18CA;
-			remoteInfo = SwiftCrypto;
+			remoteInfo = EllipticCurveKit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		128450F8C630E5A922AFCD79 /* Pods-EllipticCurveKit.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.fasttestable.xcconfig"; sourceTree = "<group>"; };
-		2E48574CE3542C51EAC1410D /* Pods-EllipticCurveKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		36E702435B716071B4AA8888 /* Pods_EllipticCurveKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B11D266AF9C7DFC41BED662 /* Pods_EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4824B760210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortWeierstrassPointMultiplicationTests.swift; sourceTree = "<group>"; };
 		4824B763211239D900112764 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		4824B76621123AED00112764 /* AffinePointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinePointOnCurve.swift; sourceTree = "<group>"; };
@@ -76,6 +70,19 @@
 		482598FC210F14820023E010 /* ModularSquareRootsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularSquareRootsTests.swift; sourceTree = "<group>"; };
 		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		4847DE052137339B00440F1E /* base_framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_framework.xcconfig; sourceTree = "<group>"; };
+		4847DE062137339B00440F1E /* ellipticcurvekit_release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_release.xcconfig; sourceTree = "<group>"; };
+		4847DE072137339B00440F1E /* ellipticcurvekit_debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_debug.xcconfig; sourceTree = "<group>"; };
+		4847DE082137339B00440F1E /* base_apps.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_apps.xcconfig; sourceTree = "<group>"; };
+		4847DE092137339B00440F1E /* base_debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_debug.xcconfig; sourceTree = "<group>"; };
+		4847DE0A2137339B00440F1E /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		4847DE0B2137339B00440F1E /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		4847DE0C2137339B00440F1E /* ellipticcurvekit_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_tests.xcconfig; sourceTree = "<group>"; };
+		4847DE0D2137339B00440F1E /* test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = test.xcconfig; sourceTree = "<group>"; };
+		4847DE0E2137339B00440F1E /* base_release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_release.xcconfig; sourceTree = "<group>"; };
+		4847DE0F2137339B00440F1E /* base_shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_shared.xcconfig; sourceTree = "<group>"; };
+		4847DE102137339B00440F1E /* base_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_tests.xcconfig; sourceTree = "<group>"; };
+		4847DE112137339B00440F1E /* ellipticcurvekit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit.xcconfig; sourceTree = "<group>"; };
 		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
 		4848A04120FD312F004BC02C /* Schnorr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schnorr.swift; sourceTree = "<group>"; };
 		4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressibleByAffineCoordinates.swift; sourceTree = "<group>"; };
@@ -122,21 +129,15 @@
 		48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyWIF.swift; sourceTree = "<group>"; };
 		48D1101D20F3D832005A212A /* PublicAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicAddress.swift; sourceTree = "<group>"; };
 		48EB887F20FF2D5900974DF9 /* ModularInverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularInverse.swift; sourceTree = "<group>"; };
-		48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EllipticCurveKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		48F22CA820C70DC1004A18CA /* SwiftCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCrypto.h; sourceTree = "<group>"; };
+		48F22C8D20C70D87004A18CA /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48F22C9620C70D87004A18CA /* .xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = .xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EllipticCurveKit.h; sourceTree = "<group>"; };
 		48F22CA920C70DC1004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F22CB020C70DE5004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyBase64EncodingDecodingTests.swift; sourceTree = "<group>"; };
 		48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningAndVerificationTests.swift; sourceTree = "<group>"; };
 		48F242F620F7DD2200FB36DF /* Secp256k1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256k1.swift; sourceTree = "<group>"; };
 		48FF10F52122FBE700AA788A /* ECCBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECCBase.swift; sourceTree = "<group>"; };
-		5BFB1D00C4906EDF498A3223 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.fasttestable.xcconfig"; sourceTree = "<group>"; };
-		665161916806AD945170E11A /* Pods_SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCryptoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		97FADED435792F7E04CBF663 /* Pods-EllipticCurveKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.release.xcconfig"; sourceTree = "<group>"; };
-		C5418E65B80BA7B02014BA09 /* Pods-EllipticCurveKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.debug.xcconfig"; sourceTree = "<group>"; };
-		E9FA036CDFCD096C260BAD34 /* Pods-EllipticCurveKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +145,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				906F954CB5C2DBE40DDCA931 /* Pods_EllipticCurveKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,38 +152,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48F22C9720C70D88004A18CA /* EllipticCurveKit.framework in Frameworks */,
-				08B28EC19FA43D9681D88350 /* Pods_EllipticCurveKitTests.framework in Frameworks */,
+				48F22C9720C70D88004A18CA /* .framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		285EE9D7DD122B692B0588B3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				665161916806AD945170E11A /* Pods_SwiftCrypto.framework */,
-				78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */,
-				3B11D266AF9C7DFC41BED662 /* Pods_EllipticCurveKit.framework */,
-				36E702435B716071B4AA8888 /* Pods_EllipticCurveKitTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		46A05956EC0C820C8AEE53C7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C5418E65B80BA7B02014BA09 /* Pods-EllipticCurveKit.debug.xcconfig */,
-				97FADED435792F7E04CBF663 /* Pods-EllipticCurveKit.release.xcconfig */,
-				128450F8C630E5A922AFCD79 /* Pods-EllipticCurveKit.fasttestable.xcconfig */,
-				2E48574CE3542C51EAC1410D /* Pods-EllipticCurveKitTests.debug.xcconfig */,
-				E9FA036CDFCD096C260BAD34 /* Pods-EllipticCurveKitTests.release.xcconfig */,
-				5BFB1D00C4906EDF498A3223 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		4824B75F210F7B8100112764 /* ShortWeierstrass */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +207,26 @@
 			path = KeyGeneration;
 			sourceTree = "<group>";
 		};
+		4847DE042137339B00440F1E /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				4847DE052137339B00440F1E /* base_framework.xcconfig */,
+				4847DE062137339B00440F1E /* ellipticcurvekit_release.xcconfig */,
+				4847DE072137339B00440F1E /* ellipticcurvekit_debug.xcconfig */,
+				4847DE082137339B00440F1E /* base_apps.xcconfig */,
+				4847DE092137339B00440F1E /* base_debug.xcconfig */,
+				4847DE0A2137339B00440F1E /* debug.xcconfig */,
+				4847DE0B2137339B00440F1E /* release.xcconfig */,
+				4847DE0C2137339B00440F1E /* ellipticcurvekit_tests.xcconfig */,
+				4847DE0D2137339B00440F1E /* test.xcconfig */,
+				4847DE0E2137339B00440F1E /* base_release.xcconfig */,
+				4847DE0F2137339B00440F1E /* base_shared.xcconfig */,
+				4847DE102137339B00440F1E /* base_tests.xcconfig */,
+				4847DE112137339B00440F1E /* ellipticcurvekit.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
 		4848A04020FD311D004BC02C /* CommonSigning */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,7 +240,7 @@
 		4861AA6B20D048B900871618 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				48F22CA820C70DC1004A18CA /* SwiftCrypto.h */,
+				48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */,
 				48F22CA920C70DC1004A18CA /* Info.plist */,
 				483C099720F5EF0400C5E2DA /* module.modulemap */,
 			);
@@ -469,8 +464,7 @@
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
-				285EE9D7DD122B692B0588B3 /* Frameworks */,
-				46A05956EC0C820C8AEE53C7 /* Pods */,
+				4847DE042137339B00440F1E /* Configurations */,
 				48F22C8E20C70D87004A18CA /* Products */,
 				48F22CA720C70DC1004A18CA /* Source */,
 				48F22CAE20C70DE5004A18CA /* Tests */,
@@ -480,8 +474,8 @@
 		48F22C8E20C70D87004A18CA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */,
-				48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */,
+				48F22C8D20C70D87004A18CA /* .framework */,
+				48F22C9620C70D87004A18CA /* .xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -535,7 +529,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */,
+				48F22CAA20C70DC9004A18CA /* EllipticCurveKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +540,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48F22CA120C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKit" */;
 			buildPhases = (
-				B83F4FC38C14DCC2CC5F65E1 /* [CP] Check Pods Manifest.lock */,
 				48F22C8820C70D87004A18CA /* Sources */,
 				48F22C8920C70D87004A18CA /* Frameworks */,
 				48F22C8A20C70D87004A18CA /* Headers */,
@@ -557,19 +550,17 @@
 			dependencies = (
 			);
 			name = EllipticCurveKit;
-			productName = SwiftCrypto;
-			productReference = 48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */;
+			productName = EllipticCurveKit;
+			productReference = 48F22C8D20C70D87004A18CA /* .framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		48F22C9520C70D87004A18CA /* EllipticCurveKitTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48F22CA420C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKitTests" */;
 			buildPhases = (
-				961842394C2FB3A92475F3C1 /* [CP] Check Pods Manifest.lock */,
 				48F22C9220C70D87004A18CA /* Sources */,
 				48F22C9320C70D87004A18CA /* Frameworks */,
 				48F22C9420C70D87004A18CA /* Resources */,
-				2D00CE763516DE3CAC5C58BC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -577,8 +568,8 @@
 				48F22C9920C70D88004A18CA /* PBXTargetDependency */,
 			);
 			name = EllipticCurveKitTests;
-			productName = SwiftCryptoTests;
-			productReference = 48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */;
+			productName = EllipticCurveKitTests;
+			productReference = 48F22C9620C70D87004A18CA /* .xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -635,67 +626,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2D00CE763516DE3CAC5C58BC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		961842394C2FB3A92475F3C1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EllipticCurveKitTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B83F4FC38C14DCC2CC5F65E1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EllipticCurveKit-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		48F22C8820C70D87004A18CA /* Sources */ = {
@@ -757,322 +687,54 @@
 		48B5FCF820FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_INCLUDE_PATHS = Source/SupportingFiles;
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = FastTestable;
 		};
 		48B5FCF920FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 128450F8C630E5A922AFCD79 /* Pods-EllipticCurveKit.fasttestable.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Source/SupportingFiles/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EllipticCurveKit;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = FastTestable;
 		};
 		48B5FCFA20FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BFB1D00C4906EDF498A3223 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = FastTestable;
 		};
 		48F22C9F20C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_INCLUDE_PATHS = Source/SupportingFiles;
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 		48F22CA020C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_INCLUDE_PATHS = Source/SupportingFiles;
-				SWIFT_VERSION = 4.2;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 		48F22CA220C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5418E65B80BA7B02014BA09 /* Pods-EllipticCurveKit.debug.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Source/SupportingFiles/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EllipticCurveKit;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		48F22CA320C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97FADED435792F7E04CBF663 /* Pods-EllipticCurveKit.release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Source/SupportingFiles/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EllipticCurveKit;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		48F22CA520C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E48574CE3542C51EAC1410D /* Pods-EllipticCurveKitTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		48F22CA620C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E9FA036CDFCD096C260BAD34 /* Pods-EllipticCurveKitTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

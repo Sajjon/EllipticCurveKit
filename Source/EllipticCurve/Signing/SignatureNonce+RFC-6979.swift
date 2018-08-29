@@ -1,6 +1,6 @@
 //
 //  SignatureNonce+RFC-6979.swift
-//  SwiftCrypto
+//  EllipticCurveKit
 //
 //  Created by Alexander Cyon on 2018-07-19.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.

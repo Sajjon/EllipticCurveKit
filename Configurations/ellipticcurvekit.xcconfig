@@ -1,0 +1,2 @@
+INFOPLIST_FILE = Source/SupportingFiles/EllipticCurveKit-Info.plist
+PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EllipticCurveKit

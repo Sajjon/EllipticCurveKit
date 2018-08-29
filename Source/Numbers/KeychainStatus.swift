@@ -1,6 +1,6 @@
 //
 //  OSStatus.swift
-//  SwiftCrypto
+//  EllipticCurveKit
 //
 //  Created by Alexander Cyon on 2018-07-24.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
@@ -1238,7 +1238,7 @@ extension Status: RawRepresentable, CustomStringConvertible {
 }
 
 extension Status: CustomNSError {
-    public static let errorDomain = "com.sajjon.swiftcrypto.status.error"
+    public static let errorDomain = "com.sajjon.EllipticCurveKit.status.error"
 
     public var errorCode: Int {
         return Int(rawValue)

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-               BuildableName = "EllipticCurveKit.framework"
+               BuildableName = ".framework"
                BlueprintName = "EllipticCurveKit"
                ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48F22C9520C70D87004A18CA"
-               BuildableName = "EllipticCurveKitTests.xctest"
+               BuildableName = ".xctest"
                BlueprintName = "EllipticCurveKitTests"
                ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48F22C9520C70D87004A18CA"
-               BuildableName = "EllipticCurveKitTests.xctest"
+               BuildableName = ".xctest"
                BlueprintName = "EllipticCurveKitTests"
                ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-            BuildableName = "EllipticCurveKit.framework"
+            BuildableName = ".framework"
             BlueprintName = "EllipticCurveKit"
             ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
          </BuildableReference>
@@ -79,7 +79,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-            BuildableName = "EllipticCurveKit.framework"
+            BuildableName = ".framework"
             BlueprintName = "EllipticCurveKit"
             ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
          </BuildableReference>
@@ -97,7 +97,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48F22C8C20C70D87004A18CA"
-            BuildableName = "EllipticCurveKit.framework"
+            BuildableName = ".framework"
             BlueprintName = "EllipticCurveKit"
             ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
          </BuildableReference>

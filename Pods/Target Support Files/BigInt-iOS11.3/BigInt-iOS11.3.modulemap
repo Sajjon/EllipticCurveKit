@@ -1,6 +1,0 @@
-framework module BigInt {
-  umbrella header "BigInt-iOS11.3-umbrella.h"
-
-  export *
-  module * { export * }
-}

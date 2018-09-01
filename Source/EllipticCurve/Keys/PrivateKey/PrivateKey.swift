@@ -8,46 +8,28 @@
 
 import Foundation
 
-public struct PrivateKey<Curve: EllipticCurve> {
-
-    let number: Number
-
-    public static func generateNew() -> PrivateKey {
-        let byteCount = (Curve.order - 1).as256bitLongData().bytes.count
-        var privateKey: PrivateKey!
-        while privateKey == nil {
-            guard let randomBytes = try? securelyRandomizeBytes(count: byteCount) else { continue }
-            let randomNumber = Number(data: Data(bytes: randomBytes))
-            privateKey = PrivateKey(number: randomNumber)
-        }
-        return privateKey
-    }
-
-    public init() {
-        self = PrivateKey.generateNew()
-    }
-
-    public init?(number: Number) {
-        guard case 1..<Curve.order = number else { return nil }
+public struct PrivateKey {
+    public let number: Number
+    public init(number: Number) {
         self.number = number
     }
 }
 
-public extension PrivateKey {
-    public init?(base64: Data) {
-        self.init(number: Number(data: base64))
-    }
-
-    public init?(base64: String) {
-        guard let data = Data(base64Encoded: base64) else { return nil }
-        self.init(base64: data)
-    }
-
-    public init?(hex: String) {
-        guard let number = Number(hexString: hex) else { return nil }
-        self.init(number: number)
-    }
-}
+//public extension PrivateKey {
+//    public init(base64: Data) {
+//        self.init(number: Number(data: base64))
+//    }
+//
+//    public init(base64: String) {
+//        guard let data = Data(base64Encoded: base64) else { return nil }
+//        self.init(base64: data)
+//    }
+//
+//    public init(hex: String) {
+//        guard let number = Number(hexString: hex) else { return nil }
+//        self.init(number: number)
+//    }
+//}
 
 public extension PrivateKey {
 

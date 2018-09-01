@@ -7,16 +7,33 @@
 //
 
 import Foundation
+import EquationKit
+import BigInt
 
-///      𝑆: 𝑦² = 𝑥³ + 𝐴𝑥 + 𝐵
-/// - Requires: `𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘 in 𝔽_𝑝 (mod 𝑝)`
+private let 𝟜𝑎³ = 4*𝑎³
+private let 𝟚𝟟𝑏² = 27*𝑏²
+private let 𝟘: Number = 0
+
+///
+/// Elliptic Curve on Short Weierstrass form (`𝑆`)
+/// - Covers all elliptic curves char≠𝟚,𝟛
+/// - Mixed Jacobian coordinates have been the speed leader for a long time.
+///
+///
+/// # Equation
+///      𝑆: 𝑦² = 𝑥³ + 𝑎𝑥 + 𝑏
+/// - Requires: `𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘`
+///
 public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates, CustomStringConvertible {
 
 
     private let a: Number
     private let b: Number
     public let galoisField: Field
-    public let equation: TwoDimensionalBalancedEquation
+    public let equation: Polynomial
+
+    private let 𝑥＇: Polynomial
+    private let 𝑦＇: Polynomial
 
     public init?(
         a: Number,
@@ -24,20 +41,14 @@ public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, Expressible
         galoisField: Field
         ) {
 
-        guard Requirements.areFullfilled(a: a, b: b, over: galoisField) else { return nil }
+        guard 𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘 ↤ [𝑎≔a, 𝑏≔b] else { return nil }
 
         self.a = a
         self.b = b
         self.galoisField = galoisField
-        self.equation = TwoDimensionalBalancedEquation(
-            lhs: { x in
-                galoisField.mod { x**3 + a*x + b }
-        }, rhs: { y in
-            galoisField.mod { y**2 }
-        }, yFromX: { x in
-            galoisField.squareRoots(of: x)
-        }
-        )
+        self.equation = 𝑦² - 𝑥³ - a*𝑥 - b
+        self.𝑥＇ = equation.differentiateWithRespectTo(𝑥)!
+        self.𝑦＇ = equation.differentiateWithRespectTo(𝑦)!
     }
 
     struct Requirements {
@@ -47,9 +58,9 @@ public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, Expressible
     }
 
     /// Returns a list of the y-coordinates on the curve at given x.
-    func getY(fromX x: Number) -> [Number] {
-        return equation.getYFrom(x: x)
-    }
+//    func getY(fromX x: Number) -> [Number] {
+//        return equation.getYFrom(x: x)
+//    }
 }
 
 // MARK: - ExpressibleByAffineCoordinates
@@ -95,7 +106,7 @@ public extension ShortWeierstraßCurve {
         let x = p.x
         let y = p.y
 
-        let λ = modInverseP(3 * x**2 + a, 2 * y)
+        let λ = modInverseP(𝑥＇.absolute().evaluate() { 𝑥 <- x }!, 𝑦＇.absolute().evaluate() { 𝑦 <- y }!)
 
         let x2 = mod { λ**2 - 2 * x }
         let y2 = mod { λ * (x - x2) - y }

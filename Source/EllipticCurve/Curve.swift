@@ -8,15 +8,6 @@
 
 import Foundation
 
-public protocol PrivateKeyConvertible {}
-public protocol PublicKeyConvertible {}
-
-public protocol KeyExchange {}
-
-public protocol DiffieHellman: KeyExchange {
-    func diffieHellman(alice: PrivateKeyConvertible, bob: PublicKeyConvertible) -> PublicKeyConvertible
-}
-
 // 2DO: Rename `BaseCurveProtocol` => `Curve`
 public protocol BaseCurveProtocol {
     func multiply(point: TwoDimensionalPoint, by number: Number) -> TwoDimensionalPoint
@@ -24,28 +15,26 @@ public protocol BaseCurveProtocol {
 
 // 2DO: Rename `Curve` => `CurveForm`
 public protocol Curve: BaseCurveProtocol {
-    associatedtype EquationType: Equation
-    var equation: EquationType { get }
+    var equation: Polynomial { get }
     var galoisField: Field { get }
     func contains<P>(point: P) -> Bool where P: Point
     func isIdentity<P>(point: P) -> Bool where P: Point
 }
+
 
 public extension Curve {
     func contains<P>(point: P) -> Bool where P: Point {
         if isIdentity(point: point) {
             return true
         } else {
-            return equation.isZero(point: point)
+            return equation.isZero(point: point, modulus: galoisField.modulus)
         }
     }
 
     func containsPointAt(x: Number, y: Number) -> Bool {
         return contains(point: AffinePointOnCurve<Self>(x: x, y: y))
     }
-}
 
-public extension Curve {
 
     func mod(_ number: Number) -> Number {
         return galoisField.mod(number)

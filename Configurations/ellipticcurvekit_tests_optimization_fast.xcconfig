@@ -1,0 +1,2 @@
+#include "ellipticcurvekit_tests.xcconfig"
+#include "ellipticcurvekit_debug_optimization_fast.xcconfig"

@@ -23,6 +23,13 @@ public struct Field: CustomStringConvertible {
     }
 }
 
+extension Field: ExpressibleByStringLiteral {}
+public extension Field {
+    public init(stringLiteral value: StringLiteralType) {
+        self.init(value)!
+    }
+}
+
 public extension Field {
 
     func mod(_ number: Number) -> Number {

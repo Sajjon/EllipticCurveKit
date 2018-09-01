@@ -44,7 +44,7 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConve
 
     // For Curve25519: a = 486662, thus `a24` = `121666`, in some code bases you might see the number `121666`.
     let a24: Number
-    public let equation: TwoDimensionalBalancedEquation
+    public let equation: Polynomial
 
     init?(
         a: Number,
@@ -61,13 +61,7 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConve
         self.galoisField = field
         self.order = order
 
-        self.equation = TwoDimensionalBalancedEquation(lhs: { x in
-            field.mod { x * (x**2 + a*x + 1) }
-        }, rhs: { y in
-            field.mod { b * y**2 }
-        }, yFromX: { x in
-            field.squareRoots(of: x).map { field.modInverse($0, b) }
-        })
+        self.equation = b*𝑦² - 𝑥³ - a*𝑥² - 𝑥
     }
 
     struct Requirements {
@@ -78,10 +72,11 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConve
 
 
     /// Returns a list of the y-coordinates on the curve at given x.
-    func getY(fromX x: Number) -> [Number] {
-       return equation.getYFrom(x: x)
-    }
+//    func getY(fromX x: Number) -> [Number] {
+//       return equation.getYFrom(x: x)
+//    }
 }
+
 
 private extension MontgomeryCurve {
 
@@ -116,8 +111,9 @@ private extension MontgomeryCurve {
         let zM = point.z
         guard zM != 0 else { return identityPointAffine }
         let xA = modInverseP(xM, zM)
-        guard let zA = equation.getYFrom(x: xA).first else { fatalError() }
-        return Affine(x: xA, y: zA)
+        fatalError()
+//        guard let zA = equation.getYFrom(x: xA).first else { fatalError() }
+//        return Affine(x: xA, y: zA)
     }
 
     func doubleMontgomery(point: MontgomeryPoint) -> MontgomeryPoint {

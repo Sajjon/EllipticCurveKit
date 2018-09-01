@@ -87,12 +87,12 @@ public class Secp256k1: ECCBase {
                 a: 0,
                 b: 7,
                 // 2^256 −2^32 −2^9 −2^8 −2^7 −2^6 −2^4 − 1  <===>  2^256 - 2^32 - 977
-                galoisField: Field("0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")!
+                galoisField: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F"
             )!,
-            order: Number(hexString: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")!,
+            order: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141",
             generator: AnyTwoDimensionalPoint(
-                x: Number(hexString: "0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798")!,
-                y: Number(hexString: "0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8")!
+                x: "0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798",
+                y: "0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8"
             ),
             cofactor: 1
         )
@@ -155,12 +155,6 @@ public func decodeScalar25519(_ number: Number) -> Number {
 //
 //}
 
-struct PrivateKey {
-    let number: Number
-    init(number: Number) {
-        self.number = number
-    }
-}
 struct Message {}
 struct Signature {}
 protocol KeyIssuer {

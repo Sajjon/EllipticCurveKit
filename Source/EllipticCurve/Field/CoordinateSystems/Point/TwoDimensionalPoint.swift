@@ -19,6 +19,10 @@ public extension TwoDimensionalPoint {
         return lhs.x == rhs.x &&
             lhs.y == rhs.y
     }
+
+    func asAnyTwoDimensionalPoint() -> AnyTwoDimensionalPoint {
+        return AnyTwoDimensionalPoint(point: self)
+    }
 }
 
 
@@ -29,5 +33,11 @@ public struct AnyTwoDimensionalPoint: TwoDimensionalPoint, Equatable {
     public init(x: Number, y: Number) {
         self.x = x
         self.y = y
+    }
+}
+
+public extension AnyTwoDimensionalPoint {
+    public init<P>(point: P) where P: TwoDimensionalPoint {
+        self.init(x: point.x, y: point.y)
     }
 }

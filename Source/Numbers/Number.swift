@@ -74,6 +74,13 @@ public extension Number {
     }
 }
 
+extension Number {
+    /// Override ExpressibleByStringLiteral default init in BigInt, by accepting hexadecimal string instead of decimal
+    public init(stringLiteral value: StringLiteralType) {
+        self.init(hexString: value)!
+    }
+}
+
 extension Data {
     func toNumber() -> Number {
         return Number(data: self)

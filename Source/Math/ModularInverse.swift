@@ -10,7 +10,7 @@ import Foundation
 
 public extension Number {
     func modulus(_ p: Number) -> Number {
-        return mod(self, modulus: p)
+        return EllipticCurveKit.mod(self, modulus: p)
     }
 
     func modulus(_ expression: () -> Number) -> Number {

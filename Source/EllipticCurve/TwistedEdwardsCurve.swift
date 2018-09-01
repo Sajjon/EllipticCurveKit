@@ -8,14 +8,14 @@
 
 import Foundation
 
-///      𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑x²𝑦²
+///      𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑𝑥²𝑦²
 /// - Requires: `𝑎𝑑(𝑎−𝑑) ≠ 0`
 public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates, CustomStringConvertible {
 
     public let a: Number
     public let d: Number
     public let galoisField: Field
-    public let equation: TwoDimensionalImbalancedEquation
+    public let equation: Polynomial
 
     struct Requirements {
         static func areFullfilled(a: Number, d: Number, over field: Field) -> Bool {
@@ -34,19 +34,21 @@ public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleBy
         self.a = a
         self.d = d
         self.galoisField = field
-        self.equation = TwoDimensionalImbalancedEquation(lhs: { x, y in
+        self.equation = a*𝑥² + 𝑦² - 1 - d*𝑥²*𝑦²
 
-            let x² = x**2
-            let y² = y**2
-
-            return field.mod { a*x² + y² }
-        }, rhs: { x, y in
-
-            let x² = x**2
-            let y² = y**2
-
-            return field.mod { 1 + d*x²*y² }
-        })
+//        self.equation = TwoDimensionalImbalancedEquation(lhs: { x, y in
+//
+//            let x² = x**2
+//            let y² = y**2
+//
+//            return field.mod { a*x² + y² }
+//        }, rhs: { x, y in
+//
+//            let x² = x**2
+//            let y² = y**2
+//
+//            return field.mod { 1 + d*x²*y² }
+//        })
     }
 
 }

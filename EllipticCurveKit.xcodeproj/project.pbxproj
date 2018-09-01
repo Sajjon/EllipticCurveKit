@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48079E6A2139354000A29FDC /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E662139354000A29FDC /* SipHash.framework */; };
+		48079E6B2139354000A29FDC /* EquationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E672139354000A29FDC /* EquationKit.framework */; };
+		48079E6C2139354000A29FDC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E682139354000A29FDC /* CryptoSwift.framework */; };
+		48079E6D2139354000A29FDC /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E692139354000A29FDC /* BigInt.framework */; };
+		48079EAB213935B800A29FDC /* ShortWeierstrassPointMultiplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48079EA0213935AB00A29FDC /* ShortWeierstrassPointMultiplicationTests.swift */; };
 		4824B76821123AF100112764 /* AffinePointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76621123AED00112764 /* AffinePointOnCurve.swift */; };
 		4824B76921123AF600112764 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B763211239D900112764 /* Field.swift */; };
 		4824B76B21123B0600112764 /* ProjectivePointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B76A21123B0600112764 /* ProjectivePointOnCurve.swift */; };
@@ -20,13 +25,15 @@
 		4824B77F2113492400112764 /* MontgomeryCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77E2113492400112764 /* MontgomeryCurve.swift */; };
 		4824B7812113492E00112764 /* EdwardsCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B7802113492E00112764 /* EdwardsCurve.swift */; };
 		4824B7832113493800112764 /* TwistedEdwardsCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B7822113493800112764 /* TwistedEdwardsCurve.swift */; };
+		48350D4B213AEAB000107CED /* EllipticCurveForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */; };
+		48350D4D213AFD4C00107CED /* EquationKit+Evaluate+Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48350D4C213AFD4C00107CED /* EquationKit+Evaluate+Point.swift */; };
+		48350D4E213AFE4600107CED /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48079E9D213935AB00A29FDC /* MultipliplicationPerformanceSecp256r1Tests.swift */; };
+		48350D50213B024A00107CED /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101920F3D7E3005A212A /* PrivateKey.swift */; };
 		4851B42821136331002404AF /* ExpressibleByAffineCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */; };
 		4851B42A2113633E002404AF /* ExpressibleByProjectiveCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4851B4292113633E002404AF /* ExpressibleByProjectiveCoordinates.swift */; };
 		4858F2DA2121AB0D00ECEC93 /* Secp256k1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F620F7DD2200FB36DF /* Secp256k1.swift */; };
 		4858F2DB21220A2300ECEC93 /* Secp256r1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EDFE20FA243E00B6F773 /* Secp256r1.swift */; };
-		4858F2DD2122DCCC00ECEC93 /* ShortWeierstrassPointMultiplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B760210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift */; };
 		48819DE02116037E00BDE952 /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48819DDF2116037E00BDE952 /* Ed25519.swift */; };
-		489096C121137DC5002D0A02 /* Equation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489096C021137DC5002D0A02 /* Equation.swift */; };
 		489119A620F209C400F86528 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891199B20F2097C00F86528 /* Number.swift */; };
 		48A19CCE2107681E005FF9F1 /* SecureRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CCD2107681E005FF9F1 /* SecureRandom.swift */; };
 		48A19CD021076B6E005FF9F1 /* KeychainStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CCF21076B6E005FF9F1 /* KeychainStatus.swift */; };
@@ -34,10 +41,17 @@
 		48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */; };
 		48B4882320E90FC2004C7B7D /* Base58.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4881F20E90FC2004C7B7D /* Base58.swift */; };
 		48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE920F3F4BC0041389D /* Data_Extension.swift */; };
+		48BA642321393C4C002B74AE /* BigInt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E692139354000A29FDC /* BigInt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48BA642421393C4C002B74AE /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E682139354000A29FDC /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48BA642521393C4C002B74AE /* EquationKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E672139354000A29FDC /* EquationKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48BA642621393C4C002B74AE /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48079E662139354000A29FDC /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48BA642821393C80002B74AE /* EquationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BA642721393C80002B74AE /* EquationTests.swift */; };
+		48BA642B21393CF8002B74AE /* Equation+BigInt+IntegerNumberExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BA642A21393CF8002B74AE /* Equation+BigInt+IntegerNumberExpressible.swift */; };
+		48BA642D21393D1D002B74AE /* Equation+BigInt+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BA642C21393D1D002B74AE /* Equation+BigInt+Operators.swift */; };
+		48BA642F21393D53002B74AE /* Equation+BigInt+Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BA642E21393D53002B74AE /* Equation+BigInt+Variables.swift */; };
 		48C3A4FD210DAF6D00282E1C /* SquareRoots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3A4FC210DAF6D00282E1C /* SquareRoots.swift */; };
 		48CCEE6E2104ECFD00E0EE34 /* DER.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCEE6D2104ECFD00E0EE34 /* DER.swift */; };
 		48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EB887F20FF2D5900974DF9 /* ModularInverse.swift */; };
-		48F22C9720C70D88004A18CA /* .framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* .framework */; };
 		48F22CAA20C70DC9004A18CA /* EllipticCurveKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48FF10F62122FBE700AA788A /* ECCBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF10F52122FBE700AA788A /* ECCBase.swift */; };
 /* End PBXBuildFile section */
@@ -52,8 +66,55 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		48BA642221393C39002B74AE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				48BA642321393C4C002B74AE /* BigInt.framework in Embed Frameworks */,
+				48BA642421393C4C002B74AE /* CryptoSwift.framework in Embed Frameworks */,
+				48BA642521393C4C002B74AE /* EquationKit.framework in Embed Frameworks */,
+				48BA642621393C4C002B74AE /* SipHash.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		4824B760210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortWeierstrassPointMultiplicationTests.swift; sourceTree = "<group>"; };
+		48079E552139345C00A29FDC /* base_framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_framework.xcconfig; sourceTree = "<group>"; };
+		48079E562139345C00A29FDC /* ellipticcurvekit_release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_release.xcconfig; sourceTree = "<group>"; };
+		48079E572139345C00A29FDC /* ellipticcurvekit_debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_debug.xcconfig; sourceTree = "<group>"; };
+		48079E582139345C00A29FDC /* base_apps.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_apps.xcconfig; sourceTree = "<group>"; };
+		48079E592139345C00A29FDC /* ellipticcurvekit_tests_optimization_fast.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_tests_optimization_fast.xcconfig; sourceTree = "<group>"; };
+		48079E5A2139345C00A29FDC /* base_debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_debug.xcconfig; sourceTree = "<group>"; };
+		48079E5B2139345C00A29FDC /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		48079E5C2139345C00A29FDC /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		48079E5D2139345C00A29FDC /* debug_optimization_fast.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug_optimization_fast.xcconfig; sourceTree = "<group>"; };
+		48079E5E2139345C00A29FDC /* ellipticcurvekit_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_tests.xcconfig; sourceTree = "<group>"; };
+		48079E5F2139345C00A29FDC /* test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = test.xcconfig; sourceTree = "<group>"; };
+		48079E602139345C00A29FDC /* ellipticcurvekit_debug_optimization_fast.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_debug_optimization_fast.xcconfig; sourceTree = "<group>"; };
+		48079E612139345C00A29FDC /* base_release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_release.xcconfig; sourceTree = "<group>"; };
+		48079E622139345C00A29FDC /* base_shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_shared.xcconfig; sourceTree = "<group>"; };
+		48079E632139345C00A29FDC /* base_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_tests.xcconfig; sourceTree = "<group>"; };
+		48079E642139345C00A29FDC /* ellipticcurvekit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit.xcconfig; sourceTree = "<group>"; };
+		48079E662139354000A29FDC /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SipHash.framework; path = Carthage/Build/iOS/SipHash.framework; sourceTree = "<group>"; };
+		48079E672139354000A29FDC /* EquationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EquationKit.framework; path = Carthage/Build/iOS/EquationKit.framework; sourceTree = "<group>"; };
+		48079E682139354000A29FDC /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		48079E692139354000A29FDC /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = Carthage/Build/iOS/BigInt.framework; sourceTree = "<group>"; };
+		48079E8A2139358C00A29FDC /* EllipticCurveKit-Tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EllipticCurveKit-Tests-Info.plist"; sourceTree = "<group>"; };
+		48079E98213935AB00A29FDC /* ModularSquareRootsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularSquareRootsTests.swift; sourceTree = "<group>"; };
+		48079E99213935AB00A29FDC /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
+		48079E9D213935AB00A29FDC /* MultipliplicationPerformanceSecp256r1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipliplicationPerformanceSecp256r1Tests.swift; sourceTree = "<group>"; };
+		48079E9E213935AB00A29FDC /* Secp256r1_PointArthmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1_PointArthmeticTests.swift; sourceTree = "<group>"; };
+		48079EA0213935AB00A29FDC /* ShortWeierstrassPointMultiplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortWeierstrassPointMultiplicationTests.swift; sourceTree = "<group>"; };
+		48079EA3213935AB00A29FDC /* MultipliplicationPerformanceSecp256k1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipliplicationPerformanceSecp256k1Tests.swift; sourceTree = "<group>"; };
+		48079EA5213935AB00A29FDC /* PrivateKeyBase64EncodingDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyBase64EncodingDecodingTests.swift; sourceTree = "<group>"; };
+		48079EA6213935AB00A29FDC /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
+		48079EA9213935AB00A29FDC /* SigningAndVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningAndVerificationTests.swift; sourceTree = "<group>"; };
+		48079EAA213935AB00A29FDC /* ECDSATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECDSATests.swift; sourceTree = "<group>"; };
 		4824B763211239D900112764 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		4824B76621123AED00112764 /* AffinePointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinePointOnCurve.swift; sourceTree = "<group>"; };
 		4824B76A21123B0600112764 /* ProjectivePointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectivePointOnCurve.swift; sourceTree = "<group>"; };
@@ -67,22 +128,8 @@
 		4824B77E2113492400112764 /* MontgomeryCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MontgomeryCurve.swift; sourceTree = "<group>"; };
 		4824B7802113492E00112764 /* EdwardsCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdwardsCurve.swift; sourceTree = "<group>"; };
 		4824B7822113493800112764 /* TwistedEdwardsCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwistedEdwardsCurve.swift; sourceTree = "<group>"; };
-		482598FC210F14820023E010 /* ModularSquareRootsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularSquareRootsTests.swift; sourceTree = "<group>"; };
-		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
+		48350D4C213AFD4C00107CED /* EquationKit+Evaluate+Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EquationKit+Evaluate+Point.swift"; sourceTree = "<group>"; };
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		4847DE052137339B00440F1E /* base_framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_framework.xcconfig; sourceTree = "<group>"; };
-		4847DE062137339B00440F1E /* ellipticcurvekit_release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_release.xcconfig; sourceTree = "<group>"; };
-		4847DE072137339B00440F1E /* ellipticcurvekit_debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_debug.xcconfig; sourceTree = "<group>"; };
-		4847DE082137339B00440F1E /* base_apps.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_apps.xcconfig; sourceTree = "<group>"; };
-		4847DE092137339B00440F1E /* base_debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_debug.xcconfig; sourceTree = "<group>"; };
-		4847DE0A2137339B00440F1E /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
-		4847DE0B2137339B00440F1E /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
-		4847DE0C2137339B00440F1E /* ellipticcurvekit_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit_tests.xcconfig; sourceTree = "<group>"; };
-		4847DE0D2137339B00440F1E /* test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = test.xcconfig; sourceTree = "<group>"; };
-		4847DE0E2137339B00440F1E /* base_release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_release.xcconfig; sourceTree = "<group>"; };
-		4847DE0F2137339B00440F1E /* base_shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_shared.xcconfig; sourceTree = "<group>"; };
-		4847DE102137339B00440F1E /* base_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = base_tests.xcconfig; sourceTree = "<group>"; };
-		4847DE112137339B00440F1E /* ellipticcurvekit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ellipticcurvekit.xcconfig; sourceTree = "<group>"; };
 		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
 		4848A04120FD312F004BC02C /* Schnorr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schnorr.swift; sourceTree = "<group>"; };
 		4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressibleByAffineCoordinates.swift; sourceTree = "<group>"; };
@@ -94,9 +141,7 @@
 		489096C021137DC5002D0A02 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
-		489119AA20F268C700F86528 /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
 		4898EDFE20FA243E00B6F773 /* Secp256r1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1.swift; sourceTree = "<group>"; };
-		4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1_PointArthmeticTests.swift; sourceTree = "<group>"; };
 		48A19CCD2107681E005FF9F1 /* SecureRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRandom.swift; sourceTree = "<group>"; };
 		48A19CCF21076B6E005FF9F1 /* KeychainStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStatus.swift; sourceTree = "<group>"; };
 		48A19CD22107C405005FF9F1 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
@@ -109,18 +154,16 @@
 		48A5541C2100F0F900A4B7FB /* Curve25519.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curve25519.swift; sourceTree = "<group>"; };
 		48A5541E2100F31400A4B7FB /* ECDSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECDSA.swift; sourceTree = "<group>"; };
 		48A554222101137C00A4B7FB /* SignatureNonce+RFC-6979.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignatureNonce+RFC-6979.swift"; sourceTree = "<group>"; };
-		48A5542421011D0600A4B7FB /* ECDSATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECDSATests.swift; sourceTree = "<group>"; };
-		48AC5CF720FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipliplicationPerformanceSecp256r1Tests.swift; sourceTree = "<group>"; };
-		48AC5D2520FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipliplicationPerformanceSecp256k1Tests.swift; sourceTree = "<group>"; };
 		48B4881B20E90FC2004C7B7D /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		48B4881E20E90FC2004C7B7D /* RIPEMD160.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		48B4881F20E90FC2004C7B7D /* Base58.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base58.swift; sourceTree = "<group>"; };
-		48B6284320FA0DC400001BDC /* EllipticCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurve.swift; sourceTree = "<group>"; };
-		48B6284520FA0E2C00001BDC /* EllipticCurvePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurvePoint.swift; sourceTree = "<group>"; };
 		48B94BE420F3F2A50041389D /* Signature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
 		48B94BE620F3F2B10041389D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		48B94BE920F3F4BC0041389D /* Data_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data_Extension.swift; sourceTree = "<group>"; };
-		48B94BEB20F3F4D50041389D /* AffinePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinePoint.swift; sourceTree = "<group>"; };
+		48BA642721393C80002B74AE /* EquationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationTests.swift; sourceTree = "<group>"; };
+		48BA642A21393CF8002B74AE /* Equation+BigInt+IntegerNumberExpressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equation+BigInt+IntegerNumberExpressible.swift"; sourceTree = "<group>"; };
+		48BA642C21393D1D002B74AE /* Equation+BigInt+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equation+BigInt+Operators.swift"; sourceTree = "<group>"; };
+		48BA642E21393D53002B74AE /* Equation+BigInt+Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equation+BigInt+Variables.swift"; sourceTree = "<group>"; };
 		48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipticCurveForm.swift; sourceTree = "<group>"; };
 		48C3A4FC210DAF6D00282E1C /* SquareRoots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareRoots.swift; sourceTree = "<group>"; };
 		48CCEE6D2104ECFD00E0EE34 /* DER.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DER.swift; sourceTree = "<group>"; };
@@ -129,13 +172,10 @@
 		48D1101B20F3D812005A212A /* PrivateKeyWIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyWIF.swift; sourceTree = "<group>"; };
 		48D1101D20F3D832005A212A /* PublicAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicAddress.swift; sourceTree = "<group>"; };
 		48EB887F20FF2D5900974DF9 /* ModularInverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularInverse.swift; sourceTree = "<group>"; };
-		48F22C8D20C70D87004A18CA /* .framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = .framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48F22C9620C70D87004A18CA /* .xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = .xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EllipticCurveKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EllipticCurveKit.h; sourceTree = "<group>"; };
 		48F22CA920C70DC1004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48F22CB020C70DE5004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyBase64EncodingDecodingTests.swift; sourceTree = "<group>"; };
-		48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningAndVerificationTests.swift; sourceTree = "<group>"; };
 		48F242F620F7DD2200FB36DF /* Secp256k1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256k1.swift; sourceTree = "<group>"; };
 		48FF10F52122FBE700AA788A /* ECCBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECCBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +185,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48079E6A2139354000A29FDC /* SipHash.framework in Frameworks */,
+				48079E6B2139354000A29FDC /* EquationKit.framework in Frameworks */,
+				48079E6C2139354000A29FDC /* CryptoSwift.framework in Frameworks */,
+				48079E6D2139354000A29FDC /* BigInt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,19 +196,159 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48F22C9720C70D88004A18CA /* .framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4824B75F210F7B8100112764 /* ShortWeierstrass */ = {
+		48079E542139345C00A29FDC /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				4824B760210F7BAA00112764 /* ShortWeierstrassPointMultiplicationTests.swift */,
+				48079E552139345C00A29FDC /* base_framework.xcconfig */,
+				48079E562139345C00A29FDC /* ellipticcurvekit_release.xcconfig */,
+				48079E572139345C00A29FDC /* ellipticcurvekit_debug.xcconfig */,
+				48079E582139345C00A29FDC /* base_apps.xcconfig */,
+				48079E592139345C00A29FDC /* ellipticcurvekit_tests_optimization_fast.xcconfig */,
+				48079E5A2139345C00A29FDC /* base_debug.xcconfig */,
+				48079E5B2139345C00A29FDC /* debug.xcconfig */,
+				48079E5C2139345C00A29FDC /* release.xcconfig */,
+				48079E5D2139345C00A29FDC /* debug_optimization_fast.xcconfig */,
+				48079E5E2139345C00A29FDC /* ellipticcurvekit_tests.xcconfig */,
+				48079E5F2139345C00A29FDC /* test.xcconfig */,
+				48079E602139345C00A29FDC /* ellipticcurvekit_debug_optimization_fast.xcconfig */,
+				48079E612139345C00A29FDC /* base_release.xcconfig */,
+				48079E622139345C00A29FDC /* base_shared.xcconfig */,
+				48079E632139345C00A29FDC /* base_tests.xcconfig */,
+				48079E642139345C00A29FDC /* ellipticcurvekit.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		48079E652139354000A29FDC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48079E692139354000A29FDC /* BigInt.framework */,
+				48079E682139354000A29FDC /* CryptoSwift.framework */,
+				48079E672139354000A29FDC /* EquationKit.framework */,
+				48079E662139354000A29FDC /* SipHash.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		48079E722139358C00A29FDC /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				48079E96213935AB00A29FDC /* Tests */,
+				48079E892139358C00A29FDC /* SupportingFiles */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		48079E892139358C00A29FDC /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				48079E8A2139358C00A29FDC /* EllipticCurveKit-Tests-Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		48079E96213935AB00A29FDC /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				48079E97213935AB00A29FDC /* Utils */,
+				48079E9A213935AB00A29FDC /* CurveTests */,
+				48BA642721393C80002B74AE /* EquationTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		48079E97213935AB00A29FDC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				48079E98213935AB00A29FDC /* ModularSquareRootsTests.swift */,
+				48079E99213935AB00A29FDC /* SHA2Tests.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		48079E9A213935AB00A29FDC /* CurveTests */ = {
+			isa = PBXGroup;
+			children = (
+				48079E9B213935AB00A29FDC /* Secp256r1 */,
+				48079E9F213935AB00A29FDC /* ShortWeierstrass */,
+				48079EA1213935AB00A29FDC /* Secp256k1 */,
+				48079EAA213935AB00A29FDC /* ECDSATests.swift */,
+			);
+			path = CurveTests;
+			sourceTree = "<group>";
+		};
+		48079E9B213935AB00A29FDC /* Secp256r1 */ = {
+			isa = PBXGroup;
+			children = (
+				48079E9C213935AB00A29FDC /* PerformanceTests */,
+				48079E9E213935AB00A29FDC /* Secp256r1_PointArthmeticTests.swift */,
+			);
+			path = Secp256r1;
+			sourceTree = "<group>";
+		};
+		48079E9C213935AB00A29FDC /* PerformanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				48079E9D213935AB00A29FDC /* MultipliplicationPerformanceSecp256r1Tests.swift */,
+			);
+			path = PerformanceTests;
+			sourceTree = "<group>";
+		};
+		48079E9F213935AB00A29FDC /* ShortWeierstrass */ = {
+			isa = PBXGroup;
+			children = (
+				48079EA0213935AB00A29FDC /* ShortWeierstrassPointMultiplicationTests.swift */,
 			);
 			path = ShortWeierstrass;
+			sourceTree = "<group>";
+		};
+		48079EA1213935AB00A29FDC /* Secp256k1 */ = {
+			isa = PBXGroup;
+			children = (
+				48079EA2213935AB00A29FDC /* PerformanceTests */,
+				48079EA4213935AB00A29FDC /* KeyGeneration */,
+				48079EA7213935AB00A29FDC /* SigningAndVerificationTests */,
+			);
+			path = Secp256k1;
+			sourceTree = "<group>";
+		};
+		48079EA2213935AB00A29FDC /* PerformanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				48079EA3213935AB00A29FDC /* MultipliplicationPerformanceSecp256k1Tests.swift */,
+			);
+			path = PerformanceTests;
+			sourceTree = "<group>";
+		};
+		48079EA4213935AB00A29FDC /* KeyGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				48079EA5213935AB00A29FDC /* PrivateKeyBase64EncodingDecodingTests.swift */,
+				48079EA6213935AB00A29FDC /* CreatePublicKeyFromPrivateKeyTests.swift */,
+			);
+			path = KeyGeneration;
+			sourceTree = "<group>";
+		};
+		48079EA7213935AB00A29FDC /* SigningAndVerificationTests */ = {
+			isa = PBXGroup;
+			children = (
+				48079EA8213935AB00A29FDC /* Schnorr */,
+			);
+			path = SigningAndVerificationTests;
+			sourceTree = "<group>";
+		};
+		48079EA8213935AB00A29FDC /* Schnorr */ = {
+			isa = PBXGroup;
+			children = (
+				48079EA9213935AB00A29FDC /* SigningAndVerificationTests.swift */,
+			);
+			path = Schnorr;
 			sourceTree = "<group>";
 		};
 		4824B762211239A600112764 /* Field */ = {
@@ -198,35 +382,6 @@
 			path = Point;
 			sourceTree = "<group>";
 		};
-		482B154120D41053001B437D /* KeyGeneration */ = {
-			isa = PBXGroup;
-			children = (
-				482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */,
-				48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */,
-			);
-			path = KeyGeneration;
-			sourceTree = "<group>";
-		};
-		4847DE042137339B00440F1E /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				4847DE052137339B00440F1E /* base_framework.xcconfig */,
-				4847DE062137339B00440F1E /* ellipticcurvekit_release.xcconfig */,
-				4847DE072137339B00440F1E /* ellipticcurvekit_debug.xcconfig */,
-				4847DE082137339B00440F1E /* base_apps.xcconfig */,
-				4847DE092137339B00440F1E /* base_debug.xcconfig */,
-				4847DE0A2137339B00440F1E /* debug.xcconfig */,
-				4847DE0B2137339B00440F1E /* release.xcconfig */,
-				4847DE0C2137339B00440F1E /* ellipticcurvekit_tests.xcconfig */,
-				4847DE0D2137339B00440F1E /* test.xcconfig */,
-				4847DE0E2137339B00440F1E /* base_release.xcconfig */,
-				4847DE0F2137339B00440F1E /* base_shared.xcconfig */,
-				4847DE102137339B00440F1E /* base_tests.xcconfig */,
-				4847DE112137339B00440F1E /* ellipticcurvekit.xcconfig */,
-			);
-			path = Configurations;
-			sourceTree = "<group>";
-		};
 		4848A04020FD311D004BC02C /* CommonSigning */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,22 +402,11 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		48687FAE20F7E4EB00F2AFA4 /* OLD POINT */ = {
-			isa = PBXGroup;
-			children = (
-				48B94BEB20F3F4D50041389D /* AffinePoint.swift */,
-				48B6284320FA0DC400001BDC /* EllipticCurve.swift */,
-				48B6284520FA0E2C00001BDC /* EllipticCurvePoint.swift */,
-			);
-			path = "OLD POINT";
-			sourceTree = "<group>";
-		};
 		489119A320F209AA00F86528 /* EllipticCurve */ = {
 			isa = PBXGroup;
 			children = (
 				4824B762211239A600112764 /* Field */,
 				48A19CD72107C43B005FF9F1 /* DistributedSystem */,
-				48687FAE20F7E4EB00F2AFA4 /* OLD POINT */,
 				48F242F520F7DD0500FB36DF /* CommonCurves */,
 				48B94BE320F3F2870041389D /* Signing */,
 				48D1101520F3D740005A212A /* Keys */,
@@ -278,45 +422,6 @@
 				48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */,
 			);
 			path = EllipticCurve;
-			sourceTree = "<group>";
-		};
-		489119A920F268AF00F86528 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				489119AA20F268C700F86528 /* SHA2Tests.swift */,
-				482598FC210F14820023E010 /* ModularSquareRootsTests.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		4898EE0020FA269C00B6F773 /* CurveTests */ = {
-			isa = PBXGroup;
-			children = (
-				4824B75F210F7B8100112764 /* ShortWeierstrass */,
-				48A5542421011D0600A4B7FB /* ECDSATests.swift */,
-				4898EE0220FA26BC00B6F773 /* Secp256r1 */,
-				4898EE0120FA26A200B6F773 /* Secp256k1 */,
-			);
-			path = CurveTests;
-			sourceTree = "<group>";
-		};
-		4898EE0120FA26A200B6F773 /* Secp256k1 */ = {
-			isa = PBXGroup;
-			children = (
-				48AC5D2420FF943E00AE4B77 /* PerformanceTests */,
-				482B154120D41053001B437D /* KeyGeneration */,
-				48F242F120F7D40600FB36DF /* SigningAndVerificationTests */,
-			);
-			path = Secp256k1;
-			sourceTree = "<group>";
-		};
-		4898EE0220FA26BC00B6F773 /* Secp256r1 */ = {
-			isa = PBXGroup;
-			children = (
-				48AC5CF620FF3F0300AE4B77 /* PerformanceTests */,
-				4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */,
-			);
-			path = Secp256r1;
 			sourceTree = "<group>";
 		};
 		48A19CCC21076811005FF9F1 /* Numbers */ = {
@@ -359,30 +464,6 @@
 			path = DLTs;
 			sourceTree = "<group>";
 		};
-		48A554202101064D00A4B7FB /* Schnorr */ = {
-			isa = PBXGroup;
-			children = (
-				48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */,
-			);
-			path = Schnorr;
-			sourceTree = "<group>";
-		};
-		48AC5CF620FF3F0300AE4B77 /* PerformanceTests */ = {
-			isa = PBXGroup;
-			children = (
-				48AC5CF720FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift */,
-			);
-			path = PerformanceTests;
-			sourceTree = "<group>";
-		};
-		48AC5D2420FF943E00AE4B77 /* PerformanceTests */ = {
-			isa = PBXGroup;
-			children = (
-				48AC5D2520FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift */,
-			);
-			path = PerformanceTests;
-			sourceTree = "<group>";
-		};
 		48B4881A20E90FC2004C7B7D /* Cryptography */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,8 +498,19 @@
 			isa = PBXGroup;
 			children = (
 				48B94BE920F3F4BC0041389D /* Data_Extension.swift */,
+				48350D4C213AFD4C00107CED /* EquationKit+Evaluate+Point.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		48BA642921393CA6002B74AE /* Equation */ = {
+			isa = PBXGroup;
+			children = (
+				48BA642A21393CF8002B74AE /* Equation+BigInt+IntegerNumberExpressible.swift */,
+				48BA642C21393D1D002B74AE /* Equation+BigInt+Operators.swift */,
+				48BA642E21393D53002B74AE /* Equation+BigInt+Variables.swift */,
+			);
+			path = Equation;
 			sourceTree = "<group>";
 		};
 		48C3A4F3210B14ED00282E1C /* Encoding */ = {
@@ -464,18 +556,19 @@
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
-				4847DE042137339B00440F1E /* Configurations */,
+				48079E542139345C00A29FDC /* Configurations */,
+				48079E652139354000A29FDC /* Frameworks */,
 				48F22C8E20C70D87004A18CA /* Products */,
 				48F22CA720C70DC1004A18CA /* Source */,
-				48F22CAE20C70DE5004A18CA /* Tests */,
+				48079E722139358C00A29FDC /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
 		48F22C8E20C70D87004A18CA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				48F22C8D20C70D87004A18CA /* .framework */,
-				48F22C9620C70D87004A18CA /* .xctest */,
+				48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */,
+				48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -483,6 +576,7 @@
 		48F22CA720C70DC1004A18CA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				48BA642921393CA6002B74AE /* Equation */,
 				48C3A4F3210B14ED00282E1C /* Encoding */,
 				48A19CCC21076811005FF9F1 /* Numbers */,
 				48EB887E20FF2D4C00974DF9 /* Math */,
@@ -492,24 +586,6 @@
 				4861AA6B20D048B900871618 /* SupportingFiles */,
 			);
 			path = Source;
-			sourceTree = "<group>";
-		};
-		48F22CAE20C70DE5004A18CA /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				48F22CB020C70DE5004A18CA /* Info.plist */,
-				4898EE0020FA269C00B6F773 /* CurveTests */,
-				489119A920F268AF00F86528 /* Utils */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		48F242F120F7D40600FB36DF /* SigningAndVerificationTests */ = {
-			isa = PBXGroup;
-			children = (
-				48A554202101064D00A4B7FB /* Schnorr */,
-			);
-			path = SigningAndVerificationTests;
 			sourceTree = "<group>";
 		};
 		48F242F520F7DD0500FB36DF /* CommonCurves */ = {
@@ -551,7 +627,7 @@
 			);
 			name = EllipticCurveKit;
 			productName = EllipticCurveKit;
-			productReference = 48F22C8D20C70D87004A18CA /* .framework */;
+			productReference = 48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		48F22C9520C70D87004A18CA /* EllipticCurveKitTests */ = {
@@ -561,6 +637,7 @@
 				48F22C9220C70D87004A18CA /* Sources */,
 				48F22C9320C70D87004A18CA /* Frameworks */,
 				48F22C9420C70D87004A18CA /* Resources */,
+				48BA642221393C39002B74AE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -569,7 +646,7 @@
 			);
 			name = EllipticCurveKitTests;
 			productName = EllipticCurveKitTests;
-			productReference = 48F22C9620C70D87004A18CA /* .xctest */;
+			productReference = 48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -632,8 +709,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48350D4B213AEAB000107CED /* EllipticCurveForm.swift in Sources */,
 				48CCEE6E2104ECFD00E0EE34 /* DER.swift in Sources */,
+				48BA642B21393CF8002B74AE /* Equation+BigInt+IntegerNumberExpressible.swift in Sources */,
 				4824B76821123AF100112764 /* AffinePointOnCurve.swift in Sources */,
+				48350D4D213AFD4C00107CED /* EquationKit+Evaluate+Point.swift in Sources */,
 				4824B77621132DD800112764 /* JacobianPointOnCurve.swift in Sources */,
 				48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */,
 				489119A620F209C400F86528 /* Number.swift in Sources */,
@@ -649,11 +729,11 @@
 				4851B42A2113633E002404AF /* ExpressibleByProjectiveCoordinates.swift in Sources */,
 				4858F2DA2121AB0D00ECEC93 /* Secp256k1.swift in Sources */,
 				4824B77F2113492400112764 /* MontgomeryCurve.swift in Sources */,
+				48BA642D21393D1D002B74AE /* Equation+BigInt+Operators.swift in Sources */,
 				4824B76F2113105F00112764 /* ThreeDimensionalPoint.swift in Sources */,
 				48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */,
 				4824B77A21132ED000112764 /* Curve.swift in Sources */,
 				4824B76B21123B0600112764 /* ProjectivePointOnCurve.swift in Sources */,
-				489096C121137DC5002D0A02 /* Equation.swift in Sources */,
 				48819DE02116037E00BDE952 /* Ed25519.swift in Sources */,
 				4824B7832113493800112764 /* TwistedEdwardsCurve.swift in Sources */,
 				4824B77C21132EEF00112764 /* ShortWeierstraßCurve.swift in Sources */,
@@ -661,7 +741,9 @@
 				48FF10F62122FBE700AA788A /* ECCBase.swift in Sources */,
 				48C3A4FD210DAF6D00282E1C /* SquareRoots.swift in Sources */,
 				4824B772211310A600112764 /* Point.swift in Sources */,
+				48BA642F21393D53002B74AE /* Equation+BigInt+Variables.swift in Sources */,
 				48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */,
+				48350D50213B024A00107CED /* PrivateKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,7 +751,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4858F2DD2122DCCC00ECEC93 /* ShortWeierstrassPointMultiplicationTests.swift in Sources */,
+				48079EAB213935B800A29FDC /* ShortWeierstrassPointMultiplicationTests.swift in Sources */,
+				48BA642821393C80002B74AE /* EquationTests.swift in Sources */,
+				48350D4E213AFE4600107CED /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,54 +770,63 @@
 /* Begin XCBuildConfiguration section */
 		48B5FCF820FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E602139345C00A29FDC /* ellipticcurvekit_debug_optimization_fast.xcconfig */;
 			buildSettings = {
 			};
 			name = FastTestable;
 		};
 		48B5FCF920FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E602139345C00A29FDC /* ellipticcurvekit_debug_optimization_fast.xcconfig */;
 			buildSettings = {
 			};
 			name = FastTestable;
 		};
 		48B5FCFA20FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E592139345C00A29FDC /* ellipticcurvekit_tests_optimization_fast.xcconfig */;
 			buildSettings = {
 			};
 			name = FastTestable;
 		};
 		48F22C9F20C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E572139345C00A29FDC /* ellipticcurvekit_debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		48F22CA020C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E562139345C00A29FDC /* ellipticcurvekit_release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		48F22CA220C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E572139345C00A29FDC /* ellipticcurvekit_debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		48F22CA320C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E562139345C00A29FDC /* ellipticcurvekit_release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		48F22CA520C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E5E2139345C00A29FDC /* ellipticcurvekit_tests.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		48F22CA620C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48079E5E2139345C00A29FDC /* ellipticcurvekit_tests.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;

@@ -7,6 +7,14 @@
 //
 
 import Foundation
+import EquationKit
+import BigInt
+
+private let 𝑑 = Variable("𝑑")
+private let 𝑑² = Exponentiation(variable: 𝑑, exponent: 2)
+private let 𝑎²𝑑 = 𝑎² * 𝑑
+private let 𝑎𝑑² = 𝑎 * 𝑑²
+//private let 𝑎𝑑(𝑎−𝑑)
 
 ///      𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑𝑥²𝑦²
 /// - Requires: `𝑎𝑑(𝑎−𝑑) ≠ 0`
@@ -17,38 +25,15 @@ public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleBy
     public let galoisField: Field
     public let equation: Polynomial
 
-    struct Requirements {
-        static func areFullfilled(a: Number, d: Number, over field: Field) -> Bool {
-            return field.mod { a*d * (a-d) } != 0
-        }
-    }
+    init?(a: Number, d: Number, galoisField field: Field) {
+        let 𝑝 = field.modulus
 
-    init?(
-        a: Number,
-        d: Number,
-        galoisField field: Field
-        ) {
-
-        guard Requirements.areFullfilled(a: a, d: d, over: field) else { return nil }
+        guard 𝑎²𝑑 - 𝑎𝑑² ≢ 𝟘 % 𝑝 ↤ [ 𝑎 ≔ a, 𝑑 ≔ d ] else { return nil }
 
         self.a = a
         self.d = d
         self.galoisField = field
-        self.equation = a*𝑥² + 𝑦² - 1 - d*𝑥²*𝑦²
-
-//        self.equation = TwoDimensionalImbalancedEquation(lhs: { x, y in
-//
-//            let x² = x**2
-//            let y² = y**2
-//
-//            return field.mod { a*x² + y² }
-//        }, rhs: { x, y in
-//
-//            let x² = x**2
-//            let y² = y**2
-//
-//            return field.mod { 1 + d*x²*y² }
-//        })
+        self.equation = a*𝑥² + 𝑦² - (1 + d*𝑥²*𝑦²)
     }
 
 }

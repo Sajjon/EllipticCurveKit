@@ -8,7 +8,6 @@
 
 import Foundation
 
-public typealias HexString = String
 public struct PublicKey<Curve: EllipticCurve> {
     public typealias Point = AffinePoint<Curve>
 

@@ -13,13 +13,13 @@ public struct Field: CustomStringConvertible {
 
     let modulus: Number
 
-    init(modulus: Number) {
+    init(_ modulus: Number) {
         self.modulus = modulus
     }
 
     init?(_ hex: String) {
         guard let number = Number(hexString: hex) else { return nil }
-        self.init(modulus: number)
+        self.init(number)
     }
 }
 

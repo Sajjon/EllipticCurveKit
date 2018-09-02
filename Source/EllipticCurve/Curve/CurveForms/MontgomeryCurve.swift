@@ -7,35 +7,15 @@
 //
 
 import Foundation
+import EquationKit
+import BigInt
+
+private let 𝑏𝑎² = 𝑏 * 𝑎²
+private let 𝟜𝑏 = 4 * 𝑏
 
 ///     𝑀: 𝑏𝑦² = 𝑥(𝑥² + 𝑎𝑥 + 1)
 /// - Requires: `𝑏(𝑎² - 𝟜) ≠ 𝟘 in 𝔽_𝑝` (or equivalently: `𝑏 ≠ 𝟘` and `𝑎² ≠ 𝟜`)
 public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConvertible {
-//    public let curveId: SpecificCurve
-
-
-    /// https://www.hyperelliptic.org/EFD/g1p/auto-montgom-xz.html
-    public struct MontgomeryPoint: TwoDimensionalPoint, Equatable {
-        public var x: Number
-        public var y: Number
-
-        var z: Number {
-            get { return y }
-            set { y = newValue }
-        }
-
-        fileprivate init(x: Number, z: Number, over field: Field) {
-                self.x = field.mod(x)
-                self.y = field.mod(z)
-        }
-
-        fileprivate init(affine: Affine, over field: Field) {
-            self.init(
-                x: affine.x,
-                z: 1,
-                over: field)
-        }
-    }
 
     private let a: Number
     private let b: Number
@@ -49,32 +29,51 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConve
     init?(
         a: Number,
         b: Number,
-        galoisField field: Field,
+        galoisField: Field,
         order: Number
         ) {
 
-        guard Requirements.areFullfilled(a: a, b: b, over: field) else { return nil }
+        let 𝑝 = galoisField.modulus
+
+        guard 𝑏𝑎² - 𝟜𝑏 ≢ 𝟘 % 𝑝 ↤ [ 𝑎 ≔ a, 𝑏 ≔ b ] else { return nil }
 
         self.a = a
         self.b = b
-        self.a24 = field.mod((a + 2)/4)
-        self.galoisField = field
+        self.a24 = galoisField.mod((a + 2)/4)
+        self.galoisField = galoisField
         self.order = order
 
-        self.equation = b*𝑦² - 𝑥³ - a*𝑥² - 𝑥
+        self.equation = b*𝑦² - 𝑥*(𝑥² + a*𝑥 + 1)
     }
-
-    struct Requirements {
-        static func areFullfilled(a: Number, b: Number, over field: Field) -> Bool {
-            return field.mod { b*(a**2 - 4) } != 0
-        }
-    }
-
 
     /// Returns a list of the y-coordinates on the curve at given x.
 //    func getY(fromX x: Number) -> [Number] {
 //       return equation.getYFrom(x: x)
 //    }
+
+
+    /// https://www.hyperelliptic.org/EFD/g1p/auto-montgom-xz.html
+    public struct MontgomeryPoint: TwoDimensionalPoint, Equatable {
+        public var x: Number
+        public var y: Number
+
+        var z: Number {
+            get { return y }
+            set { y = newValue }
+        }
+
+        fileprivate init(x: Number, z: Number, over field: Field) {
+            self.x = field.mod(x)
+            self.y = field.mod(z)
+        }
+
+        fileprivate init(affine: Affine, over field: Field) {
+            self.init(
+                x: affine.x,
+                z: 1,
+                over: field)
+        }
+    }
 }
 
 

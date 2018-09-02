@@ -7,7 +7,19 @@
 //
 
 import Foundation
+import EquationKit
 import BigInt
+
+public func ^^(lhs: Int, rhs: Int) -> Number {
+    return Number(lhs).power(rhs)
+}
+public func -(lhs: BigInt, rhs: Int) -> BigInt {
+    return lhs - BigInt(rhs)
+}
+public func +(lhs: BigInt, rhs: Int) -> BigInt {
+    return lhs + BigInt(rhs)
+}
+
 
 public typealias Number = BigInt
 

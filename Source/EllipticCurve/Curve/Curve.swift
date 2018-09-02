@@ -10,13 +10,13 @@ import Foundation
 
 // 2DO: Rename `BaseCurveProtocol` => `Curve`
 public protocol BaseCurveProtocol {
+    var galoisField: Field { get }
     func multiply(point: TwoDimensionalPoint, by number: Number) -> TwoDimensionalPoint
 }
 
 // 2DO: Rename `Curve` => `CurveForm`
 public protocol Curve: BaseCurveProtocol {
     var equation: Polynomial { get }
-    var galoisField: Field { get }
     func contains<P>(point: P) -> Bool where P: Point
     func isIdentity<P>(point: P) -> Bool where P: Point
 }

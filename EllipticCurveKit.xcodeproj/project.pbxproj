@@ -25,6 +25,9 @@
 		4824B77F2113492400112764 /* MontgomeryCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77E2113492400112764 /* MontgomeryCurve.swift */; };
 		4824B7812113492E00112764 /* EdwardsCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B7802113492E00112764 /* EdwardsCurve.swift */; };
 		4824B7832113493800112764 /* TwistedEdwardsCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B7822113493800112764 /* TwistedEdwardsCurve.swift */; };
+		48316D1A213BE93A00274329 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE620F3F2B10041389D /* Message.swift */; };
+		48316D1C213BEBBE00274329 /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B94BE420F3F2A50041389D /* Signature.swift */; };
+		48316D1E213BF52600274329 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48316D1D213BF52600274329 /* Environment.swift */; };
 		48350D4B213AEAB000107CED /* EllipticCurveForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */; };
 		48350D4D213AFD4C00107CED /* EquationKit+Evaluate+Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48350D4C213AFD4C00107CED /* EquationKit+Evaluate+Point.swift */; };
 		48350D4E213AFE4600107CED /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48079E9D213935AB00A29FDC /* MultipliplicationPerformanceSecp256r1Tests.swift */; };
@@ -128,6 +131,7 @@
 		4824B77E2113492400112764 /* MontgomeryCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MontgomeryCurve.swift; sourceTree = "<group>"; };
 		4824B7802113492E00112764 /* EdwardsCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdwardsCurve.swift; sourceTree = "<group>"; };
 		4824B7822113493800112764 /* TwistedEdwardsCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwistedEdwardsCurve.swift; sourceTree = "<group>"; };
+		48316D1D213BF52600274329 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		48350D4C213AFD4C00107CED /* EquationKit+Evaluate+Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EquationKit+Evaluate+Point.swift"; sourceTree = "<group>"; };
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
@@ -138,7 +142,6 @@
 		4885ABA520F77D6B00115FE0 /* Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signing.swift; sourceTree = "<group>"; };
 		4885ABA720F77ECB00115FE0 /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
-		489096C021137DC5002D0A02 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
 		4898EDFE20FA243E00B6F773 /* Secp256r1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1.swift; sourceTree = "<group>"; };
@@ -382,6 +385,54 @@
 			path = Point;
 			sourceTree = "<group>";
 		};
+		48316D1F213C00D300274329 /* Curve */ = {
+			isa = PBXGroup;
+			children = (
+				48316D23213C012100274329 /* Coordinates */,
+				48316D21213C00FF00274329 /* ECC */,
+				48316D20213C00EF00274329 /* CurveForms */,
+				4824B77921132ED000112764 /* Curve.swift */,
+			);
+			path = Curve;
+			sourceTree = "<group>";
+		};
+		48316D20213C00EF00274329 /* CurveForms */ = {
+			isa = PBXGroup;
+			children = (
+				4824B77B21132EEF00112764 /* ShortWeierstraßCurve.swift */,
+				4824B77E2113492400112764 /* MontgomeryCurve.swift */,
+				4824B7802113492E00112764 /* EdwardsCurve.swift */,
+				4824B7822113493800112764 /* TwistedEdwardsCurve.swift */,
+				48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */,
+			);
+			path = CurveForms;
+			sourceTree = "<group>";
+		};
+		48316D21213C00FF00274329 /* ECC */ = {
+			isa = PBXGroup;
+			children = (
+				48316D22213C010D00274329 /* ECCBase */,
+			);
+			path = ECC;
+			sourceTree = "<group>";
+		};
+		48316D22213C010D00274329 /* ECCBase */ = {
+			isa = PBXGroup;
+			children = (
+				48FF10F52122FBE700AA788A /* ECCBase.swift */,
+			);
+			path = ECCBase;
+			sourceTree = "<group>";
+		};
+		48316D23213C012100274329 /* Coordinates */ = {
+			isa = PBXGroup;
+			children = (
+				4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */,
+				4851B4292113633E002404AF /* ExpressibleByProjectiveCoordinates.swift */,
+			);
+			path = Coordinates;
+			sourceTree = "<group>";
+		};
 		4848A04020FD311D004BC02C /* CommonSigning */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,21 +456,12 @@
 		489119A320F209AA00F86528 /* EllipticCurve */ = {
 			isa = PBXGroup;
 			children = (
+				48316D1F213C00D300274329 /* Curve */,
 				4824B762211239A600112764 /* Field */,
 				48A19CD72107C43B005FF9F1 /* DistributedSystem */,
 				48F242F520F7DD0500FB36DF /* CommonCurves */,
 				48B94BE320F3F2870041389D /* Signing */,
 				48D1101520F3D740005A212A /* Keys */,
-				4824B77921132ED000112764 /* Curve.swift */,
-				48FF10F52122FBE700AA788A /* ECCBase.swift */,
-				4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */,
-				4851B4292113633E002404AF /* ExpressibleByProjectiveCoordinates.swift */,
-				4824B77B21132EEF00112764 /* ShortWeierstraßCurve.swift */,
-				489096C021137DC5002D0A02 /* Equation.swift */,
-				4824B77E2113492400112764 /* MontgomeryCurve.swift */,
-				4824B7802113492E00112764 /* EdwardsCurve.swift */,
-				4824B7822113493800112764 /* TwistedEdwardsCurve.swift */,
-				48C3A4F7210B9F6A00282E1C /* EllipticCurveForm.swift */,
 			);
 			path = EllipticCurve;
 			sourceTree = "<group>";
@@ -547,6 +589,8 @@
 		48EB887E20FF2D4C00974DF9 /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				48BA642921393CA6002B74AE /* Equation */,
+				48A19CCC21076811005FF9F1 /* Numbers */,
 				48EB887F20FF2D5900974DF9 /* ModularInverse.swift */,
 				48C3A4FC210DAF6D00282E1C /* SquareRoots.swift */,
 			);
@@ -576,9 +620,8 @@
 		48F22CA720C70DC1004A18CA /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				48BA642921393CA6002B74AE /* Equation */,
+				48316D1D213BF52600274329 /* Environment.swift */,
 				48C3A4F3210B14ED00282E1C /* Encoding */,
-				48A19CCC21076811005FF9F1 /* Numbers */,
 				48EB887E20FF2D4C00974DF9 /* Math */,
 				48B94BE820F3F4B00041389D /* Extensions */,
 				489119A320F209AA00F86528 /* EllipticCurve */,
@@ -726,10 +769,13 @@
 				48A19CCE2107681E005FF9F1 /* SecureRandom.swift in Sources */,
 				48A19CD021076B6E005FF9F1 /* KeychainStatus.swift in Sources */,
 				48B4882320E90FC2004C7B7D /* Base58.swift in Sources */,
+				48316D1E213BF52600274329 /* Environment.swift in Sources */,
 				4851B42A2113633E002404AF /* ExpressibleByProjectiveCoordinates.swift in Sources */,
 				4858F2DA2121AB0D00ECEC93 /* Secp256k1.swift in Sources */,
 				4824B77F2113492400112764 /* MontgomeryCurve.swift in Sources */,
 				48BA642D21393D1D002B74AE /* Equation+BigInt+Operators.swift in Sources */,
+				48316D1A213BE93A00274329 /* Message.swift in Sources */,
+				48316D1C213BEBBE00274329 /* Signature.swift in Sources */,
 				4824B76F2113105F00112764 /* ThreeDimensionalPoint.swift in Sources */,
 				48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */,
 				4824B77A21132ED000112764 /* Curve.swift in Sources */,

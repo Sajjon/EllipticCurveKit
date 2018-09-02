@@ -12,7 +12,7 @@ import BigInt
 
 private let 𝟜𝑎³ = 4*𝑎³
 private let 𝟚𝟟𝑏² = 27*𝑏²
-private let 𝟘: Number = 0
+let 𝟘: Number = 0
 
 ///
 /// Elliptic Curve on Short Weierstrass form (`𝑆`)
@@ -41,7 +41,9 @@ public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, Expressible
         galoisField: Field
         ) {
 
-        guard 𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘 ↤ [𝑎≔a, 𝑏≔b] else { return nil }
+        let 𝑝 = galoisField.modulus
+
+        guard 𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 𝟘 % 𝑝 ↤ [ 𝑎 ≔ a, 𝑏 ≔ b ] else { return nil }
 
         self.a = a
         self.b = b

@@ -20,7 +20,7 @@
 		4824B772211310A600112764 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B771211310A600112764 /* Point.swift */; };
 		4824B77621132DD800112764 /* JacobianPointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77521132DD800112764 /* JacobianPointOnCurve.swift */; };
 		4824B77821132E5B00112764 /* ThreeDimensionalPointOnCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77721132E5B00112764 /* ThreeDimensionalPointOnCurve.swift */; };
-		4824B77A21132ED000112764 /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77921132ED000112764 /* Curve.swift */; };
+		4824B77A21132ED000112764 /* CurveForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77921132ED000112764 /* CurveForm.swift */; };
 		4824B77C21132EEF00112764 /* ShortWeierstraßCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77B21132EEF00112764 /* ShortWeierstraßCurve.swift */; };
 		4824B77F2113492400112764 /* MontgomeryCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B77E2113492400112764 /* MontgomeryCurve.swift */; };
 		4824B7812113492E00112764 /* EdwardsCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824B7802113492E00112764 /* EdwardsCurve.swift */; };
@@ -126,7 +126,7 @@
 		4824B771211310A600112764 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		4824B77521132DD800112764 /* JacobianPointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacobianPointOnCurve.swift; sourceTree = "<group>"; };
 		4824B77721132E5B00112764 /* ThreeDimensionalPointOnCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDimensionalPointOnCurve.swift; sourceTree = "<group>"; };
-		4824B77921132ED000112764 /* Curve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curve.swift; sourceTree = "<group>"; };
+		4824B77921132ED000112764 /* CurveForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveForm.swift; sourceTree = "<group>"; };
 		4824B77B21132EEF00112764 /* ShortWeierstraßCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortWeierstraßCurve.swift"; sourceTree = "<group>"; };
 		4824B77E2113492400112764 /* MontgomeryCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MontgomeryCurve.swift; sourceTree = "<group>"; };
 		4824B7802113492E00112764 /* EdwardsCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdwardsCurve.swift; sourceTree = "<group>"; };
@@ -357,24 +357,23 @@
 		4824B762211239A600112764 /* Field */ = {
 			isa = PBXGroup;
 			children = (
-				4824B76521123AD700112764 /* CoordinateSystems */,
 				4824B763211239D900112764 /* Field.swift */,
 			);
 			path = Field;
 			sourceTree = "<group>";
 		};
-		4824B76521123AD700112764 /* CoordinateSystems */ = {
+		4824B76521123AD700112764 /* Point */ = {
 			isa = PBXGroup;
 			children = (
-				4824B7702113108600112764 /* Point */,
+				4824B7702113108600112764 /* Protocols */,
 				4824B76621123AED00112764 /* AffinePointOnCurve.swift */,
 				4824B76A21123B0600112764 /* ProjectivePointOnCurve.swift */,
 				4824B77521132DD800112764 /* JacobianPointOnCurve.swift */,
 			);
-			path = CoordinateSystems;
+			path = Point;
 			sourceTree = "<group>";
 		};
-		4824B7702113108600112764 /* Point */ = {
+		4824B7702113108600112764 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				4824B76C2113104700112764 /* TwoDimensionalPoint.swift */,
@@ -382,16 +381,17 @@
 				4824B76E2113105F00112764 /* ThreeDimensionalPoint.swift */,
 				4824B77721132E5B00112764 /* ThreeDimensionalPointOnCurve.swift */,
 			);
-			path = Point;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		48316D1F213C00D300274329 /* Curve */ = {
 			isa = PBXGroup;
 			children = (
+				48F242F520F7DD0500FB36DF /* CommonCurves */,
 				48316D23213C012100274329 /* Coordinates */,
 				48316D21213C00FF00274329 /* ECC */,
 				48316D20213C00EF00274329 /* CurveForms */,
-				4824B77921132ED000112764 /* Curve.swift */,
+				4824B77921132ED000112764 /* CurveForm.swift */,
 			);
 			path = Curve;
 			sourceTree = "<group>";
@@ -427,6 +427,7 @@
 		48316D23213C012100274329 /* Coordinates */ = {
 			isa = PBXGroup;
 			children = (
+				4824B76521123AD700112764 /* Point */,
 				4851B42721136331002404AF /* ExpressibleByAffineCoordinates.swift */,
 				4851B4292113633E002404AF /* ExpressibleByProjectiveCoordinates.swift */,
 			);
@@ -459,7 +460,6 @@
 				48316D1F213C00D300274329 /* Curve */,
 				4824B762211239A600112764 /* Field */,
 				48A19CD72107C43B005FF9F1 /* DistributedSystem */,
-				48F242F520F7DD0500FB36DF /* CommonCurves */,
 				48B94BE320F3F2870041389D /* Signing */,
 				48D1101520F3D740005A212A /* Keys */,
 			);
@@ -778,7 +778,7 @@
 				48316D1C213BEBBE00274329 /* Signature.swift in Sources */,
 				4824B76F2113105F00112764 /* ThreeDimensionalPoint.swift in Sources */,
 				48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */,
-				4824B77A21132ED000112764 /* Curve.swift in Sources */,
+				4824B77A21132ED000112764 /* CurveForm.swift in Sources */,
 				4824B76B21123B0600112764 /* ProjectivePointOnCurve.swift in Sources */,
 				48819DE02116037E00BDE952 /* Ed25519.swift in Sources */,
 				4824B7832113493800112764 /* TwistedEdwardsCurve.swift in Sources */,

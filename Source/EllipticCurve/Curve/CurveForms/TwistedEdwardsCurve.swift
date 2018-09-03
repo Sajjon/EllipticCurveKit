@@ -10,15 +10,9 @@ import Foundation
 import EquationKit
 import BigInt
 
-private let 𝑑 = Variable("𝑑")
-private let 𝑑² = Exponentiation(variable: 𝑑, exponent: 2)
-private let 𝑎²𝑑 = 𝑎² * 𝑑
-private let 𝑎𝑑² = 𝑎 * 𝑑²
-//private let 𝑎𝑑(𝑎−𝑑)
-
 ///      𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑𝑥²𝑦²
 /// - Requires: `𝑎𝑑(𝑎−𝑑) ≠ 0`
-public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates, CustomStringConvertible {
+public struct TwistedEdwardsCurve: CurveForm, ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates, CustomStringConvertible {
 
     public let a: Number
     public let d: Number
@@ -33,7 +27,7 @@ public struct TwistedEdwardsCurve: ExpressibleByAffineCoordinates, ExpressibleBy
         self.a = a
         self.d = d
         self.galoisField = field
-        self.equation = a*𝑥² + 𝑦² - (1 + d*𝑥²*𝑦²)
+        self.equation = EllipticCurveForm.twistedEdwards.substitute() { [ 𝑎 ≔ a, 𝑑 ≔ d ] }
     }
 
 }

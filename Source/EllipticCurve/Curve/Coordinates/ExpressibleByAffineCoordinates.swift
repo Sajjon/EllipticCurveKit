@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ExpressibleByAffineCoordinates: Curve {
+public protocol ExpressibleByAffineCoordinates: CurveForm {
     typealias Affine = AffinePointOnCurve<Self>
 
     static var identityPointAffine: Affine { get }

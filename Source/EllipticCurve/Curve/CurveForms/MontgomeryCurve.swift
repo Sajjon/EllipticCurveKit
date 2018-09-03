@@ -15,7 +15,7 @@ private let 𝟜𝑏 = 4 * 𝑏
 
 ///     𝑀: 𝑏𝑦² = 𝑥(𝑥² + 𝑎𝑥 + 1)
 /// - Requires: `𝑏(𝑎² - 𝟜) ≠ 𝟘 in 𝔽_𝑝` (or equivalently: `𝑏 ≠ 𝟘` and `𝑎² ≠ 𝟜`)
-public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConvertible {
+public struct MontgomeryCurve: CurveForm, ExpressibleByAffineCoordinates, CustomStringConvertible {
 
     private let a: Number
     private let b: Number
@@ -43,14 +43,8 @@ public struct MontgomeryCurve: ExpressibleByAffineCoordinates, CustomStringConve
         self.galoisField = galoisField
         self.order = order
 
-        self.equation = b*𝑦² - 𝑥*(𝑥² + a*𝑥 + 1)
+        self.equation = EllipticCurveForm.montgomery.substitute() {[ 𝑎 ≔ a, 𝑏 ≔ b ]}
     }
-
-    /// Returns a list of the y-coordinates on the curve at given x.
-//    func getY(fromX x: Number) -> [Number] {
-//       return equation.getYFrom(x: x)
-//    }
-
 
     /// https://www.hyperelliptic.org/EFD/g1p/auto-montgom-xz.html
     public struct MontgomeryPoint: TwoDimensionalPoint, Equatable {

@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol ThreeDimensionalPointOnCurve: ThreeDimensionalPoint, Equatable {
-    associatedtype CurveType: Curve
+    associatedtype CurveType: CurveForm
     init(x: Number, y: Number, z: Number)
 }
 

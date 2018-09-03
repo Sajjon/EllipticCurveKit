@@ -8,8 +8,29 @@
 
 import Foundation
 
-/// The curve E: `y² = x³ + ax + b` over Fp
+public let secp256k1 = Secp256k1()
+
+/// The curve E: `𝑦² = 𝑥³ + 7` over Fp
 /// `secp256k1` Also known as the `Bitcoin curve` (though used by Ethereum, Zilliqa, Radix)
+public class Secp256k1: ECCBase {
+    public init() {
+        super.init(
+            name: .named(.secp256k1),
+            form: ShortWeierstraßCurve(
+                a: 0,
+                b: 7,
+                // 2^256 −2^32 −2^9 −2^8 −2^7 −2^6 −2^4 − 1  <===>  2^256 - 2^32 - 977
+                galoisField: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F"
+                )!,
+            order: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141",
+            generator: AnyTwoDimensionalPoint(
+                x: "0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798",
+                y: "0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8"
+            ),
+            cofactor: 1
+        )
+    }
+}
 
 
 

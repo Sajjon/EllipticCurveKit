@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ProjectivePointOnCurve<C: Curve>: ThreeDimensionalPointOnCurve {
+public struct ProjectivePointOnCurve<C: CurveForm>: ThreeDimensionalPointOnCurve {
     public typealias CurveType = C
     public let x: Number
     public let y: Number

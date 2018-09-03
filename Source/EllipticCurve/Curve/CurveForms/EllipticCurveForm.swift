@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EquationKit
 
 /// Based on Ed Dawson:
 /// PDF: https://pdfs.semanticscholar.org/presentation/9ebd/4d864ce5597eca5d2cb5021b7b5b0def4480.pdf
@@ -30,7 +31,6 @@ import Foundation
 /// `𝜑` reads out "phi"
 /// Notation: `𝐸𝖰 ⟶ 𝐸𝖶, (𝑥, 𝑦)` describes a mapping from "𝐸𝖰" to "𝐸𝖶", which are two different forms of the same field.
 public enum EllipticCurveForm {
-
     ///
     /// Weierstrass form (`𝑊`) of a curve.
     /// - Not used, see `shortWeierstrass` instead.
@@ -53,12 +53,12 @@ public enum EllipticCurveForm {
     ///      𝑆: 𝑦² = 𝑥³ + 𝑎𝑥 + 𝑏
     /// - Requires: `𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘 in 𝔽_𝑝 (mod 𝑝)`
     ///
-    case shortWeierstrass
+    public static let shortWeierstrass = 𝑦² - (𝑥³ + 𝑎𝑥 + 𝑏)
 
     ///
     /// Montgomery form (`𝑀`) for a curve.
     /// # Equation
-    ///     𝑀: 𝑏𝑦² = 𝑥(𝑥² + 𝑎𝑥 + 1)
+    ///     𝑀: 𝑏𝑦² = 𝑥(𝑥² + 𝑎𝑥 + 𝟙)
     /// - Requires: `𝑏(𝑎² - 𝟜) ≠ 𝟘 in 𝔽_𝑝` (or equivalently: `𝑏 ≠ 𝟘` and `𝑎² ≠ 𝟜`)
     ///
     /// # 𝑀 is birationally equivalent to Weierstrass form:
@@ -71,7 +71,7 @@ public enum EllipticCurveForm {
     /// - Requires: 𝜑 requires: `𝑧³ + 𝑎𝑧 + 𝑏 = 𝟘` to have at least one root `𝜋` in `𝔽_𝑝` AND `𝟛𝜋² + 𝑎` is a quadratic residue in `𝔽_𝑝`
     ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝑀, (𝑡, 𝑣) ⟼ (𝑥, 𝑦) = { 𝑠 = sqrt(𝟛𝜋² + 𝑎)⁻¹ } = ( 𝑠(𝑡-𝜋), 𝑠𝑣), `𝑀𝑎 := 𝟛𝜋𝑠`, `𝑀𝑏 := 𝑠`
     ///
-    case montgomery
+    public static let montgomery = 𝑏𝑦² - 𝑥*(𝑥² + 𝑎𝑥 + 𝟙)
 
     ///
     /// Extended Jacobi Quartic form (`𝑄`) of a curve.
@@ -98,7 +98,7 @@ public enum EllipticCurveForm {
     /// # Mapping from Weierstrass to Extended Jacobi Quartic form:
     ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝖰, (𝑢, 𝑣) ⟼ (𝑥, 𝑦) = ( 𝟚𝑢𝑣⁻¹, (𝑢-𝟚𝑎)𝑢²𝟚𝑣⁻² - 𝟙 )
     ///
-    case extendedJacobiQuartic
+    public static let extendedJacobiQuartic = 𝑦² - (𝑑𝑥⁴ + 𝟚𝑎𝑥² + 𝟙)
 
     ///
     /// Twisted Hessian form (`𝐻`) of a curve.
@@ -109,7 +109,7 @@ public enum EllipticCurveForm {
     ///
     ///
     /// # Equation
-    ///     𝐻: 𝑎𝑥³ = 𝑦³ + 𝟙 = 𝑑𝑥𝑦
+    ///     𝐻: 𝑎𝑥³ + 𝑦³ + 𝟙 = 𝑑𝑥𝑦
     ///
     ///
     /// # 𝐻 is birationally equivalent to Weierstrass form:
@@ -131,7 +131,7 @@ public enum EllipticCurveForm {
     ///
     ///     𝜑: 𝐸𝖶 ⟶ 𝐸𝐻, (𝑢, 𝑣) ⟼ (𝑥, 𝑦) = ( (𝟙𝟠(𝑑²+𝟜𝑢)🐶, (𝟙-𝟜𝟠𝑣)🐶 )
     ///
-    case twistedHessian
+    public static let twistedHessian = 𝑎𝑥³ + 𝑦³ + 𝟙 - 𝑑𝑥𝑦
 
     ///
     /// Twisted Edwards form (`𝐸`) of a curve.
@@ -143,7 +143,7 @@ public enum EllipticCurveForm {
     ///
     ///
     /// # Equation
-    ///     𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑x²𝑦²
+    ///     𝐸: 𝑎𝑥² + 𝑦² = 𝟙 + 𝑑𝑥²𝑦²
     /// - Requires: `𝑎𝑑(𝑎−𝑑) ≠ 0`
     ///
     ///
@@ -162,7 +162,7 @@ public enum EllipticCurveForm {
     /// # Mapping from Weierstrass to Twisted Edwards form:
     ///     𝜑: 𝐸𝑊 ⟶ 𝐸𝐸, (𝑥', 𝑦') ⟼ (𝑥, 𝑦) = (𝟚𝑢𝑣⁻¹, (𝑢-𝑎+𝑑)(𝑢+𝑎-𝑑)⁻¹)
     ///
-    case twistedEdwards
+    public static let twistedEdwards = 𝑎𝑥² + 𝑦² - (𝟙 + 𝑑𝑥²𝑦²)
 
     ///
     /// Twisted Jacobi intersection form (`𝐼`) of a curve:
@@ -197,3 +197,34 @@ public enum EllipticCurveForm {
     ///
     case twistedJacobiIntersection
 }
+
+
+//public extension EllipticCurveForm {
+//    var equation: Polynomial {
+//        switch self {
+//        case .shortWeierstrass: return 𝑦² - (𝑥³ + 𝑎𝑥 + 𝑏)
+//        case .montgomery: return 𝑏𝑦² - 𝑥*(𝑥² + 𝑎𝑥 + 1)
+//        default: fatalError()
+//        }
+//    }
+//}
+
+private let 𝟙: Number = 1
+private let 𝟚: Number = 2
+private let 𝟛: Number = 3
+private let 𝟜: Number = 4
+private let 𝟝: Number = 5
+private let 𝟞: Number = 6
+private let 𝟟: Number = 7
+private let 𝟠: Number = 8
+
+private let 𝑑² = Exponentiation(variable: 𝑑, exponent: 2)
+let 𝑎²𝑑 = 𝑎² * 𝑑
+let 𝑎𝑑² = 𝑎 * 𝑑²
+private let 𝑏𝑦² = 𝑏*𝑦²
+private let 𝑑𝑥⁴ = 𝑑*𝑥⁴
+private let 𝑎𝑥² = 2*𝑎*𝑥²
+private let 𝟚𝑎𝑥² = 2*𝑎𝑥²
+private let 𝑎𝑥³ = 𝑎*𝑥³
+private let 𝑑𝑥²𝑦² = 𝑑*𝑥²*𝑦²
+private let 𝑑𝑥𝑦 = 𝑑*𝑥*𝑦

@@ -8,21 +8,15 @@
 
 import Foundation
 
-// 2DO: Rename `BaseCurveProtocol` => `Curve`
-public protocol BaseCurveProtocol {
+public protocol CurveForm {
     var galoisField: Field { get }
     func multiply(point: TwoDimensionalPoint, by number: Number) -> TwoDimensionalPoint
-}
-
-// 2DO: Rename `Curve` => `CurveForm`
-public protocol Curve: BaseCurveProtocol {
     var equation: Polynomial { get }
     func contains<P>(point: P) -> Bool where P: Point
     func isIdentity<P>(point: P) -> Bool where P: Point
 }
 
-
-public extension Curve {
+public extension CurveForm {
     func contains<P>(point: P) -> Bool where P: Point {
         if isIdentity(point: point) {
             return true
@@ -34,7 +28,6 @@ public extension Curve {
     func containsPointAt(x: Number, y: Number) -> Bool {
         return contains(point: AffinePointOnCurve<Self>(x: x, y: y))
     }
-
 
     func mod(_ number: Number) -> Number {
         return galoisField.mod(number)

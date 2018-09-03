@@ -24,7 +24,7 @@ let 𝟘: Number = 0
 ///      𝑆: 𝑦² = 𝑥³ + 𝑎𝑥 + 𝑏
 /// - Requires: `𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘`
 ///
-public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, ExpressibleByProjectiveCoordinates, CustomStringConvertible {
+public struct ShortWeierstraßCurve: CurveForm {
 
 
     private let a: Number
@@ -48,24 +48,14 @@ public struct ShortWeierstraßCurve: ExpressibleByAffineCoordinates, Expressible
         self.a = a
         self.b = b
         self.galoisField = galoisField
-        self.equation = 𝑦² - 𝑥³ - a*𝑥 - b
+        self.equation = EllipticCurveForm.shortWeierstrass.substitute() {[ 𝑎 ≔ a, 𝑏 ≔ b ] }
         self.𝑥＇ = equation.differentiateWithRespectTo(𝑥)!
         self.𝑦＇ = equation.differentiateWithRespectTo(𝑦)!
     }
-
-    struct Requirements {
-        static func areFullfilled(a: Number, b: Number, over field: Field) -> Bool {
-            return field.mod { 4*a**3 + 27*b**2 } != 0
-        }
-    }
-
-    /// Returns a list of the y-coordinates on the curve at given x.
-//    func getY(fromX x: Number) -> [Number] {
-//        return equation.getYFrom(x: x)
-//    }
 }
 
 // MARK: - ExpressibleByAffineCoordinates
+extension ShortWeierstraßCurve: ExpressibleByAffineCoordinates {}
 public extension ShortWeierstraßCurve {
 
     static let identityPointAffine: Affine = .infinity
@@ -119,6 +109,7 @@ public extension ShortWeierstraßCurve {
 }
 
 // MARK: - ExpressibleByProjectiveCoordinates
+extension ShortWeierstraßCurve: ExpressibleByProjectiveCoordinates {}
 public extension ShortWeierstraßCurve {
 
     func affineToProjective(_ affinePoint: Affine) -> Projective {
@@ -206,6 +197,7 @@ public extension ShortWeierstraßCurve {
 }
 
 // MARK: - CustomStringConvertible
+extension ShortWeierstraßCurve: CustomStringConvertible {}
 public extension ShortWeierstraßCurve {
     var description: String {
         return "𝑦² = 𝑥³ + 𝐴𝑥 + 𝐵 over \(galoisField)"

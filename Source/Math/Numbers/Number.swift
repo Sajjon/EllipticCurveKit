@@ -20,6 +20,11 @@ public func +(lhs: BigInt, rhs: Int) -> BigInt {
     return lhs + BigInt(rhs)
 }
 
+public extension Number {
+    init(decimal: String) {
+        self.init(decimal, radix: 10)!
+    }
+}
 
 public typealias Number = BigInt
 

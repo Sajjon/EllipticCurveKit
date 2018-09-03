@@ -45,4 +45,9 @@ public extension BigInt {
     func negated() -> BigInt {
         return BigInt(sign: sign == .plus ? .minus : .plus, magnitude: magnitude)
     }
+
+    var asInteger: Int {
+        guard bitWidth < 32 else { fatalError("overflow") }
+        return Int(description)!
+    }
 }

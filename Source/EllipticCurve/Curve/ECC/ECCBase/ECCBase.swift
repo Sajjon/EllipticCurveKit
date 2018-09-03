@@ -9,28 +9,91 @@
 import Foundation
 import EquationKit
 
+public enum NamedCurve {
+    case secp256k1
+    case secp256r1
 
-public class ECCBase: EllipticCurveCryptography {
+    /// Not to be confused with Ed25519
+    case curve25519
 
-    /// The underlying elliptic curve
-    let curve: BaseCurveProtocol
+    /// Not to be confused with Curv25519
+    case ed25519
+
+    var curve: ECCBase {
+        switch self {
+        case .secp256k1: return EllipticCurveKit.secp256k1
+        case .secp256r1: return EllipticCurveKit.secp256r1
+        case .curve25519: return EllipticCurveKit.curve25519
+        case .ed25519: return EllipticCurveKit.ed25519
+        }
+    }
+
+    var name: String {
+        return String(describing: type(of: curve))
+    }
+}
+
+public enum Name {
+    case named(NamedCurve)
+    case custom(String)
+
+    var name: String {
+        switch self {
+        case .named(let namedCurve): return namedCurve.name
+        case .custom(let customName): return customName
+        }
+    }
+}
+
+public typealias EllipticCurveCryptography = KeyIssuer & AnySigner & AnySignatureVerifier
+
+public protocol EllipticCurve {
+    var name: Name { get }
+
+    var form: CurveForm { get }
+    var order: Number { get }
+    var generator: TwoDimensionalPoint { get }
+    var cofactor: Number { get }
+    static func *(number: Number, curve: Self) -> TwoDimensionalPoint
+    static func *(curve: Self, number: Number) -> TwoDimensionalPoint
+}
+
+// MARK: EllipticCurve operations
+public extension EllipticCurve {
+    static func *(number: Number, curve: Self) -> TwoDimensionalPoint {
+        return curve.form.multiply(point: curve.generator, by: number)
+    }
+
+    static func *(curve: Self, number: Number) -> TwoDimensionalPoint {
+        return number * curve
+    }
+}
+
+public class ECCBase: EllipticCurve, EllipticCurveCryptography {
+
+    public let name: Name
+
+    /// The underlying elliptic curve form
+    public let form: CurveForm
 
     /// Often called `N`
-    let order: Number
+    public let order: Number
 
     /// Often called `base point` or `G`
-    let generator: TwoDimensionalPoint
+    public let generator: TwoDimensionalPoint
 
     /// Often denoted `h`
-    let cofactor: Number
+    public let cofactor: Number
 
     public init(
-        curve: BaseCurveProtocol,
+        name: Name,
+        form: CurveForm,
         order: Number,
         generator: TwoDimensionalPoint,
         cofactor: Number
         ) {
-        self.curve = curve
+        self.name = name
+        self.form = form
         self.order = order
         self.generator = generator
         self.cofactor = cofactor
@@ -39,17 +102,6 @@ public class ECCBase: EllipticCurveCryptography {
     // Overrideable (thus cannot be declared in an extension (yet...))
     public func securelyGeneratePrivateKeyNumber() -> Number {
         return securelyGeneratePrivateKeyNumber(in: 1..<order)
-    }
-}
-
-// MARK: Curve operations
-public extension ECCBase {
-    static func *(number: Number, curve: ECCBase) -> TwoDimensionalPoint {
-        return curve.curve.multiply(point: curve.generator, by: number)
-    }
-
-    static func *(curve: ECCBase, number: Number) -> TwoDimensionalPoint {
-        return number * curve
     }
 }
 
@@ -70,7 +122,7 @@ public extension ECCBase {
     func createSignatureFromParts(_ parts: SignatureParts, options: SigningOptions) -> Signature {
         var (r, s) = parts
 
-        guard r < curve.galoisField.modulus, s < order, r > 0, s > 0 else { fatalError("bad values") }
+        guard r < form.galoisField.modulus, s < order, r > 0, s > 0 else { fatalError("bad values") }
 
         if options.lowS, s > (order-1)/2 {
             s = order - s
@@ -109,31 +161,13 @@ internal extension ECCBase {
     }
 }
 
-public let secp256k1 = Secp256k1()
-public class Secp256k1: ECCBase {
-    public init() {
-        super.init(
-            curve: ShortWeierstraßCurve(
-                a: 0,
-                b: 7,
-                // 2^256 −2^32 −2^9 −2^8 −2^7 −2^6 −2^4 − 1  <===>  2^256 - 2^32 - 977
-                galoisField: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F"
-                )!,
-            order: "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141",
-            generator: AnyTwoDimensionalPoint(
-                x: "0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798",
-                y: "0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8"
-            ),
-            cofactor: 1
-        )
-    }
-}
 
 public let secp256r1 = Secp256r1()
 public class Secp256r1: ECCBase {
     public init() {
         super.init(
-            curve: ShortWeierstraßCurve(
+            name: .named(.secp256r1),
+            form: ShortWeierstraßCurve(
                 a: "0xFFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC",
                 b: Number(hexString: "0x5AC635D8AA3A93E7B3EBBD55769886BC651D06B0CC53B0F63BCE3C3E27D2604B")!,
                 /// 2^256 - 2^224 + 2^192 + 2^96 - 1  <===>  2^224 * (2^32 − 1) + 2^192 +2^96 − 1
@@ -159,47 +193,56 @@ public func decodeScalar25519(_ number: Number) -> Number {
 
 
 
-private let curve25519 = (galoisField: Field(2^^255 - 19), order: Number(2^^252 + Number(decimal: "27742317777372353535851937790883648493")))
-class ECCBaseCurve25519: ECCBase {
+private let parameters25519 = (galoisField: Field(2^^255 - 19), order: Number(2^^252 + Number(decimal: "27742317777372353535851937790883648493")))
+
+public let curve25519 = Curve25519()
+public class Curve25519: ECCBase {
     public override func securelyGeneratePrivateKeyNumber() -> Number {
         return securelyGeneratePrivateKeyNumber(in: 1..<order) {
             decodeScalar25519($0)
         }
     }
 
-    public init(curve: BaseCurveProtocol? = nil, generator: TwoDimensionalPoint? = nil) {
-        super.init(
-            curve: curve ?? MontgomeryCurve(
+    /// Initializer for the named curve `Curve25519`
+    public convenience init() {
+        self.init(
+            name: .named(.curve25519),
+            form: MontgomeryCurve(
                 a: 486662,
                 b: 1,
-                galoisField: curve25519.galoisField,
-                order: curve25519.order
-                )!,
-            order: curve25519.order,
-            generator: generator ?? AnyTwoDimensionalPoint(
+                galoisField: parameters25519.galoisField,
+                order: parameters25519.order
+            )!,
+            generator: AnyTwoDimensionalPoint(
                 x: 9,
                 y: Number(decimal: "14781619447589544791020593568409986887264606134616475288964881837755586237401")
-            ),
+            )
+        )
+    }
+
+    /// Initializer for any transformation of `Curve25519`, e.g. `Ed25519`.
+    public init(name: Name, form: CurveForm, generator: TwoDimensionalPoint) {
+        super.init(
+            name: name,
+            form: form,
+            order: parameters25519.order,
+            generator: generator,
             cofactor: 8
         )
     }
 
 }
 
-public extension Number {
-    init(decimal: String) {
-        self.init(decimal, radix: 10)!
-    }
-}
-
-class ECCEd25519: ECCBaseCurve25519 {
+public let ed25519 = Ed25519()
+public class Ed25519: Curve25519 {
     public init() {
         super.init(
-            curve: TwistedEdwardsCurve(
+            name: .named(.ed25519),
+            form: TwistedEdwardsCurve(
                 a: -1,
-                d: curve25519.galoisField.modInverse(-121665, 121666),
-                galoisField: curve25519.galoisField
-            ),
+                d: parameters25519.galoisField.modInverse(-121665, 121666),
+                galoisField: parameters25519.galoisField
+            )!,
             generator: AnyTwoDimensionalPoint(
                 x: Number(decimal: "15112221349535400772501151409588531511454012693041857206046113283949847762202"),
                 y: Number(decimal: "46316835694926478169428394003475163141307993866256225615783033603165251855960")
@@ -210,7 +253,6 @@ class ECCEd25519: ECCBaseCurve25519 {
 
 public protocol KeyIssuer {
     func generatePrivateKey() -> PrivateKey
-
 }
 
 public enum SignatureScheme {
@@ -283,4 +325,3 @@ public extension SignatureVerifier {
     }
 }
 
-public typealias EllipticCurveCryptography = KeyIssuer & AnySigner & AnySignatureVerifier

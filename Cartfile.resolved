@@ -1,4 +1,4 @@
-github "Sajjon/EquationKit" "0.0.5"
+github "Sajjon/EquationKit" "0.0.7"
 github "attaswift/BigInt" "v3.1.0"
 github "attaswift/SipHash" "v1.2.2"
 github "krzyzanowskim/CryptoSwift" "0.11.0"

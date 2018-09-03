@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AffinePointOnCurve<C: Curve>: TwoDimensionalPoint, Equatable {
+public struct AffinePointOnCurve<C: CurveForm>: TwoDimensionalPoint, Equatable {
     public let x: Number
     public let y: Number
     public let isInfinity: Bool

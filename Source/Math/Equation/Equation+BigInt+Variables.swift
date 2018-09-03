@@ -19,8 +19,6 @@ public typealias Term = TermStruct<Exponentiation>
 
 public let 𝑥 = Variable("𝑥")
 public let 𝑦 = Variable("𝑦")
-public let 𝑎 = Variable("𝑎")
-public let 𝑏 = Variable("𝑏")
 
 
 public let 𝑥² = Exponentiation(𝑥, exponent: 2)
@@ -46,3 +44,7 @@ public let 𝑎³ = Exponentiation(𝑎, exponent: 3)
 
 public let 𝑏² = Exponentiation(𝑏, exponent: 2)
 public let 𝑏³ = Exponentiation(𝑏, exponent: 3)
+public let 𝑎 = Variable("𝑎")
+public let 𝑎𝑥 = 𝑎*𝑥
+public let 𝑏 = Variable("𝑏")
+public let 𝑑 = Variable("𝑑")

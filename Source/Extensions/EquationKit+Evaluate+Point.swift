@@ -20,6 +20,6 @@ public extension PolynomialStruct where TermType == TermStruct<ExponentiationStr
     }
 
     func isZero(x: Number, y: Number, modulus p: Number) -> Bool {
-        return evaluate(modulus: p) {[ 𝑥 <- x, 𝑦 <- x ]} == 0
+        return evaluate(modulus: Modulus(p)) {[ 𝑥 <- x, 𝑦 <- x ]} == 0
     }
 }

@@ -8,15 +8,13 @@
 
 import Foundation
 
-public protocol ExpressibleByProjectiveCoordinates: Curve {
+public protocol ExpressibleByProjectiveCoordinates: CurveForm {
     typealias Projective = ProjectivePointOnCurve<Self>
     static var identityPointProjective: Projective { get }
 
     func addProjective(point p1: Projective, to p2: Projective) -> Projective
     func doubleProjective(point: Projective) -> Projective
     func multiplyProjective(point: Projective, by number: Number) -> Projective
-
-//    func projectiveMultiplicationOfGenerator(times number: Number) -> Projective
 
     func affineToProjective(_ affinePoint: AffinePointOnCurve<Self>) -> Projective
     func projectiveToAffine(_ projectivePoint: Projective) -> AffinePointOnCurve<Self>
@@ -26,10 +24,6 @@ public extension ExpressibleByProjectiveCoordinates {
     var identityPointProjective: ProjectivePointOnCurve<Self> {
         return Self.identityPointProjective
     }
-
-//    func projectiveMultiplicationOfGenerator(times number: Number) -> Projective {
-//        return multiplyProjective(point: generatorProjective, by: number)
-//    }
 }
 
 public extension ExpressibleByProjectiveCoordinates {

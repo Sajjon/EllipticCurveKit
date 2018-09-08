@@ -48,7 +48,7 @@ public struct ShortWeierstraßCurve: CurveForm {
         self.a = a
         self.b = b
         self.galoisField = galoisField
-        self.equation = EllipticCurveForm.shortWeierstrass.substitute() {[ 𝑎 ≔ a, 𝑏 ≔ b ] }
+        self.equation = EllipticCurveForm.Weierstraß.short.substitute() {[ 𝑎 ≔ a, 𝑏 ≔ b ] }
         self.𝑥＇ = equation.differentiateWithRespectTo(𝑥)!
         self.𝑦＇ = equation.differentiateWithRespectTo(𝑦)!
     }

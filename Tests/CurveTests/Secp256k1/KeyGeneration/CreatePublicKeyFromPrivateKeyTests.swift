@@ -9,7 +9,7 @@
 import XCTest
 import BigInt
 
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 // This is a completely uninteresting private key for a wallet with no funds.
 private let privateKeyHex = "29EE955FEDA1A85F87ED4004958479706BA6C71FC99A67697A9A13D9D08C618E"

@@ -8,7 +8,7 @@
 
 import UIKit
 
-import SwiftCrypto
+import EllipticCurveKit
 import CryptoSwift
 import BigInt
 

@@ -4,8 +4,8 @@ import UIKit
 // This does not work in Xcode 10, I get `error: Couldn't lookup symbols:`. Probably an xcode bug
 
 /*
-//@testable import SwiftCrypto
-import SwiftCrypto
+//@testable import EllipticCurveKit
+import EllipticCurveKit
 
 
 let privateKey = PrivateKey(hex: "B7E151628AED2A6ABF7158809CF4F3C762E7160F38B4DA56A784D9045190CFEF") {

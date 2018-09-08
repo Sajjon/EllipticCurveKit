@@ -10,7 +10,7 @@ import Foundation
 
 public struct PrivateKey<Curve: EllipticCurve> {
 
-    let number: Number
+    public let number: Number
 
     public static func generateNew() -> PrivateKey {
         let byteCount = (Curve.order - 1).as256bitLongData().bytes.count
@@ -53,6 +53,15 @@ public extension PrivateKey {
 
     func asData() -> Data {
         return number.as256bitLongData()
+    }
+
+    func asHexStringLength64() -> String {
+        return number.asHexStringLength64()
+    }
+
+    /// Uses `asHexStringLength64`
+    func asHex() -> String {
+        return asHexStringLength64()
     }
 
     func base64Encoded() -> String {

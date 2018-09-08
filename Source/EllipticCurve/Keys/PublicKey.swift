@@ -13,7 +13,7 @@ public struct PublicKey<Curve: EllipticCurve> {
     public typealias Point = AffinePoint<Curve>
 
     public let point: Point
-    let data: (uncompressed: Data, compressed: Data)
+    public let data: (uncompressed: Data, compressed: Data)
     public let hex: (uncompressed: HexString, compressed: HexString)
 
     public init(point: Point) {

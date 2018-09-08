@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Wallet<SystemType: DistributedSystem> {
-    let keyPair: KeyPairType
-    let publicAddress: PublicAddressType
+    public let keyPair: KeyPairType
+    public let publicAddress: PublicAddressType
 
     public init(keyPair: KeyPairType, publicAddress: PublicAddressType) {
         self.keyPair = keyPair

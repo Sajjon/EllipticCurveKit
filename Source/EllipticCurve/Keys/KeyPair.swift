@@ -12,8 +12,8 @@ public struct KeyPair<Curve: EllipticCurve> {
     public typealias PrivateKeyType = PrivateKey<Curve>
     public typealias PublicKeyType = PublicKey<Curve>
 
-    let privateKey: PrivateKeyType
-    let publicKey: PublicKeyType
+    public let privateKey: PrivateKeyType
+    public let publicKey: PublicKeyType
 
     public init(`private`: PrivateKeyType, `public`: PublicKeyType) {
         self.privateKey = `private`

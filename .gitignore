@@ -48,7 +48,7 @@ playground.xcworkspace
 #
 # Pods/
 
-# Carthage
+Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 # Carthage/Checkouts
@@ -66,3 +66,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# Here comes gitignore of the custom folder Icon, do not edit below this line:
+Icon
+

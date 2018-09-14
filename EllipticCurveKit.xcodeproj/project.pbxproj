@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
+		44717B4DB218E43CDDBFA968 /* Pods_EllipticCurveKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22D5815CE22BD264FD6F901 /* Pods_EllipticCurveKitTests.framework */; };
 		4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A03E20FD2983004BC02C /* AnyKeySigner.swift */; };
 		4848A04220FD312F004BC02C /* Schnorr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A04120FD312F004BC02C /* Schnorr.swift */; };
 		48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */; };
@@ -56,7 +57,7 @@
 		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */; };
 		48F242F820F7DD2600FB36DF /* Secp256k1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F620F7DD2200FB36DF /* Secp256k1.swift */; };
-		8823FC9573D8C1AF8B8D30CD /* Pods_SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 665161916806AD945170E11A /* Pods_SwiftCrypto.framework */; };
+		9F324BA22C93060C24A708CA /* Pods_EllipticCurveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6934A9BD668E6B342C9C5D04 /* Pods_EllipticCurveKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,8 +71,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1EC9D765543237D4FC0A37DA /* Pods-SwiftCryptoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.release.xcconfig"; sourceTree = "<group>"; };
-		30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.release.xcconfig"; sourceTree = "<group>"; };
+		24C830CC58BE4E27D9E807AE /* Pods-EllipticCurveKit.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.fasttestable.xcconfig"; sourceTree = "<group>"; };
+		357403164FDDDC52786A2C10 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.fasttestable.xcconfig"; sourceTree = "<group>"; };
+		44678E239246F4E6CF9394B2 /* Pods-EllipticCurveKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.release.xcconfig"; sourceTree = "<group>"; };
 		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
@@ -80,7 +82,6 @@
 		4885ABA520F77D6B00115FE0 /* Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signing.swift; sourceTree = "<group>"; };
 		4885ABA720F77ECB00115FE0 /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
-		4885ABAB20F7871800115FE0 /* Play.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Play.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
 		489119AA20F268C700F86528 /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
@@ -118,7 +119,7 @@
 		48D1101D20F3D832005A212A /* PublicAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicAddress.swift; sourceTree = "<group>"; };
 		48EB887F20FF2D5900974DF9 /* ModularInverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularInverse.swift; sourceTree = "<group>"; };
 		48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48F22C9620C70D87004A18CA /* SwiftCryptoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCryptoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EllipticCurveKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22CA820C70DC1004A18CA /* SwiftCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCrypto.h; sourceTree = "<group>"; };
 		48F22CA920C70DC1004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F22CB020C70DE5004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,11 +127,12 @@
 		48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningAndVerificationTests.swift; sourceTree = "<group>"; };
 		48F242F620F7DD2200FB36DF /* Secp256k1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256k1.swift; sourceTree = "<group>"; };
 		665161916806AD945170E11A /* Pods_SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C2A764FF59FB28920DD81F9 /* Pods-SwiftCryptoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6934A9BD668E6B342C9C5D04 /* Pods_EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69E5607CDE45CC1D3BDDF02B /* Pods-EllipticCurveKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCryptoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		80FCDAEA4BA6EBC44813B8F4 /* Pods-SwiftCrypto.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.fasttestable.xcconfig"; sourceTree = "<group>"; };
-		82728DFA7D34ED05E1AD3618 /* Pods-SwiftCrypto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCrypto.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCrypto/Pods-SwiftCrypto.debug.xcconfig"; sourceTree = "<group>"; };
-		E3F0989F90460577EE278809 /* Pods-SwiftCryptoTests.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftCryptoTests.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests.fasttestable.xcconfig"; sourceTree = "<group>"; };
+		9536C5CD440FE616CA2234BB /* Pods-EllipticCurveKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.debug.xcconfig"; sourceTree = "<group>"; };
+		BA86F41576A1A17429405E4D /* Pods-EllipticCurveKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F22D5815CE22BD264FD6F901 /* Pods_EllipticCurveKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8823FC9573D8C1AF8B8D30CD /* Pods_SwiftCrypto.framework in Frameworks */,
+				9F324BA22C93060C24A708CA /* Pods_EllipticCurveKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +150,7 @@
 			files = (
 				48F22C9720C70D88004A18CA /* EllipticCurveKit.framework in Frameworks */,
 				0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */,
+				44717B4DB218E43CDDBFA968 /* Pods_EllipticCurveKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +162,8 @@
 			children = (
 				665161916806AD945170E11A /* Pods_SwiftCrypto.framework */,
 				78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */,
+				6934A9BD668E6B342C9C5D04 /* Pods_EllipticCurveKit.framework */,
+				F22D5815CE22BD264FD6F901 /* Pods_EllipticCurveKitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,12 +171,12 @@
 		46A05956EC0C820C8AEE53C7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				82728DFA7D34ED05E1AD3618 /* Pods-SwiftCrypto.debug.xcconfig */,
-				30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */,
-				6C2A764FF59FB28920DD81F9 /* Pods-SwiftCryptoTests.debug.xcconfig */,
-				1EC9D765543237D4FC0A37DA /* Pods-SwiftCryptoTests.release.xcconfig */,
-				80FCDAEA4BA6EBC44813B8F4 /* Pods-SwiftCrypto.fasttestable.xcconfig */,
-				E3F0989F90460577EE278809 /* Pods-SwiftCryptoTests.fasttestable.xcconfig */,
+				9536C5CD440FE616CA2234BB /* Pods-EllipticCurveKit.debug.xcconfig */,
+				44678E239246F4E6CF9394B2 /* Pods-EllipticCurveKit.release.xcconfig */,
+				24C830CC58BE4E27D9E807AE /* Pods-EllipticCurveKit.fasttestable.xcconfig */,
+				BA86F41576A1A17429405E4D /* Pods-EllipticCurveKitTests.debug.xcconfig */,
+				69E5607CDE45CC1D3BDDF02B /* Pods-EllipticCurveKitTests.release.xcconfig */,
+				357403164FDDDC52786A2C10 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -409,7 +414,6 @@
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
-				4885ABAB20F7871800115FE0 /* Play.playground */,
 				285EE9D7DD122B692B0588B3 /* Frameworks */,
 				46A05956EC0C820C8AEE53C7 /* Pods */,
 				48F22C8E20C70D87004A18CA /* Products */,
@@ -422,7 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */,
-				48F22C9620C70D87004A18CA /* SwiftCryptoTests.xctest */,
+				48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -483,9 +487,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		48F22C8C20C70D87004A18CA /* SwiftCrypto */ = {
+		48F22C8C20C70D87004A18CA /* EllipticCurveKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48F22CA120C70D88004A18CA /* Build configuration list for PBXNativeTarget "SwiftCrypto" */;
+			buildConfigurationList = 48F22CA120C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKit" */;
 			buildPhases = (
 				B83F4FC38C14DCC2CC5F65E1 /* [CP] Check Pods Manifest.lock */,
 				48F22C8820C70D87004A18CA /* Sources */,
@@ -497,14 +501,14 @@
 			);
 			dependencies = (
 			);
-			name = SwiftCrypto;
+			name = EllipticCurveKit;
 			productName = SwiftCrypto;
 			productReference = 48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		48F22C9520C70D87004A18CA /* SwiftCryptoTests */ = {
+		48F22C9520C70D87004A18CA /* EllipticCurveKitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48F22CA420C70D88004A18CA /* Build configuration list for PBXNativeTarget "SwiftCryptoTests" */;
+			buildConfigurationList = 48F22CA420C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKitTests" */;
 			buildPhases = (
 				961842394C2FB3A92475F3C1 /* [CP] Check Pods Manifest.lock */,
 				48F22C9220C70D87004A18CA /* Sources */,
@@ -517,9 +521,9 @@
 			dependencies = (
 				48F22C9920C70D88004A18CA /* PBXTargetDependency */,
 			);
-			name = SwiftCryptoTests;
+			name = EllipticCurveKitTests;
 			productName = SwiftCryptoTests;
-			productReference = 48F22C9620C70D87004A18CA /* SwiftCryptoTests.xctest */;
+			productReference = 48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -542,7 +546,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 48F22C8720C70D87004A18CA /* Build configuration list for PBXProject "SwiftCrypto" */;
+			buildConfigurationList = 48F22C8720C70D87004A18CA /* Build configuration list for PBXProject "EllipticCurveKit" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -554,8 +558,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				48F22C8C20C70D87004A18CA /* SwiftCrypto */,
-				48F22C9520C70D87004A18CA /* SwiftCryptoTests */,
+				48F22C8C20C70D87004A18CA /* EllipticCurveKit */,
+				48F22C9520C70D87004A18CA /* EllipticCurveKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -584,7 +588,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework",
@@ -597,7 +601,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftCryptoTests/Pods-SwiftCryptoTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		961842394C2FB3A92475F3C1 /* [CP] Check Pods Manifest.lock */ = {
@@ -611,7 +615,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SwiftCryptoTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EllipticCurveKitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -629,7 +633,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SwiftCrypto-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EllipticCurveKit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -704,7 +708,7 @@
 /* Begin PBXTargetDependency section */
 		48F22C9920C70D88004A18CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 48F22C8C20C70D87004A18CA /* SwiftCrypto */;
+			target = 48F22C8C20C70D87004A18CA /* EllipticCurveKit */;
 			targetProxy = 48F22C9820C70D88004A18CA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -771,7 +775,7 @@
 		};
 		48B5FCF920FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80FCDAEA4BA6EBC44813B8F4 /* Pods-SwiftCrypto.fasttestable.xcconfig */;
+			baseConfigurationReference = 24C830CC58BE4E27D9E807AE /* Pods-EllipticCurveKit.fasttestable.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -788,7 +792,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -798,10 +802,11 @@
 		};
 		48B5FCFA20FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3F0989F90460577EE278809 /* Pods-SwiftCryptoTests.fasttestable.xcconfig */;
+			baseConfigurationReference = 357403164FDDDC52786A2C10 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -810,6 +815,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -941,7 +947,7 @@
 		};
 		48F22CA220C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82728DFA7D34ED05E1AD3618 /* Pods-SwiftCrypto.debug.xcconfig */;
+			baseConfigurationReference = 9536C5CD440FE616CA2234BB /* Pods-EllipticCurveKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -958,7 +964,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -968,7 +974,7 @@
 		};
 		48F22CA320C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30E2A5EA06E20A8C11C03CAC /* Pods-SwiftCrypto.release.xcconfig */;
+			baseConfigurationReference = 44678E239246F4E6CF9394B2 /* Pods-EllipticCurveKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -985,7 +991,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCrypto;
+				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -995,10 +1001,11 @@
 		};
 		48F22CA520C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C2A764FF59FB28920DD81F9 /* Pods-SwiftCryptoTests.debug.xcconfig */;
+			baseConfigurationReference = BA86F41576A1A17429405E4D /* Pods-EllipticCurveKitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1007,6 +1014,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1014,10 +1022,11 @@
 		};
 		48F22CA620C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EC9D765543237D4FC0A37DA /* Pods-SwiftCryptoTests.release.xcconfig */;
+			baseConfigurationReference = 69E5607CDE45CC1D3BDDF02B /* Pods-EllipticCurveKitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1026,6 +1035,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1034,7 +1044,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		48F22C8720C70D87004A18CA /* Build configuration list for PBXProject "SwiftCrypto" */ = {
+		48F22C8720C70D87004A18CA /* Build configuration list for PBXProject "EllipticCurveKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48F22C9F20C70D88004A18CA /* Debug */,
@@ -1044,7 +1054,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48F22CA120C70D88004A18CA /* Build configuration list for PBXNativeTarget "SwiftCrypto" */ = {
+		48F22CA120C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48F22CA220C70D88004A18CA /* Debug */,
@@ -1054,7 +1064,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48F22CA420C70D88004A18CA /* Build configuration list for PBXNativeTarget "SwiftCryptoTests" */ = {
+		48F22CA420C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48F22CA520C70D88004A18CA /* Debug */,

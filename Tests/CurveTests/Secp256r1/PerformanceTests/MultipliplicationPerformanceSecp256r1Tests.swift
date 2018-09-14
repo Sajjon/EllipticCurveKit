@@ -1,6 +1,6 @@
 //
 //  MultipliplicationPerformanceSecp256r1Tests.swift
-//  SwiftCryptoTests
+//  EllipticCurveKitTests
 //
 //  Created by Alexander Cyon on 2018-07-18.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.

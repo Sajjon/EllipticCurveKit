@@ -68,5 +68,5 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 # Here comes gitignore of the custom folder Icon, do not edit below this line:
-Icon
 
+Icon

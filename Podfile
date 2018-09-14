@@ -1,20 +1,20 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-workspace 'SwiftCrypto'
+workspace 'EllipticCurveKit'
 
 def pods()
 	pod 'BigInt'
   	pod 'CryptoSwift'
 end
 
-target 'SwiftCrypto' do
-	project 'SwiftCrypto.xcodeproj'
+target 'EllipticCurveKit' do
+	project 'EllipticCurveKit.xcodeproj'
   use_frameworks!
 
 	pods
 
-  target 'SwiftCryptoTests' do
+  target 'EllipticCurveKitTests' do
     inherit! :search_paths
     # Pods for testing
   end

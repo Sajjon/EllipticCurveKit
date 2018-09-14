@@ -42,6 +42,16 @@
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "48F22C9520C70D87004A18CA"
+               BuildableName = "EllipticCurveKitTests.xctest"
+               BlueprintName = "EllipticCurveKitTests"
+               ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

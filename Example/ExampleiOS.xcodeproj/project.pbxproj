@@ -330,6 +330,9 @@
 				"${BUILT_PRODUCTS_DIR}/BigInt-iOS11.4/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.4/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash-iOS11.4/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (

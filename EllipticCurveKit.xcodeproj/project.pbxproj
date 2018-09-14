@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */; };
-		44717B4DB218E43CDDBFA968 /* Pods_EllipticCurveKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22D5815CE22BD264FD6F901 /* Pods_EllipticCurveKitTests.framework */; };
+		31AB332E0500F6F9B14E1D69 /* Pods_EllipticCurveKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2187DE6D6CB87F3AD861F438 /* Pods_EllipticCurveKitTests.framework */; };
 		4848A03F20FD2983004BC02C /* AnyKeySigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A03E20FD2983004BC02C /* AnyKeySigner.swift */; };
 		4848A04220FD312F004BC02C /* Schnorr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4848A04120FD312F004BC02C /* Schnorr.swift */; };
 		48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */; };
@@ -54,10 +53,10 @@
 		48D1101E20F3D832005A212A /* PublicAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D1101D20F3D832005A212A /* PublicAddress.swift */; };
 		48EB888020FF2D5900974DF9 /* ModularInverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EB887F20FF2D5900974DF9 /* ModularInverse.swift */; };
 		48F22C9720C70D88004A18CA /* EllipticCurveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */; };
-		48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* SwiftCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48F22CAA20C70DC9004A18CA /* EllipticCurveKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */; };
 		48F242F820F7DD2600FB36DF /* Secp256k1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F620F7DD2200FB36DF /* Secp256k1.swift */; };
-		9F324BA22C93060C24A708CA /* Pods_EllipticCurveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6934A9BD668E6B342C9C5D04 /* Pods_EllipticCurveKit.framework */; };
+		7CAFC604C5BCB39F0509F72F /* Pods_EllipticCurveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB05E5D6380021B20834BC53 /* Pods_EllipticCurveKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,14 +65,15 @@
 			containerPortal = 48F22C8420C70D87004A18CA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 48F22C8C20C70D87004A18CA;
-			remoteInfo = SwiftCrypto;
+			remoteInfo = EllipticCurveKit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24C830CC58BE4E27D9E807AE /* Pods-EllipticCurveKit.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.fasttestable.xcconfig"; sourceTree = "<group>"; };
-		357403164FDDDC52786A2C10 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.fasttestable.xcconfig"; sourceTree = "<group>"; };
-		44678E239246F4E6CF9394B2 /* Pods-EllipticCurveKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.release.xcconfig"; sourceTree = "<group>"; };
+		0FD66A73CDF334CD1BBAA777 /* Pods-EllipticCurveKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.release.xcconfig"; sourceTree = "<group>"; };
+		1853B0E938135C038AAE0660 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.fasttestable.xcconfig"; sourceTree = "<group>"; };
+		1FBBDA8D54022F783D36749E /* Pods-EllipticCurveKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		2187DE6D6CB87F3AD861F438 /* Pods_EllipticCurveKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePublicKeyFromPrivateKeyTests.swift; sourceTree = "<group>"; };
 		483C099720F5EF0400C5E2DA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
@@ -120,19 +120,16 @@
 		48EB887F20FF2D5900974DF9 /* ModularInverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModularInverse.swift; sourceTree = "<group>"; };
 		48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EllipticCurveKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		48F22CA820C70DC1004A18CA /* SwiftCrypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftCrypto.h; sourceTree = "<group>"; };
+		48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EllipticCurveKit.h; sourceTree = "<group>"; };
 		48F22CA920C70DC1004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F22CB020C70DE5004A18CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F242EF20F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyBase64EncodingDecodingTests.swift; sourceTree = "<group>"; };
 		48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningAndVerificationTests.swift; sourceTree = "<group>"; };
 		48F242F620F7DD2200FB36DF /* Secp256k1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256k1.swift; sourceTree = "<group>"; };
-		665161916806AD945170E11A /* Pods_SwiftCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6934A9BD668E6B342C9C5D04 /* Pods_EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		69E5607CDE45CC1D3BDDF02B /* Pods-EllipticCurveKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCryptoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9536C5CD440FE616CA2234BB /* Pods-EllipticCurveKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.debug.xcconfig"; sourceTree = "<group>"; };
-		BA86F41576A1A17429405E4D /* Pods-EllipticCurveKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F22D5815CE22BD264FD6F901 /* Pods_EllipticCurveKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7447D691EE2EB88C5886E27E /* Pods-EllipticCurveKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D9F35C160A80EFA5D408A8CD /* Pods-EllipticCurveKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.debug.xcconfig"; sourceTree = "<group>"; };
+		EC67AD2005093425E63E3468 /* Pods-EllipticCurveKit.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EllipticCurveKit.fasttestable.xcconfig"; path = "Pods/Target Support Files/Pods-EllipticCurveKit/Pods-EllipticCurveKit.fasttestable.xcconfig"; sourceTree = "<group>"; };
+		FB05E5D6380021B20834BC53 /* Pods_EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F324BA22C93060C24A708CA /* Pods_EllipticCurveKit.framework in Frameworks */,
+				7CAFC604C5BCB39F0509F72F /* Pods_EllipticCurveKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,38 +146,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F22C9720C70D88004A18CA /* EllipticCurveKit.framework in Frameworks */,
-				0AEEF2E72F2DB23157321272 /* Pods_SwiftCryptoTests.framework in Frameworks */,
-				44717B4DB218E43CDDBFA968 /* Pods_EllipticCurveKitTests.framework in Frameworks */,
+				31AB332E0500F6F9B14E1D69 /* Pods_EllipticCurveKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		285EE9D7DD122B692B0588B3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				665161916806AD945170E11A /* Pods_SwiftCrypto.framework */,
-				78FBB1C9A0AA5A32A740B188 /* Pods_SwiftCryptoTests.framework */,
-				6934A9BD668E6B342C9C5D04 /* Pods_EllipticCurveKit.framework */,
-				F22D5815CE22BD264FD6F901 /* Pods_EllipticCurveKitTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		46A05956EC0C820C8AEE53C7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9536C5CD440FE616CA2234BB /* Pods-EllipticCurveKit.debug.xcconfig */,
-				44678E239246F4E6CF9394B2 /* Pods-EllipticCurveKit.release.xcconfig */,
-				24C830CC58BE4E27D9E807AE /* Pods-EllipticCurveKit.fasttestable.xcconfig */,
-				BA86F41576A1A17429405E4D /* Pods-EllipticCurveKitTests.debug.xcconfig */,
-				69E5607CDE45CC1D3BDDF02B /* Pods-EllipticCurveKitTests.release.xcconfig */,
-				357403164FDDDC52786A2C10 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		482B154120D41053001B437D /* KeyGeneration */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +174,7 @@
 		4861AA6B20D048B900871618 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				48F22CA820C70DC1004A18CA /* SwiftCrypto.h */,
+				48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */,
 				48F22CA920C70DC1004A18CA /* Info.plist */,
 				483C099720F5EF0400C5E2DA /* module.modulemap */,
 			);
@@ -414,11 +386,11 @@
 		48F22C8320C70D87004A18CA = {
 			isa = PBXGroup;
 			children = (
-				285EE9D7DD122B692B0588B3 /* Frameworks */,
-				46A05956EC0C820C8AEE53C7 /* Pods */,
 				48F22C8E20C70D87004A18CA /* Products */,
 				48F22CA720C70DC1004A18CA /* Source */,
 				48F22CAE20C70DE5004A18CA /* Tests */,
+				A75A8F8B4AAB19DF076A9FB1 /* Pods */,
+				79B6DC572F28656C640E4CB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -473,6 +445,28 @@
 			path = CommonCurves;
 			sourceTree = "<group>";
 		};
+		79B6DC572F28656C640E4CB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB05E5D6380021B20834BC53 /* Pods_EllipticCurveKit.framework */,
+				2187DE6D6CB87F3AD861F438 /* Pods_EllipticCurveKitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A75A8F8B4AAB19DF076A9FB1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D9F35C160A80EFA5D408A8CD /* Pods-EllipticCurveKit.debug.xcconfig */,
+				0FD66A73CDF334CD1BBAA777 /* Pods-EllipticCurveKit.release.xcconfig */,
+				EC67AD2005093425E63E3468 /* Pods-EllipticCurveKit.fasttestable.xcconfig */,
+				7447D691EE2EB88C5886E27E /* Pods-EllipticCurveKitTests.debug.xcconfig */,
+				1FBBDA8D54022F783D36749E /* Pods-EllipticCurveKitTests.release.xcconfig */,
+				1853B0E938135C038AAE0660 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -480,7 +474,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48F22CAA20C70DC9004A18CA /* SwiftCrypto.h in Headers */,
+				48F22CAA20C70DC9004A18CA /* EllipticCurveKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,7 +485,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48F22CA120C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKit" */;
 			buildPhases = (
-				B83F4FC38C14DCC2CC5F65E1 /* [CP] Check Pods Manifest.lock */,
+				4FC7F06DEB052F2C2B54A5A7 /* [CP] Check Pods Manifest.lock */,
 				48F22C8820C70D87004A18CA /* Sources */,
 				48F22C8920C70D87004A18CA /* Frameworks */,
 				48F22C8A20C70D87004A18CA /* Headers */,
@@ -502,7 +496,7 @@
 			dependencies = (
 			);
 			name = EllipticCurveKit;
-			productName = SwiftCrypto;
+			productName = EllipticCurveKit;
 			productReference = 48F22C8D20C70D87004A18CA /* EllipticCurveKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -510,11 +504,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48F22CA420C70D88004A18CA /* Build configuration list for PBXNativeTarget "EllipticCurveKitTests" */;
 			buildPhases = (
-				961842394C2FB3A92475F3C1 /* [CP] Check Pods Manifest.lock */,
+				AA48E44C053E33A186F453A0 /* [CP] Check Pods Manifest.lock */,
 				48F22C9220C70D87004A18CA /* Sources */,
 				48F22C9320C70D87004A18CA /* Frameworks */,
 				48F22C9420C70D87004A18CA /* Resources */,
-				2D00CE763516DE3CAC5C58BC /* [CP] Embed Pods Frameworks */,
+				474AAD2835749ACCF6811AE1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -522,7 +516,7 @@
 				48F22C9920C70D88004A18CA /* PBXTargetDependency */,
 			);
 			name = EllipticCurveKitTests;
-			productName = SwiftCryptoTests;
+			productName = EllipticCurveKitTests;
 			productReference = 48F22C9620C70D87004A18CA /* EllipticCurveKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -582,7 +576,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2D00CE763516DE3CAC5C58BC /* [CP] Embed Pods Frameworks */ = {
+		474AAD2835749ACCF6811AE1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -604,25 +598,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EllipticCurveKitTests/Pods-EllipticCurveKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		961842394C2FB3A92475F3C1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EllipticCurveKitTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B83F4FC38C14DCC2CC5F65E1 /* [CP] Check Pods Manifest.lock */ = {
+		4FC7F06DEB052F2C2B54A5A7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -634,6 +610,24 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-EllipticCurveKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA48E44C053E33A186F453A0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EllipticCurveKitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -775,7 +769,7 @@
 		};
 		48B5FCF920FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24C830CC58BE4E27D9E807AE /* Pods-EllipticCurveKit.fasttestable.xcconfig */;
+			baseConfigurationReference = EC67AD2005093425E63E3468 /* Pods-EllipticCurveKit.fasttestable.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -802,7 +796,7 @@
 		};
 		48B5FCFA20FF339E007629C6 /* FastTestable */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 357403164FDDDC52786A2C10 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */;
+			baseConfigurationReference = 1853B0E938135C038AAE0660 /* Pods-EllipticCurveKitTests.fasttestable.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -813,7 +807,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -947,7 +941,7 @@
 		};
 		48F22CA220C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9536C5CD440FE616CA2234BB /* Pods-EllipticCurveKit.debug.xcconfig */;
+			baseConfigurationReference = D9F35C160A80EFA5D408A8CD /* Pods-EllipticCurveKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -974,7 +968,7 @@
 		};
 		48F22CA320C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44678E239246F4E6CF9394B2 /* Pods-EllipticCurveKit.release.xcconfig */;
+			baseConfigurationReference = 0FD66A73CDF334CD1BBAA777 /* Pods-EllipticCurveKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1001,7 +995,7 @@
 		};
 		48F22CA520C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA86F41576A1A17429405E4D /* Pods-EllipticCurveKitTests.debug.xcconfig */;
+			baseConfigurationReference = 7447D691EE2EB88C5886E27E /* Pods-EllipticCurveKitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -1012,7 +1006,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -1022,7 +1016,7 @@
 		};
 		48F22CA620C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69E5607CDE45CC1D3BDDF02B /* Pods-EllipticCurveKitTests.release.xcconfig */;
+			baseConfigurationReference = 1FBBDA8D54022F783D36749E /* Pods-EllipticCurveKitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -1033,7 +1027,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.SwiftCryptoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

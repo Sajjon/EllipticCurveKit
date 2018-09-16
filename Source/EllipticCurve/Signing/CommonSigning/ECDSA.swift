@@ -13,7 +13,6 @@ import CryptoSwift
 public struct ECDSA<CurveType: EllipticCurve>: Signing {
     public typealias Curve = CurveType
 }
-public typealias Hasher = (Data) -> Data
 public extension ECDSA {
 
     static func sign(_ message: Message, using keyPair: KeyPair<Curve>) -> Signature<Curve> {
@@ -39,7 +38,7 @@ public extension ECDSA {
     //       the message hash and needs to be preimage resistant. If it's weak, anyone can recover the
     //       private key from a few observed signatures. Using the same function to derive k therefore
     //       does not make the signature any less secure.
-    static func _sign(_ message: Message, privateKey: PrivateKey<Curve>, publicKey: PublicKey<Curve>, hasher hash: Hasher = Crypto.sha2Sha256) -> Signature<Curve> {
+    static func _sign(_ message: Message, privateKey: PrivateKey<Curve>, publicKey: PublicKey<Curve>, hasher: UpdatableHasher = UpdatableHashProvider.hasher(variant: .sha2sha256)) -> Signature<Curve> {
 
         /*
          For Alice to sign a message {\displaystyle m} m, she follows these steps:
@@ -59,7 +58,7 @@ public extension ECDSA {
         let d = privateKey.number
 
         repeat {
-            var k = privateKey.signatureNonceK(forHashedData: z.as256bitLongData(), digestLength: CryptoSwift.SHA2.Variant.sha256.digestLength)
+            var k = privateKey.signatureNonceK(forHashedData: z.as256bitLongData(), digestLength: hasher.digestLength)
             k = Curve.modN { k } // make sure k belongs to [0, n - 1]
 
             let point: Curve.Point = Curve.G * k

@@ -19,6 +19,10 @@
 		489119A620F209C400F86528 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891199B20F2097C00F86528 /* Number.swift */; };
 		489119AB20F268C700F86528 /* SHA2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119AA20F268C700F86528 /* SHA2Tests.swift */; };
 		489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482B154220D41083001B437D /* CreatePublicKeyFromPrivateKeyTests.swift */; };
+		48924EA7214D32D800B72AF2 /* HMAC_DRBG_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48924EA6214D32D800B72AF2 /* HMAC_DRBG_Tests.swift */; };
+		48924EBB214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */; };
+		48924EBF214E5C3100B72AF2 /* additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB9214E5C3100B72AF2 /* additional_data.json */; };
+		48924EC0214E5C3100B72AF2 /* no_additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EBA214E5C3100B72AF2 /* no_additional_data.json */; };
 		4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EDFE20FA243E00B6F773 /* Secp256r1.swift */; };
 		4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */; };
 		48A19CCE2107681E005FF9F1 /* SecureRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CCD2107681E005FF9F1 /* SecureRandom.swift */; };
@@ -85,6 +89,10 @@
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
 		489119AA20F268C700F86528 /* SHA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA2Tests.swift; sourceTree = "<group>"; };
+		48924EA6214D32D800B72AF2 /* HMAC_DRBG_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAC_DRBG_Tests.swift; sourceTree = "<group>"; };
+		48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hmac_drbg_nist_no_prediction_resistance_reseed.json; sourceTree = "<group>"; };
+		48924EB9214E5C3100B72AF2 /* additional_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = additional_data.json; sourceTree = "<group>"; };
+		48924EBA214E5C3100B72AF2 /* no_additional_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = no_additional_data.json; sourceTree = "<group>"; };
 		4898EDFE20FA243E00B6F773 /* Secp256r1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1.swift; sourceTree = "<group>"; };
 		4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1_PointArthmeticTests.swift; sourceTree = "<group>"; };
 		48A19CCD2107681E005FF9F1 /* SecureRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRandom.swift; sourceTree = "<group>"; };
@@ -205,12 +213,63 @@
 			path = EllipticCurve;
 			sourceTree = "<group>";
 		};
-		489119A920F268AF00F86528 /* Utils */ = {
+		48924EA5214D32B700B72AF2 /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
 				489119AA20F268C700F86528 /* SHA2Tests.swift */,
+				48924EA6214D32D800B72AF2 /* HMAC_DRBG_Tests.swift */,
 			);
-			path = Utils;
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		48924EAE214E5C3100B72AF2 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				48924EAF214E5C3100B72AF2 /* HMAC_DRBG */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		48924EAF214E5C3100B72AF2 /* HMAC_DRBG */ = {
+			isa = PBXGroup;
+			children = (
+				48924EB0214E5C3100B72AF2 /* NIST */,
+			);
+			path = HMAC_DRBG;
+			sourceTree = "<group>";
+		};
+		48924EB0214E5C3100B72AF2 /* NIST */ = {
+			isa = PBXGroup;
+			children = (
+				48924EB1214E5C3100B72AF2 /* PREDICTION_RESISTANCE_NOT_ENABLED */,
+			);
+			path = NIST;
+			sourceTree = "<group>";
+		};
+		48924EB1214E5C3100B72AF2 /* PREDICTION_RESISTANCE_NOT_ENABLED */ = {
+			isa = PBXGroup;
+			children = (
+				48924EB2214E5C3100B72AF2 /* RESEED */,
+				48924EB8214E5C3100B72AF2 /* NO_RESEED */,
+			);
+			path = PREDICTION_RESISTANCE_NOT_ENABLED;
+			sourceTree = "<group>";
+		};
+		48924EB2214E5C3100B72AF2 /* RESEED */ = {
+			isa = PBXGroup;
+			children = (
+				48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */,
+			);
+			path = RESEED;
+			sourceTree = "<group>";
+		};
+		48924EB8214E5C3100B72AF2 /* NO_RESEED */ = {
+			isa = PBXGroup;
+			children = (
+				48924EB9214E5C3100B72AF2 /* additional_data.json */,
+				48924EBA214E5C3100B72AF2 /* no_additional_data.json */,
+			);
+			path = NO_RESEED;
 			sourceTree = "<group>";
 		};
 		4898EE0020FA269C00B6F773 /* CurveTests */ = {
@@ -420,9 +479,10 @@
 		48F22CAE20C70DE5004A18CA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				48924EAE214E5C3100B72AF2 /* JSON */,
 				48F22CB020C70DE5004A18CA /* Info.plist */,
+				48924EA5214D32B700B72AF2 /* Crypto */,
 				4898EE0020FA269C00B6F773 /* CurveTests */,
-				489119A920F268AF00F86528 /* Utils */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -570,6 +630,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48924EC0214E5C3100B72AF2 /* no_additional_data.json in Resources */,
+				48924EBB214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json in Resources */,
+				48924EBF214E5C3100B72AF2 /* additional_data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +754,7 @@
 				48AC5CF820FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */,
 				48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
 				48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */,
+				48924EA7214D32D800B72AF2 /* HMAC_DRBG_Tests.swift in Sources */,
 				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */,
 				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,

@@ -14,6 +14,17 @@ import BigInt
 // The three test vectors below are found at:
 //  https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors
 class SignignAndVerificationTests: XCTestCase {
+
+    func testSigFromZilliqaWallet() {
+        signingAndVerifyingSignaturesTest(
+            // Some uninteresting Zilliqa TESTNET private key, containing a few worthless TEST tokens.
+            privateKey: "0E891B9DFF485000C7D1DC22ECF3A583CC50328684321D61947A86E57CF6C638",
+            compressedPublicKey: "034ae47910d58b9bde819c3cffa8de4441955508db00aa2540db8e6bf6e99abc1b",
+            message: "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000019CA91EB535FB92FDA5094110FDAEB752EDB9B039034ae47910d58b9bde819c3cffa8de4441955508db00aa2540db8e6bf6e99abc1b000000000000000000000000000000000000000000000000000000000000000f000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000",
+            signature: "58a1d11298c80452b91ab3e562bc7160bea8dd49a877885d48a17f3ad4d886d6b94a4413a88630686068485588e80a4cae088fa330ed6a657cf134907157aa64"
+        )
+    }
+
     
     // `Test vector 1`
     func testSigningAndVerifyingSignatures1() {
@@ -48,13 +59,14 @@ class SignignAndVerificationTests: XCTestCase {
         )
     }
     
-    private func signingAndVerifyingSignaturesTest(privateKey priHex: String, compressedPublicKey: String, uncompressedPublicKey: String, message mHex: String, signature sigHex: String) {
+    private func signingAndVerifyingSignaturesTest(privateKey priHex: String, compressedPublicKey: String, uncompressedPublicKey: String? = nil, message mHex: String, signature sigHex: String) {
         
         let privateKey = PrivateKey<Secp256k1>(hex: priHex)!
         let keyPair = AnyKeyGenerator<Secp256k1>.restoreKeyPairFrom(privateKey: privateKey)
         let publicKey = keyPair.publicKey
-        
-        XCTAssertEqual(publicKey.hex.uncompressed, uncompressedPublicKey)
+        if let uncompressedPublicKey = uncompressedPublicKey {
+            XCTAssertEqual(publicKey.hex.uncompressed, uncompressedPublicKey)
+        }
         XCTAssertEqual(publicKey.hex.compressed, compressedPublicKey)
         
         let message = Message(hex: mHex)

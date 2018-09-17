@@ -23,6 +23,8 @@
 		48924EBB214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */; };
 		48924EBF214E5C3100B72AF2 /* additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB9214E5C3100B72AF2 /* additional_data.json */; };
 		48924EC0214E5C3100B72AF2 /* no_additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EBA214E5C3100B72AF2 /* no_additional_data.json */; };
+		48924EC3214E9AE200B72AF2 /* HMACTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48924EC2214E9AE200B72AF2 /* HMACTests.swift */; };
+		48924EC5214EB86600B72AF2 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48924EC4214EB86600B72AF2 /* BigInt.framework */; };
 		4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EDFE20FA243E00B6F773 /* Secp256r1.swift */; };
 		4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */; };
 		48A19CCE2107681E005FF9F1 /* SecureRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A19CCD2107681E005FF9F1 /* SecureRandom.swift */; };
@@ -93,6 +95,8 @@
 		48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hmac_drbg_nist_no_prediction_resistance_reseed.json; sourceTree = "<group>"; };
 		48924EB9214E5C3100B72AF2 /* additional_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = additional_data.json; sourceTree = "<group>"; };
 		48924EBA214E5C3100B72AF2 /* no_additional_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = no_additional_data.json; sourceTree = "<group>"; };
+		48924EC2214E9AE200B72AF2 /* HMACTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACTests.swift; sourceTree = "<group>"; };
+		48924EC4214EB86600B72AF2 /* BigInt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BigInt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4898EDFE20FA243E00B6F773 /* Secp256r1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1.swift; sourceTree = "<group>"; };
 		4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1_PointArthmeticTests.swift; sourceTree = "<group>"; };
 		48A19CCD2107681E005FF9F1 /* SecureRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRandom.swift; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48924EC5214EB86600B72AF2 /* BigInt.framework in Frameworks */,
 				48F22C9720C70D88004A18CA /* EllipticCurveKit.framework in Frameworks */,
 				31AB332E0500F6F9B14E1D69 /* Pods_EllipticCurveKitTests.framework in Frameworks */,
 			);
@@ -218,6 +223,7 @@
 			children = (
 				489119AA20F268C700F86528 /* SHA2Tests.swift */,
 				48924EA6214D32D800B72AF2 /* HMAC_DRBG_Tests.swift */,
+				48924EC2214E9AE200B72AF2 /* HMACTests.swift */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 		79B6DC572F28656C640E4CB4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48924EC4214EB86600B72AF2 /* BigInt.framework */,
 				FB05E5D6380021B20834BC53 /* Pods_EllipticCurveKit.framework */,
 				2187DE6D6CB87F3AD861F438 /* Pods_EllipticCurveKitTests.framework */,
 			);
@@ -755,6 +762,7 @@
 				48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
 				48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */,
 				48924EA7214D32D800B72AF2 /* HMAC_DRBG_Tests.swift in Sources */,
+				48924EC3214E9AE200B72AF2 /* HMACTests.swift in Sources */,
 				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */,
 				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,
@@ -843,6 +851,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = 1;
 				INFOPLIST_FILE = Source/SupportingFiles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -853,6 +862,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -865,6 +875,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				GCC_OPTIMIZATION_LEVEL = 1;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -874,6 +885,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1070,6 +1082,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

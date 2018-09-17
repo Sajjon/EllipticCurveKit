@@ -25,8 +25,9 @@ public extension Schnorr {
 
         var signature: Signature<Curve>?
         while signature == nil {
-            let k = drbg.generateNumberOf(length: length)
-            signature = trySign(message, privateKey: privateKey, k: k, publicKey: publicKey)
+            let k = drbg.generateNumberOf(length: length).result
+            let K = Number(data: k)
+            signature = trySign(message, privateKey: privateKey, k: K, publicKey: publicKey)
         }
 
         return signature!
@@ -68,8 +69,8 @@ extension Hasher where Self: CryptoSwift.DigestType {
     public func digest() -> Data {
         let one = calculate([])
         let two = calculate([])
-        assert(one == two)
-        assert(two == calculate([]))
+        precondition(one == two)
+        precondition(two == calculate([]))
         return Data(one)
     }
 }
@@ -92,11 +93,11 @@ public extension UpdatableHasher {
 extension CryptoSwift.SHA2: UpdatableHasher {
     public func update(_ data: Data) -> CryptoSwift.SHA2 {
         let before = digest()
-        assert(before == digest())
+        precondition(before == digest())
         _ = try! self.update(withBytes: data.bytes.slice, isLast: false)
         let after = digest()
-        assert(after != before)
-        assert(after == digest())
+        precondition(after != before)
+        precondition(after == digest())
         return self
     }
 
@@ -129,78 +130,108 @@ public enum HashType {
     case sha2sha256
 }
 
-public final class UpdatableHMAC {
+typealias ByteArray = [Byte]
 
-    private var inner: UpdatableHasher
-    private var outer: UpdatableHasher
-    private let hasher: UpdatableHasher
-
-    public init(key: Data, hasher: UpdatableHasher) {
-        self.hasher = hasher
-
-        var key = key.bytes
-
-        // Shorten key, if needed
-        if key.count > hasher.blockSize {
-            key = hasher.calculate(key).bytes
+extension HashType {
+    var hmac: HMAC.Variant {
+        switch self {
+        case .sha2sha256: return .sha256
         }
-        assert(key.count <= hasher.blockSize)
-
-        // Add padding to key
-        for _ in key.count..<hasher.blockSize {
-            key.append(0x0)
-        }
-
-        for i in 0..<key.count {
-            key[i] ^= 0x36
-        }
-        self.inner = hasher.newHasher().update(key)
-
-        // 0x36 ^ 0x5c = 0x6a
-        for i in 0..<key.count {
-            key[i] ^= 0x6a;
-        }
-        self.outer = hasher.newHasher().update(key)
     }
 }
 
-// MARK: - UpdatableHasher
-extension UpdatableHMAC: UpdatableHasher {}
-public extension UpdatableHMAC {
 
-    var type: HashType {
-        return hasher.type
+struct HMACUpdatable {
+
+    private var _digest: ByteArray
+    private let hmac: HMAC
+    private let hashType: HashType
+
+    init(key: ByteArray, data: ByteArray?, hash: HashType = .sha2sha256) {
+        self.hashType = hash
+        let variant = hash.hmac
+        let hmac = HMAC(key: key, variant: variant)
+        if let data = data {
+            let digest = try! hmac.authenticate(data)
+            self.hmac = HMAC(key: digest)
+            self._digest = digest
+        } else {
+            _digest = key
+            self.hmac = hmac
+        }
     }
 
-    var blockSize: Int {
-        return hasher.blockSize
+    func digest() -> ByteArray {
+        return _digest
+    }
+    func update(_ bytes: ByteArray) -> HMACUpdatable {
+        return HMACUpdatable(key: _digest, data: bytes, hash: hashType)
+    }
+}
+extension HMACUpdatable {
+    init(key: Data, data: Data?, hash: HashType = .sha2sha256) {
+        self.init(key: key.bytes, data: data?.bytes, hash: hash)
+    }
+    init(key: Data, data: String, encoding: String.Encoding = .utf8, hash: HashType = .sha2sha256) {
+        self.init(key: key, data: data.data(using: encoding), hash: hash)
+    }
+    init(key: String, data: String, encoding: String.Encoding = .utf8, hash: HashType = .sha2sha256) {
+        guard let key = key.data(using: encoding) else { fatalError("unhandled") }
+        self.init(key: key, data: data, encoding: encoding, hash: hash)
     }
 
-    var digestLength: Int {
-        return hasher.digestLength
-    }
-
-    func calculate(_ data: Data) -> Data {
-        fatalError("what to do?")
-    }
-
-    func digest() -> Data {
-        let outer0 = outer.digest()
-        assert(outer0 == outer.digest())
-        let inner0 = inner.digest()
-        assert(inner0 == inner.digest())
-        outer.update(inner.digest())
-        assert(outer.digest() != outer0)
-        return outer.digest()
-    }
-
-    func update(_ data: Data) -> Self {
-        print("inner: \(Number(data: inner.digest())), outer: \(Number(data: outer.digest()))")
-        inner.update(data)
-        return self
+    func hexDigest() -> String {
+        return Data(digest()).toHexString()
     }
 }
 
+public protocol DataConvertible { //: ExpressibleByArrayLiteral, ExpressibleByStringLiteral {
+    var asData: Data { get }
+    var asHex: String { get }
+    init(data: Data)
+}
+
+extension DataConvertible {
+    public var asHex: String {
+        return asData.toHexString()
+    }
+}
+
+extension HMACUpdatable: DataConvertible {
+    var asData: Data {
+        return Data(digest())
+    }
+    init(data: Data) {
+        fatalError()
+    }
+}
+
+extension Array: DataConvertible where Element == Byte {
+    public var asData: Data { return Data(self) }
+    public init(data: Data) {
+        self.init(data.bytes)
+    }
+}
+
+extension Data: DataConvertible {
+    public var asData: Data { return self }
+    public init(data: Data) {
+        self = data
+    }
+}
+
+//extension DataConvertible {
+//    public init(arrayLiteral bytes: Byte...) {
+//        self.init(data: Data(bytes))
+//    }
+//    public init(stringLiteral hex: String) {
+//        self.init(data: Number(hexString: hex)!.asTrimmedData())
+//    }
+//}
+
+//func = (lhs: inout DataConvertible, rhs: DataConvertible) {
+//    fatalError()
+//}
 
 /// hmac-drbg
 public final class HMAC_DRBG {
@@ -217,14 +248,17 @@ public final class HMAC_DRBG {
     //    /// Often called `pers`
     //    private let personalization: Data
 
-    private var K: Data
-    private var V: Data
+    private var K: DataConvertible
+    private var V: DataConvertible
     private let minimumEntropyByteCount: Int
     private var iterationsLeftUntilReseed: Number
     private static let reseedInterval: Number = 0x1000000000000
+    private var hashType: HashType {
+        return hasher.type
+    }
 
-    func hmac() -> UpdatableHMAC {
-        return UpdatableHMAC(key: K, hasher: hasher)
+    func hmac(_ key: DataConvertible, _ data: DataConvertible) -> HMACUpdatable {
+        return HMACUpdatable(key: key.asData, data: data.asData, hash: hashType)
     }
 
     public init(
@@ -233,7 +267,8 @@ public final class HMAC_DRBG {
         nonce: Data,
         personalization: Data? = nil,
         additionalInput: Data? = nil,
-        minimumEntropyByteCount: Int? = nil
+        minimumEntropyByteCount: Int? = nil,
+        expected: (initV: String, initK: String)? = nil
         ) {
         self.hasher = hasher
         self.iterationsLeftUntilReseed = HMAC_DRBG.reseedInterval
@@ -246,56 +281,61 @@ public final class HMAC_DRBG {
             }
             return minimumEntropyByteCount
         }()
-        assert(hasher.digestLength == 32)
+        precondition(hasher.digestLength == 32)
         self.K = Data(repeating: 0x00, count: hasher.digestLength)
         self.V = Data(repeating: 0x01, count: hasher.digestLength)
 
         let seed = entropy + nonce + (personalization ?? Data())
         print("🌳 Seed: \(Number(data: seed))")
         updateSeed(seed)
+
+        if let expected = expected {
+            precondition(V.asHex == expected.initV, "V: `\(V.asHex)`, but expected: `\(expected.initV)`")
+            precondition(K.asHex == expected.initK)
+        }
     }
 }
 
-func d(_ data: Data, _ variable: String) {
-    let number = Number(data: data)
-    print("\(variable): \(number)")
+//func d(_ data: Data, _ variable: String) {
+//    let number = Number(data: data)
+//    print("\(variable): \(number)")
+//}
+//
+//func d(_ hmac: UpdatableHMAC, _ variable: String) {
+//    d(hmac.digest(), variable)
+//}
+
+func + (data: DataConvertible, byte: Byte) -> Data {
+    return data.asData + Data([byte])
 }
 
-func d(_ hmac: UpdatableHMAC, _ variable: String) {
-    d(hmac.digest(), variable)
+func + (data: Data, byte: Byte) -> Data {
+    return data + Data([byte])
+}
+
+func + (lhs: Data, rhs: Data?) -> Data {
+    guard let rhs = rhs else { return lhs }
+    return lhs + rhs
+}
+
+extension Data: ExpressibleByArrayLiteral {
+    public init(arrayLiteral bytes: Byte...) {
+        self.init(bytes: bytes)
+    }
 }
 
 private extension HMAC_DRBG {
-    func updateSeed(_ seed: Data?) {
-        var kmac = hmac()
-//        d(kmac, "kmac")
-        kmac = kmac.update(V)
-            .update([0x00])
 
-//        d(kmac, "kmac")
-        kmac = kmac.update(seed)
-//        d(kmac, "kmac")
-        K = kmac.digest()
-//        d(K, "K")
-        V = hmac()
-            .update(V)
-            .digest()
+    func updateSeed(_ _seed: Data? = nil) {
+        let seed = _seed ?? Data()
+        func update(_ magicByte: Byte) {
+            K = hmac(K, V + magicByte + seed)
+            V = hmac(K, V)
+        }
+        update(0x00)
+        if _seed == nil { return }
+        update(0x01)
 
-//        d(V, "V")
-
-        K = hmac()
-            .update(V)
-            .update(Data([0x01]))
-            .update(seed)
-            .digest()
-
-//        d(K, "K")
-
-        V = hmac()
-            .update(V)
-            .digest()
-
-//        d(V, "V")
     }
 }
 
@@ -311,25 +351,44 @@ public extension HMAC_DRBG {
         updateSeed(entropy + additionalData)
     }
 
-    func generateNumberOf(length: Int, additionalData: Data? = nil) -> Number {
-        defer { iterationsLeftUntilReseed -= 1 }
+    func generateNumberOf(length: Int, additionalData: Data? = nil) -> (result: Data, state: KeyValue) {
+        defer {
+            if let additionalData = additionalData {
+                updateSeed(additionalData)
+            }
+            iterationsLeftUntilReseed -= 1
+        }
         guard iterationsLeftUntilReseed > 0 else {
             fatalError("Reseed is required")
         }
 
-        updateSeed(additionalData)
+        precondition(length == 128)
 
-        var temp = Data()
-        while temp.count < length {
-            print("💎 V: \(Number(data: V))")
-            V = hmac().update(V).digest()
-            temp += V
+        if let additionalData = additionalData {
+            updateSeed(additionalData)
         }
-        let result = temp.prefix(length)
+
+        var generated = Data()
+        while generated.count < length {
+            V = hmac(K, V).digest()
+            generated += V.asData
+        }
+        generated = generated.prefix(length)
         updateSeed(additionalData)
-        return Number(data: result)
+        return (result: generated, state: KeyValue(v: V.asHex, key: K.asHex))
     }
 }
+
+/// Only for unit tests
+public struct KeyValue: Codable {
+    enum CodingKeys: String, CodingKey {
+        case v = "V"
+        case key = "Key"
+    }
+    let v: String
+    let key: String
+}
+
 
 private extension Schnorr {
 
@@ -343,10 +402,10 @@ private extension Schnorr {
         // and the sign for y.
         // Hence a total of 33 bytes.
         let PUBKEY_COMPRESSED_SIZE_BYTES: Int = 33
-        assert(compressPubKey.bytes.count == PUBKEY_COMPRESSED_SIZE_BYTES)
+        precondition(compressPubKey.bytes.count == PUBKEY_COMPRESSED_SIZE_BYTES)
 
         // TODO ensure BIG ENDIAN
-        assert(q.bytes.count >= PUBKEY_COMPRESSED_SIZE_BYTES)
+        precondition(q.bytes.count >= PUBKEY_COMPRESSED_SIZE_BYTES)
         let Q = Data(q.bytes.prefix(PUBKEY_COMPRESSED_SIZE_BYTES))
 
         return Crypto.sha2Sha256(Q + compressPubKey + msgData)

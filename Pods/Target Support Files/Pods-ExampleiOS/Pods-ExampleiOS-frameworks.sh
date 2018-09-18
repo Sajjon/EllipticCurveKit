@@ -146,16 +146,25 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BigInt-iOS11.4/BigInt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.4/CryptoSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.4/SipHash.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BigInt-iOS11.4/BigInt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.4/CryptoSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.4/SipHash.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework"
 fi
 if [[ "$CONFIGURATION" == "FastTestable" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BigInt-iOS11.4/BigInt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.4/CryptoSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.4/SipHash.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

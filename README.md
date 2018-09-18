@@ -1,5 +1,5 @@
 ## ⚠️ THIS SDK IS NOT SAFE/PRODUCTION READY (YET!) ⚠️ 
-#### I'm no cryptography expert, If you find mistakes, inaccuracies or if you have suggestions for improvements of this README or the source code, please [submit an issue](https://github.com/Sajjon/SwiftCrypto/issues/new)!
+#### I'm no cryptography expert, If you find mistakes, inaccuracies or if you have suggestions for improvements of this README or the source code, please [submit an issue](https://github.com/Sajjon/EllipticCurveKit/issues/new)!
 
 <!-- MarkdownTOC -->
 
@@ -121,7 +121,7 @@ This SDK is in a proof-of-concept stage, but most features are supported, the co
 This SDK should never require any bridge to some C library (OpenSSL or bitcoin core for example) or even Objective-C. This SDK should be "Swifty" through and through. 
 
 ## Big Numbers
-Elliptic Curve Cryptography requires big numbers (256 bits and more), but natively we only have support for 64 bits (on 64-bit platforms) using [`UInt64`](https://developer.apple.com/documentation/swift/uint64). I started on developing [my own BigInt code, which I eventually throw away](https://github.com/Sajjon/SwiftCrypto/commit/b447188a4dd303b14eb8c483bb6fde6c351c815c) since Apple Developer [Karoy Lorentey a.k.a. *"lorentey"*](https://github.com/lorentey) already created BigInt SDK [attaswift/BigInt](https://github.com/attaswift/BigInt) which works beautifully. I am also keeping an eye on a [BigInt implementation from Apple, which is in prototype stage](https://github.com/apple/swift/blob/master/test/Prototypes/BigInt.swift), might switch over to it if ever officially released.
+Elliptic Curve Cryptography requires big numbers (256 bits and more), but natively we only have support for 64 bits (on 64-bit platforms) using [`UInt64`](https://developer.apple.com/documentation/swift/uint64). I started on developing [my own BigInt code, which I eventually throw away](https://github.com/Sajjon/EllipticCurveKit/commit/b447188a4dd303b14eb8c483bb6fde6c351c815c) since Apple Developer [Karoy Lorentey a.k.a. *"lorentey"*](https://github.com/lorentey) already created BigInt SDK [attaswift/BigInt](https://github.com/attaswift/BigInt) which works beautifully. I am also keeping an eye on a [BigInt implementation from Apple, which is in prototype stage](https://github.com/apple/swift/blob/master/test/Prototypes/BigInt.swift), might switch over to it if ever officially released.
 
 I have also evalutated [hyugit/UInt256](https://github.com/hyugit/UInt256) which conforms to Swifts [FixedWidthInteger protocol](https://developer.apple.com/documentation/swift/fixedwidthinteger), but that won't scale well since we might need 512 and 1024 bit large numbers. I also suspect that arithemtic operations in [attaswift/BigInt](https://github.com/attaswift/BigInt) are faster than [hyugit/UInt256](https://github.com/hyugit/UInt256) (needs verification). There are also *discontinued* [CryptoCoinSwift/UInt256](https://github.com/CryptoCoinSwift/UInt256) which seems inferior to hyugit/UInt256. 
 

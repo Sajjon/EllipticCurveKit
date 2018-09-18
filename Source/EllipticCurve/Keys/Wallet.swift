@@ -1,6 +1,6 @@
 //
 //  Wallet.swift
-//  SwiftCrypto
+//  EllipticCurveKit
 //
 //  Created by Alexander Cyon on 2018-07-12.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Wallet<SystemType: DistributedSystem> {
-    let keyPair: KeyPairType
-    let publicAddress: PublicAddressType
+    public let keyPair: KeyPairType
+    public let publicAddress: PublicAddressType
 
     public init(keyPair: KeyPairType, publicAddress: PublicAddressType) {
         self.keyPair = keyPair

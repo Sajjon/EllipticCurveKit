@@ -1,6 +1,6 @@
 //
 //  PublicKey.swift
-//  SwiftCrypto
+//  EllipticCurveKit
 //
 //  Created by Alexander Cyon on 2018-07-09.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
@@ -13,7 +13,7 @@ public struct PublicKey<Curve: EllipticCurve> {
     public typealias Point = AffinePoint<Curve>
 
     public let point: Point
-    let data: (uncompressed: Data, compressed: Data)
+    public let data: (uncompressed: Data, compressed: Data)
     public let hex: (uncompressed: HexString, compressed: HexString)
 
     public init(point: Point) {

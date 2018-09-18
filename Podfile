@@ -1,20 +1,20 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-workspace 'SwiftCrypto'
+workspace 'EllipticCurveKit'
 
 def pods()
 	pod 'BigInt'
   	pod 'CryptoSwift'
 end
 
-target 'SwiftCrypto' do
-	project 'SwiftCrypto.xcodeproj'
+target 'EllipticCurveKit' do
+	project 'EllipticCurveKit.xcodeproj'
   use_frameworks!
 
 	pods
 
-  target 'SwiftCryptoTests' do
+  target 'EllipticCurveKitTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -30,4 +30,12 @@ target 'ExampleiOS' do
 	target 'ExampleiOSTests' do
 		inherit! :search_paths
 	end
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+        	config.build_settings['ENABLE_TESTABILITY'] = 'YES'
+        end
+    end
 end

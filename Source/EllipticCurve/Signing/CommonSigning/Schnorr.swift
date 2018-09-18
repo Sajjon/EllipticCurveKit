@@ -1,6 +1,6 @@
 //
 //  Schnorr.swift
-//  SwiftCrypto
+//  EllipticCurveKit
 //
 //  Created by Alexander Cyon on 2018-07-16.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
@@ -14,29 +14,23 @@ public struct Schnorr<CurveType: EllipticCurve>: Signing {
 
 public extension Schnorr {
 
-    static func sign(_ message: Message, using keyPair: KeyPair<Curve>) -> Signature<Curve> {
-        return sign(message, privateKey: keyPair.privateKey, publicKey: keyPair.publicKey)
-    }
+    static func sign(_ message: Message, using keyPair: KeyPair<CurveType>, personalizationDRBG: Data) -> Signature<Curve> {
 
-    static func sign(_ message: Message, privateKey: PrivateKey<Curve>, publicKey: PublicKey<Curve>) -> Signature<Curve> {
-        /// assign `K` according RFC-6979:
-        ///
-        /// https://tools.ietf.org/html/rfc6979
+        let privateKey = keyPair.privateKey
+        let publicKey = keyPair.publicKey
 
-        var k = Number(data: Crypto.sha2Sha256(privateKey.asData() + message.asData()))
-        let R = Curve.G * k // `nonce point`? ( https://github.com/yuntai/schnorr-examples/blob/master/schnorr/schnorr.py )
+        let drbg = HMAC_DRBG(message: message, privateKey: privateKey, personalization: personalizationDRBG)
 
-        /// "Choose a random `k` from the allowed set" https://en.wikipedia.org/wiki/Schnorr_signature
-        /// Here we make sure that k is not too large.
-        if jacobi(R) != 1 {
-            k = Curve.N - k
+        let length = Curve.N.asTrimmedData().bytes.count
+
+        var signature: Signature<Curve>?
+        while signature == nil {
+            let k = drbg.generateNumberOf(length: length).result
+            let K = Number(data: k)
+            signature = trySign(message, privateKey: privateKey, k: K, publicKey: publicKey)
         }
 
-        let e = Crypto.sha2Sha256(R.x.as256bitLongData() + publicKey.data.compressed + message.asData()).toNumber()
-
-        /// GOTCHA: `secp256k1` uses `mod P` for all operations, but for the creation of the Schnorr signature, we use `mod n`, ref: https://gist.github.com/kallewoof/5d623445802a84f17cc7ff5572109074#gotchas
-        let signatureSuffix = Curve.modN { k + e * privateKey.number }
-        return Signature<Curve>(r: R.x, s: signatureSuffix)!
+        return signature!
     }
 
     static func verify(_ message: Message, wasSignedBy signature: Signature<Curve>, publicKey: PublicKey<Curve>) -> Bool {
@@ -56,6 +50,55 @@ public extension Schnorr {
 }
 
 private extension Schnorr {
+
+    /// Hash (q | M)
+    static func hash(_ q: Data, message: Message, publicKey: PublicKey<Curve>) -> Data {
+        let compressPubKey = publicKey.data.compressed
+        let msgData = message.asData()
+        // Public key is a point (x, y) on the curve.
+        // Each coordinate requires 32 bytes.
+        // In its compressed form it suffices to store the x co-ordinate
+        // and the sign for y.
+        // Hence a total of 33 bytes.
+        let PUBKEY_COMPRESSED_SIZE_BYTES: Int = 33
+        precondition(compressPubKey.bytes.count == PUBKEY_COMPRESSED_SIZE_BYTES)
+
+        // TODO ensure BIG ENDIAN
+        precondition(q.bytes.count >= PUBKEY_COMPRESSED_SIZE_BYTES)
+        let Q = Data(q.bytes.prefix(PUBKEY_COMPRESSED_SIZE_BYTES))
+
+        return Crypto.sha2Sha256(Q + compressPubKey + msgData)
+    }
+
+    static func trySign(_ message: Message, privateKey: PrivateKey<Curve>, k: Number, publicKey: PublicKey<Curve>) -> Signature<Curve> {
+
+        guard privateKey.number > 0 else { fatalError("bad private key") }
+        guard privateKey.number < Curve.order else { fatalError("bad private key") }
+
+        // 1a. check that k is not 0
+        guard k > 0 else { fatalError("bad k") }
+        // 1b. check that k is < the order of the group
+        guard k < Curve.order else { fatalError("bad k") }
+
+        // 2. Compute commitment Q = kG, where g is the base point
+        let Q = Curve.G * k
+        // convert the commitment to octets first
+        let compressedQ = PublicKey(point: Q).data.compressed
+
+        // 3. Compute the challenge r = H(Q || pubKey || msg)
+        let r = Number(data: hash(compressedQ, message: message, publicKey: publicKey))
+
+        guard r > 0 else { fatalError("bad r") }
+        guard r <= Curve.order else { fatalError("bad r") }
+
+        // 4. Compute s = k - r * prv
+        let s = Curve.modN { k - (r * privateKey.number) }
+
+        guard s > 0 else { fatalError("bad S") }
+
+        return Signature<Curve>(r: r, s: s)!
+    }
+
     /// "Jacobian coordinates Elliptic Curve operations can be implemented more efficiently by using Jacobian coordinates. Elliptic Curve operations implemented this way avoid many intermediate modular inverses (which are computationally expensive), and the scheme proposed in this document is in fact designed to not need any inversions at all for validation. When operating on a point P with Jacobian coordinates (x,y,z), for which x(P) is defined as `x/z^2` and y(P) is defined as `y/z^3`"
     /// REFERENCE TO: https://en.wikibooks.org/wiki/Cryptography/Prime_Curve/Jacobian_Coordinates
     ///

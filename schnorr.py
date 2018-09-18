@@ -146,7 +146,7 @@ def test_vector(private_key, expected_public_key, message, signature):
 
 
 	calculated_signature = schnorr_sign(message, private_key)
-	# debug(calculated_signature, 'calculated_signature')
+	debug(calculated_signature, 'calculated_signature')
 	debug_assert_equal(
 		signature,
 		calculated_signature
@@ -192,13 +192,13 @@ def test_vector3():
 	print("TEST VECTOR 3 PASSED")
 
 # OTHER Test Vector source: https://gist.github.com/kallewoof/5d623445802a84f17cc7ff5572109074
-def test_vector_ext4():
-	# test_vector(
-	# 	private_key = '',
-	# 	expected_public_key = '',
-	# 	message = '',
-	# 	signature = ''
-	# )
+def test_vector4():
+	test_vector(
+		private_key = '0E891B9DFF485000C7D1DC22ECF3A583CC50328684321D61947A86E57CF6C638',
+		expected_public_key = '034AE47910D58B9BDE819C3CFFA8DE4441955508DB00AA2540DB8E6BF6E99ABC1B',
+		message = '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000019CA91EB535FB92FDA5094110FDAEB752EDB9B039034ae47910d58b9bde819c3cffa8de4441955508db00aa2540db8e6bf6e99abc1b000000000000000000000000000000000000000000000000000000000000000f000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000',
+		signature = '58A1D11298C80452B91AB3E562BC7160BEA8DD49A877885D48A17F3AD4D886D6B94A4413A88630686068485588E80A4CAE088FA330ED6A657CF134907157AA64'
+	)
 	print("TEST VECTOR 4 NOT IMPLEMENTED YET")
 
 # https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#Test_vectors
@@ -206,7 +206,7 @@ def run_all_tests():
 	test_vector1()
 	test_vector2()
 	test_vector3()
-	# test_vector_ext4()
+	test_vector4()
 	print("ALL TESTS PASSED :D")
 
 run_all_tests()

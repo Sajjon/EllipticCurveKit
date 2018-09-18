@@ -13,7 +13,6 @@
 		4820860720FE7D90002FAB4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4820860620FE7D90002FAB4F /* Assets.xcassets */; };
 		4820860A20FE7D90002FAB4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4820860820FE7D90002FAB4F /* LaunchScreen.storyboard */; };
 		4820861520FE7D90002FAB4F /* ExampleiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4820861420FE7D90002FAB4F /* ExampleiOSTests.swift */; };
-		48EB887D20FE87E500974DF9 /* SwiftCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EB887720FE7F3200974DF9 /* SwiftCrypto.framework */; };
 		BB6086597B261D0B4ACA7134 /* Pods_ExampleiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2D97CDC5D343ECB41C672EE /* Pods_ExampleiOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,19 +24,26 @@
 			remoteGlobalIDString = 482085FB20FE7D8E002FAB4F;
 			remoteInfo = ExampleiOS;
 		};
-		48EB887620FE7F3200974DF9 /* PBXContainerItemProxy */ = {
+		48AE5EC2214C251900FB3DFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 48EB887120FE7F3200974DF9 /* SwiftCrypto.xcodeproj */;
+			containerPortal = 48AE5EBD214C251900FB3DFE /* EllipticCurveKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 48F22C8D20C70D87004A18CA;
-			remoteInfo = SwiftCrypto;
+			remoteInfo = EllipticCurveKit;
 		};
-		48EB887820FE7F3200974DF9 /* PBXContainerItemProxy */ = {
+		48AE5EC4214C251900FB3DFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 48EB887120FE7F3200974DF9 /* SwiftCrypto.xcodeproj */;
+			containerPortal = 48AE5EBD214C251900FB3DFE /* EllipticCurveKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 48F22C9620C70D87004A18CA;
-			remoteInfo = SwiftCryptoTests;
+			remoteInfo = EllipticCurveKitTests;
+		};
+		48AE5EC6214C254600FB3DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48AE5EBD214C251900FB3DFE /* EllipticCurveKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 48F22C8C20C70D87004A18CA;
+			remoteInfo = EllipticCurveKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -52,7 +58,7 @@
 		4820861020FE7D90002FAB4F /* ExampleiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4820861420FE7D90002FAB4F /* ExampleiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleiOSTests.swift; sourceTree = "<group>"; };
 		4820861620FE7D90002FAB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48EB887120FE7F3200974DF9 /* SwiftCrypto.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftCrypto.xcodeproj; path = ../SwiftCrypto.xcodeproj; sourceTree = "<group>"; };
+		48AE5EBD214C251900FB3DFE /* EllipticCurveKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EllipticCurveKit.xcodeproj; path = ../EllipticCurveKit.xcodeproj; sourceTree = "<group>"; };
 		5CAA6906EFE0EC7F7D9AEED2 /* Pods-ExampleiOSTests.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleiOSTests.fasttestable.xcconfig"; path = "../Pods/Target Support Files/Pods-ExampleiOSTests/Pods-ExampleiOSTests.fasttestable.xcconfig"; sourceTree = "<group>"; };
 		606B3DBB8C1F615A7098C588 /* Pods-ExampleiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleiOSTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-ExampleiOSTests/Pods-ExampleiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6BDE2E8C59CACA71B199A81E /* Pods-ExampleiOS.fasttestable.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleiOS.fasttestable.xcconfig"; path = "../Pods/Target Support Files/Pods-ExampleiOS/Pods-ExampleiOS.fasttestable.xcconfig"; sourceTree = "<group>"; };
@@ -67,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48EB887D20FE87E500974DF9 /* SwiftCrypto.framework in Frameworks */,
 				BB6086597B261D0B4ACA7134 /* Pods_ExampleiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +91,7 @@
 		482085F320FE7D8E002FAB4F = {
 			isa = PBXGroup;
 			children = (
-				48EB887120FE7F3200974DF9 /* SwiftCrypto.xcodeproj */,
+				48AE5EBD214C251900FB3DFE /* EllipticCurveKit.xcodeproj */,
 				482085FE20FE7D8E002FAB4F /* ExampleiOS */,
 				4820861320FE7D90002FAB4F /* ExampleiOSTests */,
 				482085FD20FE7D8E002FAB4F /* Products */,
@@ -125,11 +130,11 @@
 			path = ExampleiOSTests;
 			sourceTree = "<group>";
 		};
-		48EB887220FE7F3200974DF9 /* Products */ = {
+		48AE5EBE214C251900FB3DFE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				48EB887720FE7F3200974DF9 /* SwiftCrypto.framework */,
-				48EB887920FE7F3200974DF9 /* SwiftCryptoTests.xctest */,
+				48AE5EC3214C251900FB3DFE /* EllipticCurveKit.framework */,
+				48AE5EC5214C251900FB3DFE /* EllipticCurveKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				48AE5EC7214C254600FB3DFE /* PBXTargetDependency */,
 			);
 			name = ExampleiOS;
 			productName = ExampleiOS;
@@ -229,8 +235,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 48EB887220FE7F3200974DF9 /* Products */;
-					ProjectRef = 48EB887120FE7F3200974DF9 /* SwiftCrypto.xcodeproj */;
+					ProductGroup = 48AE5EBE214C251900FB3DFE /* Products */;
+					ProjectRef = 48AE5EBD214C251900FB3DFE /* EllipticCurveKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -242,18 +248,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		48EB887720FE7F3200974DF9 /* SwiftCrypto.framework */ = {
+		48AE5EC3214C251900FB3DFE /* EllipticCurveKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = SwiftCrypto.framework;
-			remoteRef = 48EB887620FE7F3200974DF9 /* PBXContainerItemProxy */;
+			path = EllipticCurveKit.framework;
+			remoteRef = 48AE5EC2214C251900FB3DFE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		48EB887920FE7F3200974DF9 /* SwiftCryptoTests.xctest */ = {
+		48AE5EC5214C251900FB3DFE /* EllipticCurveKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = SwiftCryptoTests.xctest;
-			remoteRef = 48EB887820FE7F3200974DF9 /* PBXContainerItemProxy */;
+			path = EllipticCurveKitTests.xctest;
+			remoteRef = 48AE5EC4214C251900FB3DFE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -324,6 +330,9 @@
 				"${BUILT_PRODUCTS_DIR}/BigInt-iOS11.4/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.4/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash-iOS11.4/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/BigInt-iOS11.3/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash-iOS11.3/SipHash.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -363,6 +372,11 @@
 			isa = PBXTargetDependency;
 			target = 482085FB20FE7D8E002FAB4F /* ExampleiOS */;
 			targetProxy = 4820861120FE7D90002FAB4F /* PBXContainerItemProxy */;
+		};
+		48AE5EC7214C254600FB3DFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EllipticCurveKit;
+			targetProxy = 48AE5EC6214C254600FB3DFE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

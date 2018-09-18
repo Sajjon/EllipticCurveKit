@@ -1,6 +1,6 @@
 //
 //  MultipliplicationPerformanceSecp256k1Tests.swift
-//  SwiftCryptoTests
+//  EllipticCurveKitTests
 //
 //  Created by Alexander Cyon on 2018-07-18.
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 import BigInt
 
-@testable import SwiftCrypto
+@testable import EllipticCurveKit
 
 class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
 

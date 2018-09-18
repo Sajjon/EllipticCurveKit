@@ -74,7 +74,6 @@ private extension HMAC_DRBG {
         update(0x00)
         if _seed == nil { return }
         update(0x01)
-
     }
 }
 
@@ -90,11 +89,9 @@ public extension HMAC_DRBG {
         updateSeed(entropy + additionalData)
     }
 
+    // Psuedocode at page 5: https://eprint.iacr.org/2018/349.pdf
     func generateNumberOf(length: Int, additionalData: Data? = nil) -> (result: Data, state: KeyValue) {
         defer {
-            if let additionalData = additionalData {
-                updateSeed(additionalData)
-            }
             iterationsLeftUntilReseed -= 1
         }
         guard iterationsLeftUntilReseed > 0 else {

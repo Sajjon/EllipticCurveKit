@@ -66,9 +66,9 @@ private extension HMAC_DRBG_Tests {
 
         let generated2 = hmac.generateNumberOf(
             length: configuration.expectedResultByteLength,
-            additionalData: s2d(o: vector.generateCalls.first?.additionalInput)
+            additionalData: s2d(o: vector.generateCalls[1].additionalInput)
         )
-
+        print(generated2)
         XCTAssertEqual(generated2.state.v, vector.generateCalls[1].keyValue.v)
         XCTAssertEqual(generated2.state.key, vector.generateCalls[1].keyValue.key)
 

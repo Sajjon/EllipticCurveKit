@@ -21,14 +21,10 @@ public extension Schnorr {
 
         let drbg = HMAC_DRBG(message: message, privateKey: privateKey, personalization: personalizationDRBG)
 
-        let hasRemainder = Curve.N.bitWidth % 8 == 0
-        let length = (Curve.N.bitWidth/8) + (hasRemainder ? 1 : 0)
-        precondition(length == 32, "length is: \(length)")
-
         var signature: Signature<Curve>?
         var K: Number!
         while signature == nil {
-            let k = drbg.generateNumberOf(length: length).result
+            let k = drbg.generateNumberOfLength(byteCount: Curve.N.byteCount)
             K = Number(data: k)
             signature = trySign(message, privateKey: privateKey, k: K, publicKey: publicKey)
         }

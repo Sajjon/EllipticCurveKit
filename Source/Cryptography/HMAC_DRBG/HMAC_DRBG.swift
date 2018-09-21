@@ -9,7 +9,7 @@
 import Foundation
 
 
-/// hmac-drbg
+/// HMAC_DRBG is a Deterministic Random Bit Generator (DRBG) using HMAC as hash function.
 public final class HMAC_DRBG {
 
     /// Typically sha256
@@ -19,13 +19,11 @@ public final class HMAC_DRBG {
     private var V: DataConvertible
     private let minimumEntropyByteCount: Int
     private var iterationsLeftUntilReseed: Number
+
+    /// 2^48, which is NIST's recommended value
     private static let reseedInterval: Number = 0x1000000000000
     private var hashType: HashType {
         return hasher.type
-    }
-
-    func hmac(_ key: DataConvertible, _ data: DataConvertible) -> HMACUpdatable {
-        return HMACUpdatable(key: key.asData, data: data.asData, hash: hashType)
     }
 
     public init(
@@ -48,32 +46,12 @@ public final class HMAC_DRBG {
             }
             return minimumEntropyByteCount
         }()
-        precondition(hasher.digestLength == 32)
+
         self.K = Data(repeating: 0x00, count: hasher.digestLength)
         self.V = Data(repeating: 0x01, count: hasher.digestLength)
 
         let seed = entropy + nonce + (personalization ?? Data())
-        print("🌳 Seed: \(Number(data: seed))")
         updateSeed(seed)
-
-        if let expected = expected {
-            precondition(V.asHex == expected.initV, "V: `\(V.asHex)`, but expected: `\(expected.initV)`")
-            precondition(K.asHex == expected.initK)
-        }
-    }
-}
-
-private extension HMAC_DRBG {
-
-    func updateSeed(_ _seed: Data? = nil) {
-        let seed = _seed ?? Data()
-        func update(_ magicByte: Byte) {
-            K = hmac(K, V + magicByte + seed)
-            V = hmac(K, V)
-        }
-        update(0x00)
-        if _seed == nil { return }
-        update(0x01)
     }
 }
 
@@ -83,14 +61,21 @@ public extension HMAC_DRBG {
         self.init(entropy: privateKey.asData(), nonce: message.asData(), personalization: personalization)
     }
 
+    func generateNumberOfLength(byteCount: Int, additionalData: Data? = nil) -> Data {
+        return generateNumberOfLength(byteCount, additionalData: additionalData).result
+    }
+
     func reseed(entropy: Data, additionalData: Data = Data()) {
         defer { iterationsLeftUntilReseed = HMAC_DRBG.reseedInterval }
         precondition(entropy.count >= minimumEntropyByteCount, "Not enough entropy. Minimum is #\(minimumEntropyByteCount) bytes")
         updateSeed(entropy + additionalData)
     }
+}
 
-    // Psuedocode at page 5: https://eprint.iacr.org/2018/349.pdf
-    func generateNumberOf(length: Int, additionalData: Data? = nil) -> (result: Data, state: KeyValue) {
+extension HMAC_DRBG {
+    /// Psuedocode at page 5: https://eprint.iacr.org/2018/349.pdf
+    /// Return value `state` is only used by unit tests
+    func generateNumberOfLength(_ byteCount: Int, additionalData: Data? = nil) -> (result: Data, state: KeyValue) {
         defer {
             iterationsLeftUntilReseed -= 1
         }
@@ -103,12 +88,31 @@ public extension HMAC_DRBG {
         }
 
         var generated = Data()
-        while generated.count < length {
-            V = hmac(K, V).digest()
+        while generated.count < byteCount {
+            V = HMAC_K(V)
             generated += V.asData
         }
-        generated = generated.prefix(length)
+        generated = generated.prefix(byteCount)
         updateSeed(additionalData)
         return (result: generated, state: KeyValue(v: V.asHex, key: K.asHex))
+    }
+}
+
+private extension HMAC_DRBG {
+
+    func updateSeed(_ _seed: Data? = nil) {
+        let seed = _seed ?? Data()
+        func update(_ magicByte: Byte) {
+            K = HMAC_K(V + magicByte + seed)
+            V = HMAC_K(V)
+        }
+        update(0x00)
+        if _seed == nil { return }
+        update(0x01)
+    }
+
+    func HMAC_K(_ data: DataConvertible) -> Data {
+        let bytes = try! Crypto.hmacSha256(key: K.asData.bytes, data: data.asData.bytes)
+        return Data(bytes)
     }
 }

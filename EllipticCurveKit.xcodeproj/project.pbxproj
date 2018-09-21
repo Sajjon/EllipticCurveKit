@@ -23,7 +23,6 @@
 		48924EBB214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */; };
 		48924EBF214E5C3100B72AF2 /* additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB9214E5C3100B72AF2 /* additional_data.json */; };
 		48924EC0214E5C3100B72AF2 /* no_additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EBA214E5C3100B72AF2 /* no_additional_data.json */; };
-		48924EC3214E9AE200B72AF2 /* HMACTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48924EC2214E9AE200B72AF2 /* HMACTests.swift */; };
 		48924EC5214EB86600B72AF2 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48924EC4214EB86600B72AF2 /* BigInt.framework */; };
 		4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EDFE20FA243E00B6F773 /* Secp256r1.swift */; };
 		4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */; };
@@ -65,7 +64,6 @@
 		48FFD74C21503836000F6D78 /* HMAC_DRBG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD74B21503836000F6D78 /* HMAC_DRBG.swift */; };
 		48FFD74F2150385D000F6D78 /* KeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD74E2150385D000F6D78 /* KeyValue.swift */; };
 		48FFD7512150387E000F6D78 /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD7502150387E000F6D78 /* DataConvertible.swift */; };
-		48FFD753215038AF000F6D78 /* HMACUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD752215038AF000F6D78 /* HMACUpdatable.swift */; };
 		48FFD755215038BF000F6D78 /* HashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD754215038BF000F6D78 /* HashType.swift */; };
 		48FFD757215038F6000F6D78 /* Hasher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD756215038F6000F6D78 /* Hasher.swift */; };
 		48FFD75D21503952000F6D78 /* TestVectorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD75B2150394E000F6D78 /* TestVectorStrings.swift */; };
@@ -104,7 +102,6 @@
 		48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hmac_drbg_nist_no_prediction_resistance_reseed.json; sourceTree = "<group>"; };
 		48924EB9214E5C3100B72AF2 /* additional_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = additional_data.json; sourceTree = "<group>"; };
 		48924EBA214E5C3100B72AF2 /* no_additional_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = no_additional_data.json; sourceTree = "<group>"; };
-		48924EC2214E9AE200B72AF2 /* HMACTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACTests.swift; sourceTree = "<group>"; };
 		48924EC4214EB86600B72AF2 /* BigInt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BigInt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4898EDFE20FA243E00B6F773 /* Secp256r1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1.swift; sourceTree = "<group>"; };
 		4898EE0320FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256r1_PointArthmeticTests.swift; sourceTree = "<group>"; };
@@ -150,7 +147,6 @@
 		48FFD74B21503836000F6D78 /* HMAC_DRBG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAC_DRBG.swift; sourceTree = "<group>"; };
 		48FFD74E2150385D000F6D78 /* KeyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValue.swift; sourceTree = "<group>"; };
 		48FFD7502150387E000F6D78 /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
-		48FFD752215038AF000F6D78 /* HMACUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACUpdatable.swift; sourceTree = "<group>"; };
 		48FFD754215038BF000F6D78 /* HashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashType.swift; sourceTree = "<group>"; };
 		48FFD756215038F6000F6D78 /* Hasher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hasher.swift; sourceTree = "<group>"; };
 		48FFD7592150393E000F6D78 /* TestVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVector.swift; sourceTree = "<group>"; };
@@ -242,7 +238,6 @@
 				489119AA20F268C700F86528 /* SHA2Tests.swift */,
 				48924EA6214D32D800B72AF2 /* HMAC_DRBG_Tests.swift */,
 				48FFD75821503932000F6D78 /* HMAC_DRBG_Tests */,
-				48924EC2214E9AE200B72AF2 /* HMACTests.swift */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -538,7 +533,6 @@
 				48FFD754215038BF000F6D78 /* HashType.swift */,
 				48FFD74E2150385D000F6D78 /* KeyValue.swift */,
 				48FFD7502150387E000F6D78 /* DataConvertible.swift */,
-				48FFD752215038AF000F6D78 /* HMACUpdatable.swift */,
 				48FFD756215038F6000F6D78 /* Hasher.swift */,
 			);
 			path = HMAC_DRBG;
@@ -774,7 +768,6 @@
 				48B4882220E90FC2004C7B7D /* RIPEMD160.swift in Sources */,
 				4848A04220FD312F004BC02C /* Schnorr.swift in Sources */,
 				48A5541D2100F0F900A4B7FB /* Curve25519.swift in Sources */,
-				48FFD753215038AF000F6D78 /* HMACUpdatable.swift in Sources */,
 				48687FB020F7E54500F2AFA4 /* JacobianPoint.swift in Sources */,
 				48FFD757215038F6000F6D78 /* Hasher.swift in Sources */,
 				48A554262101233100A4B7FB /* SignatureNonce+RFC-6979.swift in Sources */,
@@ -814,7 +807,6 @@
 				48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */,
 				48FFD75D21503952000F6D78 /* TestVectorStrings.swift in Sources */,
 				48924EA7214D32D800B72AF2 /* HMAC_DRBG_Tests.swift in Sources */,
-				48924EC3214E9AE200B72AF2 /* HMACTests.swift in Sources */,
 				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */,
 				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,

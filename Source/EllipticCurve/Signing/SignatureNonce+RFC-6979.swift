@@ -8,8 +8,14 @@
 
 import CryptoSwift
 
-func byteCount(of bitsCount: Int) -> Int {
-    return Int(floor(Double((bitsCount + 7)) / Double(8)))
+func byteCount(fromBitCount: Int) -> Int {
+    return Int(floor(Double((fromBitCount + 7)) / Double(8)))
+}
+
+extension Number {
+    var byteCount: Int {
+        return EllipticCurveKit.byteCount(fromBitCount: magnitude.bitWidth)
+    }
 }
 
 extension PrivateKey {
@@ -32,21 +38,21 @@ extension PrivateKey {
          // Step 3.2.c. "K = 0x00 0x00 0x00 ... 0x00" - (32 bytes equal 0x00)
         var K = [UInt8](repeating: 0x00, count: hashFunctionUsedToHashInputDataDigestLength)
 
-        func hmac(_ data: [Byte]) -> [Byte] {
+        func HMAC_K(_ data: [Byte]) -> [Byte] {
             return try! Crypto.hmacSha256(key: K, data: data)
         }
 
         // Step 3.2.d: "K = HMAC_K(V || 0x00 || int2octets(x) || bits2octets(h1))"
-        K = hmac(V + [0] + x + h1)
+        K = HMAC_K(V + [0] + x + h1)
 
         // Step 3.2.e: "V = HMAC_K(V)"
-        V = hmac(V)
+        V = HMAC_K(V)
 
         // Step 3.2.f: "K = HMAC_K(V || 0x01 || int2octets(x) || bits2octets(h1))"
-        K = hmac(V + [1] + x + h1)
+        K = HMAC_K(V + [1] + x + h1)
 
         // Step 3.2.g. "V = HMAC_K(V)"
-        V = hmac(V)
+        V = HMAC_K(V)
 
         func bits2int(_ bytes: [Byte]) -> Number {
             let data = Data(bytes: bytes)
@@ -65,8 +71,8 @@ extension PrivateKey {
             T = []
 
             // 3.2.h.2
-            while T.count < byteCount(of: qlen) {
-                V = hmac(V)
+            while T.count < byteCount(fromBitCount: qlen) {
+                V = HMAC_K(V)
                 T = T + V
             }
 
@@ -77,8 +83,8 @@ extension PrivateKey {
                 break
             }
 
-            K = hmac(V + [0])
-            V = hmac(V)
+            K = HMAC_K(V + [0])
+            V = HMAC_K(V)
         } while true
 
         return k

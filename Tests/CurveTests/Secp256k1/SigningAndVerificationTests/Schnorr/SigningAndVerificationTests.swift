@@ -11,23 +11,11 @@ import BigInt
 
 @testable import EllipticCurveKit
 
-// The three test vectors below are found at:
-//  https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors
 class SignignAndVerificationTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-    }
-
-    func testSigFromZilliqaWallet() {
-        signingAndVerifyingSignaturesTest(
-            // Some uninteresting Zilliqa TESTNET private key, containing a few worthless TEST tokens.
-            privateKey: "0E891B9DFF485000C7D1DC22ECF3A583CC50328684321D61947A86E57CF6C638",
-            compressedPublicKey: "034AE47910D58B9BDE819C3CFFA8DE4441955508DB00AA2540DB8E6BF6E99ABC1B",
-            msgHex: "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000019CA91EB535FB92FDA5094110FDAEB752EDB9B039034ae47910d58b9bde819c3cffa8de4441955508db00aa2540db8e6bf6e99abc1b000000000000000000000000000000000000000000000000000000000000000f000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000",
-            sig: "58A1D11298C80452B91AB3E562BC7160BEA8DD49A877885D48A17F3AD4D886D6B94A4413A88630686068485588E80A4CAE088FA330ED6A657CF134907157AA64"
-        )
     }
 
     func test10SchnorrVectors() {
@@ -101,6 +89,7 @@ struct TestVectorSignature: Codable {
     let s: String
 }
 
+/// Test vectors from Zilliqas Javascript SDK: https://github.com/Zilliqa/Zilliqa-JavaScript-Library/blob/999fb305e49cbbf711cf9af8c2836f0486abb354/src/__tests__/schnorr.fixtures.ts
 private let vectors = """
 [
     {

@@ -31,7 +31,7 @@ class SignignAndVerificationTests: XCTestCase {
     }
 
     func test10SchnorrVectors() {
-        let testVectors = try! JSONDecoder().decode([TestVectorSignature].self, from: vectors.data(using: .utf8)!)
+        let testVectors = try! JSONDecoder().decode([TestVectorSignature].self, from: vectors.data(using: .default)!)
         testVectors.forEach {
             performTest(vector: $0)
         }
@@ -47,7 +47,7 @@ class SignignAndVerificationTests: XCTestCase {
         }
         XCTAssertEqual(publicKey.hex.compressed, compressedPublicKey)
 
-        XCTAssertEqual(message.asData().asHex.uppercased(), message.description.uppercased())
+        XCTAssertEqual(message.asHex.uppercased(), message.description.uppercased())
 
         XCTAssertTrue(Schnorr<Secp256k1>.verify(message, wasSignedBy: expectedSignature, publicKey: publicKey))
 
@@ -85,7 +85,7 @@ class SignignAndVerificationTests: XCTestCase {
 }
 
 let drbgPers: Data = {
-    let pers = "Schnorr+SHA256  ".data(using: .ascii)!
+    let pers = "Schnorr+SHA256  ".data(using: .default)!
     var returnValue = Data([Byte](repeating: 0x00, count: 32))
     returnValue = returnValue + pers
     if returnValue.count != 48 { fatalError("bad length") }

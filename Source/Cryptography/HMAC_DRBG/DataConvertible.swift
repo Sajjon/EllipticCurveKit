@@ -8,10 +8,33 @@
 
 import Foundation
 
-public protocol DataConvertible {
+public protocol NumberConvertible {
+    var asNumber: Number { get }
+}
+
+func * (lhs: NumberConvertible, rhs: NumberConvertible) -> Number {
+    return lhs.asNumber * rhs.asNumber
+}
+func * (lhs: NumberConvertible, rhs: Number) -> Number {
+    return lhs.asNumber * rhs
+}
+func * (lhs: Number, rhs: NumberConvertible) -> Number {
+    return lhs * rhs.asNumber
+}
+func + (lhs: NumberConvertible, rhs: NumberConvertible) -> Number {
+    return lhs.asNumber + rhs.asNumber
+}
+func + (lhs: NumberConvertible, rhs: Number) -> Number {
+    return lhs.asNumber + rhs
+}
+func + (lhs: Number, rhs: NumberConvertible) -> Number {
+    return lhs + rhs.asNumber
+}
+
+public protocol DataConvertible: NumberConvertible {
     var asData: Data { get }
     var asHex: String { get }
-    init(data: Data)
+//    init(data: Data)
 }
 
 extension Number {
@@ -26,17 +49,24 @@ extension Data {
     }
 }
 
-extension DataConvertible {
+extension NumberConvertible where Self: DataConvertible {
+    public var asNumber: Number {
+        return asData.toNumber()
+    }
+}
+
+public extension DataConvertible {
+
+
+
     var byteCount: Int {
         return asData.byteCount
     }
     var bytes: [Byte] {
         return asData.bytes
     }
-}
 
-extension DataConvertible {
-    public var asHex: String {
+    var asHex: String {
         return asData.toHexString()
     }
 }
@@ -55,6 +85,11 @@ func + (lhs: DataConvertible, rhs: DataConvertible) -> Data {
     return Data(bytes)
 }
 
+func + (lhs: DataConvertible, rhs: DataConvertible?) -> Data {
+    guard let rhs = rhs else { return lhs.asData }
+    return lhs + rhs
+}
+
 func + (data: Data, byte: Byte) -> Data {
     return data + Data([byte])
 }
@@ -70,12 +105,26 @@ extension Data: ExpressibleByArrayLiteral {
     }
 }
 
+extension Array: NumberConvertible where Element == Byte {
+    public var asNumber: Number {
+        return asData.toNumber()
+    }
+}
+
 extension Array: DataConvertible where Element == Byte {
+
     public var asData: Data { return Data(self) }
     public init(data: Data) {
         self.init(data.bytes)
     }
 }
+
+//extension Array: DataConvertible where Element == Byte {
+//    public var asData: Data { return Data(self) }
+//    public init(data: Data) {
+//        self.init(data.bytes)
+//    }
+//}
 
 extension Data: DataConvertible {
     public var asData: Data { return self }

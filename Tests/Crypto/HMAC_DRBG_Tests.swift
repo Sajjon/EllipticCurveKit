@@ -75,7 +75,7 @@ private extension HMAC_DRBG_Tests {
         perform(test: vector, hmac: configuration.hmac, resultByteCount: configuration.expectedResultByteLength)
     }
 
-    private func perform(test vector: TestVector, hmac: Hmac, resultByteCount: Int) {
+    private func perform(test vector: TestVector, hmac: HMAC, resultByteCount: Int) {
         print("Test Vector: \n`\(vector)`")
 
         perform(
@@ -94,13 +94,13 @@ private extension HMAC_DRBG_Tests {
         )
     }
 
-    private func perform(testVectorString: TestVectorStrings, hmac: Hmac, resultByteCount: Int) {
+    private func perform(testVectorString: TestVectorStrings, hmac: HMAC, resultByteCount: Int) {
         perform(test: testVectorString.asTestVector(), hmac: hmac, resultByteCount: resultByteCount)
     }
 
 
     private func perform(
-        hmac: Hmac,
+        hmac: HMAC,
         entropy: Data,
         nonce: Data,
         pers: Data?,

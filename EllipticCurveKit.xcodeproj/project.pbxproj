@@ -17,7 +17,7 @@
 		4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4885ABA920F77EE600115FE0 /* Wallet.swift */; };
 		488A6575215537A90091FD03 /* HashFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A6574215537A90091FD03 /* HashFunction.swift */; };
 		488A65772155388B0091FD03 /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A65762155388B0091FD03 /* Hashing.swift */; };
-		488A65792155389A0091FD03 /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A65782155389A0091FD03 /* Hash.swift */; };
+		488A65792155389A0091FD03 /* Hasher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A65782155389A0091FD03 /* Hasher.swift */; };
 		488A657B215538B50091FD03 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A657A215538B50091FD03 /* HMAC.swift */; };
 		489119A520F209BA00F86528 /* AnyKeyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489119A420F209BA00F86528 /* AnyKeyGenerator.swift */; };
 		489119A620F209C400F86528 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4891199B20F2097C00F86528 /* Number.swift */; };
@@ -99,7 +99,7 @@
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		488A6574215537A90091FD03 /* HashFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashFunction.swift; sourceTree = "<group>"; };
 		488A65762155388B0091FD03 /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
-		488A65782155389A0091FD03 /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
+		488A65782155389A0091FD03 /* Hasher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hasher.swift; sourceTree = "<group>"; };
 		488A657A215538B50091FD03 /* HMAC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
 		4891199B20F2097C00F86528 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		489119A420F209BA00F86528 /* AnyKeyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeyGenerator.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				488A6574215537A90091FD03 /* HashFunction.swift */,
-				488A65782155389A0091FD03 /* Hash.swift */,
+				488A65782155389A0091FD03 /* Hasher.swift */,
 				488A657A215538B50091FD03 /* HMAC.swift */,
 				488A65762155388B0091FD03 /* Hashing.swift */,
 			);
@@ -796,7 +796,7 @@
 				48B94BE720F3F2B10041389D /* Message.swift in Sources */,
 				48B4882020E90FC2004C7B7D /* Crypto.swift in Sources */,
 				4885ABA820F77ECB00115FE0 /* KeyPair.swift in Sources */,
-				488A65792155389A0091FD03 /* Hash.swift in Sources */,
+				488A65792155389A0091FD03 /* Hasher.swift in Sources */,
 				48FFD74F2150385D000F6D78 /* KeyValue.swift in Sources */,
 				48D1101A20F3D7E3005A212A /* PrivateKey.swift in Sources */,
 				4885ABAA20F77EE600115FE0 /* Wallet.swift in Sources */,

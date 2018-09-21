@@ -12,7 +12,7 @@ typealias ByteArray = [Byte]
 /// HMAC_DRBG is a Deterministic Random Bit Generator (DRBG) using HMAC as hash function.
 public final class HMAC_DRBG {
 
-    private let hmac: Hmac
+    private let hmac: HMAC
 
     private var K: DataConvertible
     private var V: DataConvertible
@@ -22,13 +22,12 @@ public final class HMAC_DRBG {
     /// 2^48, which is NIST's recommended value
     private static let reseedInterval: Number = 0x1000000000000
 
-
     public init(
-        hmac: Hmac = HmacImpl(function: .sha256),
-        entropy: Data,
-        nonce: Data,
-        personalization: Data? = nil,
-        additionalInput: Data? = nil,
+        hmac: HMAC = DefaultHMAC(function: .sha256),
+        entropy: DataConvertible,
+        nonce: DataConvertible,
+        personalization: DataConvertible? = nil,
+        additionalInput: DataConvertible? = nil,
         minimumEntropyByteCount: Int? = nil
         ) {
         self.hmac = hmac
@@ -45,15 +44,18 @@ public final class HMAC_DRBG {
     }
 }
 
-
+// MARK: - Errors
 public extension HMAC_DRBG {
     enum Error: Swift.Error {
         case notEnoughEntropy(byteCountProvidedEntropy: Int, byteCountMinimumRequiredEntropy: Int)
         case reseedNeeded
     }
+}
 
-    convenience init<Curve>(message: Message, privateKey: PrivateKey<Curve>, personalization: Data?) {
-        self.init(entropy: privateKey.asData(), nonce: message.asData(), personalization: personalization)
+
+public extension HMAC_DRBG {
+    convenience init<Curve>(message: Message, privateKey: PrivateKey<Curve>, personalization: DataConvertible?) {
+        self.init(entropy: privateKey, nonce: message, personalization: personalization)
     }
 
     func generateNumberOfLength(byteCount: Int, additionalData: Data? = nil) throws -> Data {

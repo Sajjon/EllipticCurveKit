@@ -51,10 +51,6 @@ public extension PrivateKey {
 
 public extension PrivateKey {
 
-    func asData() -> Data {
-        return number.as256bitLongData()
-    }
-
     func asHexStringLength64() -> String {
         return number.asHexStringLength64()
     }
@@ -65,6 +61,13 @@ public extension PrivateKey {
     }
 
     func base64Encoded() -> String {
-        return asData().base64EncodedString()
+        return asData.base64EncodedString()
     }
+}
+
+extension PrivateKey: DataConvertible {
+    public var asData: Data {
+        return number.as256bitLongData()
+    }
+
 }

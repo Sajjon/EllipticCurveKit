@@ -20,18 +20,18 @@ public extension ECDSA {
     }
 
     static func sign(_ message: Message, privateKey: PrivateKey<Curve>, publicKey: PublicKey<Curve>, function: HashFunction = .sha256) -> Signature<Curve> {
-        return sign(message, privateKey: privateKey, publicKey: publicKey, hash: HashImpl(function: function))
+        return sign(message, privateKey: privateKey, publicKey: publicKey, hash: DefaultHasher(function: function))
     }
 
-    static func sign(_ message: Message, privateKey: PrivateKey<Curve>, publicKey: PublicKey<Curve>, hash: Hash) -> Signature<Curve> {
-        let z = message.asData().toNumber()
+    static func sign(_ message: Message, privateKey: PrivateKey<Curve>, publicKey: PublicKey<Curve>, hash: Hasher) -> Signature<Curve> {
+        let z: NumberConvertible = message // = message.asData().toNumber()
 
         var r: Number = 0
         var s: Number = 0
         let d = privateKey.number
 
         repeat {
-            var k = privateKey.signatureNonceK(forHashedData: z.as256bitLongData(), digestLength: hash.digestLength)
+            var k = privateKey.drbgRFC6979(message: message)
             k = Curve.modN { k } // make sure k belongs to [0, n - 1]
 
             let point: Curve.Point = Curve.G * k
@@ -47,7 +47,7 @@ public extension ECDSA {
     /// Assumes that signature.r and signature.s ~= 1...Curve.N
     static func verify(_ message: Message, wasSignedBy signature: Signature<Curve>, publicKey: PublicKey<Curve>) -> Bool {
         guard publicKey.point.isOnCurve() else { return false }
-        let z = message.asData().toNumber()
+        let z: NumberConvertible = message//.asData().toNumber()
         let r = signature.r
         let s = signature.s
         let H = publicKey.point

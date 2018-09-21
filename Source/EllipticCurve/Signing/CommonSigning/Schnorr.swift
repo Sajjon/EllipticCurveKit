@@ -43,7 +43,7 @@ public extension Schnorr {
         let Q = Curve.addition(l, r)!
         let compressedQ = PublicKey<Curve>(point: Q).data.compressed
 
-        let r1 = Number(data: hash(compressedQ, publicKey: publicKey, message: message))
+        let r1 = hash(compressedQ, publicKey: publicKey, message: message, hasher: message.hashedBy).asNumber
 
         guard r1 < Curve.N, r1 > 0 else { fatalError("invalid hash") }
 
@@ -74,7 +74,7 @@ extension Schnorr {
         let compressedQ = PublicKey(point: Q).data.compressed
 
         // 3. Compute the challenge r = H(Q || pubKey || msg)
-        let r = Number(data: hash(compressedQ, publicKey: publicKey, message: message))
+        let r = hash(compressedQ, publicKey: publicKey, message: message, hasher: message.hashedBy).asNumber
 
         guard r > 0 else { fatalError("bad r") }
         guard r <= Curve.order else { fatalError("bad r") }
@@ -91,9 +91,9 @@ extension Schnorr {
 // MARK: - Private
 private extension Schnorr {
     /// Hash (q | M)
-    static func hash(_ q: Data, publicKey: PublicKey<Curve>, message: Message) -> Data {
+    static func hash(_ q: Data, publicKey: PublicKey<Curve>, message: Message, hasher: Hasher) -> Data {
         let compressPubKey = publicKey.data.compressed
-        let msgData = message.asData()
+        let msgData: DataConvertible = message
         // Public key is a point (x, y) on the curve.
         // Each coordinate requires 32 bytes.
         // In its compressed form it suffices to store the x co-ordinate
@@ -107,8 +107,7 @@ private extension Schnorr {
         let Q = Data(q.bytes.prefix(PUBKEY_COMPRESSED_SIZE_BYTES))
 
         let dataToHash = Q + compressPubKey + msgData
-        precondition(dataToHash.count == (66 + msgData.count), "count was: \(dataToHash.count)")
-        let hashedData = Crypto.sha2Sha256(dataToHash)
+        let hashedData = hasher.hash(dataToHash)
         return hashedData
     }
 }

@@ -8,12 +8,12 @@
 
 import Foundation
 
-public protocol Hmac: Hashing {
+public protocol HMAC: Hashing {
     func hmac(key: DataConvertible, data: DataConvertible) throws -> Data
     var strength: Int { get }
 }
 
-public struct HmacImpl: Hmac {
+public struct DefaultHMAC: HMAC {
 
     public let function: HashFunction
 

@@ -47,7 +47,7 @@ struct HMACTestConfigurationRaw: Codable {
 }
 
 struct HMACTestConfiguration {
-    let hmac: Hmac
+    let hmac: HMAC
     let zipDownloadURL: URL
     let filePathInZip: URL
     let isPredictionResistance: Bool
@@ -72,7 +72,7 @@ extension HMACTestConfiguration: CustomStringConvertible {
 extension HMACTestConfigurationRaw {
     func asConfiguration() -> HMACTestConfiguration {
         return HMACTestConfiguration(
-            hmac: HmacImpl(name: hashFunction)!,
+            hmac: DefaultHMAC(name: hashFunction)!,
             zipDownloadURL: zipDownloadURL,
             filePathInZip: filePathInZip,
             isPredictionResistance: isPredictionResistance,

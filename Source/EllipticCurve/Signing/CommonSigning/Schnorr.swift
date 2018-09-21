@@ -14,19 +14,22 @@ public struct Schnorr<CurveType: EllipticCurve>: Signing {
 
 public extension Schnorr {
 
-    static func sign(_ message: Message, using keyPair: KeyPair<CurveType>, personalizationDRBG: Data) -> Signature<Curve> {
+    static func sign(_ message: Message, using keyPair: KeyPair<CurveType>, personalizationDRBG: Data?) -> Signature<CurveType> {
 
         let privateKey = keyPair.privateKey
         let publicKey = keyPair.publicKey
 
         let drbg = HMAC_DRBG(message: message, privateKey: privateKey, personalization: personalizationDRBG)
 
-        let length = Curve.N.asTrimmedData().bytes.count
+        let hasRemainder = Curve.N.bitWidth % 8 == 0
+        let length = (Curve.N.bitWidth/8) + (hasRemainder ? 1 : 0)
+        precondition(length == 32, "length is: \(length)")
 
         var signature: Signature<Curve>?
+        var K: Number!
         while signature == nil {
             let k = drbg.generateNumberOf(length: length).result
-            let K = Number(data: k)
+            K = Number(data: k)
             signature = trySign(message, privateKey: privateKey, k: K, publicKey: publicKey)
         }
 
@@ -34,41 +37,30 @@ public extension Schnorr {
     }
 
     static func verify(_ message: Message, wasSignedBy signature: Signature<Curve>, publicKey: PublicKey<Curve>) -> Bool {
-        guard publicKey.point.isOnCurve() else { return false }
-        let r = signature.r
-        let s = signature.s
-        let e = Crypto.sha2Sha256(r.as256bitLongData() + publicKey.data.compressed + message.asData()).toNumber()
 
-        guard
-            let R = Curve.addition((Curve.G * s), (publicKey.point * (Curve.N - e))),
-            jacobi(R) == 1,
-            R.x == r /// When Jacobian: `R.x == r` can be changed to `R.x == ((R.z)^2 * r) % P.`
-            else { return false }
+        guard signature.s < Curve.N else { fatalError("incorrect S value in signature") }
+        guard signature.r < Curve.N else { fatalError("incorrect R value in signature") }
 
-        return true
+        let l = publicKey.point * signature.r
+        let r = Curve.G * signature.s
+
+        let Q = Curve.addition(l, r)!
+        let compressedQ = PublicKey<Curve>(point: Q).data.compressed
+
+        let r1 = Number(data: hash(compressedQ, publicKey: publicKey, message: message))
+
+        guard r1 < Curve.N, r1 > 0 else { fatalError("invalid hash") }
+
+        let signatureDidSignMessageUsingPublicKey = r1 == signature.r
+
+        assert(signatureDidSignMessageUsingPublicKey, "r1: `\(r1)`, sig.r: `\(signature.r)`")
+
+        return signatureDidSignMessageUsingPublicKey
     }
 }
 
-private extension Schnorr {
-
-    /// Hash (q | M)
-    static func hash(_ q: Data, message: Message, publicKey: PublicKey<Curve>) -> Data {
-        let compressPubKey = publicKey.data.compressed
-        let msgData = message.asData()
-        // Public key is a point (x, y) on the curve.
-        // Each coordinate requires 32 bytes.
-        // In its compressed form it suffices to store the x co-ordinate
-        // and the sign for y.
-        // Hence a total of 33 bytes.
-        let PUBKEY_COMPRESSED_SIZE_BYTES: Int = 33
-        precondition(compressPubKey.bytes.count == PUBKEY_COMPRESSED_SIZE_BYTES)
-
-        // TODO ensure BIG ENDIAN
-        precondition(q.bytes.count >= PUBKEY_COMPRESSED_SIZE_BYTES)
-        let Q = Data(q.bytes.prefix(PUBKEY_COMPRESSED_SIZE_BYTES))
-
-        return Crypto.sha2Sha256(Q + compressPubKey + msgData)
-    }
+// MARK: - Internal Methods
+extension Schnorr {
 
     static func trySign(_ message: Message, privateKey: PrivateKey<Curve>, k: Number, publicKey: PublicKey<Curve>) -> Signature<Curve> {
 
@@ -86,7 +78,7 @@ private extension Schnorr {
         let compressedQ = PublicKey(point: Q).data.compressed
 
         // 3. Compute the challenge r = H(Q || pubKey || msg)
-        let r = Number(data: hash(compressedQ, message: message, publicKey: publicKey))
+        let r = Number(data: hash(compressedQ, publicKey: publicKey, message: message))
 
         guard r > 0 else { fatalError("bad r") }
         guard r <= Curve.order else { fatalError("bad r") }
@@ -98,20 +90,29 @@ private extension Schnorr {
 
         return Signature<Curve>(r: r, s: s)!
     }
-
-    /// "Jacobian coordinates Elliptic Curve operations can be implemented more efficiently by using Jacobian coordinates. Elliptic Curve operations implemented this way avoid many intermediate modular inverses (which are computationally expensive), and the scheme proposed in this document is in fact designed to not need any inversions at all for validation. When operating on a point P with Jacobian coordinates (x,y,z), for which x(P) is defined as `x/z^2` and y(P) is defined as `y/z^3`"
-    /// REFERENCE TO: https://en.wikibooks.org/wiki/Cryptography/Prime_Curve/Jacobian_Coordinates
-    ///
-    /// WHEN Jacobian Coordinates: "jacobi(point.y) can be implemented as jacobi(point.y * point.z mod P)."
-    //
-    /// Can be computed more efficiently using an extended GCD algorithm.
-    /// reference: https://en.wikipedia.org/wiki/Jacobi_symbol#Calculating_the_Jacobi_symbol
-    static func jacobi(_ point: Curve.Point) -> Number {
-        func jacobi(_ number: Number) -> Number {
-            let division = (Curve.P - 1).quotientAndRemainder(dividingBy: 2)
-            return number.power(division.quotient, modulus: Curve.P)
-        }
-        return jacobi(point.y) // can be changed to jacobi(point.y * point.z % Curve.P)
-    }
 }
 
+// MARK: - Private
+private extension Schnorr {
+    /// Hash (q | M)
+    static func hash(_ q: Data, publicKey: PublicKey<Curve>, message: Message) -> Data {
+        let compressPubKey = publicKey.data.compressed
+        let msgData = message.asData()
+        // Public key is a point (x, y) on the curve.
+        // Each coordinate requires 32 bytes.
+        // In its compressed form it suffices to store the x co-ordinate
+        // and the sign for y.
+        // Hence a total of 33 bytes.
+        let PUBKEY_COMPRESSED_SIZE_BYTES: Int = 33
+        precondition(compressPubKey.bytes.count == PUBKEY_COMPRESSED_SIZE_BYTES)
+
+        // TODO ensure BIG ENDIAN
+        precondition(q.bytes.count >= PUBKEY_COMPRESSED_SIZE_BYTES)
+        let Q = Data(q.bytes.prefix(PUBKEY_COMPRESSED_SIZE_BYTES))
+
+        let dataToHash = Q + compressPubKey + msgData
+        precondition(dataToHash.count == (66 + msgData.count), "count was: \(dataToHash.count)")
+        let hashedData = Crypto.sha2Sha256(dataToHash)
+        return hashedData
+    }
+}

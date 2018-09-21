@@ -98,8 +98,6 @@ public extension HMAC_DRBG {
             fatalError("Reseed is required")
         }
 
-        precondition(length == 128)
-
         if let additionalData = additionalData {
             updateSeed(additionalData)
         }

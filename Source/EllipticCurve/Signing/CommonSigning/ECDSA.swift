@@ -15,7 +15,7 @@ public struct ECDSA<CurveType: EllipticCurve>: Signing {
 }
 public extension ECDSA {
 
-    static func sign(_ message: Message, using keyPair: KeyPair<Curve>) -> Signature<Curve> {
+    static func sign(_ message: Message, using keyPair: KeyPair<CurveType>, personalizationDRBG: Data?) -> Signature<CurveType> {
         return sign(message, privateKey: keyPair.privateKey, publicKey: keyPair.publicKey)
     }
 

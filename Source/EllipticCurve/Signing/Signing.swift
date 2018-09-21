@@ -19,7 +19,7 @@ public protocol Signing {
 }
 
 public extension Signing {
-    static func sign(_ message: Message, using keyPair: KeyPair<Curve>, personalizationDRBG: Data? = nil) -> Signature<Curve> {
-        return sign(message, using: keyPair, personalizationDRBG: personalizationDRBG)
+    static func sign(_ message: Message, using keyPair: KeyPair<Curve>) -> Signature<Curve> {
+        return sign(message, using: keyPair, personalizationDRBG: nil)
     }
 }

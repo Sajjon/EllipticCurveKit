@@ -10,7 +10,18 @@ import XCTest
 import CryptoSwift
 import BigInt
 
+
 @testable import EllipticCurveKit
+
+extension Message {
+    init(message: String) {
+        self.init(unhashed: message, encoding: .default, hasher: DefaultHasher.sha256)!
+    }
+
+    init(hex: String) {
+        self.init(hashedHex: hex, hashedBy: DefaultHasher.sha256)!
+    }
+}
 
 // Test vectors: https://github.com/trezor/trezor-crypto/blob/957b8129bded180c8ac3106e61ff79a1a3df8893/tests/test_check.c#L1959-L1965
 // Signature data from: https://github.com/oleganza/CoreBitcoin/blob/master/CoreBitcoinTestsOSX/BTCKeyTests.swift
@@ -36,7 +47,7 @@ class ECDSATests: XCTestCase {
         let publicKey = PublicKey(privateKey: privateKey)
         let keyPair = KeyPair(private: privateKey, public: publicKey)
         let message = Message(message: messageToHash)
-        let k = privateKey.signatureNonceK(forHashedData: message.asData())
+        let k = privateKey.drbgRFC6979(message: message) //.signatureNonceK(forHashedData: message.asData())
 
 
         XCTAssertEqual(expected.k, k.asHexString(uppercased: false), "Must produce matching k nonce.")

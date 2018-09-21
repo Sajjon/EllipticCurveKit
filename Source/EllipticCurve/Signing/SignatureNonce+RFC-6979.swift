@@ -8,79 +8,87 @@
 
 import CryptoSwift
 
-func byteCount(of bitsCount: Int) -> Int {
-    return Int(floor(Double((bitsCount + 7)) / Double(8)))
+func byteCount(fromBitCount: Int) -> Int {
+    return Int(floor(Double((fromBitCount + 7)) / Double(8)))
 }
 
-extension PrivateKey {
-
-    /// https://tools.ietf.org/html/rfc6979#section-3.2
-    func signatureNonceK(forHashedData hashedData: Data, digestLength: Int? = nil) -> Number {
-
-        let hashFunctionUsedToHashInputDataDigestLength = digestLength ?? CryptoSwift.SHA2.Variant.sha256.digestLength
-
-        let privateKey = self
-        let privateKeyData = asData()
-        let x = privateKeyData.bytes
-        let order = Curve.order
-        let qlen = order.magnitude.bitWidth
-
-        // Step 3.2.a: "h1 = H(m)" - Already performed by the caller
-        let h1 = hashedData.bytes
-        // Step 3.2.b: "V = 0x01 0x01 0x01 ... 0x01" - (32 bytes equal 0x01)
-        var V = [UInt8](repeating: 0x01, count: hashFunctionUsedToHashInputDataDigestLength)
-         // Step 3.2.c. "K = 0x00 0x00 0x00 ... 0x00" - (32 bytes equal 0x00)
-        var K = [UInt8](repeating: 0x00, count: hashFunctionUsedToHashInputDataDigestLength)
-
-        func hmac(_ data: [Byte]) -> [Byte] {
-            return try! Crypto.hmacSha256(key: K, data: data)
-        }
-
-        // Step 3.2.d: "K = HMAC_K(V || 0x00 || int2octets(x) || bits2octets(h1))"
-        K = hmac(V + [0] + x + h1)
-
-        // Step 3.2.e: "V = HMAC_K(V)"
-        V = hmac(V)
-
-        // Step 3.2.f: "K = HMAC_K(V || 0x01 || int2octets(x) || bits2octets(h1))"
-        K = hmac(V + [1] + x + h1)
-
-        // Step 3.2.g. "V = HMAC_K(V)"
-        V = hmac(V)
-
-        func bits2int(_ bytes: [Byte]) -> Number {
-            let data = Data(bytes: bytes)
-            let x = Number(data: data)
-            let l = x.magnitude.bitWidth
-            if l > qlen {
-                return x >> (l - qlen)
-            }
-            return x
-        }
-        // Step 3.2.h.
-        // 3.2.h.1
-        var T: [Byte]
-        var k: Number = 0
-        repeat { // Note: the probability of not succeeding at the first try is about 2^-127.
-            T = []
-
-            // 3.2.h.2
-            while T.count < byteCount(of: qlen) {
-                V = hmac(V)
-                T = T + V
-            }
-
-            // 3.2.h.3
-            k = bits2int(T)
-
-            if k > 0 && k < order {
-                break
-            }
-
-            K = hmac(V + [0])
-            V = hmac(V)
-        } while true
-
-        return k
+extension Number {
+    var byteCount: Int {
+        return EllipticCurveKit.byteCount(fromBitCount: magnitude.bitWidth)
     }
 }
+
+public extension PrivateKey {
+    func drbgRFC6979(message: Message) -> Number {
+        return EllipticCurveKit.drbgRFC6979(privateKey: self, message: message)
+    }
+}
+
+/// https://tools.ietf.org/html/rfc6979#section-3.2
+public func drbgRFC6979<Curve>(privateKey: PrivateKey<Curve>, message: Message) -> Number {
+
+    let hmac = DefaultHMAC(function: message.hashedBy.function)
+
+    let byteCount = message.byteCount
+
+    let x: DataConvertible = privateKey
+    let qlen = Curve.order.magnitude.bitWidth
+
+    // Step 3.2.a: "h1 = H(m)" - Already performed by the caller
+    let h1: DataConvertible = message
+    // Step 3.2.b: "V = 0x01 0x01 0x01 ... 0x01" - (n bytes equal 0x01)
+    var V: DataConvertible = ByteArray(repeating: 0x01, count: byteCount)
+    // Step 3.2.c. "K = 0x00 0x00 0x00 ... 0x00" - (n bytes equal 0x00)
+    var K: DataConvertible = ByteArray(repeating: 0x00, count: byteCount)
+
+    func HMAC_K(_ data: DataConvertible) -> Data {
+        return try! hmac.hmac(key: K, data: data)
+    }
+
+    // Step 3.2.d: "K = HMAC_K(V || 0x00 || int2octets(x) || bits2octets(h1))"
+    K = HMAC_K(V + 0x00 + x + h1)
+
+    // Step 3.2.e: "V = HMAC_K(V)"
+    V = HMAC_K(V)
+
+    // Step 3.2.f: "K = HMAC_K(V || 0x01 || int2octets(x) || bits2octets(h1))"
+    K = HMAC_K(V + 0x01 + x + h1)
+
+    // Step 3.2.g. "V = HMAC_K(V)"
+    V = HMAC_K(V)
+
+    func bits2int(_ data: DataConvertible) -> Number {
+        let x = Number(data)
+        let l = x.magnitude.bitWidth
+        if l > qlen {
+            return x >> (l - qlen)
+        }
+        return x
+    }
+    // Step 3.2.h.
+    // 3.2.h.1
+    var T: DataConvertible
+    var k: Number = 0
+    repeat { // Note: the probability of not succeeding at the first try is about 2^-127.
+        T = []
+
+        // 3.2.h.2
+        while T.byteCount < EllipticCurveKit.byteCount(fromBitCount: qlen) {
+            V = HMAC_K(V)
+            T = T + V
+        }
+
+        // 3.2.h.3
+        k = bits2int(T)
+
+        if k > 0 && k < Curve.order {
+            break
+        }
+
+        K = HMAC_K(V + [0])
+        V = HMAC_K(V)
+    } while true
+
+    return k
+}
+

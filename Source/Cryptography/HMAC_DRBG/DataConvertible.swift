@@ -8,20 +8,86 @@
 
 import Foundation
 
-public protocol DataConvertible {
-    var asData: Data { get }
-    var asHex: String { get }
-    init(data: Data)
+public protocol NumberConvertible {
+    var asNumber: Number { get }
 }
 
-extension DataConvertible {
-    public var asHex: String {
+func * (lhs: NumberConvertible, rhs: NumberConvertible) -> Number {
+    return lhs.asNumber * rhs.asNumber
+}
+func * (lhs: NumberConvertible, rhs: Number) -> Number {
+    return lhs.asNumber * rhs
+}
+func * (lhs: Number, rhs: NumberConvertible) -> Number {
+    return lhs * rhs.asNumber
+}
+func + (lhs: NumberConvertible, rhs: NumberConvertible) -> Number {
+    return lhs.asNumber + rhs.asNumber
+}
+func + (lhs: NumberConvertible, rhs: Number) -> Number {
+    return lhs.asNumber + rhs
+}
+func + (lhs: Number, rhs: NumberConvertible) -> Number {
+    return lhs + rhs.asNumber
+}
+
+public protocol DataConvertible: NumberConvertible {
+    var asData: Data { get }
+    var asHex: String { get }
+//    init(data: Data)
+}
+
+extension Number {
+    init(_ data: DataConvertible) {
+        self.init(data: data.asData)
+    }
+}
+
+extension Data {
+    var byteCount: Int {
+        return count
+    }
+}
+
+extension NumberConvertible where Self: DataConvertible {
+    public var asNumber: Number {
+        return asData.toNumber()
+    }
+}
+
+public extension DataConvertible {
+
+
+
+    var byteCount: Int {
+        return asData.byteCount
+    }
+    var bytes: [Byte] {
+        return asData.bytes
+    }
+
+    var asHex: String {
         return asData.toHexString()
     }
 }
 
 func + (data: DataConvertible, byte: Byte) -> Data {
     return data.asData + Data([byte])
+}
+
+func + (lhs: Data, rhs: DataConvertible) -> Data {
+    return Data(lhs.bytes + rhs.asData.bytes)
+}
+
+func + (lhs: DataConvertible, rhs: DataConvertible) -> Data {
+    var bytes: [Byte] = lhs.bytes
+    bytes.append(contentsOf: rhs.bytes)
+    return Data(bytes)
+}
+
+func + (lhs: DataConvertible, rhs: DataConvertible?) -> Data {
+    guard let rhs = rhs else { return lhs.asData }
+    return lhs + rhs
 }
 
 func + (data: Data, byte: Byte) -> Data {
@@ -39,16 +105,37 @@ extension Data: ExpressibleByArrayLiteral {
     }
 }
 
+extension Array: NumberConvertible where Element == Byte {
+    public var asNumber: Number {
+        return asData.toNumber()
+    }
+}
+
 extension Array: DataConvertible where Element == Byte {
+
     public var asData: Data { return Data(self) }
     public init(data: Data) {
         self.init(data.bytes)
     }
 }
 
+//extension Array: DataConvertible where Element == Byte {
+//    public var asData: Data { return Data(self) }
+//    public init(data: Data) {
+//        self.init(data.bytes)
+//    }
+//}
+
 extension Data: DataConvertible {
     public var asData: Data { return self }
     public init(data: Data) {
         self = data
+    }
+}
+
+extension Byte: DataConvertible {
+    public var asData: Data { return Data([self]) }
+    public init(data: Data) {
+        self = data.bytes.first ?? 0x00
     }
 }

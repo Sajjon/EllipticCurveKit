@@ -30,15 +30,12 @@ struct TestVectorStrings: Codable {
     let entropyInputReseed: String?
     let additionalInputReseed: String?
     let expected: String
-    let keyValueAfterInit: KeyValue
+    let keyValueAfterInit: KeyValue?
     let generateCalls: [Generate]
 }
 
 extension TestVectorStrings {
     func asTestVector() -> TestVector {
-
-
-
         return TestVector(
             name: name,
             entropy: s2d(entropy),
@@ -50,6 +47,35 @@ extension TestVectorStrings {
             generateCalls: generateCalls,
             expected: s2d(expected)
         )
+    }
+
+    init(
+        name: String,
+        entropy: String,
+        nonce: String,
+        pers: String? = nil,
+        entropyInputReseed: String? = nil,
+        additionalInputReseed: String? = nil,
+        gen1Add: String? = nil,
+        gen1V: String,
+        gen1K: String,
+        gen2Add: String? = nil,
+        gen2V: String,
+        gen2K: String,
+        expected: String
+        ) {
+        self.name = name
+        self.entropy = entropy
+        self.nonce = nonce
+        self.personalizationString = pers
+        self.entropyInputReseed = entropyInputReseed
+        self.additionalInputReseed = additionalInputReseed
+        self.expected = expected
+        self.keyValueAfterInit = nil
+        self.generateCalls = [
+            Generate(keyValue: KeyValue(v: gen1V, key: gen1K), additionalInput: gen1Add),
+            Generate(keyValue: KeyValue(v: gen2V, key: gen2K), additionalInput: gen2Add)
+        ]
     }
 }
 

@@ -17,7 +17,7 @@ struct TestVector {
     let personalizationString: Data?
     let entropyInputReseed: Data?
     let additionalInputReseed: Data?
-    let keyValueAfterInit: KeyValue
+    let keyValueAfterInit: KeyValue?
     let generateCalls: [Generate]
     let expected: Data
 }

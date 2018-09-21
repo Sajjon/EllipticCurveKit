@@ -51,6 +51,14 @@
                BlueprintName = "EllipticCurveKitTests"
                ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "MultipliplicationPerformanceSecp256k1Tests">
+               </Test>
+               <Test
+                  Identifier = "MultipliplicationPerformanceSecp256r1Tests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

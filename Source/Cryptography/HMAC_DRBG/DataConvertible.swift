@@ -14,6 +14,27 @@ public protocol DataConvertible {
     init(data: Data)
 }
 
+extension Number {
+    init(_ data: DataConvertible) {
+        self.init(data: data.asData)
+    }
+}
+
+extension Data {
+    var byteCount: Int {
+        return count
+    }
+}
+
+extension DataConvertible {
+    var byteCount: Int {
+        return asData.byteCount
+    }
+    var bytes: [Byte] {
+        return asData.bytes
+    }
+}
+
 extension DataConvertible {
     public var asHex: String {
         return asData.toHexString()
@@ -22,6 +43,16 @@ extension DataConvertible {
 
 func + (data: DataConvertible, byte: Byte) -> Data {
     return data.asData + Data([byte])
+}
+
+func + (lhs: Data, rhs: DataConvertible) -> Data {
+    return Data(lhs.bytes + rhs.asData.bytes)
+}
+
+func + (lhs: DataConvertible, rhs: DataConvertible) -> Data {
+    var bytes: [Byte] = lhs.bytes
+    bytes.append(contentsOf: rhs.bytes)
+    return Data(bytes)
 }
 
 func + (data: Data, byte: Byte) -> Data {
@@ -50,5 +81,12 @@ extension Data: DataConvertible {
     public var asData: Data { return self }
     public init(data: Data) {
         self = data
+    }
+}
+
+extension Byte: DataConvertible {
+    public var asData: Data { return Data([self]) }
+    public init(data: Data) {
+        self = data.bytes.first ?? 0x00
     }
 }

@@ -47,7 +47,7 @@ struct HMACTestConfigurationRaw: Codable {
 }
 
 struct HMACTestConfiguration {
-    let hasher: UpdatableHasher
+    let hmac: Hmac
     let zipDownloadURL: URL
     let filePathInZip: URL
     let isPredictionResistance: Bool
@@ -72,12 +72,7 @@ extension HMACTestConfiguration: CustomStringConvertible {
 extension HMACTestConfigurationRaw {
     func asConfiguration() -> HMACTestConfiguration {
         return HMACTestConfiguration(
-            hasher: { () -> UpdatableHasher in
-                switch hashFunction {
-                case "sha256": return UpdatableHashProvider.hasher(variant: .sha2sha256)
-                default: fatalError("incorrect implementation")
-                }
-        }(),
+            hmac: HmacImpl(name: hashFunction)!,
             zipDownloadURL: zipDownloadURL,
             filePathInZip: filePathInZip,
             isPredictionResistance: isPredictionResistance,

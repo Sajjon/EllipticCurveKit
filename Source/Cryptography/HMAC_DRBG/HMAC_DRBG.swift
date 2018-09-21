@@ -7,13 +7,12 @@
 //
 
 import Foundation
-
+typealias ByteArray = [Byte]
 
 /// HMAC_DRBG is a Deterministic Random Bit Generator (DRBG) using HMAC as hash function.
 public final class HMAC_DRBG {
 
-    /// Typically sha256
-    private let hasher: UpdatableHasher
+    private let hmac: Hmac
 
     private var K: DataConvertible
     private var V: DataConvertible
@@ -22,34 +21,26 @@ public final class HMAC_DRBG {
 
     /// 2^48, which is NIST's recommended value
     private static let reseedInterval: Number = 0x1000000000000
-    private var hashType: HashType {
-        return hasher.type
-    }
+
 
     public init(
-        hasher: UpdatableHasher = UpdatableHashProvider.hasher(variant: .sha2sha256),
+        hmac: Hmac = HmacImpl(function: .sha256),
         entropy: Data,
         nonce: Data,
         personalization: Data? = nil,
         additionalInput: Data? = nil,
         minimumEntropyByteCount: Int? = nil
         ) {
-        self.hasher = hasher
+        self.hmac = hmac
         self.iterationsLeftUntilReseed = HMAC_DRBG.reseedInterval
-        self.minimumEntropyByteCount = {
-            guard let minimumEntropyByteCount = minimumEntropyByteCount else {
-                switch hasher.type {
-                // https://github.com/indutny/hash.js/blob/9db0a25077e0237e91c1257552a8d37df1c6e17a/lib/hash/sha/256.js#L56
-                case .sha2sha256: return 192/8
-                }
-            }
-            return minimumEntropyByteCount
-        }()
+        self.minimumEntropyByteCount = minimumEntropyByteCount ?? hmac.strength
 
-        self.K = Data(repeating: 0x00, count: hasher.digestLength)
-        self.V = Data(repeating: 0x01, count: hasher.digestLength)
+        let byteCount = hmac.digestLength
 
-        let seed = entropy + nonce + (personalization ?? Data())
+        self.K = Data(repeating: 0x00, count: byteCount)
+        self.V = Data(repeating: 0x01, count: byteCount)
+
+        let seed = entropy + nonce + personalization
         updateSeed(seed)
     }
 }
@@ -70,7 +61,9 @@ public extension HMAC_DRBG {
     }
 
     func reseed(entropy: Data, additionalData: Data = Data()) throws {
-        guard entropy.count >= minimumEntropyByteCount else { throw Error.notEnoughEntropy(byteCountProvidedEntropy: entropy.count, byteCountMinimumRequiredEntropy: minimumEntropyByteCount) }
+        guard entropy.count >= minimumEntropyByteCount else {
+            throw Error.notEnoughEntropy(byteCountProvidedEntropy: entropy.count, byteCountMinimumRequiredEntropy: minimumEntropyByteCount)
+        }
         updateSeed(entropy + additionalData)
         iterationsLeftUntilReseed = HMAC_DRBG.reseedInterval
     }
@@ -112,7 +105,6 @@ private extension HMAC_DRBG {
     }
 
     func HMAC_K(_ data: DataConvertible) -> Data {
-        let bytes = try! Crypto.hmacSha256(key: K.asData.bytes, data: data.asData.bytes)
-        return Data(bytes)
+        return try! hmac.hmac(key: K, data: data)
     }
 }

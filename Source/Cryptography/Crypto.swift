@@ -19,7 +19,7 @@ public extension Crypto {
     }
 
     static func hmac(key: DataConvertible, data: DataConvertible, function: HashFunction) throws -> Data {
-        let bytes = try HMAC(key: key.asData.bytes, variant: function.hmac).authenticate(data.asData.bytes)
+        let bytes = try CryptoSwift.HMAC(key: key.asData.bytes, variant: function.hmac).authenticate(data.asData.bytes)
         return Data(bytes)
     }
 
@@ -50,13 +50,13 @@ public extension Crypto {
 extension HashFunction {
     fileprivate var hmac: CryptoSwift.HMAC.Variant {
         switch self {
-        case .sha256: return HMAC.Variant.sha256
+        case .sha256: return CryptoSwift.HMAC.Variant.sha256
         }
     }
 
     fileprivate var sha2: CryptoSwift.SHA2.Variant {
         switch self {
-        case .sha256: return SHA2.Variant.sha256
+        case .sha256: return CryptoSwift.SHA2.Variant.sha256
         }
     }
 }

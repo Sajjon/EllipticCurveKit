@@ -24,7 +24,7 @@ public extension Schnorr {
         var signature: Signature<Curve>?
         var K: Number!
         while signature == nil {
-            let k = drbg.generateNumberOfLength(byteCount: Curve.N.byteCount)
+            let k = try! drbg.generateNumberOfLength(byteCount: Curve.N.byteCount)
             K = Number(data: k)
             signature = trySign(message, privateKey: privateKey, k: K, publicKey: publicKey)
         }

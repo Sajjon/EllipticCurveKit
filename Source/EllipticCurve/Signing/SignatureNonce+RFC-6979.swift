@@ -25,12 +25,12 @@ public extension PrivateKey {
 }
 
 /// https://tools.ietf.org/html/rfc6979#section-3.2
-public func drbgRFC6979<Curve>(privateKey: PrivateKey<Curve>, message: Message, hmac: HMAC = DefaultHMAC(function: .sha256)) -> Number {
+public func drbgRFC6979<Curve>(privateKey: PrivateKey<Curve>, message: Message) -> Number {
 
-//    let hashedData = message.asData()
+    let hmac = DefaultHMAC(function: message.hashedBy.function)
+
     let byteCount = message.byteCount
 
-//    let privateKeyData = privateKey.asData()
     let x: DataConvertible = privateKey
     let qlen = Curve.order.magnitude.bitWidth
 
@@ -58,7 +58,6 @@ public func drbgRFC6979<Curve>(privateKey: PrivateKey<Curve>, message: Message, 
     V = HMAC_K(V)
 
     func bits2int(_ data: DataConvertible) -> Number {
-        //            let data = Data(bytes: bytes)
         let x = Number(data)
         let l = x.magnitude.bitWidth
         if l > qlen {

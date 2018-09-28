@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
     spec.osx.deployment_target = "10.9"
     spec.tvos.deployment_target = "9.0"
     spec.watchos.deployment_target = "2.0"
-    spec.license      = { :type => 'MIT', :file => 'LICENSE.md' }
+    spec.license      = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
     spec.summary      = 'Elliptic Curve Cryptography in pure Swift'
     spec.homepage     = 'https://github.com/Sajjon/EllipticCurveKit'
     spec.author       = 'Alex Cyon'

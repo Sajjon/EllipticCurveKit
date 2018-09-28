@@ -1,6 +1,7 @@
 Pod::Spec.new do |s|
     s.name         = 'EllipticCurveKit'
     s.version      = '0.0.1'
+    s.swift_version = '4.2'
     s.ios.deployment_target = "8.0"
     s.osx.deployment_target = "10.9"
     s.tvos.deployment_target = "9.0"

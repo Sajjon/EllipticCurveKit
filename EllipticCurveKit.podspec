@@ -9,8 +9,8 @@ Pod::Spec.new do |spec|
     spec.summary      = 'Elliptic Curve Cryptography in pure Swift'
     spec.homepage     = 'https://github.com/Sajjon/EllipticCurveKit'
     spec.author       = 'Alex Cyon'
-    spec.source       = { :git => 'https://github.com/Sajjon/EllipticCurveKit.git', :tag => 'v' + String(spec.version) }
+    spec.source       = { :git => 'https://github.com/Sajjon/EllipticCurveKit.git', :tag => String(spec.version) }
     spec.source_files = 'sources/*.swift'
     spec.social_media_url = 'https://twitter.com/alexcyon'
-    spec.dependency 'BigInt', :git => 'https://github.com/attaswift/BigInt.git'
+    spec.dependency 'BigInt', '~> 3.1'
 end

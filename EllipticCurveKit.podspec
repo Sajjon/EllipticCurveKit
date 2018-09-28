@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
     s.source_files = 'Source/**/*.swift'
     s.social_media_url = 'https://twitter.com/alexcyon'
     s.dependency 'BigInt', '~> 3.1'
+    s.dependency 'CryptoSwift', '~> 0.12'
 end

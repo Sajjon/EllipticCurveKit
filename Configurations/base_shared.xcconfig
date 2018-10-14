@@ -66,8 +66,8 @@ ONLY_ACTIVE_ARCH[config=Debug] = YES
 SWIFT_ACTIVE_COMPILATION_CONDITIONS[config=Debug] = $(inherited) $(_DEBUG)
 
 MACOSX_DEPLOYMENT_TARGET[sdk=macosx*] = 10.12
-VALID_ARCHS[sdk=macosx*] = i386 x86_64
-ARCHS[sdk=macosx*] = i386 x86_64
+VALID_ARCHS[sdk=iphonesimulator*] = i386 x86_64
+VALID_ARCHS[sdk=macosx*] = x86_64
 
 COMBINE_HIDPI_IMAGES[sdk=macosx*] = YES
 

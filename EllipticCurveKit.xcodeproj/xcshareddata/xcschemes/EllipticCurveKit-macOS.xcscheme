@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "482AD09D21736589009A506E"
-               BuildableName = "EllipticCurveKit-macOS-Tests.xctest"
+               BuildableName = "EllipticCurveKitTests.xctest"
                BlueprintName = "EllipticCurveKit-macOS-Tests"
                ReferencedContainer = "container:EllipticCurveKit.xcodeproj">
             </BuildableReference>

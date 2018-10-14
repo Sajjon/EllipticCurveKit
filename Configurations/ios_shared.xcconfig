@@ -1,5 +1,0 @@
-#include "base_shared.xcconfig"
-FRAMEWORK_SEARCH_PATHS = $(inherited) $(PROJECT_DIR)/Carthage/Build/iOS
-IPHONEOS_DEPLOYMENT_TARGET = 11.3
-SDKROOT = iphoneos
-//VALID_ARCHS = arm64 armv7 armv7s

@@ -204,22 +204,12 @@
 		4848A03E20FD2983004BC02C /* AnyKeySigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyKeySigner.swift; sourceTree = "<group>"; };
 		4848A04120FD312F004BC02C /* Schnorr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schnorr.swift; sourceTree = "<group>"; };
 		48687FAF20F7E54500F2AFA4 /* JacobianPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JacobianPoint.swift; sourceTree = "<group>"; };
+		48746E2B2173824B003B665C /* EllipticCurveKit-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-Mac.xcconfig"; sourceTree = "<group>"; };
+		48746E2C2173824B003B665C /* EllipticCurveKit-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-iOS.xcconfig"; sourceTree = "<group>"; };
+		48746E2D217382E0003B665C /* EllipticCurveKit-Tests-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-Tests-iOS.xcconfig"; sourceTree = "<group>"; };
+		48746E2E217382E0003B665C /* EllipticCurveKit-Tests-Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-Tests-Mac.xcconfig"; sourceTree = "<group>"; };
 		4882024D21725C95008C6120 /* EllipticCurveKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EllipticCurveKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4882026A21726005008C6120 /* Zilliqa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zilliqa.swift; sourceTree = "<group>"; };
-		488202D72172611B008C6120 /* EllipticCurveKitTests-iOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKitTests-iOS-Debug.xcconfig"; sourceTree = "<group>"; };
-		488202D82172611B008C6120 /* EllipticCurveKitTests-iOS-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKitTests-iOS-Release.xcconfig"; sourceTree = "<group>"; };
-		488202D92172611B008C6120 /* EllipticCurveKitTests-macOS-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKitTests-macOS-Release.xcconfig"; sourceTree = "<group>"; };
-		488202DA2172611B008C6120 /* EllipticCurveKitTests-macOS-Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKitTests-macOS-Common.xcconfig"; sourceTree = "<group>"; };
-		488202DB2172611B008C6120 /* EllipticCurveKitTests-iOS-Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKitTests-iOS-Common.xcconfig"; sourceTree = "<group>"; };
-		488202DC2172611B008C6120 /* EllipticCurveKit-Tests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-Tests-Shared.xcconfig"; sourceTree = "<group>"; };
-		488202DD2172611B008C6120 /* EllipticCurveKitTests-macOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKitTests-macOS-Debug.xcconfig"; sourceTree = "<group>"; };
-		488202DF21726138008C6120 /* EllipticCurveKit-macOS-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-macOS-Release.xcconfig"; sourceTree = "<group>"; };
-		488202E021726138008C6120 /* EllipticCurveKit-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-Shared.xcconfig"; sourceTree = "<group>"; };
-		488202E121726138008C6120 /* EllipticCurveKit-iOS-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-iOS-Release.xcconfig"; sourceTree = "<group>"; };
-		488202E221726138008C6120 /* EllipticCurveKit-iOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-iOS-Debug.xcconfig"; sourceTree = "<group>"; };
-		488202E321726138008C6120 /* EllipticCurveKit-macOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-macOS-Debug.xcconfig"; sourceTree = "<group>"; };
-		488202E421726138008C6120 /* EllipticCurveKit-iOS-Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-iOS-Common.xcconfig"; sourceTree = "<group>"; };
-		488202E521726138008C6120 /* EllipticCurveKit-macOS-Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EllipticCurveKit-macOS-Common.xcconfig"; sourceTree = "<group>"; };
 		4885ABA520F77D6B00115FE0 /* Signing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signing.swift; sourceTree = "<group>"; };
 		4885ABA720F77ECB00115FE0 /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
 		4885ABA920F77EE600115FE0 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
@@ -363,13 +353,8 @@
 		488202D62172611B008C6120 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				488202D72172611B008C6120 /* EllipticCurveKitTests-iOS-Debug.xcconfig */,
-				488202D82172611B008C6120 /* EllipticCurveKitTests-iOS-Release.xcconfig */,
-				488202D92172611B008C6120 /* EllipticCurveKitTests-macOS-Release.xcconfig */,
-				488202DA2172611B008C6120 /* EllipticCurveKitTests-macOS-Common.xcconfig */,
-				488202DB2172611B008C6120 /* EllipticCurveKitTests-iOS-Common.xcconfig */,
-				488202DC2172611B008C6120 /* EllipticCurveKit-Tests-Shared.xcconfig */,
-				488202DD2172611B008C6120 /* EllipticCurveKitTests-macOS-Debug.xcconfig */,
+				48746E2D217382E0003B665C /* EllipticCurveKit-Tests-iOS.xcconfig */,
+				48746E2E217382E0003B665C /* EllipticCurveKit-Tests-Mac.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -377,13 +362,8 @@
 		488202DE21726138008C6120 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				488202DF21726138008C6120 /* EllipticCurveKit-macOS-Release.xcconfig */,
-				488202E021726138008C6120 /* EllipticCurveKit-Shared.xcconfig */,
-				488202E121726138008C6120 /* EllipticCurveKit-iOS-Release.xcconfig */,
-				488202E221726138008C6120 /* EllipticCurveKit-iOS-Debug.xcconfig */,
-				488202E321726138008C6120 /* EllipticCurveKit-macOS-Debug.xcconfig */,
-				488202E421726138008C6120 /* EllipticCurveKit-iOS-Common.xcconfig */,
-				488202E521726138008C6120 /* EllipticCurveKit-macOS-Common.xcconfig */,
+				48746E2C2173824B003B665C /* EllipticCurveKit-iOS.xcconfig */,
+				48746E2B2173824B003B665C /* EllipticCurveKit-Mac.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -1092,28 +1072,28 @@
 /* Begin XCBuildConfiguration section */
 		482AD0A721736589009A506E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202DD2172611B008C6120 /* EllipticCurveKitTests-macOS-Debug.xcconfig */;
+			baseConfigurationReference = 48746E2E217382E0003B665C /* EllipticCurveKit-Tests-Mac.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		482AD0A821736589009A506E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202D92172611B008C6120 /* EllipticCurveKitTests-macOS-Release.xcconfig */;
+			baseConfigurationReference = 48746E2E217382E0003B665C /* EllipticCurveKit-Tests-Mac.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		4882025F21725C96008C6120 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202E321726138008C6120 /* EllipticCurveKit-macOS-Debug.xcconfig */;
+			baseConfigurationReference = 48746E2B2173824B003B665C /* EllipticCurveKit-Mac.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		4882026021725C96008C6120 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202DF21726138008C6120 /* EllipticCurveKit-macOS-Release.xcconfig */;
+			baseConfigurationReference = 48746E2B2173824B003B665C /* EllipticCurveKit-Mac.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -1246,28 +1226,28 @@
 		};
 		48F22CA220C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202E221726138008C6120 /* EllipticCurveKit-iOS-Debug.xcconfig */;
+			baseConfigurationReference = 48746E2C2173824B003B665C /* EllipticCurveKit-iOS.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		48F22CA320C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202E121726138008C6120 /* EllipticCurveKit-iOS-Release.xcconfig */;
+			baseConfigurationReference = 48746E2C2173824B003B665C /* EllipticCurveKit-iOS.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		48F22CA520C70D88004A18CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202D72172611B008C6120 /* EllipticCurveKitTests-iOS-Debug.xcconfig */;
+			baseConfigurationReference = 48746E2D217382E0003B665C /* EllipticCurveKit-Tests-iOS.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		48F22CA620C70D88004A18CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488202D82172611B008C6120 /* EllipticCurveKitTests-iOS-Release.xcconfig */;
+			baseConfigurationReference = 48746E2D217382E0003B665C /* EllipticCurveKit-Tests-iOS.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;

@@ -1,3 +1,6 @@
+#include "../../Configurations/base_tests.xcconfig"
+#include "../../Configurations/Carthage.xcconfig"
+
 INFOPLIST_FILE = Tests/SupportingFiles/EllipticCurveKitTests-Info.plist
 PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKitTests
 PRODUCT_NAME = EllipticCurveKitTests

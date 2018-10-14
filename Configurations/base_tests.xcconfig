@@ -1,0 +1,7 @@
+#include "base_shared.xcconfig"
+
+ONLY_ACTIVE_ARCH = YES
+PRODUCT_MODULE_NAME = $(PRODUCT_NAME:c99extidentifier)Tests
+
+//Only used by APPS but it does not mess up build settings for test targets for FRAMEWORKS in Xcode 9.3 so will keep it here for now
+BUNDLE_LOADER = $(TEST_HOST)

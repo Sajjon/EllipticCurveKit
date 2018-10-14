@@ -1,3 +1,5 @@
+#include "../../Configurations/Carthage.xcconfig"
+
 INFOPLIST_FILE = Source/SupportingFiles/EllipticCurveKit-Info.plist
 PRODUCT_BUNDLE_IDENTIFIER = cyon.alex.EllipticCurveKit
 PRODUCT_NAME = EllipticCurveKit

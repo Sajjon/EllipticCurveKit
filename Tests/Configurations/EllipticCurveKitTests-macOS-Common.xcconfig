@@ -1,3 +1,0 @@
-#include "EllipticCurveKit-Tests-Shared.xcconfig"
-#include "../../Configurations/base_tests.xcconfig"
-#include "../../Configurations/macos_framework.xcconfig"

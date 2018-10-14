@@ -1,2 +1,0 @@
-#include "EllipticCurveKit-macOS-Common.xcconfig"
-#include "../../Configurations/base_debug.xcconfig"

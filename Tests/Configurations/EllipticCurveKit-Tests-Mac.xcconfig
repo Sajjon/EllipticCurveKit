@@ -1,0 +1,2 @@
+#include "../../Configurations/mac_framework.xcconfig"
+#include "EllipticCurveKit-Tests-Shared.xcconfig"

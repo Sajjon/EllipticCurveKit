@@ -34,7 +34,6 @@ COPY_PHASE_STRIP = NO
 ENABLE_STRICT_OBJC_MSGSEND = YES
 GCC_C_LANGUAGE_STANDARD = gnu11
 GCC_NO_COMMON_BLOCKS = YES
-SDKROOT = iphoneos
 GCC_WARN_64_TO_32_BIT_CONVERSION = YES
 GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR
 GCC_WARN_UNDECLARED_SELECTOR = YES
@@ -49,10 +48,41 @@ SWIFT_VERSION = 4.2
 ENABLE_BITCODE = NO
 CODE_SIGN_ENTITLEMENTS =
 CODE_SIGN_IDENTITY =
+DEBUG_INFORMATION_FORMAT[config=Release] = dwarf-with-dsym
+DEBUG_INFORMATION_FORMAT[config=Debug] = dwarf
+ENABLE_NS_ASSERTIONS[config=Release] = NO
+MTL_ENABLE_DEBUG_INFO[config=Release] = NO
+SWIFT_COMPILATION_MODE[config=Release] = wholemodule
+SWIFT_OPTIMIZATION_LEVEL[config=Release] = -O
+GCC_OPTIMIZATION_LEVEL[config=Release] = 3
+VALIDATE_PRODUCT[config=Release] = YES
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES[config=Release] = NO
+_DEBUG = DEBUG
+GCC_PREPROCESSOR_DEFINITIONS[config=Debug] = $(_DEBUG)
+ENABLE_TESTABILITY[config=Debug] = YES
+GCC_DYNAMIC_NO_PIC[config=Debug] = NO
+MTL_ENABLE_DEBUG_INFO[config=Debug] = YES
+ONLY_ACTIVE_ARCH[config=Debug] = YES
+SWIFT_ACTIVE_COMPILATION_CONDITIONS[config=Debug] = $(inherited) $(_DEBUG)
+
+MACOSX_DEPLOYMENT_TARGET[sdk=macosx*] = 10.12
+VALID_ARCHS[sdk=macosx*] = i386 x86_64
+ARCHS[sdk=macosx*] = i386 x86_64
+
+COMBINE_HIDPI_IMAGES[sdk=macosx*] = YES
+
+// LD_RUNPATH_SEARCH_PATHS
+LD_RUNPATH_SEARCH_PATHS[sdk=macosx*] = $(inherited) @executable_path/../Frameworks @loader_path/../Frameworks
+IPHONE_LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+LD_RUNPATH_SEARCH_PATHS[sdk=iphoneos*] = $(IPHONE_LD_RUNPATH_SEARCH_PATHS)
+LD_RUNPATH_SEARCH_PATHS[sdk=iphonesimulator*] = $(IPHONE_LD_RUNPATH_SEARCH_PATHS)
+
+IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*] = 11.3
+
+
 
 // "Fastest [-O3]"
 GCC_OPTIMIZATION_LEVEL = 3
 SWIFT_OPTIMIZATION_LEVEL = -O
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 // Vanilla for FRAMEWORKS but not apps, however needed by our apps.
-LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks

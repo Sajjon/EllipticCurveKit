@@ -1,0 +1,2 @@
+#include "EllipticCurveKitTests-iOS-Common.xcconfig"
+#include "../../Configurations/base_debug.xcconfig"

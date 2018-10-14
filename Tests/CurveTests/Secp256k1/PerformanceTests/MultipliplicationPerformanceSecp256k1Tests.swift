@@ -9,9 +9,10 @@
 import Foundation
 
 import XCTest
+@testable import EllipticCurveKit
+
 import BigInt
 
-@testable import EllipticCurveKit
 
 class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
 

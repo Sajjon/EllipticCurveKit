@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 //! Project version number for EllipticCurveKit.
 FOUNDATION_EXPORT double EllipticCurveKitVersionNumber;

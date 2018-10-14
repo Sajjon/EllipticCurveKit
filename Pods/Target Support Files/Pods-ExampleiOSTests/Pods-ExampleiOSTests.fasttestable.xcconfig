@@ -1,8 +1,0 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/BigInt-iOS11.3" "${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift-iOS11.3" "${PODS_CONFIGURATION_BUILD_DIR}/SipHash-iOS11.3"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/BigInt-iOS11.3/BigInt.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/BigInt-iOS11.4/BigInt.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift-iOS11.3/CryptoSwift.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift-iOS11.4/CryptoSwift.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SipHash-iOS11.3/SipHash.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SipHash-iOS11.4/SipHash.framework/Headers"
-PODS_BUILD_DIR = ${BUILD_DIR}
-PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
-PODS_PODFILE_DIR_PATH = ${SRCROOT}/..
-PODS_ROOT = ${SRCROOT}/../Pods

@@ -1,0 +1,3 @@
+#include "../../Configurations/ios_framework.xcconfig"
+#include "../../Configurations/base_tests.xcconfig"
+#include "EllipticCurveKit-Tests-Shared.xcconfig"

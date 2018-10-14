@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
     s.name         = 'EllipticCurveKit'
-    s.version      = '0.0.1'
+    s.version      = '0.0.2'
     s.swift_version = '4.2'
-    s.ios.deployment_target = "11.0"
+    s.ios.deployment_target = "11.3"
+    s.osx.deployment_target = "10.12"
     s.license      = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
     s.summary      = 'Elliptic Curve Cryptography in pure Swift'
     s.homepage     = 'https://github.com/Sajjon/EllipticCurveKit'

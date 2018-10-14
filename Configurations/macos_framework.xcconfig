@@ -1,0 +1,5 @@
+#include "base_framework.xcconfig"
+#include "macos_shared.xcconfig"
+
+
+FRAMEWORK_VERSION = A

@@ -82,7 +82,7 @@ if signature == expectedSignature {
 }
 
 if AnyKeySigner<Schnorr<Secp256k1>>.verify(message, wasSignedBy: signature, publicKey: keyPair.publicKey) {
-     print("'It's working, it's working!' - Anakin Skywalker ( https://youtu.be/AXwGVXD7qEQ )")
+     print("Yes, message was indeed signed by public key and prodouced that signature.")
 }
 ```
 

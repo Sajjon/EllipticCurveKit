@@ -53,7 +53,7 @@ public extension RIPEMD160 {
         count += Int64(data.count)
     }
 
-    public mutating func finalize() -> Data {
+    mutating func finalize() -> Data {
         var X = [UInt32](repeating: 0, count: 16)
         /* append the bit m_n == 1 */
         buffer.append(0x80)
@@ -104,8 +104,8 @@ public extension RIPEMD160 {
         var key = key
         key.count = 64 // Truncate to 64 bytes or fill-up with zeros.
         
-        let outerKeyPad = Data(bytes: key.map { $0 ^ 0x5c })
-        let innerKeyPad = Data(bytes: key.map { $0 ^ 0x36 })
+        let outerKeyPad = Data(key.map { $0 ^ 0x5c })
+        let innerKeyPad = Data(key.map { $0 ^ 0x36 })
         
         var innerMd = RIPEMD160()
         innerMd.update(data: innerKeyPad)

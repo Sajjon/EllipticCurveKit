@@ -24,8 +24,8 @@ public protocol EllipticCurveCryptographyKeyGeneration {
 }
 
 public extension EllipticCurveCryptographyKeyGeneration {
-    public typealias PrivateKeyType = PrivateKey<Curve>
-    public typealias KeyPairType = KeyPair<Curve>
+    typealias PrivateKeyType = PrivateKey<Curve>
+    typealias KeyPairType = KeyPair<Curve>
 }
 
 public struct AnyKeyGenerator<Curve: EllipticCurve>: EllipticCurveCryptographyKeyGeneration {}

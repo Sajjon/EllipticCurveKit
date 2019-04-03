@@ -33,7 +33,7 @@ public struct Signature<Curve: EllipticCurve>: Equatable, CustomStringConvertibl
 }
 
 public extension Signature {
-    public init?(hex: HexString) {
+    init?(hex: HexString) {
         guard
             hex.count == 128,
         case let rHex = String(hex.prefix(64)),

@@ -25,11 +25,11 @@ public struct PublicAddress<SystemType: DistributedSystem>: Address {
 }
 
 public extension PublicAddress {
-    public init(keyPair: KeyPair<Curve>, system: System) {
+    init(keyPair: KeyPair<Curve>, system: System) {
         self.init(publicKeyPoint: keyPair.publicKey, system: system)
     }
 
-    public init(privateKey: PrivateKey<Curve>, system: System) {
+    init(privateKey: PrivateKey<Curve>, system: System) {
         self.init(keyPair: KeyPair(private: privateKey), system: system)
     }
 }

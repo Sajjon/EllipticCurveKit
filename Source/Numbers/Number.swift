@@ -13,20 +13,20 @@ public typealias Number = BigInt
 
 public extension Number {
 
-    public init(sign: Number.Sign = .plus, _ words: [Number.Word]) {
+    init(sign: Number.Sign = .plus, _ words: [Number.Word]) {
         let magnitude = Number.Magnitude(words: words)
         self.init(sign: sign, magnitude: magnitude)
     }
 
-    public init(sign: Number.Sign = .plus, data: Data) {
+    init(sign: Number.Sign = .plus, data: Data) {
         self.init(sign: sign, Number.Magnitude(data))
     }
 
-    public init(sign: Number.Sign = .plus, _ magnitude: Number.Magnitude) {
+    init(sign: Number.Sign = .plus, _ magnitude: Number.Magnitude) {
         self.init(sign: sign, magnitude: magnitude)
     }
 
-    public init?(hexString: String) {
+    init?(hexString: String) {
         var hexString = hexString
         if hexString.starts(with: "0x") {
             hexString = String(hexString.dropFirst(2))
@@ -34,7 +34,7 @@ public extension Number {
         self.init(hexString, radix: 16)
     }
 
-    public init?(decimalString: String) {
+    init?(decimalString: String) {
         self.init(decimalString, radix: 10)
     }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 public extension Data {
-    public init(_ byte: Byte) {
+    init(_ byte: Byte) {
         self.init([byte])
     }
 

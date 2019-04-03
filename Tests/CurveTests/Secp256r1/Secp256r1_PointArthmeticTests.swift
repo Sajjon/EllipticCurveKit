@@ -32,8 +32,7 @@ class Secp256r1_PointArthmeticTests: XCTestCase {
 
         XCTAssertEqual(publicKey.point.y.asHexStringLength64(), "3E13BE2FFCB19403A761420B1D26AF55E265A6F924FE0B7174D4D3654249092F")
 
-        let neoPublicAddress = "AbRbkor1bsuxCuhAQeXHuN4gGXJJwfNApS"
-
+//        let neoPublicAddress = "AbRbkor1bsuxCuhAQeXHuN4gGXJJwfNApS"
     }
 
     /// Some uninteresting private key generated using https://neotracker.io/wallet
@@ -52,7 +51,7 @@ class Secp256r1_PointArthmeticTests: XCTestCase {
 
         XCTAssertEqual(publicKey.point.y.asHexStringLength64(), "5598091915EFFA6F181D3EC8B4374806247081684C822D622DDE241288B9F0B4")
 
-        let neoPublicAddress = "AeGbQr4SuU1oXhxMDJqu9U5UNj5gPc6kNk"
+//        let neoPublicAddress = "AeGbQr4SuU1oXhxMDJqu9U5UNj5gPc6kNk"
 
     }
 
@@ -73,7 +72,7 @@ class Secp256r1_PointArthmeticTests: XCTestCase {
 
         XCTAssertEqual(publicKey.point.y.asHexStringLength64(), "28AF61281FD35E2FA7002523ACC85A429CB06EE6648325389F59EDFCE1405141")
 
-        let neoPublicAddress = "Ac3TQZXhJpZY6VAdKdJEewEyQi4xD2xAQt"
+//        let neoPublicAddress = "Ac3TQZXhJpZY6VAdKdJEewEyQi4xD2xAQt"
 
     }
 }

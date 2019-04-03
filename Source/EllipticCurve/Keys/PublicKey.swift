@@ -45,7 +45,7 @@ public struct PublicKey<Curve: EllipticCurve> {
 }
 
 public extension PublicKey {
-    public init(privateKey: PrivateKey<Curve>) {
+    init(privateKey: PrivateKey<Curve>) {
         let point = Curve.G * privateKey.number
         self.init(point: point)
     }

@@ -28,7 +28,7 @@ public extension WIFFormatter {
         return base58Encode(prefix: network.privateKeyWifPrefix, data: privateKey.number.as256bitLongData(), suffix: network.privateKeyWifSuffix)
     }
 
-    public func base58Encode(prefix prefixByte: Byte, data: Data, suffix suffixByte: Byte?) -> Base58Encoded {
+    func base58Encode(prefix prefixByte: Byte, data: Data, suffix suffixByte: Byte?) -> Base58Encoded {
         let prefix = Data([prefixByte])
         var suffix: Data?
         if let suffixByte = suffixByte {

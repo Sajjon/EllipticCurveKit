@@ -101,7 +101,7 @@ func + (lhs: Data, rhs: Data?) -> Data {
 
 extension Data: ExpressibleByArrayLiteral {
     public init(arrayLiteral bytes: Byte...) {
-        self.init(bytes: bytes)
+        self.init(bytes)
     }
 }
 

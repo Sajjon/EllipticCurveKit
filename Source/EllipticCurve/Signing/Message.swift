@@ -35,24 +35,18 @@ public extension Message {
 // MARK: - Convenience Initializers
 public extension Message {
 
-    public init(unhashed: Data, hasher: Hasher) {
+    init(unhashed: Data, hasher: Hasher) {
         self.init(hashedData: hasher.hash(unhashed), hashedBy: hasher)
     }
 
-    public init?(unhashed: String, encoding: String.Encoding = .default, hasher: Hasher) {
+    init?(unhashed: String, encoding: String.Encoding = .default, hasher: Hasher) {
         guard let unhashedData = unhashed.data(using: encoding) else { return nil }
         self.init(unhashed: unhashedData, hasher: hasher)
     }
 
-    public init?(hashedHex: HexString, hashedBy hasher: Hasher) {
+    init?(hashedHex: HexString, hashedBy hasher: Hasher) {
         self.init(hashedData: Data(hex: hashedHex), hashedBy: hasher)
     }
-
-//    public init(number: Number, hashedBy hasher: Hasher) {
-//        self.init(hex: number.asHexString())
-//    }
-
-//    function: HashFunction = .sha256
 }
 
 public extension Message {
@@ -64,11 +58,6 @@ public extension Message {
     var description: String {
         return hexString
     }
-
-
-//    func asData() -> Data {
-//        return Data(hex: hexString)
-//    }
 }
 
 extension Message: DataConvertible {

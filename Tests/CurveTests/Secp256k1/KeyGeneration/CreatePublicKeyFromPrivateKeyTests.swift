@@ -20,6 +20,19 @@ class CreatePublicKeyFromPrivateKeyTests: XCTestCase {
 
     private lazy var publicKey = PublicKey<Secp256k1>(privateKey: privateKey)
 
+    func testMultiplyWithOrder() {
+        let G = Secp256k1.G
+        let nPlusOne = Secp256k1.order + 1
+        XCTAssertEqual(nPlusOne.asHexString(), "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364142")
+        
+        let pointNPlusOne: AffinePoint<Secp256k1> = G * nPlusOne
+        let pointOne: AffinePoint<Secp256k1> = G * 1
+        XCTAssertEqual(pointNPlusOne.x.asHexString(), "79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798")
+        XCTAssertEqual(pointNPlusOne.y.asHexString(), "483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8")
+        XCTAssertEqual(pointNPlusOne.x, pointOne.x)
+        XCTAssertEqual(pointNPlusOne.y, pointOne.y)
+    }
+    
     func testCreatingPublicKeyAndAddressesFromPrivateKey() {
         XCTAssertEqual(publicKey.x.asHexString(), "F979F942AE743F27902B62CA4E8A8FE0F8A979EE3AD7BD0817339A665C3E7F4F")
         XCTAssertEqual(publicKey.y.asHexString(), "B8CF959134B5C66BCC333A968B26D0ADACCFAD26F1EA8607D647E5B679C49184")

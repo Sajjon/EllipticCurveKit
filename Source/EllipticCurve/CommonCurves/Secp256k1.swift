@@ -9,7 +9,7 @@
 import Foundation
 
 /// The curve E: `y² = x³ + ax + b` over Fp
-/// `secp256r1` Also known as the `Bitcoin curve` (though used by Ethereum, Zilliqa, Radix)
+/// `secp256k1` Also known as the `Bitcoin curve` (though used by Ethereum, Zilliqa, Radix)
 public struct Secp256k1: EllipticCurve {
 
     /// `2^256 −2^32 −2^9 −2^8 −2^7 −2^6 −2^4 − 1` <=> `2^256 - 2^32 - 977`

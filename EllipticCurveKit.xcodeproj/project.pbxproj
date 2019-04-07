@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		482AD02D217269CB009A506E /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02A217269CB009A506E /* SipHash.framework */; };
 		482AD02E217269CB009A506E /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02B217269CB009A506E /* CryptoSwift.framework */; };
-		482AD032217269E7009A506E /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02F217269E7009A506E /* SipHash.framework */; };
 		482AD033217269E7009A506E /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD030217269E7009A506E /* BigInt.framework */; };
 		482AD034217269E7009A506E /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD031217269E7009A506E /* CryptoSwift.framework */; };
 		482AD04C217343D0009A506E /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD029217269CB009A506E /* BigInt.framework */; };
@@ -34,10 +32,8 @@
 		48746E1D217370AC003B665C /* hmac_drbg_nist_no_prediction_resistance_reseed.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */; };
 		48746E222173715D003B665C /* BigInt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD029217269CB009A506E /* BigInt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48746E232173715D003B665C /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02B217269CB009A506E /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		48746E242173715D003B665C /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02A217269CB009A506E /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48746E26217371BB003B665C /* BigInt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD030217269E7009A506E /* BigInt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48746E27217371BB003B665C /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD031217269E7009A506E /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		48746E28217371BB003B665C /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02F217269E7009A506E /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */; };
 		4882026721725FAB008C6120 /* EllipticCurveKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4882026B21726005008C6120 /* Zilliqa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882026A21726005008C6120 /* Zilliqa.swift */; };
@@ -171,7 +167,6 @@
 			files = (
 				48746E222173715D003B665C /* BigInt.framework in Embed Frameworks */,
 				48746E232173715D003B665C /* CryptoSwift.framework in Embed Frameworks */,
-				48746E242173715D003B665C /* SipHash.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,7 +179,6 @@
 			files = (
 				48746E26217371BB003B665C /* BigInt.framework in Embed Frameworks */,
 				48746E27217371BB003B665C /* CryptoSwift.framework in Embed Frameworks */,
-				48746E28217371BB003B665C /* SipHash.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +279,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				482AD032217269E7009A506E /* SipHash.framework in Frameworks */,
 				482AD033217269E7009A506E /* BigInt.framework in Frameworks */,
 				482AD034217269E7009A506E /* CryptoSwift.framework in Frameworks */,
 			);
@@ -296,7 +289,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				482AD04C217343D0009A506E /* BigInt.framework in Frameworks */,
-				482AD02D217269CB009A506E /* SipHash.framework in Frameworks */,
 				482AD02E217269CB009A506E /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

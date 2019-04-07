@@ -1,2 +1,2 @@
-github "attaswift/BigInt"
-github "krzyzanowskim/CryptoSwift"
+github "attaswift/BigInt" "4.0.0"
+github "krzyzanowskim/CryptoSwift" "1.0.0"

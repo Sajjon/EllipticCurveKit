@@ -44,7 +44,7 @@ class SignignAndVerificationTests: XCTestCase {
         if let k = k {
             calculatedSig = try! Schnorr<Secp256k1>.trySign(message, privateKey: keyPair.privateKey, k: Number(hexString: k)!, publicKey: keyPair.publicKey)
         } else {
-            calculatedSig = try! Schnorr<Secp256k1>.sign(message, using: keyPair, personalizationDRBG: drbgPers)
+            calculatedSig = Schnorr<Secp256k1>.sign(message, using: keyPair, personalizationDRBG: drbgPers)
         }
 
         XCTAssertEqual(calculatedSig, expectedSignature)

@@ -34,10 +34,10 @@ public extension DistributedSystem {
 }
 
 public extension DistributedSystem {
-    func wifUncompressed(from privateKey: PrivateKey<Curve>) -> Base58Encoded {
+    func wifUncompressed(from privateKey: PrivateKey<Curve>) -> Base58String {
         return wifFormatter.uncompressed(from: privateKey, for: network)
     }
-    func wifCompressed(from privateKey: PrivateKey<Curve>) -> Base58Encoded {
+    func wifCompressed(from privateKey: PrivateKey<Curve>) -> Base58String {
         return wifFormatter.compressed(from: privateKey, for: network)
     }
 }

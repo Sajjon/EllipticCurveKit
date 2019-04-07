@@ -9,10 +9,9 @@
 import Foundation
 
 /// WIF == Wallet Import Format
-public typealias Base58Encoded = String
 public struct PrivateKeyWIF<System: DistributedSystem> {
-    let compressed: Base58Encoded
-    let uncompressed: Base58Encoded
+    let compressed: Base58String
+    let uncompressed: Base58String
 
 
     public init(privateKey: PrivateKeyType, system: System) {

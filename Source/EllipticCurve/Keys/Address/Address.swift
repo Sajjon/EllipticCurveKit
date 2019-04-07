@@ -19,7 +19,7 @@ public protocol Address {
 
 public extension Address {
     var address: String {
-        return base58.compressed
+        return base58.compressed.value
     }
 }
 
@@ -30,14 +30,14 @@ public extension Address where System == Zilliqa {
 }
 
 
-private func base58Encode(_ hash: Data) -> String {
+private func base58Encode(_ hash: Data) -> Base58String {
     let checksum = Crypto.sha2Sha256_twice(hash).prefix(4)
-    let address = Base58.encode(hash + checksum)
+    let address = Base58String(data: hash + checksum)
     return address
 }
 
 public extension Address {
-    func base58Encoded(compressed: Bool) -> String {
+    func base58Encoded(compressed: Bool) -> Base58String {
         let data = compressed ? compressedHash : uncompressedHash
         return base58Encode(data)
     }
@@ -48,7 +48,7 @@ public extension Address {
         return (uncompressed: uncompressedHash, compressed: compressedHash)
     }
 
-    var base58: (uncompressed: Base58Encoded, compressed: Base58Encoded) {
+    var base58: (uncompressed: Base58String, compressed: Base58String) {
         return (uncompressed: base58Encoded(compressed: false), compressed: base58Encoded(compressed: true))
     }
 }

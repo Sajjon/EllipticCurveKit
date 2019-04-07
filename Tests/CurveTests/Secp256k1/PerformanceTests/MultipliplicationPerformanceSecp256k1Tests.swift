@@ -29,7 +29,7 @@ class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
                 let privateKey = PrivateKey<Secp256k1>(number: Secp256k1.N - Number(D))!
                 let publicAddress = PublicAddress(privateKey: privateKey, system: Bitcoin(.mainnet))
                 if calculated.count < count {
-                    calculated.append(publicAddress.base58.uncompressed)
+                    calculated.append(publicAddress.base58.uncompressed.value)
                 }
             }
 //        }
@@ -50,7 +50,7 @@ class MultipliplicationPerformanceSecp256k1Tests: XCTestCase {
             for D in 1...count {
                 let publicKey = PublicKey<Secp256k1>(point: Secp256k1.G * (Number(D)))
                 let publicAddress = PublicAddress(publicKeyPoint: publicKey, system: Bitcoin(.mainnet))
-                let uncompressedBase58Address = publicAddress.base58.uncompressed
+                let uncompressedBase58Address = publicAddress.base58.uncompressed.value
                 let lastTwoChars = String(uncompressedBase58Address.suffix(2))
                 if calculated.count < count {
                     calculated.append(lastTwoChars)

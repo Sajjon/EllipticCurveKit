@@ -10,9 +10,9 @@ import Foundation
 
 public protocol WIFFormatter {
     associatedtype System: DistributedSystem
-    func uncompressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58Encoded
-    func compressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58Encoded
-    func base58Encode(prefix prefixByte: Byte, data: Data, suffix suffixByte: Byte?) -> Base58Encoded
+    func uncompressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58String
+    func compressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58String
+    func base58Encode(prefix prefixByte: Byte, data: Data, suffix suffixByte: Byte?) -> Base58String
 }
 
 public extension WIFFormatter {
@@ -21,14 +21,14 @@ public extension WIFFormatter {
 }
 
 public extension WIFFormatter {
-    func uncompressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58Encoded {
+    func uncompressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58String {
         return base58Encode(prefix: network.privateKeyWifPrefix, data: privateKey.number.as256bitLongData(), suffix: nil)
     }
-    func compressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58Encoded {
+    func compressed(from privateKey: PrivateKeyType, for network: System.Network) -> Base58String {
         return base58Encode(prefix: network.privateKeyWifPrefix, data: privateKey.number.as256bitLongData(), suffix: network.privateKeyWifSuffix)
     }
 
-    func base58Encode(prefix prefixByte: Byte, data: Data, suffix suffixByte: Byte?) -> Base58Encoded {
+    func base58Encode(prefix prefixByte: Byte, data: Data, suffix suffixByte: Byte?) -> Base58String {
         let prefix = Data([prefixByte])
         var suffix: Data?
         if let suffixByte = suffixByte {
@@ -45,7 +45,6 @@ public extension WIFFormatter {
 
         let checkSummedPayload: Data = payload + checkSum
 
-        let base58Encoded = Base58.encode(checkSummedPayload)
-        return base58Encoded
+        return Base58String(data: checkSummedPayload)
     }
 }

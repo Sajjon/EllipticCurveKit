@@ -57,15 +57,15 @@ class CreatePublicKeyFromPrivateKeyTests: XCTestCase {
         let expectedMainnetPrivateKeyWIFCompressed = "KxdDnBkVJrzGUyKc45BeZ3hQ1Mx2JsPcceL3RiQ4GP7kSTX682Jj"
 
         let mainnetWifs = PrivateKeyWIF(privateKey: privateKey, system: Bitcoin(.mainnet))
-        XCTAssertEqual(mainnetWifs.uncompressed, expectedMainnetPrivateKeyWIFUncompressed)
-        XCTAssertEqual(mainnetWifs.compressed, expectedMainnetPrivateKeyWIFCompressed)
+        XCTAssertEqual(mainnetWifs.uncompressed.value, expectedMainnetPrivateKeyWIFUncompressed)
+        XCTAssertEqual(mainnetWifs.compressed.value, expectedMainnetPrivateKeyWIFCompressed)
 
         let expectedTestnetPrivateKeyWIFUncompressed = "91uPFyaqRgMHTbqufQ7HyVpTRbwvgwwSkt5seQyzioPpxsz2QXA"
         let expectedTestnetPrivateKeyWIFCompressed = "cNzDF6kLjvgXeQnsSUzmvNCTdbFRyKVJggUWY8rZmVmkhCdFnSS9"
 
         let testnetWifs = PrivateKeyWIF(privateKey: privateKey, system: Bitcoin(.testnet))
-        XCTAssertEqual(testnetWifs.uncompressed, expectedTestnetPrivateKeyWIFUncompressed)
-        XCTAssertEqual(testnetWifs.compressed, expectedTestnetPrivateKeyWIFCompressed)
+        XCTAssertEqual(testnetWifs.uncompressed.value, expectedTestnetPrivateKeyWIFUncompressed)
+        XCTAssertEqual(testnetWifs.compressed.value, expectedTestnetPrivateKeyWIFCompressed)
 
     }
 }

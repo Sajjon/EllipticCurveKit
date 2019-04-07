@@ -139,6 +139,8 @@
 		48FFD75D21503952000F6D78 /* TestVectorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD75B2150394E000F6D78 /* TestVectorStrings.swift */; };
 		48FFD75E2150395A000F6D78 /* TestVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD7592150393E000F6D78 /* TestVector.swift */; };
 		48FFD76221503A50000F6D78 /* TestJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD75F21503980000F6D78 /* TestJSON.swift */; };
+		E66433B8225A622A00629B3F /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66433B7225A622A00629B3F /* Macros.swift */; };
+		E66433B9225A622A00629B3F /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66433B7225A622A00629B3F /* Macros.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,6 +266,7 @@
 		48FFD7592150393E000F6D78 /* TestVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVector.swift; sourceTree = "<group>"; };
 		48FFD75B2150394E000F6D78 /* TestVectorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVectorStrings.swift; sourceTree = "<group>"; };
 		48FFD75F21503980000F6D78 /* TestJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestJSON.swift; sourceTree = "<group>"; };
+		E66433B7225A622A00629B3F /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +331,7 @@
 				48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */,
 				48F22CA920C70DC1004A18CA /* EllipticCurveKit-Info.plist */,
 				483C099720F5EF0400C5E2DA /* module.modulemap */,
+				E66433B7225A622A00629B3F /* Macros.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -935,6 +939,7 @@
 				488202A421726046008C6120 /* NetworkInformation.swift in Sources */,
 				4882029F21726046008C6120 /* Data_Extension.swift in Sources */,
 				488202AB21726046008C6120 /* AnyKeySigner.swift in Sources */,
+				E66433B9225A622A00629B3F /* Macros.swift in Sources */,
 				488202C421726046008C6120 /* Crypto.swift in Sources */,
 				4882029D21726046008C6120 /* KeychainStatus.swift in Sources */,
 				488202AA21726046008C6120 /* Curve25519.swift in Sources */,
@@ -987,6 +992,7 @@
 				48A19CE22107C4A5005FF9F1 /* Neo.swift in Sources */,
 				4898EDFF20FA243E00B6F773 /* Secp256r1.swift in Sources */,
 				48D1101C20F3D812005A212A /* PrivateKeyWIF.swift in Sources */,
+				E66433B8225A622A00629B3F /* Macros.swift in Sources */,
 				48B94BEA20F3F4BC0041389D /* Data_Extension.swift in Sources */,
 				48B94BEC20F3F4D50041389D /* AffinePoint.swift in Sources */,
 				48B94BE520F3F2A50041389D /* Signature.swift in Sources */,

@@ -8,108 +8,153 @@
 //  Copyright © 2018 Kishikawa Katsumi. All rights reserved.
 //
 
-import Foundation
+import BigInt
 
-// The Base58 encoding used is home made, and has some differences. Especially,
-// leading zeroes are kept as single zeroes when conversion happens.
-public struct Base58 {
-    private static let base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-
-    private init() {}
-
-    public static func encode(_ bytes: Data) -> String {
-        var bytes = bytes
-        var zerosCount = 0
-        var length = 0
-
-        for b in bytes {
-            if b != 0 { break }
-            zerosCount += 1
+/// String representation of a Base58 string which is impossible to instantiatie with invalid values.
+public struct Base58String: DataConvertible, CharacterSetSpecifying, Equatable, ExpressibleByStringLiteral {
+    
+    public static var allowedCharacters = CharacterSet.base58
+    
+    public let value: String
+    public init(validated unvalidated: String) {
+        do {
+            self.value = try Base58String.validateCharacters(in: unvalidated)
+        } catch {
+            fatalError("Passed unvalid string, error: \(error)")
         }
-
-        bytes.removeFirst(zerosCount)
-
-        let size = bytes.count * 138 / 100 + 1
-
-        var base58: [UInt8] = Array(repeating: 0, count: size)
-        for b in bytes {
-            var carry = Int(b)
-            var i = 0
-
-            for j in 0...base58.count-1 where carry != 0 || i < length {
-                carry += 256 * Int(base58[base58.count - j - 1])
-                base58[base58.count - j - 1] = UInt8(carry % 58)
-                carry /= 58
-                i += 1
-            }
-
-            assert(carry == 0)
-
-            length = i
-        }
-
-        // skip leading zeros
-        var zerosToRemove = 0
-        var str = ""
-        for b in base58 {
-            if b != 0 { break }
-            zerosToRemove += 1
-        }
-        base58.removeFirst(zerosToRemove)
-
-        while 0 < zerosCount {
-            str = "\(str)1"
-            zerosCount -= 1
-        }
-
-        for b in base58 {
-            str = "\(str)\(base58Alphabet[String.Index(encodedOffset: Int(b))])"
-        }
-
-        return str
     }
+}
 
-    public static func decode(_ base58: String) -> Data {
-        // remove leading and trailing whitespaces
-        let string = base58.trimmingCharacters(in: .whitespaces)
+// MARK: - From Unvalidated String
+public extension Base58String {
+    init(string unvalidated: String) throws {
+        let validated = try Base58String.validateCharacters(in: unvalidated)
+        self.init(validated: validated)
+    }
+}
 
-        guard !string.isEmpty else { return Data() }
-
-        var zerosCount = 0
-        var length = 0
-        for c in string {
-            if c != "1" { break }
-            zerosCount += 1
+// MARK: - ExpressibleByStringLiteral
+public extension Base58String {
+    init(stringLiteral value: String) {
+        do {
+            try self.init(string: value)
+        } catch {
+            fatalError("Passed bad string value, error: \(error)")
         }
+    }
+}
 
-        let size = string.lengthOfBytes(using: .utf8) * 733 / 1000 + 1 - zerosCount
-        var base58: [UInt8] = Array(repeating: 0, count: size)
-        for c in string where c != " " {
-            // search for base58 character
-            guard let base58Index = base58Alphabet.firstIndex(of: c) else { return Data() }
 
-            var carry = base58Index.encodedOffset
-            var i = 0
-            for j in 0...base58.count where carry != 0 || i < length {
-                carry += 58 * Int(base58[base58.count - j - 1])
-                base58[base58.count - j - 1] = UInt8(carry % 256)
-                carry /= 256
-                i += 1
+// MARK: - DataInitializable
+public extension Base58String {
+    
+    init(data: Data) {
+        let bytes = data.bytes
+        var x = data.unsignedBigInteger
+        let alphabet = String.base58Alphabet.toData()
+        let radix = BigUInt(alphabet.count)
+        
+        var answer = [UInt8]()
+        answer.reserveCapacity(bytes.count)
+        
+        while x > 0 {
+            let (quotient, modulus) = x.quotientAndRemainder(dividingBy: radix)
+            answer.append(alphabet[Int(modulus)])
+            x = quotient
+        }
+        
+        let prefix = Array(bytes.prefix(while: {$0 == 0})).map { _ in alphabet[0] }
+        answer.append(contentsOf: prefix)
+        answer.reverse()
+        
+        self.init(validated: String(data: answer.asData))
+    }
+}
+
+// MARK: DataConvertible
+public extension Base58String {
+    var asData: Data {
+        
+        let alphabet = String.base58Alphabet.toData()
+        let radix = BigUInt(alphabet.count)
+        let byteString = [UInt8](value.utf8)
+        
+        var answer = BigUInt(0)
+        var temp = BigUInt(1)
+        for character in byteString.reversed() {
+            guard let index = alphabet.firstIndex(of: character) else {
+                incorrectImplementation("Should contain character")
             }
-
-            assert(carry == 0)
-            length = i
+            answer += temp * BigUInt(index)
+            temp *= radix
         }
+        return byteString.prefix(while: { $0 == alphabet[0] }) + answer.serialize()
+    }
+}
 
-        // skip leading zeros
-        var zerosToRemove = 0
-
-        for b in base58 {
-            if b != 0 { break }
-            zerosToRemove += 1
+public extension String {
+    static var base58Alphabet: String {
+        return "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+    }
+    func toData(encodingForced: String.Encoding = .default) -> Data {
+        guard let encodedData = self.data(using: encodingForced) else {
+            incorrectImplementation("Should always be able to encode string to data")
         }
-        base58.removeFirst(zerosToRemove)
+        return encodedData
+    }
+    init(data: Data, encodingForced: String.Encoding = .default) {
+        guard let string = String(data: data, encoding: encodingForced) else {
+            incorrectImplementation("Should always be able to get string from data")
+        }
+        self = string
+    }
+}
 
-        return Data(repeating: 0, count: zerosCount) + Data(base58)
+public extension CharacterSet {
+    static var base58: CharacterSet {
+        return CharacterSet(charactersIn: .base58Alphabet)
+    }
+}
+
+public protocol CharacterSetSpecifying {
+    static var allowedCharacters: CharacterSet { get }
+}
+
+public extension CharacterSetSpecifying {
+    var allowedCharacters: CharacterSet {
+        return Self.allowedCharacters
+    }
+    
+    static func isSupersetOfCharacters(in string: String) -> Bool {
+        return allowedCharacters.isSuperset(of: CharacterSet(charactersIn: string))
+    }
+    
+    static func disallowedCharacters(in string: String) -> String? {
+        for char in string {
+            for unicodeScalar in char.unicodeScalars {
+                guard allowedCharacters.contains(unicodeScalar) else {
+                    return String(unicodeScalar)
+                }
+            }
+        }
+        return nil
+    }
+    
+    static func validateCharacters(in string: String) throws -> String {
+        if let disallowed = disallowedCharacters(in: string) {
+            throw CharacterSetError.invalidCharacters(expectedCharacters: allowedCharacters, butGot: disallowed)
+        }
+        return string
+    }
+}
+
+public enum CharacterSetError: Swift.Error {
+    case invalidCharacters(expectedCharacters: CharacterSet, butGot: String)
+}
+
+// MARK: - Integer
+public extension DataConvertible {
+    var unsignedBigInteger: BigUInt {
+        return BigUInt(asData)
     }
 }

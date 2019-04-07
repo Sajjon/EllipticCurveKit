@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name         = 'EllipticCurveKit'
-    s.version      = '0.0.2'
-    s.swift_version = '4.2'
+    s.version      = '1.0.0'
+    s.swift_version = '5.0'
     s.ios.deployment_target = "11.3"
     s.osx.deployment_target = "10.12"
     s.license      = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
     s.source_files = 'Source/**/*.swift'
     s.social_media_url = 'https://twitter.com/alexcyon'
     s.dependency 'BigInt', '~> 3.1'
-    s.dependency 'CryptoSwift', '~> 0.12'
+    s.dependency 'CryptoSwift', '~> 1.0.0'
 end

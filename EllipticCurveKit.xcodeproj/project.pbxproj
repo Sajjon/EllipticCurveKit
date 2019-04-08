@@ -139,6 +139,8 @@
 		48FFD75D21503952000F6D78 /* TestVectorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD75B2150394E000F6D78 /* TestVectorStrings.swift */; };
 		48FFD75E2150395A000F6D78 /* TestVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD7592150393E000F6D78 /* TestVector.swift */; };
 		48FFD76221503A50000F6D78 /* TestJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD75F21503980000F6D78 /* TestJSON.swift */; };
+		E606472E225BB8A10020D8C1 /* Base58Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E606472D225BB8A10020D8C1 /* Base58Tests.swift */; };
+		E606472F225BB8A10020D8C1 /* Base58Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E606472D225BB8A10020D8C1 /* Base58Tests.swift */; };
 		E66433B8225A622A00629B3F /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66433B7225A622A00629B3F /* Macros.swift */; };
 		E66433B9225A622A00629B3F /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66433B7225A622A00629B3F /* Macros.swift */; };
 /* End PBXBuildFile section */
@@ -266,6 +268,7 @@
 		48FFD7592150393E000F6D78 /* TestVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVector.swift; sourceTree = "<group>"; };
 		48FFD75B2150394E000F6D78 /* TestVectorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVectorStrings.swift; sourceTree = "<group>"; };
 		48FFD75F21503980000F6D78 /* TestJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestJSON.swift; sourceTree = "<group>"; };
+		E606472D225BB8A10020D8C1 /* Base58Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base58Tests.swift; sourceTree = "<group>"; };
 		E66433B7225A622A00629B3F /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -403,6 +406,7 @@
 				489119AA20F268C700F86528 /* SHA2Tests.swift */,
 				48924EA6214D32D800B72AF2 /* HMAC_DRBG_Tests.swift */,
 				48FFD75821503932000F6D78 /* HMAC_DRBG_Tests */,
+				E606472D225BB8A10020D8C1 /* Base58Tests.swift */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -925,6 +929,7 @@
 				48746E1521736DE3003B665C /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */,
 				48746E1621736DE3003B665C /* Secp256r1_PointArthmeticTests.swift in Sources */,
 				48746E1221736DE3003B665C /* TestVectorStrings.swift in Sources */,
+				E606472F225BB8A10020D8C1 /* Base58Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1050,6 +1055,7 @@
 				489119AE20F26C4100F86528 /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				48A5542521011D0600A4B7FB /* ECDSATests.swift in Sources */,
 				487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */,
+				E606472E225BB8A10020D8C1 /* Base58Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

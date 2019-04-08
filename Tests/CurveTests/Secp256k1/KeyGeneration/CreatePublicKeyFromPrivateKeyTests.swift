@@ -42,16 +42,19 @@ class CreatePublicKeyFromPrivateKeyTests: XCTestCase {
 
         let testnetAddress = PublicAddress(publicKeyPoint: publicKey, system: Bitcoin(.testnet))
 
-        XCTAssertEqual(testnetAddress.base58.uncompressed, "mjdhN2LKkATnmK2bbNQTtcvyxtCyUcPDLY")
-        XCTAssertEqual(testnetAddress.base58.compressed, "mtDqt5jYQ5P5vsT6X78B8JmrArV6fM7YjU")
+        // https://www.bitaddress.org/bitaddress.org-v3.3.0-SHA256-dec17c07685e1870960903d8f58090475b25af946fe95a734f88408cef4aa194.html?testnet=true
+        XCTAssertEqual(testnetAddress.base58.uncompressed.value, "mjdhN2LKkATnmK2bbNQTtcvyxtCyUcPDLY")
+        XCTAssertEqual(testnetAddress.base58.compressed.value, "mtDqt5jYQ5P5vsT6X78B8JmrArV6fM7YjU")
 
         let zilliqaTestnetAddress = PublicAddress(publicKeyPoint: publicKey, system: Zilliqa(.testnet))
         XCTAssertEqual(zilliqaTestnetAddress.address, "59BB614648F828A3D6AFD7E488E358CDE177DAA0")
 
         let mainnetAddress = PublicAddress(publicKeyPoint: publicKey, system: Bitcoin(.mainnet))
 
-        XCTAssertEqual(mainnetAddress.base58.uncompressed, "157k4yFLw92XzCYysoS64hif6tcGdDULm6")
-        XCTAssertEqual(mainnetAddress.base58.compressed, "1Dhtb2eZb3wq9kyUoY9oJPZXJrtPjUgDBU")
+        
+        // https://www.bitaddress.org/bitaddress.org-v3.3.0-SHA256-dec17c07685e1870960903d8f58090475b25af946fe95a734f88408cef4aa194.html?testnet=false
+        XCTAssertEqual(mainnetAddress.base58.uncompressed.value, "157k4yFLw92XzCYysoS64hif6tcGdDULm6")
+        XCTAssertEqual(mainnetAddress.base58.compressed.value, "1Dhtb2eZb3wq9kyUoY9oJPZXJrtPjUgDBU")
 
         let expectedMainnetPrivateKeyWIFUncompressed = "5J8kgEmHqTH9VYLd34DP6uGVmwbDXnQFQwDvZndVP4enBqz2GuM"
         let expectedMainnetPrivateKeyWIFCompressed = "KxdDnBkVJrzGUyKc45BeZ3hQ1Mx2JsPcceL3RiQ4GP7kSTX682Jj"

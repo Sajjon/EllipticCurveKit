@@ -30,10 +30,6 @@
 		48746E1B217370A7003B665C /* no_additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EBA214E5C3100B72AF2 /* no_additional_data.json */; };
 		48746E1C217370AA003B665C /* additional_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB9214E5C3100B72AF2 /* additional_data.json */; };
 		48746E1D217370AC003B665C /* hmac_drbg_nist_no_prediction_resistance_reseed.json in Resources */ = {isa = PBXBuildFile; fileRef = 48924EB3214E5C3100B72AF2 /* hmac_drbg_nist_no_prediction_resistance_reseed.json */; };
-		48746E222173715D003B665C /* BigInt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD029217269CB009A506E /* BigInt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		48746E232173715D003B665C /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02B217269CB009A506E /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		48746E26217371BB003B665C /* BigInt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD030217269E7009A506E /* BigInt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		48746E27217371BB003B665C /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD031217269E7009A506E /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		487E2E5B20F7E0F800D6CE8E /* SigningAndVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F242F320F7D42C00FB36DF /* SigningAndVerificationTests.swift */; };
 		4882026721725FAB008C6120 /* EllipticCurveKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48F22CA820C70DC1004A18CA /* EllipticCurveKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4882026B21726005008C6120 /* Zilliqa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4882026A21726005008C6120 /* Zilliqa.swift */; };
@@ -139,8 +135,12 @@
 		48FFD75D21503952000F6D78 /* TestVectorStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD75B2150394E000F6D78 /* TestVectorStrings.swift */; };
 		48FFD75E2150395A000F6D78 /* TestVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD7592150393E000F6D78 /* TestVector.swift */; };
 		48FFD76221503A50000F6D78 /* TestJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FFD75F21503980000F6D78 /* TestJSON.swift */; };
+		E60253FC225BCA92004B2F94 /* RIPEMD160Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60253FB225BCA92004B2F94 /* RIPEMD160Tests.swift */; };
+		E60253FD225BCA92004B2F94 /* RIPEMD160Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60253FB225BCA92004B2F94 /* RIPEMD160Tests.swift */; };
 		E606472E225BB8A10020D8C1 /* Base58Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E606472D225BB8A10020D8C1 /* Base58Tests.swift */; };
 		E606472F225BB8A10020D8C1 /* Base58Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E606472D225BB8A10020D8C1 /* Base58Tests.swift */; };
+		E6064731225BCA4D0020D8C1 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD029217269CB009A506E /* BigInt.framework */; };
+		E6064732225BCA500020D8C1 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482AD02B217269CB009A506E /* CryptoSwift.framework */; };
 		E66433B8225A622A00629B3F /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66433B7225A622A00629B3F /* Macros.swift */; };
 		E66433B9225A622A00629B3F /* Macros.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66433B7225A622A00629B3F /* Macros.swift */; };
 /* End PBXBuildFile section */
@@ -161,33 +161,6 @@
 			remoteInfo = EllipticCurveKit;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		48746E1E2173713A003B665C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				48746E222173715D003B665C /* BigInt.framework in Embed Frameworks */,
-				48746E232173715D003B665C /* CryptoSwift.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		48746E25217371A8003B665C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				48746E26217371BB003B665C /* BigInt.framework in Embed Frameworks */,
-				48746E27217371BB003B665C /* CryptoSwift.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		482AD029217269CB009A506E /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = Carthage/Build/iOS/BigInt.framework; sourceTree = "<group>"; };
@@ -268,6 +241,7 @@
 		48FFD7592150393E000F6D78 /* TestVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVector.swift; sourceTree = "<group>"; };
 		48FFD75B2150394E000F6D78 /* TestVectorStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVectorStrings.swift; sourceTree = "<group>"; };
 		48FFD75F21503980000F6D78 /* TestJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestJSON.swift; sourceTree = "<group>"; };
+		E60253FB225BCA92004B2F94 /* RIPEMD160Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RIPEMD160Tests.swift; sourceTree = "<group>"; };
 		E606472D225BB8A10020D8C1 /* Base58Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base58Tests.swift; sourceTree = "<group>"; };
 		E66433B7225A622A00629B3F /* Macros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macros.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,6 +278,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				48F22C9720C70D88004A18CA /* EllipticCurveKit.framework in Frameworks */,
+				E6064731225BCA4D0020D8C1 /* BigInt.framework in Frameworks */,
+				E6064732225BCA500020D8C1 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +383,7 @@
 				48924EA6214D32D800B72AF2 /* HMAC_DRBG_Tests.swift */,
 				48FFD75821503932000F6D78 /* HMAC_DRBG_Tests */,
 				E606472D225BB8A10020D8C1 /* Base58Tests.swift */,
+				E60253FB225BCA92004B2F94 /* RIPEMD160Tests.swift */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -761,7 +738,6 @@
 				482AD09A21736589009A506E /* Sources */,
 				482AD09B21736589009A506E /* Frameworks */,
 				482AD09C21736589009A506E /* Resources */,
-				48746E25217371A8003B665C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -816,7 +792,6 @@
 				48F22C9220C70D87004A18CA /* Sources */,
 				48F22C9320C70D87004A18CA /* Frameworks */,
 				48F22C9420C70D87004A18CA /* Resources */,
-				48746E1E2173713A003B665C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -921,6 +896,7 @@
 				48746E1421736DE3003B665C /* ECDSATests.swift in Sources */,
 				48746E0F21736DE3003B665C /* SHA2Tests.swift in Sources */,
 				48746E1321736DE3003B665C /* TestJSON.swift in Sources */,
+				E60253FD225BCA92004B2F94 /* RIPEMD160Tests.swift in Sources */,
 				48746E1821736DE3003B665C /* CreatePublicKeyFromPrivateKeyTests.swift in Sources */,
 				48746E1921736DE3003B665C /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
 				48746E1021736DE3003B665C /* HMAC_DRBG_Tests.swift in Sources */,
@@ -1047,6 +1023,7 @@
 				4898EE0420FA272900B6F773 /* Secp256r1_PointArthmeticTests.swift in Sources */,
 				48FFD76221503A50000F6D78 /* TestJSON.swift in Sources */,
 				48FFD75E2150395A000F6D78 /* TestVector.swift in Sources */,
+				E60253FC225BCA92004B2F94 /* RIPEMD160Tests.swift in Sources */,
 				48AC5CF820FF3F1F00AE4B77 /* MultipliplicationPerformanceSecp256r1Tests.swift in Sources */,
 				48F242F020F7D31200FB36DF /* PrivateKeyBase64EncodingDecodingTests.swift in Sources */,
 				48AC5D2620FF944E00AE4B77 /* MultipliplicationPerformanceSecp256k1Tests.swift in Sources */,

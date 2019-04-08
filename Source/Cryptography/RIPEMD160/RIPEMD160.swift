@@ -1,34 +1,14 @@
 import Foundation
 
-// Circular left shift: http: //en.wikipedia.org/wiki/Circular_shift
-// Precendence should be the same as <<
-//infix operator  ~<< { precedence 160 associativity none }
-infix operator ~<< //: TernaryPrecedence (picked at random by alex)
-
-internal func ~<< (lhs: UInt32, rhs: Int) -> UInt32 {
-    return (lhs << UInt32(rhs)) | (lhs >> UInt32(32 - rhs));
-}
-
-
-public extension BinaryInteger {
-    var asData: Data {
-        var int = self
-        return Data(bytes: &int, count: MemoryLayout<Self>.size)
-    }
-}
-
-extension Int8: DataConvertible {}
-
-extension UInt16: DataConvertible {}
-extension Int16: DataConvertible {}
-
-extension UInt32: DataConvertible {}
-extension Int32: DataConvertible {}
-
-extension UInt64: DataConvertible {}
-extension Int64: DataConvertible {}
-
-
+/// RIPEMD160 implementation in Swift 5.
+///
+/// Based on the work of Sjors Provoost, found on [Github CryptoCoinSwift][1]
+///
+/// Migrated to Swift 5 by [Alex Cyon a.k.a. Sajjon][2]
+///
+/// [1]: https://github.com/CryptoCoinSwift/RIPEMD-Swift
+/// [2]: https://github.com/Sajjon
+///
 public struct RIPEMD160 {}
 public extension RIPEMD160 {
     static func hash(message data: Data) -> Data {
@@ -75,7 +55,6 @@ internal extension RIPEMD160 {
         paddedData += zeroBytes
         
         // Append length of message:
-//        paddedData += data.count.asData
         let length: UInt32 = UInt32(data.count) * 8
         let lengthBytes: [UInt32] = [length, UInt32(0x00_00_00_00)]
         paddedData += RIPEMD160.encodeWords(lengthBytes)
@@ -100,18 +79,12 @@ internal extension RIPEMD160 {
                     let uint32: UInt32 = asData.withUnsafeBytes {
                         $0.load(as: UInt32.self)
                     }
-                    //                    words.append(CFSwapInt32HostToLittle(uint32))
                     words.append(uint32)
                     word = [UInt8]()
                 }
             }
             word.append(byte)
         }
-//        words = Array(words.reversed())
-//        guard words.count > length else {
-//            return words
-//        }
-//        offsetted = Array(offsetted.reversed())
         return words
     }
     
@@ -320,4 +293,13 @@ internal extension RIPEMD160.Block {
             }
         }
     }
+}
+
+// Circular left shift: http: //en.wikipedia.org/wiki/Circular_shift
+// Precendence should be the same as <<
+//infix operator  ~<< { precedence 160 associativity none }
+infix operator ~<< //: TernaryPrecedence (picked at random by alex)
+
+internal func ~<< (lhs: UInt32, rhs: Int) -> UInt32 {
+    return (lhs << UInt32(rhs)) | (lhs >> UInt32(32 - rhs));
 }

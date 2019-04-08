@@ -139,3 +139,21 @@ extension Byte: DataConvertible {
         self = data.bytes.first ?? 0x00
     }
 }
+
+public extension BinaryInteger {
+    var asData: Data {
+        var int = self
+        return Data(bytes: &int, count: MemoryLayout<Self>.size)
+    }
+}
+
+extension Int8: DataConvertible {}
+
+extension UInt16: DataConvertible {}
+extension Int16: DataConvertible {}
+
+extension UInt32: DataConvertible {}
+extension Int32: DataConvertible {}
+
+extension UInt64: DataConvertible {}
+extension Int64: DataConvertible {}

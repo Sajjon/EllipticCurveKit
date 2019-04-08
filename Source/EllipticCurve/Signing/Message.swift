@@ -15,7 +15,6 @@ public extension String.Encoding {
 }
 
 public struct Message: CustomStringConvertible {
-//    private let hexString: HexString
     private let hashedData: Data
     public let hashedBy: Hasher
 

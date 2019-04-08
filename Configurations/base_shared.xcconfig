@@ -72,8 +72,8 @@ VALID_ARCHS[sdk=macosx*] = x86_64
 COMBINE_HIDPI_IMAGES[sdk=macosx*] = YES
 
 // LD_RUNPATH_SEARCH_PATHS
-LD_RUNPATH_SEARCH_PATHS[sdk=macosx*] = $(inherited) @executable_path/../Frameworks @loader_path/../Frameworks
-IPHONE_LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+LD_RUNPATH_SEARCH_PATHS[sdk=macosx*] = $(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(PROJECT_DIR)/Carthage/Build/MacOS
+IPHONE_LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS
 LD_RUNPATH_SEARCH_PATHS[sdk=iphoneos*] = $(IPHONE_LD_RUNPATH_SEARCH_PATHS)
 LD_RUNPATH_SEARCH_PATHS[sdk=iphonesimulator*] = $(IPHONE_LD_RUNPATH_SEARCH_PATHS)
 

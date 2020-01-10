@@ -6,6 +6,7 @@
 - [Goal](#goal)
     - [Swifty?](#swifty)
     - [Usage](#usage)
+        - [Message](#message)
 - [Alternatives](#alternatives)
     - [Bitcoin C Bindings](#bitcoin-c-bindings)
     - [Pure Swift](#pure-swift)

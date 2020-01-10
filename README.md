@@ -90,6 +90,9 @@ The code above takes around 0.5 seconds to execute (using `Release` optimization
 
 The privatekey, signature, and message hex strings above are *"Test Vector 2"* from the [Bitcoin BIP-Schnorr wiki](https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki#test-vectors).
 
+### Message
+As you can see in the code example above, the signer (e.g. `AnyKeySigner<Schnorr<Secp256k1>>`) has a method for signing `func sign(_ message: Message, using...` a `Message`. Which is a container for any data you wanna sign. You should only be signing hashed data. [`Message`](https://github.com/Sajjon/EllipticCurveKit/blob/master/Source/EllipticCurve/Signing/Message.swift) contains four initializers, two for unhashed data (resulting in the data being hashed by the provided `Hasher` (shadowing [Swift's `Hasher`](https://developer.apple.com/documentation/swift/hasher))). Or if you know that you have already hashed the data, you can either pass a hashed hex string representation or the hashed data (to make sure you know what you are doing you are still required to provide info about which `Hasher` has been used to hash the data. Probably `DefaultHasher.sha256`).
+
 # Alternatives
 There are many - production like alternatives to this Swift SDK. The goal of this library is to be rid of dependencies to C (and other programming languages) code. While there is alternative to this Swift SDK that is written in pure swift, it is too slow (read #pure-swift).
 

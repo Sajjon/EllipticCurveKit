@@ -47,8 +47,7 @@ class ECDSATests: XCTestCase {
         let publicKey = PublicKey(privateKey: privateKey)
         let keyPair = KeyPair(private: privateKey, public: publicKey)
         let message = Message(message: messageToHash)
-        let k = privateKey.drbgRFC6979(message: message, hashFunction: SHA256()) //.signatureNonceK(forHashedData: message.asData())
-
+        let k = privateKey.drbgRFC6979(message: message, hashFunction: SHA256())
 
         XCTAssertEqual(expected.k, k.asHexString(uppercased: false), "Must produce matching k nonce.")
 

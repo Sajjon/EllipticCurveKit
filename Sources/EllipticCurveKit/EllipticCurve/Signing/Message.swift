@@ -17,11 +17,15 @@ public extension String.Encoding {
 
 public struct Message: CustomStringConvertible {
     private let hashedData: Data
-//    public let hashedBy: Hasher
+    
+    /// Make sure you know what you are doing, is this in fact hashed data? The data ought to be hashed
+    /// before signed.
+    public init(rawData: Data) {
+        self.hashedData = rawData
+    }
 
     public init<H>(hashedData: Data, hashedBy _: H) where H: HashFunction {
         self.hashedData = hashedData
-//        self.hashedBy = hasher
     }
 }
 

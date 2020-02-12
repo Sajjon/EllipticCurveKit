@@ -9,7 +9,6 @@
 //
 
 import Foundation
-//import CryptoSwift
 import CryptoKit
 
 
@@ -22,12 +21,6 @@ public extension Crypto {
     }
 
     static func hmac<H>(key: DataConvertible, data: DataConvertible, function: H) throws -> Data where H: HashFunction {
-//        let bytes = try CryptoSwift.HMAC(key: key.asData.bytes, variant: function.hmac).authenticate(data.asData.bytes)
-//        return Data(bytes)
-        
-//        fatalError()
-//        switch function {
-//        case .sha256:
             var hmac = HMAC<H>.init(key: SymmetricKey.init(data: key.asData))
             hmac.update(data: data.asData)
             return Data(hmac.finalize())
@@ -70,23 +63,3 @@ extension Array where Element == Byte {
         return Data(sha.finalize())
     }
 }
-
-
-//extension HashFunction {
-//    fileprivate var hmac: CryptoSwift.HMAC.Variant {
-////        switch self {
-////        case .sha256: return CryptoSwift.HMAC.Variant.sha256
-////        }
-//        
-//        fatalError()
-//    }
-//
-//    fileprivate var sha2: CryptoSwift.SHA2.Variant {
-////        switch self {
-////        case .sha256: return CryptoSwift.SHA2.Variant.sha256
-////        }
-//        
-//        fatalError()
-//    }
-//}
-

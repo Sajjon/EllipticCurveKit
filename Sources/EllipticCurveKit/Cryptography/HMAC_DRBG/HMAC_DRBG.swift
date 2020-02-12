@@ -14,26 +14,20 @@ typealias ByteArray = [Byte]
 /// 2^48, which is NIST's recommended value
 private let reseedInterval: Number = 0x1000000000000
 
-
 /// HMAC_DRBG is a Deterministic Random Bit Generator (DRBG) using HMAC as hash function.
-public final class HMAC_DRBG  {
-
-//    private let hmac: HMAC<SHA256>
+public final class HMAC_DRBG {
 
     private var K: DataConvertible
     private var V: DataConvertible
     private let minimumEntropyByteCount: Int
     private var iterationsLeftUntilReseed: Number
 
-   
     public init(
-//        hmac: HMAC<SHA256>,
         entropy: DataConvertible,
         nonce: DataConvertible,
         personalization: DataConvertible? = nil,
         additionalInput: DataConvertible? = nil
     ) {
-//        self.hmac = hmac
         self.iterationsLeftUntilReseed = reseedInterval
         
          // for SHA256 it is 192: https://tools.ietf.org/html/rfc7630#section-4
@@ -119,7 +113,6 @@ private extension HMAC_DRBG {
     }
 
     func HMAC_K(_ data: DataConvertible) -> Data {
-//        return try! hmac.hmac(key: K, data: data)
         var hmac = HMAC<SHA256>.init(key: .init(data: self.K.asData))
         hmac.update(data: data.asData)
         return Data(hmac.finalize())

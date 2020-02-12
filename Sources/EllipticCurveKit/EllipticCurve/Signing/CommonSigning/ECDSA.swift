@@ -8,7 +8,6 @@
 
 import Foundation
 import BigInt
-//import CryptoSwift
 import CryptoKit
 
 public struct ECDSA<CurveType: EllipticCurve>: Signing {
@@ -29,20 +28,6 @@ public extension ECDSA {
             hashFunction: SHA256()
         )
     }
-
-//    static func sign<H>(
-//        _ message: Message,
-//        privateKey: PrivateKey<Curve>,
-//        publicKey: PublicKey<Curve>,
-//        hashFunction: H
-//    ) -> Signature<Curve> where H: HashFunction {
-//        sign(
-//            message,
-//            privateKey: privateKey,
-//            publicKey: publicKey,
-//            hashFunction: hashFunction
-//        )
-//    }
 
     static func sign<H>(
         _ message: Message,

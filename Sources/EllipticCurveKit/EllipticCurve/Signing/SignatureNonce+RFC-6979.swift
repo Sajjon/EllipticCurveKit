@@ -6,7 +6,6 @@
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
 //
 
-//import CryptoSwift
 import Foundation
 import CryptoKit
 
@@ -29,10 +28,6 @@ public extension PrivateKey {
 /// https://tools.ietf.org/html/rfc6979#section-3.2
 public func drbgRFC6979<Curve, H>(privateKey: PrivateKey<Curve>, message: Message, hashFunction: H) -> Number where H: HashFunction {
 
-//    let hmac = DefaultHMAC(function: message.hashedBy.function)
-//    let hmac = HMAC<H>()
-//    let
-
     let byteCount = message.byteCount
 
     let x: DataConvertible = privateKey
@@ -46,7 +41,6 @@ public func drbgRFC6979<Curve, H>(privateKey: PrivateKey<Curve>, message: Messag
     var K: DataConvertible = ByteArray(repeating: 0x00, count: byteCount)
 
     func HMAC_K(_ data: DataConvertible) -> Data {
-//        return try! hmac.hmac(key: K, data: data)
         try! Crypto.hmac(key: K, data: data, function: hashFunction)
     }
 

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-//import CryptoSwift
 import CryptoKit
 import BigInt
 
@@ -16,12 +15,10 @@ import BigInt
 
 extension Message {
     init(message: String) {
-//        self.init(unhashed: message, encoding: .default, hasher: S)!
         self.init(unhashed: message, encoding: .default, hashFunction: SHA256())!
     }
 
     init(hex: String) {
-//        self.init(hashedHex: hex, hashedBy: DefaultHasher.sha256)!
         self.init(hashedHex: hex, hashedBy: SHA256())!
     }
 }
@@ -225,160 +222,4 @@ class ECDSATests: XCTestCase {
             )
         )
     }
-
-
-//        verifyRFC6979("22a47fa09a223f2aa079edf85a7c2d4f8720ee63e502ee2869afab7de234b80c",
-//                      hash256(for: "test message"),
-//                      //                      BTCHash256("test message".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)),
-//            "c5186174691d589ad5fec3d34deac8a1a2b4156fd87a27ea8961dffe5d056ae9",
-//            "304402201008e236fa8cd0f25df4482dddbb622e8a8b26ef0ba731719458de3ccd93805b022032f8ebe514ba5f672466eba334639282616bb3c2f0ab09998037513d1f9e3d6d")
-
 }
-
-
-    /*
-     func testDiffieHellman() {
-     let alice = BTCKey(privateKey: BTCDataFromHex("c4bbcb1fbec99d65bf59d85c8cb62ee2db963f0fe106f483d9afa73bd4e39a8a"))
-     alice.publicKeyCompressed = true
-
-     let bob = BTCKey(privateKey: BTCDataFromHex("2db963f0fe106f483d9afa73bd4e39a8ac4bbcb1fbec99d65bf59d85c8cb62ee"))
-     bob.publicKeyCompressed = true
-
-     let dh1 = alice.diffieHellmanWithPrivateKey(bob)
-     let dh2 = bob.diffieHellmanWithPrivateKey(alice)
-
-     XCTAssertEqual(dh1.publicKey, dh2.publicKey, "")
-     XCTAssertEqual(dh1.publicKey, BTCDataFromHex("03735932754bc16e10febe40ee0280906d29459d477442f1838dcf27de3b5d9699"), "")
-     XCTAssertEqual(dh2.publicKey, BTCDataFromHex("03735932754bc16e10febe40ee0280906d29459d477442f1838dcf27de3b5d9699"), "")
-     }
-
-     func testCanonicality() {
-
-     let data = ["304402207f5561ac3cfb05743cab6ca914f7eb93c489f276f10cdf4549e7f0b0ef4e85cd02200191c0c2fd10f10158973a0344fdaf2438390e083a509d2870bcf2b05445612b01", "3045022100e81a33ac22d0ef25d359a5353977f0f953608b2733141239ec02363237ab6781022045c71237e95b56079e9fa88591060e4c1a4bb02c0cad1ebeb092749d4aa9754701", "304402202692ad36ae12652c3f4bf068bd05477d867f654f2edf2cb15d335b25305d56b802206a4b51939b4b54fa62186e7bb78b4da8fe91475e5805897df11553dd1e08eb3e01"].map(BTCDataFromHex)
-
-     for elem in data {
-     do {
-     try BTCKey.isCanonicalSignatureWithHashType(elem, verifyLowerS: true)
-     }
-     catch {
-     XCTFail("Error: \(error)")
-     }
-     }
-
-     }
-
-     func testRandomKeys() {
-     var arr = Array<NSData>()
-     // just a sanity check, not a serious randomness
-     for _ in 0 ..< 32 {
-     let k = BTCKey()
-     //println("key = \(BTCHexFromData(k.privateKey))")
-
-     // Note: this test may fail, but very rarely.
-     let subkey = k.privateKey.subdataWithRange(NSRange(location: 0, length: 4))
-     XCTAssertFalse(arr.contains(subkey), "Should not repeat")
-     XCTAssertEqual(k.privateKey.length, 32, "Should be 32 bytes")
-
-     arr.append(subkey)
-     }
-     }
-
-     func testECDSA() {
-     for n in 0 ..< 1000 {
-     let message = "Test message \(n)"
-     let messageData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-     let messageHash = messageData!.SHA256()
-
-     let secret = "Key \(n)".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!.SHA256()
-     let key = BTCKey(privateKey: secret)
-     key.publicKeyCompressed = true
-
-     let signature = key.signatureForHash(messageHash)
-
-     let key2 = BTCKey(publicKey: key.publicKey)
-     XCTAssertTrue(key2.isValidSignature(signature, hash: messageHash), "Signature must be valid")
-     }
-     }
-
-     func testBasicSigning() {
-     let message = "Test message"
-     let messageData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
-     let secret = BTCDataFromHex("c4bbcb1fbec99d65bf59d85c8cb62ee2db963f0fe106f483d9afa73bd4e39a8a")
-
-     XCTAssertEqual(secret.length, 32, "secret must be 32 bytes long")
-     let key = BTCKey(privateKey: secret)
-     key.publicKeyCompressed = false
-
-     //        println("key.publicKey = \(key.publicKey)")
-
-     let pubkeyAddress = BTCPublicKeyAddress(data: key.publicKey.BTCHash160())
-     let privkeyAddress = BTCPrivateKeyAddress(data: key.privateKey)
-
-     //        println("pubkeyAddress.string = \(pubkeyAddress!.string)")
-
-     XCTAssertEqual(pubkeyAddress!.string, "1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T", "")
-     XCTAssertEqual(privkeyAddress!.string, "5KJvsngHeMpm884wtkJNzQGaCErckhHJBGFsvd3VyK5qMZXj3hS", "")
-
-     let signature = key.signatureForHash(messageData.SHA256())
-     //        println("Signature: \(signature.hex()) (\(signature.length) bytes)")
-     //        println("Valid \(key.isValidSignature(signature, hash: messageData.SHA256()))")
-
-     XCTAssertTrue(key.isValidSignature(signature, hash: messageData.SHA256()), "Signature must be valid")
-
-     // Re-instantiate the key.
-     let pubkey = key.publicKey.copy() as! NSData
-     let key2 = BTCKey(publicKey: pubkey)
-     XCTAssertTrue(key2.isValidSignature(signature, hash: messageData.SHA256()), "Signature must be valid")
-
-     // Signature should be invalid if any bit is flipped.
-     // This all works, of course, but takes a lot of time to compute.
-     if true {
-     let digest = messageData.SHA256()
-     let sig = signature.mutableCopy() as! NSMutableData
-     let buf = unsafeBitCast(sig.mutableBytes, UnsafeMutablePointer<CUnsignedChar>.self)
-     for i in 0 ..< signature.length {
-     for j in 0 ..< 8 {
-     let mask = CUnsignedChar(1 << j)
-     buf[i] = buf[i] ^ mask
-     XCTAssertFalse(key.isValidSignature(sig, hash: digest), "Signature must not be valid if any bit is flipped")
-     XCTAssertFalse(key2.isValidSignature(sig, hash: digest), "Signature must not be valid if any bit is flipped")
-     buf[i] = buf[i] ^ mask
-     XCTAssertTrue(key.isValidSignature(sig, hash: digest), "Signature must be valid again")
-     XCTAssertTrue(key2.isValidSignature(sig, hash: digest), "Signature must be valid again")
-     }
-     }
-     }
-
-     }
-
-     func testBitcoinSignedMessage() {
-     let message = "Test message"
-     let secret = BTCDataFromHex("c4bbcb1fbec99d65bf59d85c8cb62ee2db963f0fe106f483d9afa73bd4e39a8a")
-     let key = BTCKey(privateKey: secret)
-     key.publicKeyCompressed = false
-     //        key.publicKeyCompressed = true
-     //        println("Pubkey 1: \(key.publicKey) (\(key.publicKey.length) bytes)")
-
-     do {
-     let signature = key.signatureForMessage(message)
-     //            println("Signature: \(signature.hex()) (\(signature.length) bytes)")
-     let key2 = BTCKey.verifySignature(signature, forMessage: message)
-     //            println("Pubkey 2: \(key2.publicKey) (\(key2.publicKey.length) bytes)")
-     //            println("Valid: \(key.isValidSignature(signature, forMessage: message))")
-
-     XCTAssertEqual(key2.publicKey, key.publicKey, "Recovered pubkeys should match")
-     XCTAssertTrue(key.isValidSignature(signature, forMessage: message), "Signature must be valid")
-     }
-
-     do {
-     let signature = BTCDataFromHex("1B158259BD8EEB198BABBCC4308CDFB8E8068F0A712CAC634257933A072EA6DB7" + "BEB3308F4C937D4F397A2A782BF12884045C27430719A2890F0127B4732D9CF0D")
-
-     let key = BTCKey.verifySignature(signature, forMessage: "Test message")
-     XCTAssertTrue(key.isValidSignature(signature, forMessage: "Test message"), "Should validate signature")
-     XCTAssertEqual(key.uncompressedPublicKeyAddress.string, "1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T", "Should be signed with 1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T")
-
-     }
-
-     }
-     */
-

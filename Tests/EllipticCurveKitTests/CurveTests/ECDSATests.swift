@@ -10,105 +10,21 @@ import XCTest
 import CryptoKit
 import BigInt
 
-
 @testable import EllipticCurveKit
 
-extension Message {
-    init(message: String) {
-        self.init(unhashed: message, encoding: .default, hashFunction: SHA256())!
-    }
+/// Test vectors from [trezor][trezor], signature data from [oleganza][oleganza]
+///
+/// More vectors can be founds on bitcointalk forum, [here][bitcointalk1] and [here][bitcointalk2] (unreliable?)
+///
+/// [trezor]: https://github.com/trezor/trezor-crypto/blob/957b8129bded180c8ac3106e61ff79a1a3df8893/tests/test_check.c#L1959-L1965
+/// [oleganza]: https://github.com/oleganza/CoreBitcoin/blob/master/CoreBitcoinTestsOSX/BTCKeyTests.swift
+/// [bitcointalk1]: https://bitcointalk.org/index.php?topic=285142.msg3300992#msg3300992
+/// [bitcointalk2]: https://bitcointalk.org/index.php?topic=285142.msg3299061#msg3299061
+///
+final class ECDSATests: XCTestCase {
 
-    init(hex: String) {
-        self.init(hashedHex: hex, hashedBy: SHA256())!
-    }
-}
-
-// Test vectors: https://github.com/trezor/trezor-crypto/blob/957b8129bded180c8ac3106e61ff79a1a3df8893/tests/test_check.c#L1959-L1965
-// Signature data from: https://github.com/oleganza/CoreBitcoin/blob/master/CoreBitcoinTestsOSX/BTCKeyTests.swift
-//
-// more vectors: https://bitcointalk.org/index.php?topic=285142.msg3300992#msg3300992
-// even more vectors (unreliable??):
-// https://bitcointalk.org/index.php?topic=285142.msg3299061#msg3299061
-class ECDSATests: XCTestCase {
-
-    private func verifyRFC6979<C: EllipticCurve>(
-        curve: C.Type,
-        key privateKeyHex: String,
-        message messageToHash: String,
-        expected: (k: String, r: String?, s: String?, der: String?)
-    ) {
-
-        if expected.r == nil && expected.s == nil && expected.der == nil {
-            XCTFail("Cannot run test if no expected signature data was provided")
-            return
-        }
-
-        let privateKey = PrivateKey<C>(hex: privateKeyHex)!
-        let publicKey = PublicKey(privateKey: privateKey)
-        let keyPair = KeyPair(private: privateKey, public: publicKey)
-        let message = Message(message: messageToHash)
-        let k = privateKey.drbgRFC6979(message: message, hashFunction: SHA256())
-
-        XCTAssertEqual(expected.k, k.asHexString(uppercased: false), "Must produce matching k nonce.")
-
-        let signatureFromMessage = AnyKeySigner<ECDSA<C>>.sign(message, using: keyPair)
-
-        XCTAssertTrue(AnyKeySigner<ECDSA<C>>.verify(message, wasSignedBy: signatureFromMessage, publicKey: publicKey))
-
-        if let expectedRHex = expected.r {
-            XCTAssertEqual(expectedRHex, signatureFromMessage.r.asHexString(uppercased: false), "Must produce matching signature.R.")
-        }
-        if let expectedSHex = expected.s {
-            XCTAssertEqual(expectedSHex, signatureFromMessage.s.asHexString(uppercased: false), "Must produce matching signature.S.")
-        }
-
-        if let expectedDER = expected.der {
-            XCTAssertEqual(expectedDER, signatureFromMessage.toDER(), "Expected (DER format): \(expectedDER)")
-        }
-    }
-
-    private func verifyRFC6979UsingSignatureComponents<C: EllipticCurve>(
-        curve: C.Type,
-        key privateKeyHex: String,
-        message messageToHash: String,
-        expected: (k: String, r: String, s: String)
-    ) {
-        verifyRFC6979(
-            curve: curve,
-            key: privateKeyHex,
-            message: messageToHash,
-            expected: (k: expected.k, r: expected.r, s: expected.s, der: nil)
-        )
-    }
-
-    private func verifyRFC6979UsingDER<C: EllipticCurve>(
-        curve: C.Type,
-        key privateKeyHex: String,
-        message messageToHash: String,
-        expected: (k: String, der: String)
-        ) {
-        verifyRFC6979(
-            curve: curve,
-            key: privateKeyHex,
-            message: messageToHash,
-            expected: (k: expected.k, r: nil, s: nil, der: expected.der)
-        )
-    }
-
-    private func verifyRFC6979WithSignature<C: EllipticCurve>(
-        curve: C.Type,
-        key privateKeyHex: String,
-        message messageToHash: String,
-        expected: (k: String, r: String, s: String, der: String)
-        ) {
-        verifyRFC6979(
-            curve: curve,
-            key: privateKeyHex,
-            message: messageToHash,
-            expected: (k: expected.k, r: expected.r, s: expected.s, der: expected.der)
-        )
-    }
-
+    // MARK: Tests
+    
     func testSecp256r1Vector1() {
         verifyRFC6979WithSignature(
             curve: Secp256r1.self,
@@ -220,5 +136,106 @@ class ECDSATests: XCTestCase {
                 der: "3045022100b552edd27580141f3b2a5463048cb7cd3e047b97c9f98076c32dbdf85a68718b0220279fa72dd19bfae05577e06c7c0c1900c371fcd5893f7e1d56a37d30174671f6"
             )
         )
+    }
+}
+
+// MARK: Helpers
+private extension ECDSATests {
+    
+    func verifyRFC6979<C: EllipticCurve>(
+        curve: C.Type,
+        key privateKeyHex: String,
+        message messageToHash: String,
+        expected: (k: String, r: String?, s: String?, der: String?),
+        line: UInt
+    ) {
+
+        if expected.r == nil && expected.s == nil && expected.der == nil {
+            XCTFail("Cannot run test if no expected signature data was provided", line: line)
+            return
+        }
+
+        let privateKey = PrivateKey<C>(hex: privateKeyHex)!
+        let publicKey = PublicKey(privateKey: privateKey)
+        let keyPair = KeyPair(private: privateKey, public: publicKey)
+        let message = Message(message: messageToHash)
+        let k = privateKey.drbgRFC6979(message: message, hashFunction: SHA256())
+
+        XCTAssertEqual(expected.k, k.asHexString(uppercased: false), "Must produce matching k nonce.", line: line)
+
+        let signatureFromMessage = AnyKeySigner<ECDSA<C>>.sign(message, using: keyPair)
+
+        XCTAssertTrue(AnyKeySigner<ECDSA<C>>.verify(message, wasSignedBy: signatureFromMessage, publicKey: publicKey), line: line)
+
+        if let expectedRHex = expected.r {
+            XCTAssertEqual(expectedRHex, signatureFromMessage.r.asHexString(uppercased: false), "Must produce matching signature.R.", line: line)
+        }
+        if let expectedSHex = expected.s {
+            XCTAssertEqual(expectedSHex, signatureFromMessage.s.asHexString(uppercased: false), "Must produce matching signature.S.", line: line)
+        }
+
+        if let expectedDER = expected.der {
+            XCTAssertEqual(expectedDER, signatureFromMessage.toDER(), "Expected (DER format): \(expectedDER)", line: line)
+        }
+    }
+
+    func verifyRFC6979UsingSignatureComponents<C: EllipticCurve>(
+        curve: C.Type,
+        key privateKeyHex: String,
+        message messageToHash: String,
+        expected: (k: String, r: String, s: String),
+        line: UInt
+    ) {
+        verifyRFC6979(
+            curve: curve,
+            key: privateKeyHex,
+            message: messageToHash,
+            expected: (k: expected.k, r: expected.r, s: expected.s, der: nil),
+            line: line
+        )
+    }
+
+    func verifyRFC6979UsingDER<C: EllipticCurve>(
+        curve: C.Type,
+        key privateKeyHex: String,
+        message messageToHash: String,
+        expected: (k: String, der: String),
+        line: UInt
+    ) {
+        verifyRFC6979(
+            curve: curve,
+            key: privateKeyHex,
+            message: messageToHash,
+            expected: (k: expected.k, r: nil, s: nil, der: expected.der),
+            line: line
+        )
+    }
+
+    func verifyRFC6979WithSignature<C: EllipticCurve>(
+        curve: C.Type,
+        key privateKeyHex: String,
+        message messageToHash: String,
+        expected: (k: String, r: String, s: String, der: String),
+        line: UInt = #line
+    ) {
+        verifyRFC6979(
+            curve: curve,
+            key: privateKeyHex,
+            message: messageToHash,
+            expected: (k: expected.k, r: expected.r, s: expected.s, der: expected.der),
+            line: line
+        )
+    }
+
+}
+
+// MARK: Message init
+extension Message {
+    init(message: String) {
+        self.init(unhashed: message, encoding: .default, hashFunction: SHA256())!
+    }
+
+    init(hex: String) {
+        self.init(hashedHex: hex, hashedBy: SHA256())!
     }
 }

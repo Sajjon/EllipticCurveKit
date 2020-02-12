@@ -6,7 +6,8 @@
 //  Copyright © 2018 Alexander Cyon. All rights reserved.
 //
 
-import CryptoSwift
+//import CryptoSwift
+import CryptoKit
 
 func byteCount(fromBitCount: Int) -> Int {
     return Int(floor(Double((fromBitCount + 7)) / Double(8)))

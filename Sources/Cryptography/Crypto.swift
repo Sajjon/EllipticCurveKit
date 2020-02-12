@@ -9,7 +9,9 @@
 //
 
 import Foundation
-import CryptoSwift
+//import CryptoSwift
+import CryptoKit
+
 
 public struct Crypto {}
 public extension Crypto {

@@ -8,7 +8,8 @@
 
 import Foundation
 import BigInt
-import CryptoSwift
+//import CryptoSwift
+import CryptoKit
 
 public struct ECDSA<CurveType: EllipticCurve>: Signing {
     public typealias Curve = CurveType

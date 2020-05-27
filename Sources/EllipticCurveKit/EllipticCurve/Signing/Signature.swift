@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Signature<Curve: EllipticCurve>: Equatable, CustomStringConvertible {
-    let r: Number
-    let s: Number
+    public let r: Number
+    public let s: Number
     
     /// `ensureLowSAccordingToBIP62` read below
     /// https://github.com/bitcoin/bips/blob/master/bip-0062.mediawiki#Low_S_values_in_signatures
@@ -25,6 +25,11 @@ public struct Signature<Curve: EllipticCurve>: Equatable, CustomStringConvertibl
             s = Curve.order - s
         }
         self.s = s
+    }
+    
+    public init?(der: Data, ensureLowSAccordingToBIP62: Bool = false) {
+        guard let (r, s) = derDecode(data: der) else { return nil }
+        self.init(r: r, s: s, ensureLowSAccordingToBIP62: ensureLowSAccordingToBIP62)
     }
     
     public func toDER() -> String {

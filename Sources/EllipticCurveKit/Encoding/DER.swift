@@ -35,6 +35,37 @@ public func derEncode(r: Number, s: Number) -> String {
     return DERCode.SEQUENCE.hex + byteCount.evenNumberedHexStringChars + encoded
 }
 
+public func derDecode(data: Data) -> (r: Number, s: Number)? {
+    guard
+        data.count > 8,
+        data[0] == DERCode.SEQUENCE.rawValue,
+        data[1] == data.count - 2,
+        data[2] == DERCode.INTEGER.rawValue
+    else {
+        return nil
+    }
+    
+    let rLen = Int(data[3])
+    let rIndex = 4
+    let rData = data[rIndex..<rIndex+rLen].suffix(32)
+    
+    guard rData.count == 32 else { return nil }
+    
+    let r = Number([0] + rData)
+    
+    guard data[rLen+4] == DERCode.INTEGER.rawValue else { return nil }
+    
+    let sLen = Int(data[rLen+5])
+    let sIndex = rLen+6
+    let sData = data[sIndex..<sIndex+sLen].suffix(32)
+    
+    guard sData.count == 32 else { return nil }
+    
+    let s = Number([0] + sData)
+    
+    return (r, s)
+}
+
 private extension Int {
     var evenNumberedHexStringChars: String {
         return String(format:"%02x", self)

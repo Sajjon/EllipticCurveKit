@@ -9,7 +9,7 @@
 import Foundation
 
 public typealias HexString = String
-public struct PublicKey<Curve: EllipticCurve> {
+public struct PublicKey<Curve: EllipticCurve>: Equatable {
     public typealias Point = AffinePoint<Curve>
 
     public let point: Point
@@ -45,6 +45,11 @@ public struct PublicKey<Curve: EllipticCurve> {
 }
 
 public extension PublicKey {
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.point == rhs.point
+    }
+    
     init(privateKey: PrivateKey<Curve>) {
         let point = Curve.G * privateKey.number
         self.init(point: point)

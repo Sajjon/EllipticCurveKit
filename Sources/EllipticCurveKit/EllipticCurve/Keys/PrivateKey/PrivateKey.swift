@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct PrivateKey<Curve: EllipticCurve> {
+public struct PrivateKey<Curve: EllipticCurve>: Equatable {
 
     public let number: Number
 

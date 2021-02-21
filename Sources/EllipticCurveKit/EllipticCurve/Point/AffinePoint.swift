@@ -22,6 +22,23 @@ public struct AffinePoint<CurveType: EllipticCurve>: EllipticCurvePoint {
     }
 }
 
+public func * <C>(scalar: Number, affinePoint: AffinePoint<C>) -> AffinePoint<C> {
+    affinePoint * scalar
+}
+
+public func * <C>(privateKey: PrivateKey<C>, publicKey: PublicKey<C>) -> AffinePoint<C> {
+    privateKey.number * publicKey.point
+}
+
+
+public func + <C>(point: AffinePoint<C>, publicKey: PublicKey<C>) -> AffinePoint<C> {
+    AffinePoint<C>.addPoint(point, to: publicKey.point)
+}
+
+public func + <C>(publicKey: PublicKey<C>, point: AffinePoint<C>) -> AffinePoint<C> {
+    point + publicKey
+}
+
 // EllipticCurvePoint
 public extension AffinePoint {
 
@@ -71,7 +88,7 @@ public extension AffinePoint {
         }
     }
 
-    private static func addPoint(_ p1: AffinePoint, to p2: AffinePoint) -> AffinePoint {
+    fileprivate static func addPoint(_ p1: AffinePoint, to p2: AffinePoint) -> AffinePoint {
         precondition(p1 != p2)
         let λ = modInverseP(p2.y - p1.y, p2.x - p1.x)
         let x3 = modP { λ * λ - p1.x - p2.x }

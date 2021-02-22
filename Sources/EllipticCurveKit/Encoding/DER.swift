@@ -45,19 +45,19 @@ public func derDecode(data: Data) -> (r: Number, s: Number)? {
         return nil
     }
     
-    let rLen = Int(data[3])
+    let rByteCount = Int(data[3])
     let rIndex = 4
-    let rData = data[rIndex..<rIndex+rLen].suffix(32)
+    let rData = data[rIndex..<rIndex+rByteCount].suffix(32)
     
     guard rData.count == 32 else { return nil }
     
     let r = Number([0] + rData)
     
-    guard data[rLen+4] == DERCode.INTEGER.rawValue else { return nil }
+    guard data[rByteCount+4] == DERCode.INTEGER.rawValue else { return nil }
     
-    let sLen = Int(data[rLen+5])
-    let sIndex = rLen+6
-    let sData = data[sIndex..<sIndex+sLen].suffix(32)
+    let sByteCount = Int(data[rByteCount+5])
+    let sIndex = rByteCount+6
+    let sData = data[sIndex..<sIndex+sByteCount].suffix(32)
     
     guard sData.count == 32 else { return nil }
     

@@ -48,7 +48,7 @@ public extension EllipticCurvePoint {
     }
 
     var description: String {
-        return "(x: \(x.asHexString()), y: \(x.asHexString())"
+        return "(x: \(x.asHexString()), y: \(y.asHexString())"
     }
 
 

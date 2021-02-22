@@ -174,3 +174,13 @@ It is plan to support most of the common curves listed by running CLI command `o
 - [x] secp256k1 (Bitcoin, Ethereum, Zilliqa, Radix)
 - [x] secp256r1 (NEO)
 - [ ] X25519 - [Curve25519 used for ECDH](https://en.wikipedia.org/wiki/Curve25519) (Nano, Stellar, Cardano)
+
+# Donate
+This SDK has been developed by the single author Alexander Cyon in his free time. If you find it useful, please consider donating.
+
+**Any donation would be much appreciated**:
+
+- ZIL: zil108t2jdgse760d88qjqmffhe9uy0nk4wvzx404t
+- BTC: 3GarsdAzLpEYbhkryYz1WiZxhtTLLaNJwo
+- ETH: 0xAB8F0137295BFE37f50b581F76418518a91ab8DB
+- NEO: AbbnnCLP26ccSnLooDDcwPLDnfXbVL5skH

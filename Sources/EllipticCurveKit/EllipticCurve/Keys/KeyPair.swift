@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct KeyPair<Curve: EllipticCurve> {
+public struct KeyPair<Curve: EllipticCurve>: Equatable {
     public typealias PrivateKeyType = PrivateKey<Curve>
     public typealias PublicKeyType = PublicKey<Curve>
 

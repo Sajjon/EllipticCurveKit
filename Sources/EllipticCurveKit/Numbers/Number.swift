@@ -39,7 +39,7 @@ public extension Number {
     }
 
     var isEven: Bool {
-        guard self.sign == .plus else { fatalError("what to do when negative?") }
+//        guard self.sign == .plus else { fatalError("what to do when negative?") }
         return magnitude[bitAt: 0] == false
     }
 

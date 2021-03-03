@@ -49,6 +49,31 @@ public extension AffinePoint {
     
     enum Error: Swift.Error {
         case incorrectByteCountOfPublicKey(expectedByteCount: Int, butGot: Int)
+        case failedToSerializeBytes
+    }
+    
+    init(hex: String) throws {
+        try self.init(data: Data(hex: hex))
+    }
+    
+    
+    init(data: Data) throws {
+        if data.count == 33 {
+            self = try Self.decodeFromCompressedPublicKey(bytes: data)
+        } else if data.count == 65 {
+            self = try Self.decodeFromUncompressedPublicKey(bytes: data)
+        } else {
+            throw Error.failedToSerializeBytes
+        }
+    }
+    
+    static func decodeFromUncompressedPublicKey(bytes: Data) throws -> Self {
+        guard bytes.count == 65 else { throw Error.incorrectByteCountOfPublicKey(expectedByteCount: 65, butGot: bytes.count) }
+        precondition(bytes[0] == 0x04)
+        return Self(
+            x: .init(bytes.subdata(in: 1..<33)),
+            y: .init(bytes.subdata(in: 33..<65))
+        )
     }
     
     static func decodeFromCompressedPublicKey(bytes: Data) throws -> Self {

@@ -31,6 +31,7 @@ public protocol SymmetricKeyDerivationFunction {
 /// [cyonECIES]: https://crypto.stackexchange.com/questions/88083/modified-ecies-using-ec-point-add-with-dh-key
 ///
 public struct ECAddDiffieHellmanKDF: SymmetricKeyDerivationFunction {
+    public init() {}
     public func derive(
         ephemeralPublicKey E: PublicKey<Secp256k1>,
         blackPrivateKey a: PrivateKey<Secp256k1>,
@@ -56,7 +57,7 @@ public struct ECIES {
     private let symmetricKeyDerivationFunction: SymmetricKeyDerivationFunction
     
     public init(
-        symmetricKeyDerivationFunction: SymmetricKeyDerivationFunction
+        symmetricKeyDerivationFunction: SymmetricKeyDerivationFunction = ECAddDiffieHellmanKDF()
     ) {
         self.symmetricKeyDerivationFunction = symmetricKeyDerivationFunction
     }
@@ -80,7 +81,7 @@ public extension ECIES {
 }
 
 
-private extension ECIES.SealedBox {
+public extension ECIES.SealedBox {
 
     
     init(combinedData: Data) throws {
@@ -137,7 +138,7 @@ public extension ECIES.SealedBox {
     
     static let byteCountOf = ByteCountOf()
     
-    /// The combined representation ( nonce || ephemeralPublicKeyCompressed || tag || ciphertext)
+    /// The combined representation (nonce || ephemeralPublicKeyCompressed || tag || ciphertext)
     var combined: Data {
         var combined = Data(nonce)
         combined.append(ephemeralPublicKey.data.compressed)

@@ -210,7 +210,8 @@ public extension ECIES {
             symmetricSealedBox = try AES.GCM.seal(
                 message,
                 using: symmetricKey,
-                nonce: nonce
+                nonce: nonce,
+                authenticating: ephemeralPublicKey.data.compressed
             )
             
         } catch let error as CryptoKitError {
@@ -256,7 +257,8 @@ public extension ECIES {
                     ciphertext: sealedBox.ciphertext,
                     tag: sealedBox.tag
                 ),
-                using: symmetricKey
+                using: symmetricKey,
+                authenticating: ephemeralPublicKey.data.compressed
             )
             
         } catch let error as CryptoKitError {

@@ -13,8 +13,8 @@ import CryptoKit
 public protocol SymmetricKeyDerivationFunction {
     func derive(
         ephemeralPublicKey: PublicKey<Secp256k1>,
-        alicePrivateKey: PrivateKey<Secp256k1>,
-        bobPublicKey: PublicKey<Secp256k1>
+        blackPrivateKey: PrivateKey<Secp256k1>,
+        whitePublicKey: PublicKey<Secp256k1>
     ) -> CryptoKit.SymmetricKey
 }
 
@@ -23,7 +23,7 @@ public protocol SymmetricKeyDerivationFunction {
 ///
 ///     S = aB + E
 ///     x = S.x
-///     key = SHA256(x)
+///     key = SHA256Twice(x)
 ///
 /// This scheme is different is not vanilla DH nor vanilla ECIES KDF, but a variant
 /// developed by Alexander Cyon, and presented on [Crypto StackExchange here][cyonECIES].
@@ -33,16 +33,14 @@ public protocol SymmetricKeyDerivationFunction {
 public struct ECAddDiffieHellmanKDF: SymmetricKeyDerivationFunction {
     public func derive(
         ephemeralPublicKey E: PublicKey<Secp256k1>,
-        alicePrivateKey a: PrivateKey<Secp256k1>,
-        bobPublicKey B: PublicKey<Secp256k1>
+        blackPrivateKey a: PrivateKey<Secp256k1>,
+        whitePublicKey B: PublicKey<Secp256k1>
     ) -> CryptoKit.SymmetricKey {
         let aB = a * B
         let S = aB + E
         let x = S.x
         
-        var hasher = SHA256()
-        hasher.update(data: Data(hex: x.asHexString()))
-        let keyData = Data(hasher.finalize())
+        let keyData = Crypto.sha2Sha256_twice(Data(hex: x.asHexString()))
         
         return .init(data: keyData)
     }
@@ -182,14 +180,14 @@ public extension ECIES {
     ///
     /// - Parameters:
     ///   - message: The plaintext data to seal.
-    ///   - recipientPublicKey: A cryptographic public key used to seal the message.
-    ///   - senderPrivateKey: A cryptographic private key used to seal the message.
+    ///   - whitePublicKey: A cryptographic public key used to seal the message.
+    ///   - blackPrivateKey: A cryptographic private key used to seal the message.
     ///   - nonce: A nonce used during the sealing process.
     /// - Returns: The sealed message.
     func seal<Plaintext>(
         _ message: Plaintext,
-        recipientPublicKey: PublicKey<Secp256k1>,
-        senderPrivateKey: PrivateKey<Secp256k1>,
+        whitePublicKey: PublicKey<Secp256k1>,
+        blackPrivateKey: PrivateKey<Secp256k1>,
         nonce: SealedBox.Nonce? = nil
     ) -> Result<SealedBox, EncryptionError> where Plaintext: DataProtocol {
         
@@ -200,8 +198,8 @@ public extension ECIES {
         
         let symmetricKey = symmetricKeyDerivationFunction.derive(
             ephemeralPublicKey: ephemeralPublicKey,
-            alicePrivateKey: senderPrivateKey,
-            bobPublicKey: recipientPublicKey
+            blackPrivateKey: blackPrivateKey,
+            whitePublicKey: whitePublicKey
         )
         
         let symmetricSealedBox: AES.GCM.SealedBox
@@ -233,8 +231,8 @@ public extension ECIES {
     /// Decrypts the message and verifies the authenticity of both the encrypted message and additional data.
     func open(
         _ sealedBox: SealedBox,
-        alicePublicKey: PublicKey<Secp256k1>,
-        bobPrivateKey: PrivateKey<Secp256k1>
+        whitePublicKey: PublicKey<Secp256k1>,
+        blackPrivateKey: PrivateKey<Secp256k1>
     ) -> Result<Data, DecryptionError> {
         
         
@@ -242,10 +240,8 @@ public extension ECIES {
         
         let symmetricKey = symmetricKeyDerivationFunction.derive(
             ephemeralPublicKey: ephemeralPublicKey,
-            // looks confusing for sure, but we just use `alice` and
-            // `bob` as labels for `entity one` and `entity two`.
-            alicePrivateKey: bobPrivateKey,
-            bobPublicKey: alicePublicKey
+            blackPrivateKey: blackPrivateKey,
+            whitePublicKey: whitePublicKey
         )
         
         let decryptedData: Data
@@ -272,8 +268,8 @@ public extension ECIES {
     
     func open(
         sealedBoxCombinedData combinedData: Data,
-        alicePublicKey: PublicKey<Secp256k1>,
-        bobPrivateKey: PrivateKey<Secp256k1>
+        whitePublicKey: PublicKey<Secp256k1>,
+        blackPrivateKey: PrivateKey<Secp256k1>
     ) -> Result<Data, DecryptionError> {
         
         let sealedBox: SealedBox
@@ -285,8 +281,8 @@ public extension ECIES {
         
         return open(
             sealedBox,
-            alicePublicKey: alicePublicKey,
-            bobPrivateKey: bobPrivateKey
+            whitePublicKey: whitePublicKey,
+            blackPrivateKey: blackPrivateKey
         )
     }
 }
@@ -295,8 +291,8 @@ public extension ECIES {
     func encrypt(
         message: String,
         encoding: String.Encoding = .utf8,
-        recipientPublicKey: PublicKey<Secp256k1>,
-        senderPrivateKey: PrivateKey<Secp256k1>,
+        whitePublicKey: PublicKey<Secp256k1>,
+        blackPrivateKey: PrivateKey<Secp256k1>,
         nonce: SealedBox.Nonce? = nil
     ) throws -> SealedBox {
         
@@ -306,8 +302,8 @@ public extension ECIES {
         
         return try seal(
             encodedMessage,
-            recipientPublicKey: recipientPublicKey,
-            senderPrivateKey: senderPrivateKey,
+            whitePublicKey: whitePublicKey,
+            blackPrivateKey: blackPrivateKey,
             nonce: nonce
         ).get()
     }
@@ -315,14 +311,14 @@ public extension ECIES {
     func decrypt(
         sealedBox: SealedBox,
         encoding: String.Encoding = .utf8,
-        alicePublicKey: PublicKey<Secp256k1>,
-        bobPrivateKey: PrivateKey<Secp256k1>
+        whitePublicKey: PublicKey<Secp256k1>,
+        blackPrivateKey: PrivateKey<Secp256k1>
     ) throws -> String {
         
         let decrypted = try open(
             sealedBox,
-            alicePublicKey: alicePublicKey,
-            bobPrivateKey: bobPrivateKey
+            whitePublicKey: whitePublicKey,
+            blackPrivateKey: blackPrivateKey
         ).get()
         
         guard let plaintext = String(data: decrypted, encoding: encoding) else {
@@ -336,14 +332,14 @@ public extension ECIES {
     func decrypt(
         data: Data,
         encoding: String.Encoding = .utf8,
-        alicePublicKey: PublicKey<Secp256k1>,
-        bobPrivateKey: PrivateKey<Secp256k1>
+        whitePublicKey: PublicKey<Secp256k1>,
+        blackPrivateKey: PrivateKey<Secp256k1>
     ) throws -> String {
         
         let decrypted = try open(
             sealedBoxCombinedData: data,
-            alicePublicKey: alicePublicKey,
-            bobPrivateKey: bobPrivateKey
+            whitePublicKey: whitePublicKey,
+            blackPrivateKey: blackPrivateKey
         ).get()
         
         guard let plaintext = String(data: decrypted, encoding: encoding) else {

@@ -17,29 +17,69 @@ private extension KeyPair {
 
 final class ECIESTests: XCTestCase {
     
-    private lazy var angelaMerkel   = KeyPair()
-    private lazy var joeBiden       = KeyPair()
-    private lazy var justinTrudeau   = KeyPair()
-    
-    private lazy var vladimirPutin  = KeyPair()
+    public struct Country {
+        public let headOfGovernment: String
+        private let privateKey: PrivateKey<Secp256k1>
+        public let publicKey: PublicKey<Secp256k1>
+
+        private let ecies =  ECIES(symmetricKeyDerivationFunction: ECAddDiffieHellmanKDF())
+
+        public init(headOfGovernment: String) {
+            self.headOfGovernment = headOfGovernment
+            let privateKey = PrivateKey<Secp256k1>.generateNew()
+            self.privateKey = privateKey
+            self.publicKey = PublicKey<Secp256k1>(privateKey: privateKey)
+        }
+        
+        func encrypt(
+            message: String,
+            for country: Country
+        ) throws -> Data {
+            try encrypt(message: message, readableBy: country.publicKey)
+        }
+        
+        func encrypt(
+            message: String,
+            readableBy whitePublicKey: PublicKey<Secp256k1>
+        ) throws -> Data {
+            try ecies.encrypt(
+                message: message,
+                whitePublicKey: whitePublicKey,
+                blackPrivateKey: privateKey
+            ).combined
+        }
+        
+        func decrypt(
+            encryptedMessage: Data,
+            encryptedBy sender: Country
+        ) throws -> String {
+            try decrypt(encryptedMessage: encryptedMessage, encryptedBy: sender.publicKey)
+        }
+        
+        func decrypt(
+            encryptedMessage: Data,
+            encryptedBy whitePublicKey: PublicKey<Secp256k1>
+        ) throws -> String {
+            try ecies.decrypt(
+                data: encryptedMessage,
+                whitePublicKey: whitePublicKey,
+                blackPrivateKey: privateKey
+            )
+        }
+    }
     
     let message = "Guten tag Joe! My nukes are 100 miles south west of Münich, don't tell anyone"
     
-    static func makeECIES() -> ECIES {
-        ECIES(symmetricKeyDerivationFunction: ECAddDiffieHellmanKDF())
-    }
     
-    let germany = makeECIES()
-    let america = makeECIES()
-    let russia = makeECIES()
-    let canada = makeECIES()
+    let germany = Country(headOfGovernment: "Angela Merkel")
+    let america = Country(headOfGovernment: "Joe Biden")
+    let russia = Country(headOfGovernment: "Vladimir Putin")
     
     override func setUp() {
         XCTAssertAllInequal([
-            angelaMerkel,
-            joeBiden,
-            justinTrudeau,
-            vladimirPutin
+            germany.publicKey,
+            america.publicKey,
+            russia.publicKey
         ])
     }
     
@@ -65,48 +105,53 @@ final class ECIESTests: XCTestCase {
     func testSimpleEncryptionSenderCanDecryptAsWell() throws {
         // 🇩🇪🇩🇪🇩🇪 In Germany 🇩🇪🇩🇪🇩🇪
         // Angela Merkel encrypts message for Joe Biden
-        let sealedBox = try germany.encrypt(
-            message: message,
-            recipientPublicKey: joeBiden.publicKey,
-            senderPrivateKey: angelaMerkel.privateKey
-        )
+        let encryptedMessage = try germany.encrypt(message: message, for: america)
+        try AssertThat(sender: germany, canOpenOwnMessage: encryptedMessage, sentTo: america)
         
-        let decryptedByMerkel = try germany.decrypt(
-            data: sealedBox.combined,
-            alicePublicKey: joeBiden.publicKey,
-            bobPrivateKey: angelaMerkel.privateKey
-        )
-        XCTAssertEqual(decryptedByMerkel, message)
         
         // 🇺🇸🇺🇸🇺🇸 In the US 🇺🇸🇺🇸🇺🇸
         // Joe Biden can indeed decrypt encrypted message from Angela
         let decryptedByBiden = try america.decrypt(
-            data: sealedBox.combined,
-            alicePublicKey: angelaMerkel.publicKey,
-            bobPrivateKey: joeBiden.privateKey
+            encryptedMessage: encryptedMessage,
+            encryptedBy: germany
         )
         XCTAssertEqual(decryptedByBiden, message)
 
         // 🇷🇺🇷🇺🇷🇺 In Russia 🇷🇺🇷🇺🇷🇺
         // Putin should not be able to decrypt the message
-        Assert(vladimirPutin, cannotDecrypt: sealedBox.combined, encryptedBy: angelaMerkel.publicKey)
+        AssertThat(thirdParty: russia, cannotDecrypt: encryptedMessage, sentBy: germany)
     }
 }
 
 private extension ECIESTests {
-    func Assert(
-        _ thirdParty: KeyPair,
+    func AssertThat(
+        thirdParty: Country,
         cannotDecrypt encryptedMessage: Data,
-        encryptedBy encryptor: PublicKey<Secp256k1>,
+        sentBy sender: Country,
         _ file: StaticString = #file,
         _ line: UInt = #line
     ) {
         XCTAssertThrowsSpecificError(
             file: file,
             line: line,
-            try Self.makeECIES().decrypt(data: encryptedMessage, alicePublicKey: encryptor, bobPrivateKey: thirdParty.privateKey),
+            try thirdParty.decrypt(
+                encryptedMessage: encryptedMessage,
+                encryptedBy: sender.publicKey
+            ),
             ECIES.DecryptionError.symmetricDecryptionFailed(.authenticationFailure),
             "Third party should not be able to decode message intended for someone else"
         )
+    }
+    
+    func AssertThat(
+        sender: Country,
+        canOpenOwnMessage encryptedMessage: Data,
+        sentTo recipient: Country
+    ) throws {
+        let decryptedBySender = try sender.decrypt(
+            encryptedMessage: encryptedMessage,
+            encryptedBy: recipient.publicKey
+        )
+        XCTAssertEqual(decryptedBySender, message, "Sender should be able to decrypt her own ")
     }
 }

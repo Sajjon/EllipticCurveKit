@@ -10,43 +10,6 @@ import CryptoKit
 
 
 
-public protocol SymmetricKeyDerivationFunction {
-    func derive(
-        ephemeralPublicKey: PublicKey<Secp256k1>,
-        blackPrivateKey: PrivateKey<Secp256k1>,
-        whitePublicKey: PublicKey<Secp256k1>
-    ) -> CryptoKit.SymmetricKey
-}
-
-/// Derivation of a symmetric key using a modified Diffie-Hellman key exchange between
-/// Alice, Bob and an ephemeral public key by computing:
-///
-///     S = aB + E
-///     x = S.x
-///     key = SHA256Twice(x)
-///
-/// This scheme is different is not vanilla DH nor vanilla ECIES KDF, but a variant
-/// developed by Alexander Cyon, and presented on [Crypto StackExchange here][cyonECIES].
-///
-/// [cyonECIES]: https://crypto.stackexchange.com/questions/88083/modified-ecies-using-ec-point-add-with-dh-key
-///
-public struct ECAddDiffieHellmanKDF: SymmetricKeyDerivationFunction {
-    public init() {}
-    public func derive(
-        ephemeralPublicKey E: PublicKey<Secp256k1>,
-        blackPrivateKey a: PrivateKey<Secp256k1>,
-        whitePublicKey B: PublicKey<Secp256k1>
-    ) -> CryptoKit.SymmetricKey {
-        let aB = a * B
-        let S = aB + E
-        let x = S.x
-        
-        let keyData = Crypto.sha2Sha256_twice(Data(hex: x.asHexString()))
-        
-        return .init(data: keyData)
-    }
-}
-
 /// Encrypt and Decrypt data using [ECIES][ecies] (Elliptic Curve Integrated Encryption Scheme)
 /// - a subset of DHIES.
 ///
@@ -63,120 +26,10 @@ public struct ECIES {
     }
 }
 
+
+// MARK: Seal
 public extension ECIES {
-    struct SealedBox {
         
-        /// The nonce used to encrypt the data.
-        public let nonce: Nonce
-        
-        /// The public key of the
-        public let ephemeralPublicKey: PublicKey<Secp256k1>
-        
-        /// An authentication tag.
-        public let tag: Data
-        
-        /// The encrypted data.
-        public let ciphertext: Data
-    }
-}
-
-
-public extension ECIES.SealedBox {
-
-    
-    init(combinedData: Data) throws {
-        // Sanity check of length
-        guard combinedData.count >= ByteCountOf.combinedExcludingCipherText else {
-            throw ECIES.DecryptionError.ciphertextCannotBeEmpty
-        }
-        
-        // Parse `Nonce`
-        let nonceData = combinedData.subdata(in: 0..<ByteCountOf.nonce)
-        self.nonce = try Nonce(data: nonceData)
-        
-        // Parse `Ephemeral Public Key`
-        let keyStartIndex = ByteCountOf.nonce
-        let keyEndIndex = keyStartIndex + ByteCountOf.ephemeralPublicKeyCompressed
-        let ephemeralPublicKeyCompressedData = combinedData.subdata(in: keyStartIndex..<keyEndIndex)
-        
-        guard
-            let ephemeralPublicKeyPoint = try? AffinePoint<Secp256k1>.decodeFromCompressedPublicKey(
-                bytes: ephemeralPublicKeyCompressedData
-            ) else {
-            throw ECIES.DecryptionError.failedToDecodeBytesToPublicKeyPoint
-        }
-        self.ephemeralPublicKey = PublicKey<Secp256k1>(point: ephemeralPublicKeyPoint)
-        
-        
-        // Parse `Tag`
-        let tagStartIndex = ByteCountOf.nonce + ByteCountOf.ephemeralPublicKeyCompressed
-        let tagEndIndex = tagStartIndex + ByteCountOf.tag
-        self.tag = combinedData.subdata(in: tagStartIndex..<tagEndIndex)
-        
-        // Parse `cipher`
-        self.ciphertext = combinedData.subdata(in: ByteCountOf.combinedExcludingCipherText..<combinedData.count)
-        
-    }
-    
-}
-
-
-public extension ECIES.SealedBox {
-    
-    /// A value used once during a cryptographic operation, and then discarded.
-    typealias Nonce = CryptoKit.AES.GCM.Nonce
-    
-    struct ByteCountOf {
-        static let ephemeralPublicKeyCompressed = 33
-        static let nonce = 12
-        static let tag = 16
-        static let combinedExcludingCipherText = ephemeralPublicKeyCompressed + nonce + tag
-        static func ciphertext(givenCombinedDataByteCount: Int) -> Int {
-            givenCombinedDataByteCount - combinedExcludingCipherText
-        }
-    }
-    
-    static let byteCountOf = ByteCountOf()
-    
-    /// The combined representation (nonce || ephemeralPublicKeyCompressed || tag || ciphertext)
-    var combined: Data {
-        var combined = Data(nonce)
-        combined.append(ephemeralPublicKey.data.compressed)
-        combined.append(tag)
-        combined.append(ciphertext)
-        return combined
-    }
-    
-}
-
-extension CryptoKitError: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        switch (lhs, rhs) {
-        case (.authenticationFailure, .authenticationFailure): return true
-        case (.incorrectKeySize, .incorrectKeySize): return true
-        case (.incorrectParameterSize, .incorrectParameterSize): return true
-        case (.underlyingCoreCryptoError(let lhsError), .underlyingCoreCryptoError(let rhsError)): return lhsError == rhsError
-        default:
-            return false
-        }
-    }
-}
-
-public extension ECIES {
-    
-    enum EncryptionError: Swift.Error, Equatable {
-        case encodingError
-        case symmetricEncryptionFailed(CryptoKitError)
-    }
-    
-    enum DecryptionError: Swift.Error, Equatable {
-        case decodingError
-        case failedToDecodeBytesToPublicKeyPoint
-        case ciphertextCannotBeEmpty
-        case symmetricDecryptionFailed(CryptoKitError)
-    }
-    
-    
     /// Secures the given plaintext message with encryption and an authentication tag.
     ///
     /// - Parameters:
@@ -228,7 +81,10 @@ public extension ECIES {
         return .success(sealedBox)
         
     }
-    
+}
+
+// MARK: Open
+public extension ECIES {
     /// Decrypts the message and verifies the authenticity of both the encrypted message and additional data.
     func open(
         _ sealedBox: SealedBox,
@@ -288,6 +144,7 @@ public extension ECIES {
     }
 }
 
+// MARK: Sugar
 public extension ECIES {
     func encrypt(
         message: String,

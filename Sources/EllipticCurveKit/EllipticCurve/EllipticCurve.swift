@@ -59,10 +59,10 @@ extension EllipticCurve {
     }
 
     static func modInverseP(_ v: Number, _ w: Number) -> Number {
-        return modularInverse(v, w, mod: P)
+        return divide(v, by: w, mod: P)
     }
 
     static func modInverseN(_ v: Number, _ w: Number) -> Number {
-        return modularInverse(v, w, mod: N)
+        return divide(v, by: w, mod: N)
     }
 }

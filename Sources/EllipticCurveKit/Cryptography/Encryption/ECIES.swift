@@ -26,7 +26,6 @@ public struct ECIES {
     }
 }
 
-
 // MARK: Seal
 public extension ECIES {
         
@@ -57,6 +56,7 @@ public extension ECIES {
         )
         
         let symmetricSealedBox: AES.GCM.SealedBox
+ 
         do {
             
             symmetricSealedBox = try AES.GCM.seal(
@@ -66,6 +66,15 @@ public extension ECIES {
                 authenticating: ephemeralPublicKey.data.compressed
             )
             
+            print("""
+                msg: \(Data(message).toHexString()),
+                nonce: \(Data(nonce).toHexString()),
+                authenticating: \(ephemeralPublicKey.hex.compressed),
+                ciphertext: \(symmetricSealedBox.ciphertext.asHex),
+                tag: \(symmetricSealedBox.tag.toHexString()),
+                symmetricSealedBox.nonce: \(Data(symmetricSealedBox.nonce).toHexString()),
+                """
+            )
         } catch let error as CryptoKitError {
             return .failure(.symmetricEncryptionFailed(error))
         } catch {

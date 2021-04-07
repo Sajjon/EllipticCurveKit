@@ -83,7 +83,7 @@ public extension ECIES.SealedBox {
     
     static let byteCountOf = ByteCountOf()
     
-    /// The combined representation (nonce || ephemeralPublicKeyCompressed || tag || ciphertext)
+    /// The combined representation `(nonce || ephemeralPublicKeyCompressed || tag || ciphertext)`
     var combined: Data {
         var combined = Data(nonce)
         combined.append(ephemeralPublicKey.data.compressed)

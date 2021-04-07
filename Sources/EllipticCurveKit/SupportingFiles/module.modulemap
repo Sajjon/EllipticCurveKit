@@ -1,4 +1,0 @@
-module CommomCryptoPrivate {
-    header "CommonCrypto/CommonCrypto.h"
-    export *
-}

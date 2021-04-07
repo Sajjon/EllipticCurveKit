@@ -130,7 +130,34 @@ final class ECIESTests: XCTestCase {
 
         let ecies = ECIES()
         let decrypted = try ecies.decrypt(data: encryptedMessage, whitePublicKey: senderPubKey, blackPrivateKey: privateKey)
+        
         XCTAssertEqual(decrypted, message)
+    }
+    
+    func testLength() throws {
+        let message = "The Legend of Zelda is a high fantasy action-adventure video game franchise created by Japanese game designers Shigeru Miyamoto and Takashi Tezuka. It is developed and published by Nintendo."
+        let ecies = ECIES()
+        let alice = KeyPair()
+        let bob = KeyPair()
+        let encryptedMessage = try ecies.encrypt(
+            message: message,
+            whitePublicKey: bob.publicKey,
+            blackPrivateKey: alice.privateKey
+        )
+        let encryptedBytes = encryptedMessage.combined
+        XCTAssertLessThanOrEqual(
+            encryptedBytes.count,
+            256
+        )
+        let decrypted = try ecies.decrypt(
+            data: encryptedBytes,
+            whitePublicKey: alice.publicKey,
+            blackPrivateKey: bob.privateKey
+        )
+        XCTAssertEqual(
+            decrypted,
+            message
+        )
     }
 }
 

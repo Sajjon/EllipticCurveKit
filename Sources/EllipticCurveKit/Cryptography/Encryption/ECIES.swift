@@ -65,16 +65,6 @@ public extension ECIES {
                 nonce: nonce,
                 authenticating: ephemeralPublicKey.data.compressed
             )
-            
-            print("""
-                msg: \(Data(message).toHexString()),
-                nonce: \(Data(nonce).toHexString()),
-                authenticating: \(ephemeralPublicKey.hex.compressed),
-                ciphertext: \(symmetricSealedBox.ciphertext.asHex),
-                tag: \(symmetricSealedBox.tag.toHexString()),
-                symmetricSealedBox.nonce: \(Data(symmetricSealedBox.nonce).toHexString()),
-                """
-            )
         } catch let error as CryptoKitError {
             return .failure(.symmetricEncryptionFailed(error))
         } catch {

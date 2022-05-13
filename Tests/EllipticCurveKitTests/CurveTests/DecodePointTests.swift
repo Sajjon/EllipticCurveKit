@@ -9,6 +9,16 @@ import XCTest
 @testable import EllipticCurveKit
 
 final class DecodePointTests: XCTestCase {
+	
+	func testCompressedPublicKey() throws {
+		let compressedPublicKeyBytes = Data(hex: "0339a36013301597daef41fbe593a02cc513d0b55527ec2df1050e2e8ff49c85c2")
+		let decodedFromUncompressed = try AffinePoint<Secp256k1>.decodeFromCompressedPublicKey(
+			bytes: compressedPublicKeyBytes
+		)
+		
+		let expectedUncompressedHex = "0439a36013301597daef41fbe593a02cc513d0b55527ec2df1050e2e8ff49c85c23cbe7ded0e7ce6a594896b8f62888fdbc5c8821305e2ea42bf01e37300116281"
+		XCTAssertEqual(PublicKey<Secp256k1>.init(point: decodedFromUncompressed).hex.uncompressed.lowercased(), expectedUncompressedHex)
+	}
     
     func testPointDecoding() throws {
 

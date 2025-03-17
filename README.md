@@ -1,5 +1,5 @@
 ## ⚠️ THIS SDK IS NOT SAFE/PRODUCTION READY (YET!) ⚠️ 
-#### I'm no cryptography expert, If you find mistakes, inaccuracies or if you have suggestions for improvements of this README or the source code, please [submit an issue](https://github.com/Sajjon/EllipticCurveKit/issues/new)!
+#### I'm not a cryptographer (I consider myself a _cryptography engineer_), if you find mistakes, inaccuracies or if you have suggestions for improvements of this README or the source code, please [submit an issue](https://github.com/Sajjon/EllipticCurveKit/issues/new)!
 
 <!-- MarkdownTOC -->
 
